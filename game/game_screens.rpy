@@ -54,15 +54,16 @@ screen char_select:
 screen set_attributes(cclass):
         
     default cclass  = ''
+    default pointsPower = 10
     default drawing = 0
     default points  = 0
  
     vbox:
-        text "Selected class: [cclass]
-        text "Points: [points]
+        text "Selected class: [cclass]"
+        text "Points: [points]"
         
     hbox:
-        text "Drawing: [drawing]
-        # Need to enclose everything in If
-        textbutton "+" action [ SetVariable("drawing", drawing + 1), SetVariable("points", points + 1) ]
-        textbutton "-" action [ SetVariable("drawing", drawing - 1), SetVariable("points", points - 1) ]
+        text "Drawing: [drawing]"
+        # Unsure if it works but it probably does
+        textbutton "+" action If( pointsPower > 0, true = [ SetVariable("drawing", drawing + 1), SetVariable("pointsPower", pointsPower - 1) ], false = None )
+        textbutton "-" action If( pointsPower > 0, true = [ SetVariable("drawing", drawing - 1), SetVariable("pointsPower", pointsPower + 1) ], false = None )
