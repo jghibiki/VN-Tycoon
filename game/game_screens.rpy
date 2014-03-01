@@ -50,34 +50,19 @@ screen char_select:
     imagebutton auto "gui/programmer_%s.png" focus_mask True xpos 200 ypos 400 action Return("programmer") #at main_effect2_var
     imagebutton auto "gui/composer_%s.png" focus_mask True xpos 600 ypos 400 action Return("composer") #at main_effect2_var
     
-init python:   
-    def inc_drawing():
-        global drawing
-        global points
-        if 1==1:#points>0 and drawing > -1 and drawing < 11:
-            drawing += 1
-            points -= 1
-        return None
-    def dec_drawing():
-        global drawing
-        global points
-        if 1==1:#points<6 and drawing > -1 and drawing < 11:
-            drawing += 1
-            points -= 1
-        return None    
+
+screen set_attributes(cclass):
         
-screen set_attributes(cclass=''):
-        
+    default cclass  = ''
+    default drawing = 0
+    default points  = 0
+ 
     vbox:
-        $ my_text = "Selected class: " + str(cclass)
-        text my_text
-        $ my_text = "Points: " + str(points)
-        text my_text
+        text "Selected class: [cclass]
+        text "Points: [points]
         
-        hbox:
-            $ my_text = "drawing: " + str(drawing)
-            text my_text
-            textbutton "+" action [inc_drawing(), SetVariable("drawing", drawing), SetVariable("points", points)]
-            textbutton "-" action [dec_drawing(), SetVariable("drawing", drawing), SetVariable("points", points)]
-            
-            
+    hbox:
+        text "Drawing: [drawing]
+        # Need to enclose everything in If
+        textbutton "+" action [ SetVariable("drawing", drawing + 1), SetVariable("points", points + 1) ]
+        textbutton "-" action [ SetVariable("drawing", drawing - 1), SetVariable("points", points - 1) ]
