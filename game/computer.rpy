@@ -3,12 +3,12 @@ label computer:
     #show computer Desktop
     menu:
         "open browser":
-            label webBrowser            
+            jump webBrowser            
         "turn off": 
             return #change to return to a specific screen 
     jump computer
 
-labek webBrowser:
+label webBrowser:
      #show web browser start page
      menu:
         "LemmingSoft Forums":
@@ -28,5 +28,5 @@ label lsf:
           $pass #poll for recruitment options and display
       "Back":
           jump webBrowser
-   jump lsf
+    jump lsf
 

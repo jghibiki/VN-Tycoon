@@ -49,22 +49,6 @@ screen char_select:
     imagebutton auto "gui/writer_%s.png" focus_mask True xpos 600 ypos 200 action Return("writer") #at main_effect2_var
     imagebutton auto "gui/programmer_%s.png" focus_mask True xpos 200 ypos 400 action Return("coder") #at main_effect2_var
     imagebutton auto "gui/composer_%s.png" focus_mask True xpos 600 ypos 400 action Return("composer") #at main_effect2_var
-    
-# init python:   
-    # def inc_drawing():
-        # global drawing
-        # global points
-        # if 1==1:#points>0 and drawing > -1 and drawing < 11:
-            # drawing += 1
-            # points -= 1
-        # return None
-    # def dec_drawing():
-        # global drawing
-        # global points
-        # if 1==1:#points<6 and drawing > -1 and drawing < 11:
-            # drawing += 1
-            # points -= 1
-        # return None
         
 screen set_attributes(cclass=''):
 
@@ -97,3 +81,6 @@ screen set_attributes(cclass=''):
             text my_text
             textbutton "+" action If( points > 0 and composing < 10, true = [ SetVariable("composing", composing + 1), SetVariable("points", points - 1) ], false = None )
             textbutton "-" action If( points < 6 and composing > composing_min, true = [ SetVariable("composing", composing - 1), SetVariable("points", points + 1) ], false = None )
+
+        textbutton "OK" action Return()
+            
