@@ -25,17 +25,21 @@ label start:
     show screen phone_button
 #    show screen inventory_button
 
-    
+   
     if _return=="artist":
+        $job = "artist"
         jump artist
     if _return=="writer":
+        $job = "writer"
         jump writer
     if _return=="coder":
+        $job = "coder"
         jump programmer
     if _return=="composer":
-        jump composer
+        $job = "composer"
+        jump composer        
 
-        
+
     "You've created a new Ren'Py game."
     "Once you add a story, pictures, and music, you can release it to the world!"
 
