@@ -64,12 +64,8 @@ screen set_attributes(cclass):
         
     hbox:
         text "Drawing: [drawing]"
-<<<<<<< HEAD
-        # Need to enclose everything in If
-        textbutton "+" action [ SetVariable("drawing", drawing + 1), SetVariable("points", points + 1) ]
-        textbutton "-" action [ SetVariable("drawing", drawing - 1), SetVariable("points", points - 1) ]
-=======
+
         # Unsure if it works but it probably does
         textbutton "+" action If( pointsPower > 0, true = [ SetVariable("drawing", drawing + 1), SetVariable("pointsPower", pointsPower - 1) ], false = None )
         textbutton "-" action If( pointsPower > 0, true = [ SetVariable("drawing", drawing - 1), SetVariable("pointsPower", pointsPower + 1) ], false = None )
->>>>>>> 0d3f3822084a06ac4f827bf947e4c9887fd115d9
+
