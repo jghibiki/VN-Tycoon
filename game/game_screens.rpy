@@ -58,11 +58,11 @@ screen set_attributes(cclass):
     default points  = 0
  
     vbox:
-        text "Selected class: [cclass]
-        text "Points: [points]
+        text "Selected class: [cclass]"
+        text "Points: [points]"
         
     hbox:
-        text "Drawing: [drawing]
+        text "Drawing: [drawing]"
         # Need to enclose everything in If
         textbutton "+" action [ SetVariable("drawing", drawing + 1), SetVariable("points", points + 1) ]
         textbutton "-" action [ SetVariable("drawing", drawing - 1), SetVariable("points", points - 1) ]
