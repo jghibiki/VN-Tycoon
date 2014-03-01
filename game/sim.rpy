@@ -25,10 +25,3 @@ label sim:
             
     jump sim
 
-label computer:
-    menu:
-        "open browser":
-            "lala"
-        "turn off":
-            return
-    jump computer
