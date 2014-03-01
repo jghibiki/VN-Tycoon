@@ -1,4 +1,4 @@
-﻿
+
 # The game starts here.
 label start:
     call screen char_select
@@ -38,7 +38,6 @@ label start:
     if _return=="composer":
         $job = "composer"
         jump composer        
-
 
     "You've created a new Ren'Py game."
     "Once you add a story, pictures, and music, you can release it to the world!"
