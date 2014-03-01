@@ -15,7 +15,7 @@ init -2 python:
 
 init -1 python:
     points = 5
-    drawing = 0
+    #drawing = 0
     
     art = 0
     writing = 0
@@ -47,25 +47,53 @@ screen char_select:
     add "gui/char_select_bg.jpg"
     imagebutton auto "gui/artist_%s.png" focus_mask True xpos 200 ypos 200 action Return("artist") #at main_effect2_var
     imagebutton auto "gui/writer_%s.png" focus_mask True xpos 600 ypos 200 action Return("writer") #at main_effect2_var
-    imagebutton auto "gui/programmer_%s.png" focus_mask True xpos 200 ypos 400 action Return("programmer") #at main_effect2_var
+    imagebutton auto "gui/programmer_%s.png" focus_mask True xpos 200 ypos 400 action Return("coder") #at main_effect2_var
     imagebutton auto "gui/composer_%s.png" focus_mask True xpos 600 ypos 400 action Return("composer") #at main_effect2_var
     
-
-screen set_attributes(cclass):
+# init python:   
+    # def inc_drawing():
+        # global drawing
+        # global points
+        # if 1==1:#points>0 and drawing > -1 and drawing < 11:
+            # drawing += 1
+            # points -= 1
+        # return None
+    # def dec_drawing():
+        # global drawing
+        # global points
+        # if 1==1:#points<6 and drawing > -1 and drawing < 11:
+            # drawing += 1
+            # points -= 1
+        # return None
         
-    default cclass  = ''
-    default pointsPower = 10
-    default drawing = 0
-    default points  = 0
- 
+screen set_attributes(cclass=''):
+
     vbox:
-        text "Selected class: [cclass]"
-        text "Points: [points]"
+        $ my_text = "Selected class: " + str(cclass)
+        text my_text
+        $ my_text = "Points: " + str(points)
+        text my_text
         
-    hbox:
-        text "Drawing: [drawing]"
-
-        # Unsure if it works but it probably does
-        textbutton "+" action If( pointsPower > 0, true = [ SetVariable("drawing", drawing + 1), SetVariable("pointsPower", pointsPower - 1) ], false = None )
-        textbutton "-" action If( pointsPower > 0, true = [ SetVariable("drawing", drawing - 1), SetVariable("pointsPower", pointsPower + 1) ], false = None )
-
+        hbox:
+            $ my_text = "Art: " + str(art)
+            text my_text
+            textbutton "+" action If( points > 0 and art < 10, true = [ SetVariable("art", art + 1), SetVariable("points", points - 1) ], false = None )
+            textbutton "-" action If( points < 6 and art > art_min, true = [ SetVariable("art", art - 1), SetVariable("points", points + 1) ], false = None )
+            
+        hbox:
+            $ my_text = "Writing: " + str(writing)
+            text my_text
+            textbutton "+" action If( points > 0 and writing < 10, true = [ SetVariable("writing", writing + 1), SetVariable("points", points - 1) ], false = None )
+            textbutton "-" action If( points < 6 and writing > writing_min, true = [ SetVariable("writing", writing - 1), SetVariable("points", points + 1) ], false = None )
+            
+        hbox:
+            $ my_text = "Coding: " + str(coding)
+            text my_text
+            textbutton "+" action If( points > 0 and coding < 10, true = [ SetVariable("coding", coding + 1), SetVariable("points", points - 1) ], false = None )
+            textbutton "-" action If( points < 6 and coding > coding_min, true = [ SetVariable("coding", coding - 1), SetVariable("points", points + 1) ], false = None )
+            
+        hbox:
+            $ my_text = "Composing: " + str(composing)
+            text my_text
+            textbutton "+" action If( points > 0 and composing < 10, true = [ SetVariable("composing", composing + 1), SetVariable("points", points - 1) ], false = None )
+            textbutton "-" action If( points < 6 and composing > composing_min, true = [ SetVariable("composing", composing - 1), SetVariable("points", points + 1) ], false = None )
