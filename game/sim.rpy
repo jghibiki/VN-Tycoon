@@ -25,6 +25,7 @@ label sim:
 screen sim:
     add "gui/room.jpg"
     use phone_button
+    use game_button
     imagebutton auto "gui/bedroom_%s.png" focus_mask True action [Return("sleep")] 
     imagebutton auto "gui/computer_%s.png" focus_mask True action [Return("computer")] 
     imagebutton auto "gui/exit_%s.png" focus_mask True action [Return("work")] 
