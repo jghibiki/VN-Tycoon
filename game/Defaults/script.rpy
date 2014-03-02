@@ -1,6 +1,9 @@
 
 # The game starts here.
 label start:
+    $ mygame=Game()
+    $ games=[]
+    
     call screen char_select
     $ cclass = _return
     $ art_min = 0
@@ -43,20 +46,21 @@ label start:
 #    show screen inventory_button
 
    
-    if _return=="artist":
+    if cclass=="artist":
         $job = "artist"
         jump artist
-    if _return=="writer":
+    if cclass=="writer":
         $job = "writer"
         jump writer
-    if _return=="coder":
+    if cclass=="coder":
         $job = "coder"
         jump programmer
-    if _return=="composer":
+    if cclass=="composer":
         $job = "composer"
         jump composer        
+   
 
-    "You've created a new Ren'Py game."
-    "Once you add a story, pictures, and music, you can release it to the world!"
+    "You should be seeing this text."
+    "Something went wrong. :("
 
     return
