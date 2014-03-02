@@ -23,10 +23,10 @@ label sim:
     jump sim
     
 screen sim:
-    add "Assets/gui/room.jpg"
+    add "gui/room.jpg"
     use phone_button
     use game_button
-    imagebutton auto "Assets/gui/bedroom_%s.png" focus_mask True action [Return("sleep")] 
-    imagebutton auto "Assets/gui/computer_%s.png" focus_mask True action [Return("computer")] 
-    imagebutton auto "Assets/gui/exit_%s.png" focus_mask True action [Return("work")] 
-    imagebutton auto "Assets/gui/tablet_%s.png" focus_mask True action [Return("draw")] 
+    imagebutton auto "gui/bedroom_%s.png" focus_mask True action [Return("sleep")] 
+    imagebutton auto "gui/computer_%s.png" focus_mask True action [Return("computer")] 
+    imagebutton auto "gui/exit_%s.png" focus_mask True action [Return("work")] 
+    imagebutton auto "gui/tablet_%s.png" focus_mask True action [Return("draw")] 
