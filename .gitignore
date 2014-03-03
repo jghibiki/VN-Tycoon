@@ -5,6 +5,7 @@
 *.pyo
 *.log
 *.txt
+*.save
 persistant
 
 #################
