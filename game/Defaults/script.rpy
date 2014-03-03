@@ -3,6 +3,7 @@
 label start:
     $ mygame=Game()
     $ games=[]
+    $ skills = Skills()
     
     call screen char_select
     $ cclass = _return
@@ -12,16 +13,16 @@ label start:
     $ composing_min = 0
     if cclass=="artist":
         $ art_min = 5
-        $ art += art_min
+        $ skills.art += art_min
     if cclass=="writer":
         $ writing_min = 5
-        $ writing += writing_min
+        $ skills.writing += writing_min
     if cclass=="coder":
         $ coding_min = 5
-        $ coding += coding_min
+        $ skills.coding += coding_min
     if cclass=="composer":
         $ composing_min = 5
-        $ composing += composing_min
+        $ skills.composing += composing_min
     call screen set_attributes(cclass)
 
     python:
