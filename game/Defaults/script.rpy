@@ -3,25 +3,26 @@
 label start:
     $ mygame=Game()
     $ games=[]
+    $ skills = Skills()
     
     call screen char_select
     $ cclass = _return
     $ art_min = 0
     $ writing_min = 0
     $ coding_min = 0
-    $ composing_min = 0
+    $ music_min = 0
     if cclass=="artist":
         $ art_min = 5
-        $ art += art_min
+        $ skills.art += art_min
     if cclass=="writer":
         $ writing_min = 5
-        $ writing += writing_min
+        $ skills.writing += writing_min
     if cclass=="coder":
         $ coding_min = 5
-        $ coding += coding_min
+        $ skills.coding += coding_min
     if cclass=="composer":
-        $ composing_min = 5
-        $ composing += composing_min
+        $ music_min = 5
+        $ skills.music += music_min
     call screen set_attributes(cclass)
 
     python:
@@ -54,7 +55,7 @@ label start:
         jump writer
     if cclass=="coder":
         $job = "coder"
-        jump programmer
+        jump coder
     if cclass=="composer":
         $job = "composer"
         jump composer        
