@@ -10,7 +10,7 @@ label start:
     $ art_min = 0
     $ writing_min = 0
     $ coding_min = 0
-    $ composing_min = 0
+    $ music_min = 0
     if cclass=="artist":
         $ art_min = 5
         $ skills.art += art_min
@@ -21,8 +21,8 @@ label start:
         $ coding_min = 5
         $ skills.coding += coding_min
     if cclass=="composer":
-        $ composing_min = 5
-        $ skills.composing += composing_min
+        $ music_min = 5
+        $ skills.music += music_min
     call screen set_attributes(cclass)
 
     python:
@@ -55,7 +55,7 @@ label start:
         jump writer
     if cclass=="coder":
         $job = "coder"
-        jump programmer
+        jump coder
     if cclass=="composer":
         $job = "composer"
         jump composer        

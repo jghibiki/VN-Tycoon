@@ -19,7 +19,22 @@ init -2 python:
             self.writing = 0
             self.coding = 0
             self.music = 0
-
+        def increase(self, skill, hours):
+            inc_by = hours
+            if skill == "art":
+                inc_by = inc_by * ((10.0-self.art)/10)/10
+                self.art += inc_by
+            if skill == "writing":
+                inc_by = inc_by * ((10.0-self.writing)/10)/10
+                self.writing += inc_by
+            if skill == "coding":
+                inc_by = inc_by * ((10.0-self.coding)/10)/10
+                self.coding += inc_by
+            if skill == "music":
+                inc_by = inc_by * ((10.0-self.music)/10)/10
+                self.music += inc_by
+                
+    
         
 init -1 python:
     points = 5
@@ -86,7 +101,7 @@ screen set_attributes(cclass=''):
             textbutton "-" action If( points < 6 and skills.coding > coding_min, true = [ SetField(skills, "coding", skills.coding - 1), SetVariable("points", points + 1) ], false = None )
             
         hbox:
-            $ my_text = "Composing: " + str(skills.music)
+            $ my_text = "Music: " + str(skills.music)
             text my_text
             textbutton "+" action If( points > 0 and skills.music < 10, true = [ SetField(skills, "music", skills.music + 1), SetVariable("points", points - 1) ], false = None )
             textbutton "-" action If( points < 6 and skills.music > composing_min, true = [ SetField(skills, "music", skills.music - 1), SetVariable("points", points + 1) ], false = None )

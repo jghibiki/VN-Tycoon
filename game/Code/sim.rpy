@@ -13,14 +13,15 @@ label sim:
     if action == "draw":
         if mygame.started:
             if time.dec(1):
-                "You draw some sprites for your game. [mygame.art_done]"
                 $ mygame.do_art(1)
+                "You draw some sprites for your game. [mygame.art_done]"
             else:
                 "You are too sleepy to draw."
         else:
             if time.dec(1):
                 "You spend some time practicing drawing."
-                $ skills.art += 1
+                $ skills.increase("art", 1)
+                #$ skills.art += 1
             else:
                 "You are too sleepy to draw."
     if action == "sleep":

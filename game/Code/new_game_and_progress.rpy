@@ -19,8 +19,31 @@ init python:
             self.music_done = 0
             self.music_needed = None
         def do_art(self, hours):
-            self.art_done += hours / (11-art)
-            
+            if self.art_done<self.art_needed:
+                self.art_done += hours / (11.0-skills.art)
+                return True
+            else:
+                return False
+        def do_writing(self, hours):
+            if self.writing_done<self.writing_needed:
+                self.writing_done += hours / (11.0-skills.writing)
+                return True
+            else:
+                return False
+        def do_coding(self, hours):
+            if self.coding_done<self.coding_needed:
+                self.coding_done += hours / (11.0-skills.coding)
+                return True
+            else:
+                return False
+        def do_music(self, hours):
+            if self.music_done<self.music_needed:
+                self.music_done += hours / (11.0-skills.music)
+                return True
+            else:
+                return False
+        
+
         
 screen game_button:
     hbox:
@@ -75,7 +98,7 @@ screen new_game:
             textbutton "No" action SetField(mygame, "commercial", False)
 
         hbox:
-            textbutton "Cancel" action Return()
+            textbutton "Cancel" action Hide("new_game")
             textbutton "OK" action [SetField(mygame, "started", True), Hide("new_game"), Jump("new_game")]
     
 label new_game:
