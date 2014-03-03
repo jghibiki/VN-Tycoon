@@ -11,11 +11,19 @@ label sim:
     if action == "computer":
         call computer
     if action == "draw":
-        if time.dec(1):
-            "You spend some time practicing drawing."
-            $ art += 1
+        if mygame.started:
+            if time.dec(1):
+                $ mygame.do_art(1)
+                "You draw some sprites for your game. [mygame.art_done]"
+            else:
+                "You are too sleepy to draw."
         else:
-            "You are too sleepy to draw."
+            if time.dec(1):
+                "You spend some time practicing drawing."
+                $ skills.increase("art", 1)
+                #$ skills.art += 1
+            else:
+                "You are too sleepy to draw."
     if action == "sleep":
         $ day += 1
         $ time = Time(24)

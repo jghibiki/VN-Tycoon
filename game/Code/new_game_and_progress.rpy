@@ -1,4 +1,5 @@
 init python:
+    import random
     class Game:
         def __init__(self):
             self.started = False
@@ -17,7 +18,33 @@ init python:
             self.art_needed = None
             self.music_done = 0
             self.music_needed = None
-    
+        def do_art(self, hours):
+            if self.art_done<self.art_needed:
+                self.art_done += hours / (11.0-skills.art)
+                return True
+            else:
+                return False
+        def do_writing(self, hours):
+            if self.writing_done<self.writing_needed:
+                self.writing_done += hours / (11.0-skills.writing)
+                return True
+            else:
+                return False
+        def do_coding(self, hours):
+            if self.coding_done<self.coding_needed:
+                self.coding_done += hours / (11.0-skills.coding)
+                return True
+            else:
+                return False
+        def do_music(self, hours):
+            if self.music_done<self.music_needed:
+                self.music_done += hours / (11.0-skills.music)
+                return True
+            else:
+                return False
+        
+
+        
 screen game_button:
     hbox:
         if mygame.started: # game_in_progress:
@@ -71,15 +98,40 @@ screen new_game:
             textbutton "No" action SetField(mygame, "commercial", False)
 
         hbox:
-            textbutton "Cancel" action Return()
+            textbutton "Cancel" action Hide("new_game")
             textbutton "OK" action [SetField(mygame, "started", True), Hide("new_game"), Jump("new_game")]
     
 label new_game:
     call name_gen
             
-    
-# -->Resources are determined by your selections (scope and gameplay)
+    python:
+        coding_needed = random.randint(3, 5)
+        coding_needed += int(mygame.scope/10000) * 4
+        if mygame.gameplay=="sim":
+            coding_needed += 16
+        if mygame.gameplay=="rpg":
+            coding_needed += 24
+        #coding_needed = coding_needed * (11-coding)
+        mygame.coding_needed = coding_needed
 
+        sprites_needed = random.randint(2, 4) + int(mygame.scope/20000)
+        bgs_needed = random.randint(2, 4) + int(mygame.scope/20000)
+        if mygame.gameplay=="rpg":
+            sprites_needed += 4 + int(mygame.scope/20000)*2
+            bgs_needed += 4 + int(mygame.scope/20000)*2
+        cgs_needed = int(mygame.scope/10000)
+        art_needed = 2*sprites_needed + 4*bgs_needed + 4*cgs_needed
+        #art_needed = art_needed * (11-art)
+        mygame.art_needed = art_needed
+        
+        music_needed = random.randint(2, 4) + int(mygame.scope/20000)
+        mygame.music_needed = music_needed
+        
+        writing_needed = int(mygame.scope/1000)
+        mygame.writing_needed = writing_needed
+
+# -->Resources are determined by your selections (scope and gameplay)
+    
 # Coding: with max coding skill(10): 4 hours + 4h for every 10,000 words; add 16h for sim and 24h for RPG. With coding skill 1: everything takes 10 times longer.
 
 # Art: 2-4 sprites (random) + another one for every 20,000 words; if it's an RPG: add 4 more and add 2 for every 20,000 words
