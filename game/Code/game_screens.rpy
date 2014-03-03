@@ -104,7 +104,7 @@ screen set_attributes(cclass=''):
             $ my_text = "Music: " + str(skills.music)
             text my_text
             textbutton "+" action If( points > 0 and skills.music < 10, true = [ SetField(skills, "music", skills.music + 1), SetVariable("points", points - 1) ], false = None )
-            textbutton "-" action If( points < 6 and skills.music > composing_min, true = [ SetField(skills, "music", skills.music - 1), SetVariable("points", points + 1) ], false = None )
+            textbutton "-" action If( points < 6 and skills.music > music_min, true = [ SetField(skills, "music", skills.music - 1), SetVariable("points", points + 1) ], false = None )
 
         textbutton "OK" action Return()
             
