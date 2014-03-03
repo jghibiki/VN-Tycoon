@@ -53,32 +53,26 @@ screen char_select:
 screen set_attributes(cclass=''):
 
     vbox:
-        $ my_text = "Selected class: " + str(cclass)
-        text my_text
-        $ my_text = "Points: " + str(points)
-        text my_text
+        text "Selected class: [cclass]"
+        text "Points: [points]"
         
         hbox:
-            $ my_text = "Art: " + str(art)
-            text my_text
+            text "Art: [art]"
             textbutton "+" action If( points > 0 and art < 10, true = [ SetVariable("art", art + 1), SetVariable("points", points - 1) ], false = None )
             textbutton "-" action If( points < 6 and art > art_min, true = [ SetVariable("art", art - 1), SetVariable("points", points + 1) ], false = None )
             
         hbox:
-            $ my_text = "Writing: " + str(writing)
-            text my_text
+            text "Writing: [writing]"
             textbutton "+" action If( points > 0 and writing < 10, true = [ SetVariable("writing", writing + 1), SetVariable("points", points - 1) ], false = None )
             textbutton "-" action If( points < 6 and writing > writing_min, true = [ SetVariable("writing", writing - 1), SetVariable("points", points + 1) ], false = None )
             
         hbox:
-            $ my_text = "Coding: " + str(coding)
-            text my_text
+            text "Coding: [coding]"
             textbutton "+" action If( points > 0 and coding < 10, true = [ SetVariable("coding", coding + 1), SetVariable("points", points - 1) ], false = None )
             textbutton "-" action If( points < 6 and coding > coding_min, true = [ SetVariable("coding", coding - 1), SetVariable("points", points + 1) ], false = None )
             
         hbox:
-            $ my_text = "Composing: " + str(composing)
-            text my_text
+            text "Composing: [composing]"
             textbutton "+" action If( points > 0 and composing < 10, true = [ SetVariable("composing", composing + 1), SetVariable("points", points - 1) ], false = None )
             textbutton "-" action If( points < 6 and composing > composing_min, true = [ SetVariable("composing", composing - 1), SetVariable("points", points + 1) ], false = None )
 
