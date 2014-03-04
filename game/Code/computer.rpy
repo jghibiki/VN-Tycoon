@@ -26,6 +26,10 @@ label computer:
             $showBrowser = True
         if _return == "leave":
             return # or maybe jump to sim instead
+        if _return == "lsf":
+            $showBrowser = "lsf"
+        if _return == "amazon":
+            $showBrowser = "amazon"
 
 
 #######################
@@ -34,9 +38,8 @@ label computer:
 screen computer:
     #if we end up using different bgs based on the job change this
     vbox: 
-        xpos 0.5
-        ypos 0.5
-        text "computer desktop!"
+        xpos 0.01
+        ypos 0.2
         textbutton "Open Web Browser" action Return("web_browser")
         textbutton "Leave Computer" action Return("leave") 
 
@@ -45,15 +48,23 @@ screen computer:
 
 screen webBrowser:
     vbox:
-        text "web browser"
-
+        xpos 0.01
+        ypos 0.2
+        textbutton "LemmingSoft Forums" action Return("lsf")
+        textbutton "Amazon" action Return("amazon")
 screen amazon:
     vbox:
+        xpos 0.01
+        ypos 0.2
         text "Amazon!"
+        textbutton "Back" action Return("web_browser")
 
 screen lsf:
     vbox:
+        xpos 0.01
+        ypos 0.2
         text "LemmingSoft Forums"
+        textbutton "Back" action Return("web_browser")
 
 ############################3
 ## Computer Images
