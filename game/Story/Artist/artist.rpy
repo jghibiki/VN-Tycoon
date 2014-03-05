@@ -1,7 +1,7 @@
-define Phone = Character('Phone', color="#36393D")
-define Mom = Character('Mom', color="#356AA0")
-define Martha = Character('Martha', color="#6BBA70")
-
+define Phone = Character('Phone', color="#36393D", show_two_window=True)
+define Mom = Character('Mom', color="#356AA0", show_two_window=True)
+define Martha = Character('Martha', color="#356AA0", show_two_window=True)
+#6BBA70
 image phone_mom:
     "Assets/sprites/phone_mom.png"
     yalign 0.0
@@ -52,7 +52,7 @@ label artist:
     "Of course, those were the things my mother always worried about, how it was going to possibly live off of visual novels and that I was never going to produce her grandchildren. she constantly stressed over how much time I was spending doing 'this,'  saying I was wasting my time when I could be out dating some guy, or building a career for myself and for my future family. She would stress her woes to anyone who would listen saying that I was going to be old and wrinkly and not have a date because no guy would even want to get close to me."
     Mom "You know you can't only think of yourself here, you have to think about your future; your family's future. I'm only trying to help you really should come  and join the family business. You won't get anywhere with this."
     "That's it! I had it! I couldn't take it anymore!"
-    Martha "Mother it is my life! You may think I can't make it with visual novels alone, but I can! Not only that will prove it to you, all stand on my own 2 feet with just visual novels. I'll make a life for myself! I won't need the family business or you or dad! And if I can't, I'll accept it and join the business. But you have to give me a chance! That's all I'm asking!"
+    Martha "Mother it is my life! You may think I can't make it with visual novels alone, but I can! Not only that, I will prove it to you. I'll stand on my own two feet with just visual novels. I'll make a life for myself! I won't need the family business or you or dad! And if I can't, I'll accept it and join the business. But you have to give me a chance! That's all I'm asking!"
     Mom "Goodness don't talk to your mother like that! I brought you into this world; do you know how long I was in labor with you!? No respect! You have no respect at all! Why can't you be more like your brothers?! Fine, if you want to go into this nonsense I won't stop you any longer. you can screw your life for all I care!"
     "And the line went dead."
     "I let out a sigh as I set the phone down. My mother would have to get over it this was my life, my choices, and I was going to make visual novels."
