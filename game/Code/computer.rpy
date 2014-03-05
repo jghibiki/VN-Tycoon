@@ -41,10 +41,12 @@ label computer:
         if _return == "leave":
             return # or maybe jump to sim instead
         if _return == "lsf":
+            $pollMessages()
             $showBrowser = "lsf"
         if _return == "amazon":
             $showBrowser = "amazon"
         if _return == "lsf_recruitment":
+            $poll()
             $showBrowser = "lsf_recruitment"
         if _return == "lsf_messages":
             $showBrowser = "lsf_messages"
