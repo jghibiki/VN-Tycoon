@@ -42,7 +42,24 @@ screen say:
     use quick_menu
 
 init -1 python:
-    style.say_dialogue.color = "FFF"
+    style.say_dialogue.color = "000"
+    style.say_thought.color = "000"
+    
+    
+    style.say_window.background = Frame("Assets/gui/textbox1.png", 25, 25)
+    style.say_window.left_padding=100
+    style.say_window.right_padding=100
+    style.say_window.bottom_padding=67
+    style.say_window.top_padding=25
+    
+    style.say_window.yminimum = 169
+    
+    style.say_who_window.background = Frame("Assets/gui/namebox1.png", 15, 15)
+    style.say_who_window.left_margin = 66
+    style.say_who_window.bottom_margin = 10
+    style.say_label.xalign = 0.5
+    
+    #style.say_window.bottom_padding=100
 ##############################################################################
 # Choice
 #
