@@ -120,14 +120,15 @@ screen sim:
     add "room_closed"
     
     #imagebutton idle "Assets/bg/room/room_base_closed.png" hover "Assets/bg/room/room_base_left.png" focus_mask "Assets/bg/room/left-door-mask.png" action [Return("work")] 
-    imagebutton idle "#00000000" hover "room_left" focus_mask "Assets/bg/room/left_door_mask.png" action [Return("work")] 
-    imagebutton idle "#00000000" hover "room_right" focus_mask "Assets/bg/room/right_door_mask.png" action [Return("sleep")] 
+    imagebutton idle "#00000000" hover "room_left" focus_mask "Assets/bg/room/left_door_mask.png" action [Return("work")] hovered [Play("sound", "Assets/sfx/front door open.ogg"), Show("gui_tooltip", my_picture="tooltip_work") ] unhovered [Hide("gui_tooltip")]
     
-    imagebutton idle "Assets/bg/room/computer_off.png" hover "Assets/bg/room/computer_on.png" focus_mask "Assets/bg/room/computer_mask.png" action [Return("computer")]
+    imagebutton idle "#00000000" hover "room_right" focus_mask "Assets/bg/room/right_door_mask.png" action [Return("sleep")] hovered [Play("sound", "Assets/sfx/door open.ogg"), Show("gui_tooltip", my_picture="tooltip_sleep") ] unhovered [Hide("gui_tooltip")]
+    
+    imagebutton idle "Assets/bg/room/computer_off.png" hover "Assets/bg/room/computer_on.png" focus_mask "Assets/bg/room/computer_mask.png" action [Return("computer")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_computer") ] unhovered [Hide("gui_tooltip")]
     if inventory.has_item(tablet):
-        imagebutton auto "Assets/gui/tablet_%s.png" focus_mask True action [Return("draw")] 
+        imagebutton auto "Assets/gui/tablet_%s.png" focus_mask True action [Return("draw")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_draw") ] unhovered [Hide("gui_tooltip")]
     else
-        imagebutton auto "Assets/bg/room/sketchpad_%s.png" focus_mask True action [Return("draw")] 
+        imagebutton auto "Assets/bg/room/sketchpad_%s.png" focus_mask True action [Return("draw")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_draw") ] unhovered [Hide("gui_tooltip")]
     
     
     
@@ -139,6 +140,12 @@ screen sim:
 
     use phone_button
     use game_button
+    
+init:
+    image tooltip_work=LiveComposite((665, 73), (3,56), Text("Go to work.", style="tips_bottom"))
+    image tooltip_sleep=LiveComposite((665, 73), (3,56), Text("Go to sleep.", style="tips_bottom"))
+    image tooltip_computer=LiveComposite((665, 73), (3,56), Text("Turn on the computer.", style="tips_bottom"))
+    image tooltip_draw=LiveComposite((665, 73), (3,56), Text("Draw.", style="tips_bottom"))
     
     
     
