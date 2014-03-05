@@ -2,7 +2,15 @@ init python: # For setting up the variables before they need to be used.
     photos = [] # Used for the camera
     photo_sv = 0 #number of photos
     currently_viewed_picture = 1 # This is used in the picture viewing app, to keep track of which photo is being viewed.
-    phone_screen_bg = "Assets/phone/phone_screen_blank.png"
+    
+    #phone_screen_bg = "Assets/phone/phone_screen_blank.png"
+    phone_screen_bg = ConditionSwitch(
+                "job == 'artist'", "Assets/phone/phone_screen_blank_cat.png",
+                "job == 'writer'", "Assets/phone/phone_screen_blank_grass.png",
+                "job == 'coder'", "Assets/phone/phone_screen_blank_green.png",
+                "job == 'composer'", "Assets/phone/phone_screen_blank_lotus.png",
+                True, "Assets/phone/phone_screen_blank.png")
+    
     pong_oponent=0
     pong_player=0
     
@@ -82,6 +90,12 @@ screen phone_button:
             action [Hide("phone_button"), Show ("mainphonescreen")]
         $ Clocks (55, 45, 11)
             
+init -1 python:
+    style.phone_icons_text = Style(style.default)
+    style.phone_icons_text.outlines = [(1, "000000", 0, 0)] 
+    style.phone_icons_text.color = "FFF"
+    style.phone_icons_text.size = 14
+    style.phone_icons_text.xalign = .5
 screen mainphonescreen:
     tag phone
     modal True
@@ -93,49 +107,49 @@ screen mainphonescreen:
     frame:
         background None
 #        area (23, 133, 261, 368)
-        area (18, 133, 261, 368)
+        #area (18, 133, 261, 368)
+        area (12, 133, 337, 368)
         style_group "phone"
         grid 4 4:
             vbox ypos 15:
                 imagebutton idle "Assets/phone/icons/camera.png" hover "Assets/phone/icons/camera.png" focus_mask True action ui.callsinnewcontext("take_a_photo") xalign .5
-                text "Camera"
+                text "Camera" style "phone_icons_text"
             vbox ypos 15:
                 imagebutton idle "Assets/phone/icons/clock.png" hover "Assets/phone/icons/clock.png" focus_mask True action [Hide("mainphonescreen"), Show("clock")] xalign .5
-                text "Clock"
+                text "Clock" style "phone_icons_text" 
             vbox ypos 15:
                 imagebutton idle "Assets/phone/icons/web.png" hover "Assets/phone/icons/web.png" focus_mask True xalign .5
-                text "Web"
+                text "Web" style "phone_icons_text" 
             vbox ypos 15:
                 imagebutton idle "Assets/phone/icons/pong.png" hover "Assets/phone/icons/pong.png" focus_mask True action ui.callsinnewcontext("pong") xalign .5
-                text "Pong"
-
+                text "Pong" style "phone_icons_text" 
 
             vbox ypos 30:
                 imagebutton idle "Assets/phone/icons/map.png" hover "Assets/phone/icons/map.png" focus_mask True xalign .5
-                text "Maps"
+                text "Maps" style "phone_icons_text" 
             vbox ypos 30:
                 imagebutton idle "Assets/phone/icons/ipod.png" hover "Assets/phone/icons/ipod.png" focus_mask True action ShowMenu("phone_sound_options") xalign .5
-                text "iPod"
+                text "iPod" style "phone_icons_text" 
             vbox ypos 30:
                 if photo_sv>0:
                     imagebutton idle "Assets/phone/icons/photos.png" hover "Assets/phone/icons/photos.png" focus_mask True action [Hide("mainphonescreen"), Show("view_photos")] xalign .5
-                    text "Photos"
+                    text "Photos" style "phone_icons_text" 
                 else:
                     null
             null
 
             vbox ypos 50:
                 imagebutton idle "Assets/phone/icons/save.png" hover "Assets/phone/icons/save.png" focus_mask True action [Hide("mainphonescreen"), Show("phone_button"), ShowMenu('save')] xalign .5
-                text "Save"
+                text "Save" style "phone_icons_text" 
             vbox ypos 50:
                 imagebutton idle "Assets/phone/icons/skip.png" hover "Assets/phone/icons/skip.png" focus_mask True action [Hide("mainphonescreen"), Show("phone_button"), Skip()] xalign .5
-                text "Skip"            
+                text "Skip" style "phone_icons_text" 
             vbox ypos 50:
                 imagebutton idle "Assets/phone/icons/auto.png" hover "Assets/phone/icons/auto.png" focus_mask True action [Hide("mainphonescreen"), Show("phone_button"), Preference("auto-forward", "toggle")] xalign .5
-                text "Auto"
+                text "Auto" style "phone_icons_text" 
             vbox ypos 50:
                 imagebutton idle "Assets/phone/icons/settings.png" hover "Assets/phone/icons/settings.png" focus_mask True action [Hide("mainphonescreen"), Show("phone_button"), ShowMenu("preferences")] xalign .5
-                text "Settings"
+                text "Settings" style "phone_icons_text" 
 
             vbox ypos 69:
                 imagebutton idle "Assets/phone/icons/phone.png" hover "Assets/phone/icons/phone.png" focus_mask True action ui.callsinnewcontext("phone_call") xalign .5

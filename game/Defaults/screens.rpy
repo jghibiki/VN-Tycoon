@@ -217,7 +217,7 @@ screen main_menu:
             $ button_name_hover = button_name + "_hover"
             $ tip_name = "tooltip_" + item
             $ my_action = menu_actions[item]
-            button background None focus_mask True action [Hide("gui_tooltip"), my_action] hovered [ Play ("sound", "Assets/sfx/click.wav"), Show("gui_tooltip", my_picture=tip_name) ] unhovered [Hide("gui_tooltip")]:
+            button background None focus_mask True action [Hide("gui_tooltip"), my_action] hovered [ Play ("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture=tip_name) ] unhovered [Hide("gui_tooltip")]:
                 add button_name
                 hover_child button_name_hover
     
@@ -297,7 +297,7 @@ init -1:
 init:
     transform trans30:
         alpha 0.3
-    image main_menu_cg="Assets/bg/home day.jpg"
+    image main_menu_cg="Assets/bg/bedroom.jpg"
     image main_menu_cg_foggy=LiveComposite((1366,768), (0,0), Solid("#fff"), (0,0), At(ImageReference("main_menu_cg"), trans30))
 
 screen navigation:
@@ -316,7 +316,7 @@ screen navigation:
             $ button_name_insensitive = button_name + "_insensitive"
             $ tip_name = "tooltip_" + item
             $ my_action = menu_actions[item]
-            button background None focus_mask True action my_action hovered [ Play ("sound", "Assets/sfx/click.wav"), Show("gui_tooltip", my_picture=tip_name) ] unhovered [Hide("gui_tooltip")]:
+            button background None focus_mask True action my_action hovered [ Play ("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture=tip_name) ] unhovered [Hide("gui_tooltip")]:
                 add button_name
                 selected_idle_child button_name_selected_idle
                 #selected_hover_child button_name_selected_hover
@@ -478,7 +478,7 @@ screen extras:
             $ button_name_insensitive = button_name + "_insensitive"
             $ tip_name = "tooltip_" + item
             $ my_action = menu_actions[item]
-            button background None focus_mask True action my_action hovered [ Play ("sound", "Assets/sfx/click.wav"), Show("gui_tooltip", my_picture=tip_name) ] unhovered [Hide("gui_tooltip")]:
+            button background None focus_mask True action my_action hovered [ Play ("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture=tip_name) ] unhovered [Hide("gui_tooltip")]:
                 add button_name
                 selected_idle_child button_name_selected_idle
                 #selected_hover_child button_name_selected_hover

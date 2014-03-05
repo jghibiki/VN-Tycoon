@@ -1,5 +1,4 @@
 label sim:
-    
     call screen sim
     scene black
     show room_closed
@@ -140,3 +139,6 @@ screen sim:
 
     use phone_button
     use game_button
+    
+    
+    
