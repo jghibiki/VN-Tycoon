@@ -30,9 +30,11 @@ screen say:
                         id "who"
             window:
                 id "window"
+
                 has vbox:
                     style "say_vbox"
                 text what id "what"
+                
     # If there's a side image, display it above the text.
     if side_image:
         add side_image
