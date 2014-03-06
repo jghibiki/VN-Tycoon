@@ -105,7 +105,7 @@ label new_game:
     call name_gen
             
     python:
-        coding_needed = random.randint(3, 5)
+        coding_needed = random.randint(1, 3)
         coding_needed += int(mygame.scope/10000) * 4
         if mygame.gameplay=="sim":
             coding_needed += 16
@@ -124,7 +124,7 @@ label new_game:
         #art_needed = art_needed * (11-art)
         mygame.art_needed = art_needed
         
-        music_needed = random.randint(2, 4) + int(mygame.scope/20000)
+        music_needed = random.randint(4, 8) + int(mygame.scope/20000)
         mygame.music_needed = music_needed
         
         writing_needed = int(mygame.scope/1000)
@@ -215,7 +215,5 @@ screen game_progress(curr_game = mygame):
             textbutton "Back" action Hide("game_progress")
 
             
-            
-            
-            
+
             

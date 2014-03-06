@@ -6,7 +6,8 @@ init -2 python:
             minutes = 24*60 - self.value*60 + 8*60
         def dec(self, hours):
             global minutes
-            if self.value>8:
+            
+            if self.value-hours>8:
                 self.value -= hours
                 minutes = 24*60 - self.value*60 + 8*60
                 return True
