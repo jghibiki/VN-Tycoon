@@ -23,11 +23,11 @@ init -1 python hide:
     ## This controls the title of the window, when Ren'Py is
     ## running in a window.
 
-    config.window_title = u"VN Tycoon"
+    config.window_title = u"Visual Novel Tycoon"
 
     # These control the name and version of the game, that are reported
     # with tracebacks and other debugging logs.
-    config.name = "VN Tycoon"
+    config.name = "Visual Novel Tycoon"
     config.version = "0.0"
 
     #########################################
@@ -174,17 +174,17 @@ init -1 python hide:
 
     ## Sounds that are used when button and imagemaps are clicked.
 
-    # style.button.activate_sound = "click.wav"
-    # style.imagemap.activate_sound = "click.wav"
+    # style.button.activate_sound = "click.ogg"
+    # style.imagemap.activate_sound = "click.ogg"
 
     ## Sounds that are used when entering and exiting the game menu.
 
-    # config.enter_sound = "click.wav"
-    # config.exit_sound = "click.wav"
+    # config.enter_sound = "click.ogg"
+    # config.exit_sound = "click.ogg"
 
     ## A sample sound that can be played to check the sound volume.
 
-    # config.sample_sound = "click.wav"
+    # config.sample_sound = "click.ogg"
 
     ## Music that is played while the user is at the main menu.
 
@@ -263,7 +263,7 @@ init -1 python hide:
     ## stored. (It needs to be set early, before any other init code
     ## is run, so the persisten information can be found by the init code.)
 python early:
-    config.save_directory = "VN Tycoon-1393439946"
+    config.save_directory = "Visual Novel Tycoon-1393439946"
 
 init -1 python hide:
     #########################################
