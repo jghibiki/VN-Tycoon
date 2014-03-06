@@ -30,6 +30,31 @@ label sim:
         $ day += 1
         $ time = Time(24)
     
+    if action == "read1":
+            if time.dec(1):
+                "You spend some time reading about drawing."
+                $ skills.increase("art", 1)
+            else:
+                "You are too sleepy to read."
+    if action == "read2":
+            if time.dec(1):
+                "You spend some time reading about programming."
+                $ skills.increase("coding", 1)
+            else:
+                "You are too sleepy to read."
+    if action == "read3":
+            if time.dec(1):
+                "You spend some time reading about writing."
+                $ skills.increase("writing", 1)
+            else:
+                "You are too sleepy to read."
+    if action == "read4":
+            if time.dec(1):
+                "You spend some time reading about music."
+                $ skills.increase("music", 1)
+            else:
+                "You are too sleepy to read."
+    
     jump sim
     
 
@@ -131,6 +156,15 @@ screen sim:
         imagebutton auto "Assets/bg/room/sketchpad_%s.png" focus_mask True action [Return("draw")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_draw") ] unhovered [Hide("gui_tooltip")]
     
     
+    if 1==1:
+        imagebutton auto "Assets/bg/room/book1_%s.png" focus_mask True action [Return("read1")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_read1") ] unhovered [Hide("gui_tooltip")]
+    if 1==1:
+        imagebutton auto "Assets/bg/room/book2_%s.png" focus_mask True action [Return("read2")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_read2") ] unhovered [Hide("gui_tooltip")]
+    if 1==1:
+        imagebutton auto "Assets/bg/room/book3_%s.png" focus_mask True action [Return("read3")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_read3") ] unhovered [Hide("gui_tooltip")]
+    if 1==1:
+        imagebutton auto "Assets/bg/room/book4_%s.png" focus_mask True action [Return("read4")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_read4") ] unhovered [Hide("gui_tooltip")]
+    
     
     
 #    imagebutton auto "Assets/gui/bedroom_%s.png" focus_mask True action [Return("sleep")] 
@@ -149,3 +183,12 @@ init:
     
     
     
+    image tooltip_read1=LiveComposite((665, 73), (3,56), Text("Read Drawing for Losers. Time needed: 1 hour.", style="tips_bottom"))
+    image tooltip_read2=LiveComposite((665, 73), (3,56), Text("Read Programming for Idiots. Time needed: 1 hour.", style="tips_bottom"))
+    image tooltip_read3=LiveComposite((665, 73), (3,56), Text("Read Writing for Retards. Time needed: 1 hour.", style="tips_bottom"))
+    image tooltip_read4=LiveComposite((665, 73), (3,56), Text("Read Composing for Morons. Time needed: 1 hour.", style="tips_bottom"))
+    
+    
+
+
+
