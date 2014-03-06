@@ -7,6 +7,9 @@
 *.txt
 *.save
 persistant
+saves/
+photos/
+
 
 #################
 ## Eclipse
@@ -224,8 +227,3 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
-#renpy
-.rpyb
-.rpya
-.rpyc
-.pyo
