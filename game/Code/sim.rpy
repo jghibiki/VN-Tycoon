@@ -55,6 +55,27 @@ label sim:
             else:
                 "You are too sleepy to read."
     
+    if action == "write":
+        if time.dec(1):
+            $ mygame.do_writing(1)
+            "You write afor a while for your game. [mygame.writing_done]"
+        else:
+            "You are too sleepy to write."
+    if action == "code":
+        if time.dec(1):
+            $ mygame.do_coding(1)
+            "You code for a while for your game. [mygame.coding_done]"
+        else:
+            "You are too sleepy to code."
+    if action == "compose":
+        if time.dec(1):
+            $ mygame.do_music(1)
+            "You compose for a while for your game. [mygame.music_done]"
+        else:
+            "You are too sleepy to compose."
+
+
+    
     jump sim
     
 
@@ -174,6 +195,16 @@ screen sim:
 
     use phone_button
     use game_button
+    
+    if mygame.started:
+      frame:
+        top_margin 150
+        hbox:
+            
+            textbutton "Write" action Return("write")
+            textbutton "Compose" action Return("compose")
+            textbutton "Code" action Return("code")
+    
     
 init:
     image tooltip_work=LiveComposite((665, 73), (3,56), Text("Go to work.", style="tips_bottom"))
