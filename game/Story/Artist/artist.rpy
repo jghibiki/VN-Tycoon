@@ -1,6 +1,10 @@
+image side martha = "Assets/sprites/martha_side.png"
+
 define Phone = Character('Phone', color="#36393D", show_two_window=True)
 define Mom = Character('Mom', color="#356AA0", show_two_window=True)
-define Martha = Character('Martha', color="#356AA0", show_two_window=True)
+define Martha = Character('Martha', color="#356AA0", show_two_window=True, image="martha", window_left_padding=410, who_left_padding=410)
+
+
 #6BBA70
 image phone_mom:
     "Assets/sprites/phone_mom.png"
