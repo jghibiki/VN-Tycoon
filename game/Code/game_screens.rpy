@@ -6,7 +6,8 @@ init -2 python:
             minutes = 24*60 - self.value*60 + 8*60
         def dec(self, hours):
             global minutes
-            if self.value>8:
+            
+            if self.value-hours>=8:
                 self.value -= hours
                 minutes = 24*60 - self.value*60 + 8*60
                 return True
@@ -23,28 +24,37 @@ init -2 python:
             inc_by = hours
             if skill == "art":
                 inc_by = inc_by * ((10.0-self.art)/10)/10
-                self.art += inc_by
+                if self.art + inc_by <= 10 and not self.art==10.0:
+                    self.art += inc_by
+                else:
+                    self.art = 10.0
+                    return False
             if skill == "writing":
                 inc_by = inc_by * ((10.0-self.writing)/10)/10
-                self.writing += inc_by
+                if self.writing + inc_by <= 10 and not self.writing==10.0:
+                    self.writing += inc_by
+                else:
+                    self.writing = 10.0
+                    return False
             if skill == "coding":
                 inc_by = inc_by * ((10.0-self.coding)/10)/10
-                self.coding += inc_by
+                if self.coding + inc_by <= 10 and not self.coding==10.0:
+                    self.coding += inc_by
+                else:
+                    self.coding = 10.0
+                    return False
+                    
             if skill == "music":
                 inc_by = inc_by * ((10.0-self.music)/10)/10
-                self.music += inc_by
-                
-    
+                if self.music + inc_by <= 10 and not self.music==10.0:
+                    self.music += inc_by
+                else:
+                    self.music = 10.0
+                    return False
+            return True
         
 init -1 python:
     points = 5
-    #drawing = 0
-    
-    # art = 0
-    # writing = 0
-    # coding = 0
-    # composing = 0
-    
     inventory = Inventory()
     time=Time(24)
     day=0
@@ -67,11 +77,26 @@ init python:
     config.overlay_functions.append(display_stats_overlay)
     
 screen char_select:
-    add "Assets/gui/char_select_bg.jpg"
-    imagebutton auto "Assets/gui/artist_%s.png" focus_mask True xpos 200 ypos 200 action Return("artist") #at main_effect2_var
-    imagebutton auto "Assets/gui/writer_%s.png" focus_mask True xpos 600 ypos 200 action Return("writer") #at main_effect2_var
-    imagebutton auto "Assets/gui/programmer_%s.png" focus_mask True xpos 200 ypos 400 action Return("coder") #at main_effect2_var
-    imagebutton auto "Assets/gui/composer_%s.png" focus_mask True xpos 600 ypos 400 action Return("composer") #at main_effect2_var
+    add "#000"
+    add "Assets/gui/char_select_bg.png"
+    
+    
+    imagebutton auto "Assets/gui/char_select_writer_%s.png" focus_mask True action Return("writer") hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_writer") ] unhovered [Hide("gui_tooltip")]
+    imagebutton auto "Assets/gui/char_select_artist_%s.png" focus_mask True action Return("artist")hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_artist") ] unhovered [Hide("gui_tooltip")]
+    imagebutton auto "Assets/gui/char_select_coder_%s.png" focus_mask True action Return("coder")hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_coder") ] unhovered [Hide("gui_tooltip")]
+    imagebutton auto "Assets/gui/char_select_composer_%s.png" focus_mask True action Return("composer")hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_composer") ] unhovered [Hide("gui_tooltip")]
+
+init:
+    image tooltip_writer=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("Select the writer class.", style="tips_bottom"))
+    image tooltip_artist=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("Select the artist class.", style="tips_bottom"))
+    image tooltip_coder=LiveComposite((1300, 73), (3,0), ImageReference("information"), (3,30), Text("The coder. Congratulations! You have succeeded at developing the three great virtues of a programmer: laziness, impatience, and hubris.", style="tips_bottom"))
+    image tooltip_composer=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("Select the composer class.", style="tips_bottom"))
+    
+    
+    #imagebutton auto "Assets/gui/artist_%s.png" focus_mask True xpos 200 ypos 200 action Return("artist") #at main_effect2_var
+#    imagebutton auto "Assets/gui/writer_%s.png" focus_mask True xpos 600 ypos 200 action Return("writer") #at main_effect2_var
+#    imagebutton auto "Assets/gui/programmer_%s.png" focus_mask True xpos 200 ypos 400 action Return("coder") #at main_effect2_var
+#    imagebutton auto "Assets/gui/composer_%s.png" focus_mask True xpos 600 ypos 400 action Return("composer") #at main_effect2_var
         
 screen set_attributes(cclass=''):
 

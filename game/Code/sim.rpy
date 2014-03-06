@@ -12,67 +12,113 @@ label sim:
             "You are too sleepy to work."
     if action == "computer":
         call computer
+        
     if action == "draw":
-        if mygame.started:
-            if time.dec(1):
-                $ mygame.do_art(1)
-                "You draw some sprites for your game. [mygame.art_done]"
+        call screen select_time
+        $ duration = int(_return[1])
+        if _return[0]=="p":
+            if time.dec(duration):
+                if skills.increase("art", duration):
+                    "You spend some time practicing drawing."
+                else:
+                    "You are the very best. Like no one ever was."
             else:
                 "You are too sleepy to draw."
         else:
-            if time.dec(1):
-                "You spend some time practicing drawing."
-                $ skills.increase("art", 1)
-                #$ skills.art += 1
+            if time.dec(duration):
+                $ mygame.do_art(duration)
+                "You draw some sprites for your game. [mygame.art_done]"
             else:
                 "You are too sleepy to draw."
+                
     if action == "sleep":
         $ day += 1
         $ time = Time(24)
     
     if action == "read1":
             if time.dec(1):
-                "You spend some time reading about drawing."
-                $ skills.increase("art", 1)
+                if skills.increase("art", 2):
+                    "You spend some time reading about drawing."
+                else:
+                    "You are the very best. Like no one ever was."
             else:
                 "You are too sleepy to read."
     if action == "read2":
             if time.dec(1):
-                "You spend some time reading about programming."
-                $ skills.increase("coding", 1)
+                if skills.increase("coding", 2):
+                    "You spend some time reading about programming."
+                else:
+                    "You are the very best. Like no one ever was."
             else:
                 "You are too sleepy to read."
     if action == "read3":
             if time.dec(1):
-                "You spend some time reading about writing."
-                $ skills.increase("writing", 1)
+                if skills.increase("writing", 2):
+                    "You spend some time reading about writing."
+                else:
+                    "You are the very best. Like no one ever was."
             else:
                 "You are too sleepy to read."
     if action == "read4":
             if time.dec(1):
-                "You spend some time reading about music."
-                $ skills.increase("music", 1)
+                if skills.increase("music", 2):
+                    "You spend some time reading about music."
+                else:
+                    "You are the very best. Like no one ever was."
             else:
                 "You are too sleepy to read."
     
     if action == "write":
-        if time.dec(1):
-            $ mygame.do_writing(1)
-            "You write afor a while for your game. [mygame.writing_done]"
+        call screen select_time
+        $ duration = int(_return[1])
+        if _return[0]=="p":
+            if time.dec(duration):
+                if skills.increase("writing", duration):
+                    "You spend some time practicing writing."
+                else:
+                    "You are the very best. Like no one ever was."
+            else:
+                "You are too sleepy to write."
         else:
-            "You are too sleepy to write."
+            if time.dec(duration):
+                $ mygame.do_writing(duration)
+                "You write for a while for your game. [mygame.writing_done]"
+            else:
+                "You are too sleepy to write."
+                
     if action == "code":
-        if time.dec(1):
-            $ mygame.do_coding(1)
-            "You code for a while for your game. [mygame.coding_done]"
+        call screen select_time
+        $ duration = int(_return[1])
+        if _return[0]=="p":
+            if time.dec(duration):
+                if skills.increase("coding", duration):
+                    "You spend some time practicing coding."
+                else:
+                    "You are the very best. Like no one ever was."
+            else:
+                "You are too sleepy to code."
         else:
-            "You are too sleepy to code."
+            if time.dec(duration):
+                $ mygame.do_coding(duration)
+                "You code for a while for your game. [mygame.coding_done]"
+            else:
+                "You are too sleepy to code."
+            
     if action == "compose":
-        if time.dec(1):
-            $ mygame.do_music(1)
-            "You compose for a while for your game. [mygame.music_done]"
+        call screen select_time
+        $ duration = int(_return[1])
+        if _return[0]=="p":
+            if time.dec(duration):
+                $ skills.increase("music", duration)
+                "You spend some time practicing composing."
+            else:
+                "You are too sleepy to compose."
         else:
-            "You are too sleepy to compose."
+            if time.dec(duration):
+                $ mygame.do_music(duration)
+                "You compose for a while for your game. [mygame.music_done]"
+            else:
+                "You are too sleepy to compose."
 
 
     
@@ -166,7 +212,7 @@ screen sim:
     add "room_closed"
     
     #imagebutton idle "Assets/bg/room/room_base_closed.png" hover "Assets/bg/room/room_base_left.png" focus_mask "Assets/bg/room/left-door-mask.png" action [Return("work")] 
-    imagebutton idle "#00000000" hover "room_left" focus_mask "Assets/bg/room/left_door_mask.png" action [Return("work")] hovered [Play("sound", "Assets/sfx/front door open.ogg"), Show("gui_tooltip", my_picture="tooltip_work") ] unhovered [Hide("gui_tooltip")]
+    imagebutton idle "#00000000" hover "room_left" focus_mask "Assets/bg/room/left_door_mask.png" action [Return("work")] hovered [Play("sound", "Assets/sfx/door open.ogg"), Show("gui_tooltip", my_picture="tooltip_work") ] unhovered [Hide("gui_tooltip")]
     
     imagebutton idle "#00000000" hover "room_right" focus_mask "Assets/bg/room/right_door_mask.png" action [Return("sleep")] hovered [Play("sound", "Assets/sfx/door open.ogg"), Show("gui_tooltip", my_picture="tooltip_sleep") ] unhovered [Hide("gui_tooltip")]
     
@@ -200,7 +246,6 @@ screen sim:
       frame:
         top_margin 150
         hbox:
-            
             textbutton "Write" action Return("write")
             textbutton "Compose" action Return("compose")
             textbutton "Code" action Return("code")
@@ -221,5 +266,17 @@ init:
     
     
 
-
-
+screen select_time:
+    modal True
+    vbox:
+        text "Practice:"
+        hbox:
+            textbutton "1h" action Return("p1")
+            textbutton "4h" action Return("p4")
+            textbutton "8h" action Return("p8")
+        text "Make assets:"
+        hbox:
+            textbutton "1h" action Return("a1")
+            textbutton "4h" action Return("a4")
+            textbutton "8h" action Return("a8")
+        
