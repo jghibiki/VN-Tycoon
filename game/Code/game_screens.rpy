@@ -7,7 +7,7 @@ init -2 python:
         def dec(self, hours):
             global minutes
             
-            if self.value-hours>8:
+            if self.value-hours>=8:
                 self.value -= hours
                 minutes = 24*60 - self.value*60 + 8*60
                 return True
@@ -24,28 +24,37 @@ init -2 python:
             inc_by = hours
             if skill == "art":
                 inc_by = inc_by * ((10.0-self.art)/10)/10
-                self.art += inc_by
+                if self.art + inc_by <= 10 and not self.art==10.0:
+                    self.art += inc_by
+                else:
+                    self.art = 10.0
+                    return False
             if skill == "writing":
                 inc_by = inc_by * ((10.0-self.writing)/10)/10
-                self.writing += inc_by
+                if self.writing + inc_by <= 10 and not self.writing==10.0:
+                    self.writing += inc_by
+                else:
+                    self.writing = 10.0
+                    return False
             if skill == "coding":
                 inc_by = inc_by * ((10.0-self.coding)/10)/10
-                self.coding += inc_by
+                if self.coding + inc_by <= 10 and not self.coding==10.0:
+                    self.coding += inc_by
+                else:
+                    self.coding = 10.0
+                    return False
+                    
             if skill == "music":
                 inc_by = inc_by * ((10.0-self.music)/10)/10
-                self.music += inc_by
-                
-    
+                if self.music + inc_by <= 10 and not self.music==10.0:
+                    self.music += inc_by
+                else:
+                    self.music = 10.0
+                    return False
+            return True
         
 init -1 python:
     points = 5
-    #drawing = 0
-    
-    # art = 0
-    # writing = 0
-    # coding = 0
-    # composing = 0
-    
     inventory = Inventory()
     time=Time(24)
     day=0

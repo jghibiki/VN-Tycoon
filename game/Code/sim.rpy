@@ -12,46 +12,59 @@ label sim:
             "You are too sleepy to work."
     if action == "computer":
         call computer
+        
     if action == "draw":
-        if mygame.started:
-            if time.dec(1):
-                $ mygame.do_art(1)
-                "You draw some sprites for your game. [mygame.art_done]"
+        call screen select_time
+        $ duration = int(_return[1])
+        if _return[0]=="p":
+            if time.dec(duration):
+                if skills.increase("art", duration):
+                    "You spend some time practicing drawing."
+                else:
+                    "You are the very best. Like no one ever was."
             else:
                 "You are too sleepy to draw."
         else:
-            if time.dec(1):
-                "You spend some time practicing drawing."
-                $ skills.increase("art", 1)
-                #$ skills.art += 1
+            if time.dec(duration):
+                $ mygame.do_art(duration)
+                "You draw some sprites for your game. [mygame.art_done]"
             else:
                 "You are too sleepy to draw."
+                
     if action == "sleep":
         $ day += 1
         $ time = Time(24)
     
     if action == "read1":
             if time.dec(1):
-                "You spend some time reading about drawing."
-                $ skills.increase("art", 1)
+                if skills.increase("art", 2):
+                    "You spend some time reading about drawing."
+                else:
+                    "You are the very best. Like no one ever was."
             else:
                 "You are too sleepy to read."
     if action == "read2":
             if time.dec(1):
-                "You spend some time reading about programming."
-                $ skills.increase("coding", 1)
+                if skills.increase("coding", 2):
+                    "You spend some time reading about programming."
+                else:
+                    "You are the very best. Like no one ever was."
             else:
                 "You are too sleepy to read."
     if action == "read3":
             if time.dec(1):
-                "You spend some time reading about writing."
-                $ skills.increase("writing", 1)
+                if skills.increase("writing", 2):
+                    "You spend some time reading about writing."
+                else:
+                    "You are the very best. Like no one ever was."
             else:
                 "You are too sleepy to read."
     if action == "read4":
             if time.dec(1):
-                "You spend some time reading about music."
-                $ skills.increase("music", 1)
+                if skills.increase("music", 2):
+                    "You spend some time reading about music."
+                else:
+                    "You are the very best. Like no one ever was."
             else:
                 "You are too sleepy to read."
     
@@ -60,8 +73,10 @@ label sim:
         $ duration = int(_return[1])
         if _return[0]=="p":
             if time.dec(duration):
-                $ skills.increase("writing", duration)
-                "You spend some time practicing writing."
+                if skills.increase("writing", duration):
+                    "You spend some time practicing writing."
+                else:
+                    "You are the very best. Like no one ever was."
             else:
                 "You are too sleepy to write."
         else:
@@ -76,8 +91,10 @@ label sim:
         $ duration = int(_return[1])
         if _return[0]=="p":
             if time.dec(duration):
-                $ skills.increase("code", duration)
-                "You spend some time practicing coding."
+                if skills.increase("coding", duration):
+                    "You spend some time practicing coding."
+                else:
+                    "You are the very best. Like no one ever was."
             else:
                 "You are too sleepy to code."
         else:

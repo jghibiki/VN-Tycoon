@@ -20,25 +20,25 @@ init python:
             self.music_needed = None
         def do_art(self, hours):
             if self.art_done<self.art_needed:
-                self.art_done += hours / (11.0-skills.art)
+                self.art_done += hours / (11.0-skills.art) / 2
                 return True
             else:
                 return False
         def do_writing(self, hours):
             if self.writing_done<self.writing_needed:
-                self.writing_done += hours / (11.0-skills.writing)
+                self.writing_done += hours / (11.0-skills.writing) / 2
                 return True
             else:
                 return False
         def do_coding(self, hours):
             if self.coding_done<self.coding_needed:
-                self.coding_done += hours / (11.0-skills.coding)
+                self.coding_done += hours / (11.0-skills.coding) / 2
                 return True
             else:
                 return False
         def do_music(self, hours):
             if self.music_done<self.music_needed:
-                self.music_done += hours / (11.0-skills.music)
+                self.music_done += hours / (11.0-skills.music) / 2
                 return True
             else:
                 return False
@@ -148,8 +148,20 @@ label new_game:
     jump sim
     
 label publish:
-    $ games.append(mygame)
-    $ mygame = Game()
+    $ all_resources_done = True
+    if mygame.writing_needed > mygame.writing_done:
+        $ all_resources_done = False
+    if mygame.coding_needed > mygame.coding_done:
+        $ all_resources_done = False
+    if mygame.music_needed > mygame.music_done:
+        $ all_resources_done = False
+    if mygame.art_needed > mygame.art_done:
+        $ all_resources_done = False
+    if all_resources_done:
+        $ games.append(mygame)
+        $ mygame = Game()
+    else:
+        "It's not finished!"
     
     jump sim
     

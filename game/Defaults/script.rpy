@@ -12,16 +12,16 @@ label start:
     $ coding_min = 0
     $ music_min = 0
     if cclass=="artist":
-        $ art_min = 5
+        $ art_min = 6
         $ skills.art += art_min
     if cclass=="writer":
-        $ writing_min = 5
+        $ writing_min = 6
         $ skills.writing += writing_min
     if cclass=="coder":
-        $ coding_min = 5
+        $ coding_min = 6
         $ skills.coding += coding_min
     if cclass=="composer":
-        $ music_min = 5
+        $ music_min = 6
         $ skills.music += music_min
     call screen set_attributes(cclass)
 
