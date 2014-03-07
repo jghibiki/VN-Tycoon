@@ -47,7 +47,6 @@ init -1 python:
     style.say_dialogue.color = "000"
     style.say_thought.color = "000"
     
-    
     style.say_window.background = Frame("Assets/gui/textbox1.png", 25, 25)
     style.say_window.left_padding=100
     style.say_window.right_padding=100
@@ -144,8 +143,25 @@ screen nvl:
     add SideImage() xalign 0.0 yalign 1.0
     use quick_menu
         
-        
-        
+init python:
+    style.nvl_dialogue.color = "000"
+
+    # style.say_thought.color = "000"
+    
+    style.nvl_window.background = "Assets/gui/chatbox.png"
+    style.nvl_window.left_padding=236
+    style.nvl_window.right_padding=617
+    style.nvl_window.bottom_padding=196
+    style.nvl_window.top_padding=146
+    
+    # style.say_window.yminimum = 169
+    
+    # style.say_who_window.background = Frame("Assets/gui/namebox1.png", 15, 15)
+    # style.say_who_window.left_margin = 66
+    # style.say_who_window.bottom_margin = 10
+    # style.say_label.xalign = 0.5
+
+    
 screen help_screen:
     tag menu
     use navigation

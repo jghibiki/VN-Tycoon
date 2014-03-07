@@ -46,10 +46,11 @@ label start:
     show screen phone_button
 #    show screen inventory_button
 
-   
+    
     if cclass=="artist":
         $job = "artist"
-        jump artist
+        #jump artist
+        jump artist_event2
     if cclass=="writer":
         $job = "writer"
         jump writer
