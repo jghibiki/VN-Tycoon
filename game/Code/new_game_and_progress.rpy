@@ -10,41 +10,71 @@ init python:
             self.title = "YAOELVN"
             self.commercial = False
 
-            self.coding_done = 0
-            self.coding_needed = None
-            self.writing_done = 0
-            self.writing_needed = None
-            self.art_done = 0
-            self.art_needed = None
-            self.music_done = 0
-            self.music_needed = None
+            self.coding_done = 0.0
+            self.coding_needed = 0.0
+            self.writing_done = 0.0
+            self.writing_needed = 0.0
+            self.art_done = 0.0
+            self.art_needed = 0.0
+            self.music_done = 0.0
+            self.music_needed = 0.0
+            
+            self.coding_quality = 0
+            self.writing_quality = 0
+            self.art_quality = 0
+            self.music_quality = 0
+            
+            self.quality = 0.0
+            
+            self.downloads = 0
+            self.price = 0.0
+            self.profits = 0.0
+            
         def do_art(self, hours):
             if self.art_done<self.art_needed:
                 self.art_done += hours / (11.0-skills.art) / 2
+                self.art_quality += skills.art * (hours / 2)
                 return True
             else:
                 return False
         def do_writing(self, hours):
             if self.writing_done<self.writing_needed:
                 self.writing_done += hours / (11.0-skills.writing) / 2
+                self.writing_quality += skills.writing * (hours / 2)
                 return True
             else:
                 return False
         def do_coding(self, hours):
             if self.coding_done<self.coding_needed:
                 self.coding_done += hours / (11.0-skills.coding) / 2
+                self.coding_quality += skills.coding * (hours / 2)
                 return True
             else:
                 return False
         def do_music(self, hours):
             if self.music_done<self.music_needed:
                 self.music_done += hours / (11.0-skills.music) / 2
+                self.music_quality += skills.music * (hours / 2)
                 return True
             else:
                 return False
         
+        def publish(self):
+            all_resources_done = True
+            if self.writing_needed > self.writing_done:
+                all_resources_done = False
+            if self.coding_needed > self.coding_done:
+                all_resources_done = False
+            if self.music_needed > self.music_done:
+                all_resources_done = False
+            if self.art_needed > self.art_done:
+                all_resources_done = False
+            if all_resources_done:
+                self.quality = (self.art_quality + self.writing_quality + self.coding_quality + self.music_quality) / (self.art_done + self.writing_done + self.coding_done + self.music_done)
+                return True
+            else:
+                return False
 
-        
 screen game_button:
     hbox:
         if mygame.started: # game_in_progress:
@@ -122,7 +152,7 @@ label new_game:
         cgs_needed = int(mygame.scope/10000)
         art_needed = 2*sprites_needed + 4*bgs_needed + 4*cgs_needed
         #art_needed = art_needed * (11-art)
-        mygame.art_needed = art_needed
+        mygame.art_needed = art_needed / 2
         
         music_needed = random.randint(4, 8) + int(mygame.scope/20000)
         mygame.music_needed = music_needed
@@ -148,16 +178,7 @@ label new_game:
     jump sim
     
 label publish:
-    $ all_resources_done = True
-    if mygame.writing_needed > mygame.writing_done:
-        $ all_resources_done = False
-    if mygame.coding_needed > mygame.coding_done:
-        $ all_resources_done = False
-    if mygame.music_needed > mygame.music_done:
-        $ all_resources_done = False
-    if mygame.art_needed > mygame.art_done:
-        $ all_resources_done = False
-    if all_resources_done:
+    if mygame.publish():
         $ games.append(mygame)
         $ mygame = Game()
     else:
@@ -215,14 +236,17 @@ screen game_progress(curr_game = mygame):
                 text str(mygame.music_done)
                 text "/"
                 text str(mygame.music_needed)
-                #bar value mygame.music_done range mygame.music_needed            
+                #bar value mygame.music_done range mygame.music_needed          
             hbox:
                 text "Coding:"
                 text str(mygame.coding_done)
                 text "/"
                 text str(mygame.coding_needed)
                 #bar value mygame.coding_done range mygame.coding_needed
-
+        else:
+            hbox:
+                text "Quality:"
+                text str(curr_game.quality)
         hbox:
             textbutton "Back" action Hide("game_progress")
 
