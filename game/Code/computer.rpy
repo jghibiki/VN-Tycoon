@@ -5,6 +5,7 @@ label computer:
         showBrowser = False
         showSentence = False
         showMikie = False
+        selTime = False
     while(computerLoop):
         #show screens
         if showDesktop:
@@ -17,9 +18,9 @@ label computer:
             #poll the message genereator to see if there are any new messages
             show computer browser lsf
             call screen lsf
-        elif showBrowser == "amazon":
-            show computer browser amazon
-            call screen amazon
+        elif showBrowser == "tarzan":
+            show computer browser tarzan
+            call screen tarzan
         elif showBrowser == "lsf_recruitment":
             show computer browser lsf recruitment
             call screen lsf_recruitment
@@ -31,7 +32,7 @@ label computer:
             call screen sentence
         elif showMikie and type(showMikie) == bool:
             show computer michelangelo
-            call screen michelangelo
+            call screen mikie
 
         #parse returns
         if _return == "web_browser":
@@ -42,8 +43,8 @@ label computer:
         if _return == "lsf":
             $pollMessages()
             $showBrowser = "lsf"
-        if _return == "amazon":
-            $showBrowser = "amazon"
+        if _return == "tarzan":
+            $showBrowser = "tarzan"
         if _return == "lsf_recruitment":
             $poll()
             $showBrowser = "lsf_recruitment"
@@ -59,7 +60,53 @@ label computer:
             $showSentence = True
         if _return == "open_mikie":
             $showMikie = True
+            $showDesktop = False
+        if _return[0] == "select_time":
+            $selTime = _return[1]
+        if _return[0] == "a" or _return[0] == "p":
+            $selTime = None
+            if showMikie:
+                $dur = int(_return[1])
+                if _return[0] == "p":
+                    if time.dec(dur):
+                        if skills.increase("art", dur):
+                            call drawingAnimation
+                            "You spend some time practing drawing."
+                        else:
+                            "You are the very best. Like no one ever was."
+                    else:
+                        "You are too sleepy to draw."
+                else:
+                    if time.dec(dur):
+                        $mygame.do_art(dur)
+                        $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
+                        call drawingAnimation
+                        "You draw some sprites for your game.
+                        [completion]\% Completed"
+                    else:
+                        "You are too sleepy to draw."
+            elif showSentence:
+                $dur = int(_return[1])
+                if _return[0] == "p":
+                    if time.dec(dur):
+                        if skills.increase("writing", dur):
+                            call writingAnimation
+                            "You spend some time practing writing."
+                        else:
+                            "You are the very best. Like no one ever was."
+                    else:
+                        "You are too sleepy to write."
+                else:
+                    if time.dec(dur):
+                        $mygame.do_art(dur)
+                        $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
+                        call writingAnimation
+                        "You write a few scenes for your game.
+                        [completion]\% Completed"
+                    else:
+                        "You are too sleepy to draw."
 
+                                         
 #######################
 ## Computer Screens
 
@@ -80,17 +127,26 @@ screen sentence:
     vbox:
         xpos 0.01
         ypos 0.2
-        text "Welcome to Word-processor Sentence!"
-        textbutton "Exit program" action Return("desktop")
+        if not selTime:
+            text "Welcome to Word-processor Sentence!"
+            textbutton "Write!" action Return(("select_time", "write"))
+            textbutton "Exit program" action Return("desktop")
+        else:
+            use select_time
+
 
 ############################################
 ## Drawing/Painting Software (Michelangelo)
-screen michelangelo:
+screen mikie:
     vbox:
         xpos 0.01
         ypos 0.2
-        text "Welcome to Michelangelo!"
-        textbutton "Exit program" action Return("desktop")
+        if not selTime:
+            text "Welcome to Michelangelo!"
+            textbutton "Draw!" action Return(("select_time", "draw"))
+            textbutton "Exit program" action Return("desktop")
+        else:
+            use select_time
 
 
 ########################
@@ -100,14 +156,14 @@ screen webBrowser:
         xpos 0.01
         ypos 0.2
         textbutton "LemmingSoft Forums" action Return("lsf")
-        textbutton "Amazon" action Return("amazon")
+        textbutton "Tarzan" action Return("tarzan")
         textbutton "Exit Browser" action Return("desktop")
 
-screen amazon:
+screen tarzan:
     vbox:
         xpos 0.01
         ypos 0.2
-        text "Amazon!"
+        text "Tarzan!"
         textbutton "Back" action Return("web_browser")
 
 screen lsf:
@@ -140,13 +196,22 @@ screen lsf_messages:
             text "No new messages."
 
 
+################################
+## Computer screen animations
+label drawingAnimation:
+    "drawing animation"
+    return
 
+label writingAnimation:
+    "drawing animation"
+    return
+    
 ############################3
 ## Computer Images
 init:
     image computer = "#CF6800"
     image computer browser = "#B2FB69"
-    image computer browser amazon = "#C8CF00"
+    image computer browser tarzan = "#C8CF00"
     image computer browser lsf = "#CF0026"
     image computer browser lsf recruitment = "#F86CA2"
     image computer browser lsf messages = "#6CF8C2" 

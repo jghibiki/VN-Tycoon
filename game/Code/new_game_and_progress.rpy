@@ -10,14 +10,14 @@ init python:
             self.title = "YAOELVN"
             self.commercial = False
 
-            self.coding_done = 0
-            self.coding_needed = None
+            self.coding_done = 1
+            self.coding_needed = 0
             self.writing_done = 0
-            self.writing_needed = None
+            self.writing_needed = 1 
             self.art_done = 0
-            self.art_needed = None
+            self.art_needed = 1
             self.music_done = 0
-            self.music_needed = None
+            self.music_needed = 1 
         def do_art(self, hours):
             if self.art_done<self.art_needed:
                 self.art_done += hours / (11.0-skills.art) / 2
