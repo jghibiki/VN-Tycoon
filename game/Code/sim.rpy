@@ -27,7 +27,10 @@ label sim:
         else:
             if time.dec(duration):
                 $ mygame.do_art(duration)
-                "You draw some sprites for your game. [mygame.art_done]"
+                $ completion = round((mygame.art_done/mygame.art_needed)*100, 2)
+                "You draw some sprites for your game.
+                [completion]\%
+                Completed"
             else:
                 "You are too sleepy to draw."
                 
@@ -82,7 +85,9 @@ label sim:
         else:
             if time.dec(duration):
                 $ mygame.do_writing(duration)
-                "You write for a while for your game. [mygame.writing_done]"
+                $ completion = round((mygame.writing_done/mygame.writing_needed)*100, 2)
+                "You write for a while for your game.
+                [completion]\% Completed"
             else:
                 "You are too sleepy to write."
                 
