@@ -73,57 +73,72 @@ label sim:
     
     if action == "write":
         call screen select_time
-        $ duration = int(_return[1])
-        if _return[0]=="p":
-            if time.dec(duration):
-                if skills.increase("writing", duration):
-                    "You spend some time practicing writing."
-                else:
-                    "You are the very best. Like no one ever was."
-            else:
-                "You are too sleepy to write."
+        if not _return:
+            $pass
         else:
-            if time.dec(duration):
-                $ mygame.do_writing(duration)
-                $ completion = round((mygame.writing_done/mygame.writing_needed)*100, 2)
-                "You write for a while for your game.
-                [completion]\% Completed"
+            $ duration = int(_return[1])
+            if _return[0]=="p":
+                if time.dec(duration):
+                    if skills.increase("writing", duration):
+                        "You spend some time practicing writing."
+                    else:
+                        "You are the very best. Like no one ever was."
+                else:
+                    "You are too sleepy to write."
             else:
-                "You are too sleepy to write."
-                
+                if time.dec(duration):
+                    $ mygame.do_writing(duration)
+                    $ completion = round((mygame.writing_done/mygame.writing_needed)*100, 2)
+                    "You write for a while for your game.
+                    [completion]\% Completed"
+                else:
+                    "You are too sleepy to write."
+                    
     if action == "code":
         call screen select_time
-        $ duration = int(_return[1])
-        if _return[0]=="p":
-            if time.dec(duration):
-                if skills.increase("coding", duration):
-                    "You spend some time practicing coding."
-                else:
-                    "You are the very best. Like no one ever was."
-            else:
-                "You are too sleepy to code."
+        if not _return:
+            $pass
         else:
-            if time.dec(duration):
-                $ mygame.do_coding(duration)
-                "You code for a while for your game. [mygame.coding_done]"
+            $ duration = int(_return[1])
+            if _return[0]=="p":
+                if time.dec(duration):
+                    if skills.increase("coding", duration):
+                        "You spend some time practicing coding."
+                    else:
+                        "You are the very best. Like no one ever was."
+                else:
+                    "You are too sleepy to code."
             else:
-                "You are too sleepy to code."
+                if time.dec(duration):
+                    $ mygame.do_coding(duration)
+                    $ completion = round((mygame.coding_done/mygame.coding_needed)*100, 2)
+                    "You work on some code for your game.
+                    [completion]\%
+                    Completed"
+                else:
+                    "You are too sleepy to code."
             
     if action == "compose":
         call screen select_time
-        $ duration = int(_return[1])
-        if _return[0]=="p":
-            if time.dec(duration):
-                $ skills.increase("music", duration)
-                "You spend some time practicing composing."
-            else:
-                "You are too sleepy to compose."
+        if not _return:
+            $pass
         else:
-            if time.dec(duration):
-                $ mygame.do_music(duration)
-                "You compose for a while for your game. [mygame.music_done]"
-            else:
-                "You are too sleepy to compose."
+            $ duration = int(_return[1])
+            if _return[0]=="p":
+                if time.dec(duration):
+                    $ skills.increase("music", duration)
+                    "You spend some time practicing composing."
+                else:
+                    "You are too sleepy to compose."
+            elif _return[0] == "a":
+                if time.dec(duration):
+                    $ mygame.do_music(duration)
+                    $ completion = round((mygame.music_done/mygame.music_needed)*100, 2)
+                    "You work on composing some music for your game.
+                    [completion]\%
+                    Completed"            
+                else:
+                    "You are too sleepy to compose."
 
     if action == "sales":
         call screen sales
@@ -282,8 +297,10 @@ init:
     
 
 screen select_time:
-    modal True
-    vbox:
+    modal False
+    vbox: 
+        xpos 0.01
+        ypos 0.2
         text "Practice:"
         hbox:
             textbutton "1h" action Return("p1")
@@ -294,4 +311,5 @@ screen select_time:
             textbutton "1h" action Return("a1")
             textbutton "4h" action Return("a4")
             textbutton "8h" action Return("a8")
-        textbutton "Back" action Return() 
+        textbutton "Back" action Return(False) # a lazy work around to make
+                                                    #back work 
