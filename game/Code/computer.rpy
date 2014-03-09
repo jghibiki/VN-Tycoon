@@ -27,12 +27,16 @@ label computer:
         elif showBrowser == "lsf_messages":
             show computer browser lsf messages
             call screen lsf_messages
+        elif showBrowser == "stalkmeplz":
+            show computer browser stalkMePlz
+            call screen stalkMePlz
         elif showSentence and type(showSentence) == bool:
             show computer sentence
             call screen sentence
         elif showMikie and type(showMikie) == bool:
             show computer michelangelo
             call screen mikie
+        
 
         #parse returns
         if _return == "web_browser":
@@ -50,6 +54,8 @@ label computer:
             $showBrowser = "lsf_recruitment"
         if _return == "lsf_messages":
             $showBrowser = "lsf_messages"
+        if _return == "stalkmeplz":
+            $showBrowser = "stalkmeplz"
         if _return == "desktop":
             $showDesktop = True
             $showBrowser = False
@@ -61,6 +67,17 @@ label computer:
         if _return == "open_mikie":
             $showMikie = True
             $showDesktop = False
+        if _return[0] == "tarzanAdd":
+            $tarzanCart.append(tarzanStore.pop(_return[1]))
+        if _return[0] == "tarzanRemove":
+            $tarzanStore.append(tarzanCart.pop(_return[1]))
+        if _return == "tarzanBuy":
+            $totalPrice = 0
+            for item in tarzanCart:
+                totalPrice += tarzanCart[item][price]
+            #subtract price from money
+            #maybe do somthing with the stuff bought
+            tarzanCart = [] #clear the cart
         if _return[0] == "select_time":
             $selTime = _return[1]
         if _return[0] == "a" or _return[0] == "p":
@@ -163,7 +180,61 @@ screen tarzan:
     vbox:
         xpos 0.01
         ypos 0.2
-        text "Tarzan!"
+        hbox:
+            if not len(tarzanStore) == 0 and not len(tarzanCart) == 0:
+                vbox:
+                    text "Tarzan!"
+                    textbutton "Back" action Return("web_browser")
+                    if not showCart:
+                    viewport id "tarzanVp":
+                        vbox:
+                            for item in tarzanStore:
+                                frame:
+                                    vbox:
+                                        hbox:
+                                            text tarzanStore[item][name]
+                                            null width 20 
+                                            text tarzanStore[item][price]
+                                        hbox:
+                                            textbutton "Add to cart" action
+                                            Return(("tarzanAdd", item))
+
+                                null height 3
+                    vbar value YScrollValue("tarzanVp")
+                    textbutton "My Cart" action SetVariable("showCart", True)
+
+                else:
+                    frame:
+                        vbox:
+                            if len(tarzanCart) == 0:
+                                text "No items in cart."
+                            else:
+                                for item in tarzanCart:
+                                    frame:
+                                        vbox:
+                                            hbox:
+                                                text tarzanStore[item][name]
+                                                null width 20
+                                                text tarzanStore[item][price]
+                                            hbox:
+                                                textbutton "Remove from cart" action
+                                                Return("tarzanRemove", item)
+        else:
+            vbox:
+                text "Official Notice" 
+                null height 10
+                text "This website has been taken down as part of an
+                investigation into several claims of credit card fraud against
+                the owners. If you feel you may have fallen victim to this
+                scheme please contact us right away."
+                null height 30
+                textbutton "Return" action Return("web_browser"
+screen stalkMePlz:
+    vbox:
+        xpos 0.0.1
+        ypos 0.2
+        text "Welcome to StalkMePlz!"
+        #show messages here
         textbutton "Back" action Return("web_browser")
 
 screen lsf:
@@ -217,3 +288,10 @@ init:
     image computer browser lsf messages = "#6CF8C2" 
     image computer sentence = "#7D001B"
     image computer michelangelo = "#007D0F"
+    imamge computer stalkMePlz = "#fff"
+
+    python:
+        #variables for tarzan
+        tarzanCart = []
+        tarzanStore = []
+        
