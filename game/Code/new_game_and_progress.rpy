@@ -7,7 +7,7 @@ init python:
             self.gameplay = None
             self.relationship = None
             self.genre = None
-            self.title = "YAOELVN"
+            self.title = ""
             self.commercial = False
 
             self.coding_done = 0.0

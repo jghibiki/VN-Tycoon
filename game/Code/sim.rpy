@@ -120,8 +120,17 @@ label sim:
             else:
                 "You are too sleepy to compose."
 
-
+    if action == "sales":
+        call screen sales
     
+    if action == "sell":
+        $ x_game = mygame
+        $ sales.sell(x_game)
+    
+    if action == "event":
+        $ a = eventcheck()
+        "[a]"
+        
     jump sim
     
 
@@ -242,15 +251,16 @@ screen sim:
     use phone_button
     use game_button
     
-    if mygame.started:
-      frame:
+    frame:
         top_margin 150
         hbox:
             textbutton "Write" action Return("write")
             textbutton "Compose" action Return("compose")
             textbutton "Code" action Return("code")
-    
-    
+            textbutton "Sales" action Return("sales")
+            textbutton "Sell" action Return("sell")
+            textbutton "Event" action Return("event")
+            
 init:
     image tooltip_work=LiveComposite((665, 73), (3,56), Text("Go to work.", style="tips_bottom"))
     image tooltip_sleep=LiveComposite((665, 73), (3,56), Text("Go to sleep.", style="tips_bottom"))
