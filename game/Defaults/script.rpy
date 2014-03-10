@@ -1,11 +1,14 @@
 
 # The game starts here.
 label start:
+    
     python:
         mygame=Game()
         games=[]
         skills = Skills()
         sales = Sales()
+        userNames = []
+    
     call screen char_select
     python:
         cclass = _return
