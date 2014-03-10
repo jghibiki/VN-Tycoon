@@ -73,11 +73,19 @@ label computer:
             $tarzanStore.append(tarzanCart.pop(_return[1]))
         if _return == "tarzanBuy":
             $totalPrice = 0
-            for item in tarzanCart:
-                totalPrice += tarzanCart[item][price]
+            $item = 0
+            while(item < len(tarzanCart)):
+                  #add price to total
+                  $totalPrice += tarzanCart[item]["price"]
+                  
+                  #check to see if this item is one of the unlockables
+                  if tarzanCart[item]["name"] == "Keyboard":
+                      $pass
+                  #do elifs here for other items
+                  $item += 1
             #subtract price from money
             #maybe do somthing with the stuff bought
-            tarzanCart = [] #clear the cart
+            $tarzanCart = [] #clear the cart
         if _return[0] == "select_time":
             $selTime = _return[1]
         if _return[0] == "a" or _return[0] == "p":
@@ -181,57 +189,78 @@ screen tarzan:
         xpos 0.01
         ypos 0.2
         hbox:
-            if not len(tarzanStore) == 0 and not len(tarzanCart) == 0:
+            if len(tarzanStore) != 0 or len(tarzanCart) != 0:
                 vbox:
                     text "Tarzan!"
                     textbutton "Back" action Return("web_browser")
                     if not showCart:
-                    viewport id "tarzanVp":
-                        vbox:
-                            for item in tarzanStore:
+                        frame:
+                            xmaximum 810
+                            ymaximum 300
+                            background None
+                            hbox:
                                 frame:
-                                    vbox:
-                                        hbox:
-                                            text tarzanStore[item][name]
-                                            null width 20 
-                                            text tarzanStore[item][price]
-                                        hbox:
-                                            textbutton "Add to cart" action
-                                            Return(("tarzanAdd", item))
-
-                                null height 3
-                    vbar value YScrollValue("tarzanVp")
-                    textbutton "My Cart" action SetVariable("showCart", True)
-
-                else:
-                    frame:
-                        vbox:
-                            if len(tarzanCart) == 0:
-                                text "No items in cart."
-                            else:
-                                for item in tarzanCart:
-                                    frame:
+                                    background "#fff"
+                                    xmaximum 800
+                                    ymaximum 300
+                                    viewport id "tarzanVp":
                                         vbox:
-                                            hbox:
-                                                text tarzanStore[item][name]
-                                                null width 20
-                                                text tarzanStore[item][price]
-                                            hbox:
-                                                textbutton "Remove from cart" action
-                                                Return("tarzanRemove", item)
-        else:
-            vbox:
-                text "Official Notice" 
-                null height 10
-                text "This website has been taken down as part of an
-                investigation into several claims of credit card fraud against
-                the owners. If you feel you may have fallen victim to this
-                scheme please contact us right away."
-                null height 30
-                textbutton "Return" action Return("web_browser"
+                                            for item in range(len(tarzanStore)):
+                                                frame:
+                                                    background "#ccc"
+                                                    vbox:
+                                                        hbox:
+                                                            text tarzanStore[item]["name"]
+                                                            null width 20 
+                                                            text str(tarzanStore[item]["price"])
+                                                        hbox:
+                                                            null 80
+                                                            textbutton "Add to cart" action Return(("tarzanAdd", item))
+
+                                                null height 3
+                                vbar value YScrollValue("tarzanVp")
+                        textbutton "My Cart" action SetVariable("showCart", True)
+
+                    else:
+                        frame:
+                            xmaximum 810
+                            ymaximum 300
+                            background None
+                            hbox:
+                                frame:
+                                    background "#fff"
+                                    xmaximum 800
+                                    ymaximum 300
+                                    viewport id "tarzanCartVp":
+                                        vbox:
+                                            for item in range(len(tarzanCart)):
+                                                frame:
+                                                    background "#ccc"
+                                                    vbox:
+                                                        hbox:
+                                                            text tarzanCart[item]["name"]
+                                                            null width 20 
+                                                            text str(tarzanCart[item]["price"])
+                                                        hbox:
+                                                            null 80
+                                                            textbutton "Remove from cart" action Return(("tarzanRemove", item))
+
+                                                null height 3
+                                vbar value YScrollValue("tarzanCartVp")
+                        hbox:
+                            textbutton "Hide Cart" action SetVariable("showCart", False)
+                            null width 50
+                            textbutton "Check Out" action Return("tarzanBuy")
+            else:
+                vbox:
+                    text "Official Notice" 
+                    null height 10
+                    text "This website has been taken down as part of an investigation into several claims of credit card fraud against the owners. If you feel you may have fallen victim to this scheme, please contact us right away."
+                    null height 30
+                    textbutton "Return" action Return("web_browser")
 screen stalkMePlz:
     vbox:
-        xpos 0.0.1
+        xpos 0.01
         ypos 0.2
         text "Welcome to StalkMePlz!"
         #show messages here
@@ -288,10 +317,17 @@ init:
     image computer browser lsf messages = "#6CF8C2" 
     image computer sentence = "#7D001B"
     image computer michelangelo = "#007D0F"
-    imamge computer stalkMePlz = "#fff"
+    image computer stalkMePlz = "#fff"
 
     python:
         #variables for tarzan
+        showCart = False
         tarzanCart = []
         tarzanStore = []
-        
+        tarzanStore.append({"name": "Keyboard", "price" : 200})
+        tarzanStore.append({"name": "Composing for Morons", "price": 10.00})
+        tarzanStore.append({"name": "Writing for Retards", "price": 10.00})
+        tarzanStore.append({"name": "Programming for Idiots", "price": 10.00})
+        tarzanStore.append({"name": "Drawing for Losers", "price": 10.00})
+        tarzanStore.append({"name": "Drawing Tablet", "price": 120.00})
+
