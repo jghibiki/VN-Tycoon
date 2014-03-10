@@ -33,9 +33,15 @@ label computer:
         elif showSentence and type(showSentence) == bool:
             show computer sentence
             call screen sentence
+            if not _return:
+                $selTime = False
+                call screen mikie
         elif showMikie and type(showMikie) == bool:
             show computer michelangelo
             call screen mikie
+            if not _return:
+                $selTime = False
+                call screen mikie
 
         #parse returns
         if _return == "web_browser":
@@ -66,10 +72,11 @@ label computer:
         if _return == "open_mikie":
             $showMikie = True
             $showDesktop = False
-        if _return[0] == "tarzanAdd":
-            $tarzanCart.append(tarzanStore.pop(_return[1]))
-        if _return[0] == "tarzanRemove":
-            $tarzanStore.append(tarzanCart.pop(_return[1]))
+        if type(_return) == tuple:
+            if _return[0] == "tarzanAdd":
+                $tarzanCart.append(tarzanStore.pop(_return[1]))
+            if _return[0] == "tarzanRemove":
+                $tarzanStore.append(tarzanCart.pop(_return[1]))
         if _return == "tarzanBuy":
             $totalPrice = 0
             $item = 0
@@ -213,7 +220,7 @@ screen tarzan:
                                                             null width 20 
                                                             text str(tarzanStore[item]["price"])
                                                         hbox:
-                                                            null 80
+                                                            null width 80
                                                             textbutton "Add to cart" action Return(("tarzanAdd", item))
 
                                                 null height 3
@@ -241,7 +248,7 @@ screen tarzan:
                                                             null width 20 
                                                             text str(tarzanCart[item]["price"])
                                                         hbox:
-                                                            null 80
+                                                            null width 80
                                                             textbutton "Remove from cart" action Return(("tarzanRemove", item))
 
                                                 null height 3
@@ -329,4 +336,3 @@ init:
         tarzanStore.append({"name": "Programming for Idiots", "price": 10.00})
         tarzanStore.append({"name": "Drawing for Losers", "price": 10.00})
         tarzanStore.append({"name": "Drawing Tablet", "price": 120.00})
-
