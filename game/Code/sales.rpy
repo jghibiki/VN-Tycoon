@@ -2,9 +2,9 @@ init python:
     class Sale:
         def __init__(self, game):
             self.name = game.title
-            #self.price = game.price
+            self.price = game.price
             #self.date = ...
-            self.price = "12.34"
+            #self.price = "12.34"
             self.date = "1.1.2014"
             
     class Sales:
@@ -18,7 +18,6 @@ init python:
         
 screen sales:
     add "#000"
-    # $ sales.sell(mygame)
     $ y = len(sales.earnings)+2
     grid 4 y:
         spacing 10
@@ -38,6 +37,24 @@ screen sales:
         text "$0.00"
     textbutton "Return" ypos 700 action Return()
 
-
-
-
+screen game_list:
+    add "#000"
+    vbox:
+        text "Your games:"
+        for g in games:
+        
+            hbox:
+                text g.title
+                $ price = str(g.price)
+                $ price1 = "$" + price
+                text price1
+                #textbutton "Change" action Jump("change_price")
+    
+    textbutton "Return" ypos 700 action Return()
+    
+label change_price:
+    $ price = "0.0"
+    $ price = renpy.input("New price?", price, length=6)
+    
+    
+    
