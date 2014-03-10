@@ -36,7 +36,6 @@ label computer:
         elif showMikie and type(showMikie) == bool:
             show computer michelangelo
             call screen mikie
-        
 
         #parse returns
         if _return == "web_browser":
