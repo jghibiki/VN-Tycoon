@@ -58,8 +58,8 @@ label start:
     $ job = cclass
     if cclass=="artist":
         #$job = "artist"
-        #jump artist
-        jump artist_event2
+        jump artist_event1
+        #jump artist_event2
     if cclass=="writer":
         #$job = "writer"
         jump writer
