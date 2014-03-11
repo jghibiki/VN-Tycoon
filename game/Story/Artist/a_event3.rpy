@@ -1,7 +1,3 @@
-
-
-define Fancymom = Character('Fancymom', color="#FF0084", show_two_window=True)
-
 label artist_event3:
 #Story Event 3:
 
@@ -21,3 +17,9 @@ label artist_event3:
     "Why couldn't she be like other mothers who supported their child!"
 
     "This just gave me all the more desire to want to prove myself to her and get far away from her!"
+    
+    
+    
+    $ artist_event3 = True
+    
+    jump sim

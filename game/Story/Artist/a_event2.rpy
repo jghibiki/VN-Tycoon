@@ -1,10 +1,6 @@
 #Story Event 2:
 
 #Requirements: Auto - Day 2 or so
-define Lazylandcat = Character('Lazylandcat', color="#FF7400", show_two_window=True, kind=nvl)
-define Artgirl = Character('Artgirl', color="#36393D", show_two_window=True, kind=nvl)
-
-image bg computer = "Assets/gui/computer_bg.jpg"
 
 label artist_event2:
     scene bg computer
@@ -64,5 +60,7 @@ label artist_event2:
 
     "I closed out the chat window."
     "I was going to prove my friends wrong. I can put effort into things. I can go the distance."
+    
+    $ artist_event2 = True
     
     jump sim

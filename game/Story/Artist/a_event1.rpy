@@ -1,15 +1,4 @@
-define Phone = Character('Phone', color="#36393D", show_two_window=True)
-define Mom = Character('Mom', color="#356AA0", show_two_window=True)
-define Martha = Character('Martha', color="#356AA0", show_two_window=True)
-#6BBA70
-image phone_mom:
-    "Assets/sprites/phone_mom.png"
-    yalign 0.0
-
-image bg bedroom:
-    "Assets/bg/bedroom.jpg"
-    
-label artist:
+label artist_event1:
     #Story Event one:  Requirements:  None
     hide screen phone_button
     
@@ -33,7 +22,7 @@ label artist:
     show phone_mom with dissolve
     
     Mom "Finally you pick up I thought something bad happened to you I was about to call the police!"
-    Martha "Hello mom."
+    Martha surprised "Hello mom."
     "I said in a completely casual tone ignoring her idea that I just been kidnapped."
     Mom "Honey you should really pick up the phone when people call, After all it could be someone on the other end wanting a date with you, maybe."
     "I didn't like how she I did the maybe at the end, I couldn't get a date or something. did she honestly think her daughter was so ugly that no one wanted to date her. Anyway it is what is on the inside that counts!"
