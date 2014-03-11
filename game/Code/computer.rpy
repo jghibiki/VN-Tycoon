@@ -80,17 +80,62 @@ label computer:
         if _return == "tarzanBuy":
             $totalPrice = 0
             $item = 0
+            $rejects = []
             while(item < len(tarzanCart)):
                   #add price to total
-                  $totalPrice += tarzanCart[item]["price"]
+                  $totalPrice += tarzanCart[item].price
                   
                   #check to see if this item is one of the unlockables
-                  if tarzanCart[item]["name"] == "Keyboard":
-                      $pass
-                  #do elifs here for other items
+                  if tarzanCart[item].name == "Keyboard":
+                        if not inventory.has_item("Keyboard"):
+                            if inventory.buy(Item(tarzanCart[item].name, tarzanCart[item].price)):
+                                "You have purcased a keyboard, Tazan Droid will air lift it you you shortly."
+                            else:
+                                "You don't have enough money to buy a keyboard."
+                                $rejects.append(item)
+                        else:
+                            "You already own this item!"
+                  elif tarzanCart[item].name == "Composing for Morons":
+                        if not inventory.has_item("Composing for Morons"):
+                            if inventory.buy(Item(tarzanCart[item].name, tarzanCart[item].price)):
+                                "You have purcased \"Composing for Morons\", Tazan Droid will air lift it you you shortly."
+                            else:
+                                "You don't have enough money to buy this \"Composing for Morons\". Moron. Get a job and try again."
+                                $rejects.append(item)
+                  elif tarzanCart[item].name == "Writing for the Asinine":
+                        if not inventory.has_item("Writing for the Asinine"):
+                            if inventory.buy(Item(tarzanCart[item].name, tarzanCart[item].price)):
+                                "You have purcased \"Writing for the Asinine\", Tazan Droid will air lift it you you shortly."
+                            else:
+                                "You don't have enough money to buy this \"Writing for the Asinine\". Shows how much of an {b}ASS{/b}inine fool you are."
+                                $rejects.append(item)
+                  elif tarzanCart[item].name == "Programming for Idiots":
+                        if not inventory.has_item("Programming for Idiots"):
+                            if inventory.buy(Item(tarzanCart[item].name, tarzanCart[item].price)):
+                                "You have purcased \"Programming for Idiots\", Tazan Droid will air lift it you you shortly."
+                            else:
+                                "You don't have enough money to buy this \"Programming for Idiots\". Come on! Only idiots read books to learn to program. I mean, \"Hello!?\", the internet was invented, what 60+ years ago?."
+                                $rejects.append(item)
+                  elif tarzanCart[item].name == "Drawing for Losers":
+                        if not inventory.has_item("Drawing for Losers"):
+                            if inventory.buy(Item(tarzanCart[item].name, tarzanCart[item].price)):
+                                "You have purcased \"Drawing for Losers\", Tazan Droid will air lift it you you shortly."
+                            else:
+                                "You don't have enough money to buy this \"Drawing for Losers\". There is only one type of person that would try to buy a book they couldn't affort. A {i}LOSER{/i}."
+                                $rejects.append(item)
+
+                  elif tarzanCart[item].name == "Drawing Tablet":
+                        if not inventory.has_item("Drawing Tablet"):
+                            if inventory.buy(Item(tarzanCart[item].name, tarzanCart[item].price)):
+                                "You have purcased \"Drawing Tablet\", Tazan Droid will air lift it you you shortly."
+                            else:
+                                "You don't have enough money to buy a \"Drawing Tablet\"."
+                                $rejects.append(item)
                   $item += 1
-            #subtract price from money
-            #maybe do somthing with the stuff bought
+            $item = 0
+            while item < len(rejects):
+                $tarzanStore.append(tarzanCart[item])
+                $item += 1
             $tarzanCart = [] #clear the cart
         if _return[0] == "select_time":
             $selTime = _return[1]
@@ -216,9 +261,9 @@ screen tarzan:
                                                     background "#ccc"
                                                     vbox:
                                                         hbox:
-                                                            text tarzanStore[item]["name"]
+                                                            text tarzanStore[item].name
                                                             null width 20 
-                                                            text str(tarzanStore[item]["price"])
+                                                            text str(tarzanStore[item].price)
                                                         hbox:
                                                             null width 80
                                                             textbutton "Add to cart" action Return(("tarzanAdd", item))
@@ -244,9 +289,9 @@ screen tarzan:
                                                     background "#ccc"
                                                     vbox:
                                                         hbox:
-                                                            text tarzanCart[item]["name"]
+                                                            text tarzanCart[item].name
                                                             null width 20 
-                                                            text str(tarzanCart[item]["price"])
+                                                            text str(tarzanCart[item].price)
                                                         hbox:
                                                             null width 80
                                                             textbutton "Remove from cart" action Return(("tarzanRemove", item))
@@ -330,9 +375,9 @@ init:
         showCart = False
         tarzanCart = []
         tarzanStore = []
-        tarzanStore.append({"name": "Keyboard", "price" : 200})
-        tarzanStore.append({"name": "Composing for Morons", "price": 10.00})
-        tarzanStore.append({"name": "Writing for Retards", "price": 10.00})
-        tarzanStore.append({"name": "Programming for Idiots", "price": 10.00})
-        tarzanStore.append({"name": "Drawing for Losers", "price": 10.00})
-        tarzanStore.append({"name": "Drawing Tablet", "price": 120.00})
+        tarzanStore.append(Item("Keyboard", 299.00))
+        tarzanStore.append(Item("Composing for Morons", 35.00))
+        tarzanStore.append(Item("Writing for the Asinine", 35.00))
+        tarzanStore.append(Item("Programming for Idiots",35.00))
+        tarzanStore.append(Item("Drawing for Losers", 35.00))
+        tarzanStore.append(Item("Drawing Tablet", 199.00))

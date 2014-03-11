@@ -45,6 +45,7 @@ init python:
                 return False
         def do_music(self, hours):
             if self.music_done<self.music_needed:
+                
                 self.music_done += hours / (11.0-skills.music) / 2
                 self.music_quality += skills.music * (hours / 2)
                 return True

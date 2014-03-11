@@ -1,8 +1,8 @@
 init -2 python:
     class Item:
-        def __init__(self, name, cost):
+        def __init__(self, name, price):
             self.name = name
-            self.cost = cost
+            self.price = price 
 
     class Inventory:
         def __init__(self, money=0):
@@ -10,8 +10,8 @@ init -2 python:
             self.items = []
 
         def buy(self, item):
-            if self.money >= item.cost:
-                self.money -= item.cost
+            if self.money >= item.price:
+                self.money -= price
                 self.items.append(item)
                 return True
             else:
