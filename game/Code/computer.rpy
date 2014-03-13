@@ -370,14 +370,3 @@ init:
     image computer michelangelo = "#007D0F"
     image computer stalkMePlz = "#fff"
 
-    python:
-        #variables for tarzan
-        showCart = False
-        tarzanCart = []
-        tarzanStore = []
-        tarzanStore.append(Item("Keyboard", 299.00))
-        tarzanStore.append(Item("Composing for Morons", 35.00))
-        tarzanStore.append(Item("Writing for the Asinine", 35.00))
-        tarzanStore.append(Item("Programming for Idiots",35.00))
-        tarzanStore.append(Item("Drawing for Losers", 35.00))
-        tarzanStore.append(Item("Drawing Tablet", 199.00))

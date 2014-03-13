@@ -33,7 +33,25 @@ label start:
 
     python:
         inventory = Inventory()
-        tablet = Item("Tablet", 299)
+        tablet = Item("Drawing Tablet", 199.00)
+        keyboard = Item("Keyboard", 299.00)
+        book_c = Item("Composing for Morons", 35.00)
+        book_w = Item("Writing for the Asinine", 35.00)
+        book_p = Item("Programming for Idiots",35.00)
+        book_d = Item("Drawing for Losers", 35.00)
+        
+        #variables for tarzan
+        showCart = False
+        tarzanCart = []
+        tarzanStore = []
+        tarzanStore.append(keyboard)
+        tarzanStore.append(book_c)
+        tarzanStore.append(book_w)
+        tarzanStore.append(book_p)
+        tarzanStore.append(book_d)
+        tarzanStore.append(tablet)
+
+        
         #rest of the item definitions here (including software)
     
         time=Time(24)
