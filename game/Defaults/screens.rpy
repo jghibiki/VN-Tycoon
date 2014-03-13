@@ -115,6 +115,9 @@ screen input:
 # http://www.renpy.org/doc/html/screen_special.html#nvl
 
 screen nvl:
+  #viewport id "vp1":
+    #mousewheel True
+    #draggable True
     window:
         style "nvl_window"
         has vbox:

@@ -10,6 +10,7 @@ label start:
         userNames = []
     
     call screen char_select
+    posts_list = make_posts_list()
     python:
         cclass = _return
         art_min = 0
@@ -58,8 +59,9 @@ label start:
     $ job = cclass
     if cclass=="artist":
         #$job = "artist"
-        jump artist_event1
+        #jump artist_event1
         #jump artist_event2
+        jump test
     if cclass=="writer":
         #$job = "writer"
         jump writer

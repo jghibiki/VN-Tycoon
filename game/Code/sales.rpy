@@ -37,19 +37,37 @@ screen sales:
         text "$0.00"
     textbutton "Return" ypos 700 action Return()
 
-screen game_list:
+screen game_list (page=1):
+    $ num_games = len(games)
+    $ pages =  num_games / 4
     add "#000"
     vbox:
         text "Your games:"
-        for g in games:
-        
-            hbox:
-                text g.title
-                $ price = str(g.price)
-                $ price1 = "$" + price
-                text price1
-                #textbutton "Change" action Jump("change_price")
-    
+        viewport id "vp":
+            mousewheel True
+            draggable True
+            grid 7 num_games:
+                for g in games:                        
+                            window xmaximum 262 ymaximum 143:
+                                add g.bg:
+                                    zoom 0.2
+                                add g.sp1 xalign 0.1:
+                                    zoom 0.2
+                                if g.sp2:
+                                    add g.sp2 xalign 0.7:
+                                        zoom 0.2
+                            text g.title
+                            $ price = str(0.0)# str(g.price)
+                            $ price1 = " $" + price
+                            text price1
+                            text g.genre
+                            textbutton "Cover" action Show("show_cover", game=g)                
+                            text g.relationship
+                            textbutton "Change" action Jump("change_price")
+                            
+            vbar value YScrollValue("vp")
+
+
     textbutton "Return" ypos 700 action Return()
     
 label change_price:

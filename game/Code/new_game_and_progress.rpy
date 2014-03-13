@@ -10,18 +10,31 @@ init python:
             self.title = ""
             self.commercial = False
 
-            self.coding_done = 0
-            self.coding_needed = 1
-            self.coding_quality = 0 
-            self.writing_done = 0
-            self.writing_needed = 1 
+            self.coding_done = 0.0
+            self.coding_needed = 0.0
+            self.writing_done = 0.0
+            self.writing_needed = 0.0
+            self.art_done = 0.0
+            self.art_needed = 0.0
+            self.music_done = 0.0
+            self.music_needed = 0.0
+            
+            self.coding_quality = 0
             self.writing_quality = 0
-            self.art_done = 0
-            self.art_needed = 1
             self.art_quality = 0
-            self.music_done = 0
-            self.music_needed = 1 
             self.music_quality = 0
+            
+            self.quality = 0.0
+            
+            self.downloads = 0
+            self.price = 0.0
+            self.profits = 0.0
+            
+            self.bg = ""
+            self.sp1 = ""
+            self.sp2 = None
+            
+            
         def do_art(self, hours):
             if self.art_done<self.art_needed:
                 self.art_done += hours / (11.0-skills.art) / 2
@@ -105,7 +118,7 @@ screen new_game:
             textbutton "Sci-Fi" action SetField(mygame, "genre", "sci-fi")
             textbutton "Romance" action SetField(mygame, "genre", "romance")
             textbutton "Fantasy" action SetField(mygame, "genre", "fantasy")
-            textbutton "Drama" action SetField(mygame, "genre", "drama")
+            textbutton "Slice of life" action SetField(mygame, "genre", "slice")
             
     
         hbox:
@@ -132,8 +145,10 @@ label new_game:
         coding_needed += int(mygame.scope/10000) * 4
         if mygame.gameplay=="sim":
             coding_needed += 16
+            mygame.price = 5
         if mygame.gameplay=="rpg":
             coding_needed += 24
+            mygame.price = 10
         #coding_needed = coding_needed * (11-coding)
         mygame.coding_needed = coding_needed
 
@@ -153,6 +168,7 @@ label new_game:
         writing_needed = int(mygame.scope/1000)
         mygame.writing_needed = writing_needed
 
+        mygame.price += int(mygame.scope/10000)
 # -->Resources are determined by your selections (scope and gameplay)
     
 # Coding: with max coding skill(10): 4 hours + 4h for every 10,000 words; add 16h for sim and 24h for RPG. With coding skill 1: everything takes 10 times longer.
@@ -172,11 +188,23 @@ label new_game:
     
 label publish:
     if mygame.publish():
+        $ make_cover(mygame)
         $ games.append(mygame)
         $ mygame = Game()
     else:
         "It's not finished!"
-    
+        
+        "But let's go ahead and cheat."
+        # $ self.coding_done = self.coding_needed
+        # $ self.writing_done = self.writing_needed
+        # $ self.art_done = self.art_needed
+        # $ self.music_done = self.music_needed
+        
+        $ mygame.publish()
+        $ make_cover(mygame)
+        $ games.append(mygame)
+        
+        $ mygame = Game()
     jump sim
     
 screen game_progress(curr_game = mygame):
