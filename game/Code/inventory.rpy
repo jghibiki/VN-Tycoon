@@ -11,7 +11,7 @@ init -2 python:
 
         def buy(self, item):
             if self.money >= item.price:
-                self.money -= price
+                self.money -= item.price
                 self.items.append(item)
                 return True
             else:

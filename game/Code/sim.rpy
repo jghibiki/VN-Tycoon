@@ -238,13 +238,13 @@ screen sim:
         imagebutton auto "Assets/bg/room/sketchpad_%s.png" focus_mask True action [Return("draw")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_draw") ] unhovered [Hide("gui_tooltip")]
     
     
-    if 1==1:
+    if inventory.has_item(book_d):
         imagebutton auto "Assets/bg/room/book1_%s.png" focus_mask True action [Return("read1")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_read1") ] unhovered [Hide("gui_tooltip")]
-    if 1==1:
+    if inventory.has_item(book_p):
         imagebutton auto "Assets/bg/room/book2_%s.png" focus_mask True action [Return("read2")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_read2") ] unhovered [Hide("gui_tooltip")]
-    if 1==1:
+    if inventory.has_item(book_w):
         imagebutton auto "Assets/bg/room/book3_%s.png" focus_mask True action [Return("read3")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_read3") ] unhovered [Hide("gui_tooltip")]
-    if 1==1:
+    if inventory.has_item(book_c):
         imagebutton auto "Assets/bg/room/book4_%s.png" focus_mask True action [Return("read4")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_read4") ] unhovered [Hide("gui_tooltip")]
     
     

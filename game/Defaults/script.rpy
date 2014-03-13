@@ -1,3 +1,12 @@
+init -1 python:
+    #item defines, so they can be used in screens:
+    tablet = None
+    keyboard = None
+    book_c = None
+    book_w = None
+    book_p = None
+    book_d = None
+
 
 # The game starts here.
 label start:

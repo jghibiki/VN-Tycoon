@@ -86,47 +86,47 @@ label computer:
                   $totalPrice += tarzanCart[item].price
                   
                   #check to see if this item is one of the unlockables
-                  if tarzanCart[item].name == "Keyboard":
-                        if not inventory.has_item("Keyboard"):
-                            if inventory.buy(Item(tarzanCart[item].name, tarzanCart[item].price)):
+                  if tarzanCart[item] == keyboard:
+                        if not inventory.has_item(keyboard):
+                            if inventory.buy(keyboard):
                                 "You have purcased a keyboard, Tazan Droid will air lift it you you shortly."
                             else:
                                 "You don't have enough money to buy a keyboard."
                                 $rejects.append(item)
                         else:
                             "You already own this item!"
-                  elif tarzanCart[item].name == "Composing for Morons":
-                        if not inventory.has_item("Composing for Morons"):
-                            if inventory.buy(Item(tarzanCart[item].name, tarzanCart[item].price)):
+                  elif tarzanCart[item] == book_c:
+                        if not inventory.has_item(book_c):
+                            if inventory.buy(book_c):
                                 "You have purcased \"Composing for Morons\", Tazan Droid will air lift it you you shortly."
                             else:
                                 "You don't have enough money to buy this \"Composing for Morons\". Moron. Get a job and try again."
                                 $rejects.append(item)
-                  elif tarzanCart[item].name == "Writing for the Asinine":
-                        if not inventory.has_item("Writing for the Asinine"):
-                            if inventory.buy(Item(tarzanCart[item].name, tarzanCart[item].price)):
+                  elif tarzanCart[item] == book_w:
+                        if not inventory.has_item(book_w):
+                            if inventory.buy(book_w):
                                 "You have purcased \"Writing for the Asinine\", Tazan Droid will air lift it you you shortly."
                             else:
                                 "You don't have enough money to buy this \"Writing for the Asinine\". Shows how much of an {b}ASS{/b}inine fool you are."
                                 $rejects.append(item)
-                  elif tarzanCart[item].name == "Programming for Idiots":
-                        if not inventory.has_item("Programming for Idiots"):
-                            if inventory.buy(Item(tarzanCart[item].name, tarzanCart[item].price)):
+                  elif tarzanCart[item] == book_p:
+                        if not inventory.has_item(book_p):
+                            if inventory.buy(book_p):
                                 "You have purcased \"Programming for Idiots\", Tazan Droid will air lift it you you shortly."
                             else:
                                 "You don't have enough money to buy this \"Programming for Idiots\". Come on! Only idiots read books to learn to program. I mean, \"Hello!?\", the internet was invented, what 60+ years ago?."
                                 $rejects.append(item)
-                  elif tarzanCart[item].name == "Drawing for Losers":
-                        if not inventory.has_item("Drawing for Losers"):
-                            if inventory.buy(Item(tarzanCart[item].name, tarzanCart[item].price)):
+                  elif tarzanCart[item] == book_d:
+                        if not inventory.has_item(book_d):
+                            if inventory.buy(book_d):
                                 "You have purcased \"Drawing for Losers\", Tazan Droid will air lift it you you shortly."
                             else:
                                 "You don't have enough money to buy this \"Drawing for Losers\". There is only one type of person that would try to buy a book they couldn't affort. A {i}LOSER{/i}."
                                 $rejects.append(item)
 
-                  elif tarzanCart[item].name == "Drawing Tablet":
-                        if not inventory.has_item("Drawing Tablet"):
-                            if inventory.buy(Item(tarzanCart[item].name, tarzanCart[item].price)):
+                  elif tarzanCart[item] == tablet:
+                        if not inventory.has_item(tablet):
+                            if inventory.buy(tablet):
                                 "You have purcased \"Drawing Tablet\", Tazan Droid will air lift it you you shortly."
                             else:
                                 "You don't have enough money to buy a \"Drawing Tablet\"."
