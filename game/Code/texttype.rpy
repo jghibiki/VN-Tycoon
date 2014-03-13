@@ -1,15 +1,19 @@
-def make_posts_list()
-    posts_list = ["yay for a GXB game ^^ there is just not enough GxB games around here",
-        "If you need help with your VN title I can help.",
-        "Is this project dead?",
-        "Ahahaha. No.", 
-        "While 640x480 worked perfectly during it's time, it is no longer sufficient for larger screens. We all know that the future belongs to 800x600."
-        
-    ]
-    if not job == "writer":
-        posts_list.append("I don't care how good the story is, your art looks like crap and I wouldn't play it.")
-        
-    return posts_list
+init -1 python:
+    job = None
+    def make_posts_list():
+        random_username = make_user()
+        posts_list = [
+            "yay for a GXB game ^^ there is just not enough GxB games around here",
+            "If you need help with the title for your VN I can help.",
+            "Is this project dead?",
+            "Ahahaha. No.", 
+            "While 640x480 worked perfectly during it's time, it is no longer sufficient for larger screens. We all know that the future belongs to 800x600."
+            "Yes, I agree with " + random_username + "."
+        ]
+        if not job == "writer":
+            posts_list.append("I don't care how good the story is, your art looks like crap and I wouldn't play it.")
+            
+        return posts_list
 
     
 transform textPause(showImage, start_curx, start_cury, end_curx, end_cury):

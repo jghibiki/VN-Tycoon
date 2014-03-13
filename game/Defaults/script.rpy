@@ -10,7 +10,7 @@ label start:
         userNames = []
     
     call screen char_select
-    posts_list = make_posts_list()
+    $ posts_list = make_posts_list()
     python:
         cclass = _return
         art_min = 0
