@@ -19,7 +19,6 @@ label start:
         userNames = []
     
     call screen char_select
-    $ posts_list = make_posts_list()
     python:
         cclass = _return
         art_min = 0
@@ -82,21 +81,20 @@ label start:
     
     #show screen phone_button
 #    show screen inventory_button
-
+    $ os = "win"
     $ job = cclass
+    $ posts_list = make_posts_list()
     if cclass=="artist":
-        #$job = "artist"
         #jump artist_event1
         #jump artist_event2
         jump test
     if cclass=="writer":
-        #$job = "writer"
         jump writer
     if cclass=="coder":
-        #$job = "coder"
+        $ os = "mac"
         jump coder
     if cclass=="composer":
-        #$job = "composer"
+        $ os = "mac"
         jump composer        
     
 

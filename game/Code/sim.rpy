@@ -137,9 +137,17 @@ label sim:
         $ post = random.choice(posts_list)
         call screen autoPost(323, 214, 628, 684, "Assets/gui/lsf_post_test.png", post)
         
+    if action == "cheat":
+        $ inventory.money += 100
+        $ skills.music = 10.0
+        $ skills.drawing = 10.0
+        $ skills.coding = 10.0
+        $ skills.writing = 10.0
+        
+        
     jump sim
     
-
+    
     
 init:
     # image room_closed:
@@ -268,6 +276,8 @@ screen sim:
             textbutton "Event" action Return("event")
             textbutton "Pic" action Return("pic")
             textbutton "Post" action Return("post")
+            textbutton "cheat" action Return("cheat")
+            
             
             
 init:

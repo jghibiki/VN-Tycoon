@@ -72,7 +72,7 @@ init python:
             text_show += "\nDay:" + str(day)
             text_show += "\nTime: " + str(time.value)
      
-            ui.frame(xalign=1.0)
+            ui.frame(xalign=1.0, yalign=0.1)
             ui.text(text_show)
     config.overlay_functions.append(display_stats_overlay)
     

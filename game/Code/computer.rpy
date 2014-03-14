@@ -166,7 +166,7 @@ label computer:
                 if _return[0] == "p":
                     if time.dec(dur):
                         if skills.increase("writing", dur):
-                            call writingAnimation
+                            call screen writingAnimation
                             "You spend some time practing writing."
                         else:
                             "You are the very best. Like no one ever was."
@@ -176,7 +176,7 @@ label computer:
                     if time.dec(dur):
                         $mygame.do_art(dur)
                         $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
-                        call writingAnimation
+                        call screen writingAnimation
                         "You write a few scenes for your game.
                         [completion]\% Completed"
                     else:
@@ -200,6 +200,7 @@ screen computer:
 #############################
 ## Word Processor (Sentence)
 screen sentence:
+    use window_frame("Sentence", Return("desktop"))
     vbox:
         xpos 0.01
         ypos 0.2
@@ -223,11 +224,12 @@ screen mikie:
             textbutton "Exit program" action Return("desktop")
         else:
             use select_time
-
-
+            
 ########################
 ## Web Browser Screens
 screen webBrowser:
+    use window_frame("Icewolf", Return("desktop"))
+        
     vbox:
         xpos 0.01
         ypos 0.2
@@ -353,10 +355,14 @@ label drawingAnimation:
     "drawing animation"
     return
 
-label writingAnimation:
-    "drawing animation"
-    return
-    
+screen writingAnimation:
+    $ mytext = "It would have required an intimate familiarity with the habitual demeanor of the people of Londongrove to detect in them an access of interest (we dare not say excitement), of whatever kind."
+    $ typeSpeed = 20 + int(skills.writing*6)
+    $ wait_to_hide = 1 + len(mytext) / typeSpeed
+    use window_frame("Sentence", Return("desktop"))
+    use autoPost(28, 84, 0, 0, "#00000000", mytext, typeSpeed = typeSpeed, moveCursor=False, textSize=24)
+    timer wait_to_hide action [Hide("writingAnimation"), Return()]
+
 ############################3
 ## Computer Images
 init:
@@ -370,3 +376,23 @@ init:
     image computer michelangelo = "#007D0F"
     image computer stalkMePlz = "#fff"
 
+
+screen window_frame(appname, exitaction):
+    if os == "win":
+        window:
+            background Frame("Assets/gui/frame_win.png", 20, 40, 110, 20)
+            xalign 0.1
+            yalign 0.1
+            xminimum 1300
+            yminimum 700
+            text appname xpos 20 ypos 10 color "#000" size 16
+            imagebutton auto "Assets/gui/close_win_%s.png" focus_mask True action [exitaction] xpos 1295 ypos 2            
+    elif os == "mac":
+        window:
+            background Frame("Assets/gui/frame_mac.png", 70, 39, 15, 24)
+            xalign 0.1
+            yalign 0.1
+            xminimum 1300
+            yminimum 700
+            text appname ypos 12 color "#000" size 16 text_align 0.5 min_width 1300
+            imagebutton auto "Assets/gui/close_mac_%s.png" focus_mask True action [exitaction] xpos 7 ypos 11
