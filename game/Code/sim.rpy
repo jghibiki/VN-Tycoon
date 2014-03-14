@@ -138,14 +138,16 @@ label sim:
         call screen autoPost(323, 214, 628, 684, "Assets/gui/lsf_post_test.png", post)
         
     if action == "cheat":
-        $ inventory.money += 100
+        $ inventory.money += 1000
         $ skills.music = 10.0
-        $ skills.drawing = 10.0
+        $ skills.art = 10.0
         $ skills.coding = 10.0
         $ skills.writing = 10.0
     
     if action == "stats":
         call screen stats
+        
+    
         
     jump sim
     
@@ -271,16 +273,21 @@ screen sim:
     frame:
         top_margin 150
         hbox:
-            textbutton "Write" action Return("write")
+            textbutton "debug" action ToggleVariable("debug", true_value=True, false_value=False)
+            textbutton "cheat" action Return("cheat")            
+            #textbutton "Write" action Return("write")
             textbutton "Compose" action Return("compose")
             textbutton "Code" action Return("code")
+            
             textbutton "Sales" action Return("sales")
             textbutton "List" action Return("list")
             textbutton "Event" action Return("event")
-            textbutton "Pic" action Return("pic")
+            #textbutton "Pic" action Return("pic")
             textbutton "Post" action Return("post")
-            textbutton "cheat" action Return("cheat")
             textbutton "stats" action Return("stats")
+            
+            
+
             
             
 init:

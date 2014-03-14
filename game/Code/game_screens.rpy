@@ -61,8 +61,9 @@ init -1 python:
     
 init python:
     writing = 0
+    debug = True
     def display_stats_overlay():
-        if config.developer:
+        if config.developer and debug:
             text_show = ""
             text_show += "Art: " + str(skills.art)
             text_show += "\nWriting: " + str(skills.writing)
@@ -99,38 +100,52 @@ init:
 #    imagebutton auto "Assets/gui/composer_%s.png" focus_mask True xpos 600 ypos 400 action Return("composer") #at main_effect2_var
         
 screen set_attributes(cclass=''):
+    #add "#FFF"
+    if cclass=="artist":
+        add "artist pose1 happy"
 
-    vbox:
-        $ my_text = "Selected class: " + str(cclass)
-        text my_text
-        $ my_text = "Points: " + str(points)
-        text my_text
+    vbox xpos 488 ypos 195:
+        #$ my_text = "Selected class: " + str(cclass)
+        #text my_text
+        $ my_text = "Available points: " + str(points)
+        text my_text style "my_text"
         
-        hbox:
-            $ my_text = "Art: " + str(skills.art)
-            text my_text
-            textbutton "+" action If( points > 0 and skills.art < 10, true = [ SetField(skills, "art", skills.art + 1), SetVariable("points", points - 1) ], false = None )
-            textbutton "-" action If( points < 6 and skills.art > art_min, true = [ SetField(skills, "art", skills.art - 1), SetVariable("points", points + 1) ], false = None )
-            
-        hbox:
+        grid 2 1:
             $ my_text = "Writing: " + str(skills.writing)
-            text my_text
-            textbutton "+" action If( points > 0 and skills.writing < 10, true = [ SetField(skills, "writing", skills.writing + 1), SetVariable("points", points - 1) ], false = None )
-            textbutton "-" action If( points < 6 and skills.writing > writing_min, true = [ SetField(skills, "writing", skills.writing - 1), SetVariable("points", points + 1) ], false = None )
-            
-        hbox:
-            $ my_text = "Coding: " + str(skills.coding)
-            text my_text
-            textbutton "+" action If( points > 0 and skills.coding < 10, true = [ SetField(skills, "coding", skills.coding + 1), SetVariable("points", points - 1) ], false = None )
-            textbutton "-" action If( points < 6 and skills.coding > coding_min, true = [ SetField(skills, "coding", skills.coding - 1), SetVariable("points", points + 1) ], false = None )
-            
-        hbox:
-            $ my_text = "Music: " + str(skills.music)
-            text my_text
-            textbutton "+" action If( points > 0 and skills.music < 10, true = [ SetField(skills, "music", skills.music + 1), SetVariable("points", points - 1) ], false = None )
-            textbutton "-" action If( points < 6 and skills.music > music_min, true = [ SetField(skills, "music", skills.music - 1), SetVariable("points", points + 1) ], false = None )
+            text my_text style "my_text"
+                
+            hbox xpos -90:
+                textbutton "-" action If( points < 6 and skills.writing > writing_min, true = [ SetField(skills, "writing", skills.writing - 1), SetVariable("points", points + 1) ], false = None )
+                bar value skills.writing range 10.0 style "stat_bar" right_bar "Assets/gui/stat_writing_empty.png" left_bar "Assets/gui/stat_writing_full.png" 
+                textbutton "+" action If( points > 0 and skills.writing < 10, true = [ SetField(skills, "writing", skills.writing + 1), SetVariable("points", points - 1) ], false = None )
 
-        textbutton "OK" action Return()
+        grid 2 1:
+            $ my_text = "Drawing: " + str(skills.art)
+            text my_text style "my_text"
+            hbox xpos -90:
+                textbutton "-" action If( points < 6 and skills.art > art_min, true = [ SetField(skills, "art", skills.art - 1), SetVariable("points", points + 1) ], false = None )
+                bar value skills.art range 10.0 style "stat_bar" right_bar "Assets/gui/stat_drawing_empty.png" left_bar "Assets/gui/stat_drawing_full.png"
+                textbutton "+" action If( points > 0 and skills.art < 10, true = [ SetField(skills, "art", skills.art + 1), SetVariable("points", points - 1) ], false = None )
+
+            
+        grid 2 1:
+            $ my_text = "Coding: " + str(skills.coding)
+            text my_text style "my_text"
+            hbox xpos -90:
+                textbutton "-" action If( points < 6 and skills.coding > coding_min, true = [ SetField(skills, "coding", skills.coding - 1), SetVariable("points", points + 1) ], false = None )
+                bar value skills.coding range 10.0 style "stat_bar" right_bar "Assets/gui/stat_programming_empty.png" left_bar "Assets/gui/stat_programming_full.png"
+                textbutton "+" action If( points > 0 and skills.coding < 10, true = [ SetField(skills, "coding", skills.coding + 1), SetVariable("points", points - 1) ], false = None )
+        
+        
+        grid 2 1:
+            $ my_text = "Composing: " + str(skills.music)
+            text my_text style "my_text"
+            hbox xpos -90:
+                textbutton "-" action If( points < 6 and skills.music > music_min, true = [ SetField(skills, "music", skills.music - 1), SetVariable("points", points + 1) ], false = None )            
+                bar value skills.music range 10.0 style "stat_bar" right_bar "Assets/gui/stat_composing_empty.png" left_bar "Assets/gui/stat_composing_full.png"
+                textbutton "+" action If( points > 0 and skills.music < 10, true = [ SetField(skills, "music", skills.music + 1), SetVariable("points", points - 1) ], false = None )
+
+        textbutton "Continue" action Return()
             
 screen stats:
     add "#FFF"
@@ -138,21 +153,30 @@ screen stats:
 
     $ y=195
     text "Writing" xpos 488 ypos y style "my_text"
-    bar value skills.writing range 10 style "stat_bar" xpos 950 ypos y right_bar "Assets/gui/stat_writing_empty.png" left_bar "Assets/gui/stat_writing_full.png"
+    bar value skills.writing range 10.0 style "stat_bar" xpos 854 ypos y right_bar "Assets/gui/stat_writing_empty.png" left_bar "Assets/gui/stat_writing_full.png"
     
     $ y+=58
     text "Drawing" xpos 488 ypos y style "my_text"
-    bar value skills.art range 10 style "stat_bar" xpos 856 ypos y right_bar "Assets/gui/stat_drawing_empty.png" left_bar "Assets/gui/stat_drawing_full.png"
+    bar value skills.art range 10.0 style "stat_bar" xpos 854 ypos y right_bar "Assets/gui/stat_drawing_empty.png" left_bar "Assets/gui/stat_drawing_full.png"
     
     $ y+=58
     text "Programming" xpos 488 ypos y style "my_text"
-    bar value skills.coding range 10 style "stat_bar" xpos 856 ypos y right_bar "Assets/gui/stat_programming_empty.png" left_bar "Assets/gui/stat_programming_full.png"
+    bar value skills.coding range 10.0 style "stat_bar" xpos 854 ypos y right_bar "Assets/gui/stat_programming_empty.png" left_bar "Assets/gui/stat_programming_full.png"
     
     $ y+=58
     text "Composing" xpos 488 ypos y style "my_text"
-    bar value skills.music range 10 style "stat_bar" xpos 856 ypos y right_bar "Assets/gui/stat_composing_empty.png" left_bar "Assets/gui/stat_composing_full.png"
+    bar value skills.music range 10.0 style "stat_bar" xpos 854 ypos y right_bar "Assets/gui/stat_composing_empty.png" left_bar "Assets/gui/stat_composing_full.png"
+    
+    $ y+=58*2
+    text "Money" xpos 488 ypos y style "my_text"
+    $ money = "$" + str(inventory.money)
+    text money xpos 854 ypos y style "my_text"
+    $ y+=58
+    text "Day" xpos 488 ypos y style "my_text"
+    text str(day) xpos 854 ypos y style "my_text"
     
     
+            
     
     textbutton "OK" action Return() xalign 0.1 yalign 0.9
 
@@ -166,6 +190,6 @@ init:
         thumb None
         ymaximum 50        
         xmaximum 350
-        xalign .5
+
         
         
