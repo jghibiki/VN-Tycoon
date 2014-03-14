@@ -1,5 +1,5 @@
 init python:
-    import random
+    
     class Game:
         def __init__(self):
             self.started = False

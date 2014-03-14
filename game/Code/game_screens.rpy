@@ -132,3 +132,40 @@ screen set_attributes(cclass=''):
 
         textbutton "OK" action Return()
             
+screen stats:
+    add "#FFF"
+    add "artist pose1 happy"
+
+    $ y=195
+    text "Writing" xpos 488 ypos y style "my_text"
+    bar value skills.writing range 10 style "stat_bar" xpos 950 ypos y right_bar "Assets/gui/stat_writing_empty.png" left_bar "Assets/gui/stat_writing_full.png"
+    
+    $ y+=58
+    text "Drawing" xpos 488 ypos y style "my_text"
+    bar value skills.art range 10 style "stat_bar" xpos 856 ypos y right_bar "Assets/gui/stat_drawing_empty.png" left_bar "Assets/gui/stat_drawing_full.png"
+    
+    $ y+=58
+    text "Programming" xpos 488 ypos y style "my_text"
+    bar value skills.coding range 10 style "stat_bar" xpos 856 ypos y right_bar "Assets/gui/stat_programming_empty.png" left_bar "Assets/gui/stat_programming_full.png"
+    
+    $ y+=58
+    text "Composing" xpos 488 ypos y style "my_text"
+    bar value skills.music range 10 style "stat_bar" xpos 856 ypos y right_bar "Assets/gui/stat_composing_empty.png" left_bar "Assets/gui/stat_composing_full.png"
+    
+    
+    
+    textbutton "OK" action Return() xalign 0.1 yalign 0.9
+
+init:
+    style my_text:
+        size 38
+        font "Assets/gui/animeace.ttf"
+        color "000"
+                
+    style stat_bar:
+        thumb None
+        ymaximum 50        
+        xmaximum 350
+        xalign .5
+        
+        

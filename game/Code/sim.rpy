@@ -143,9 +143,12 @@ label sim:
         $ skills.drawing = 10.0
         $ skills.coding = 10.0
         $ skills.writing = 10.0
-        
+    
+    if action == "stats":
+        call screen stats
         
     jump sim
+    
     
     
     
@@ -277,7 +280,7 @@ screen sim:
             textbutton "Pic" action Return("pic")
             textbutton "Post" action Return("post")
             textbutton "cheat" action Return("cheat")
-            
+            textbutton "stats" action Return("stats")
             
             
 init:

@@ -378,7 +378,7 @@ init:
 
 
 screen window_frame(appname, exitaction):
-    if os == "win":
+    if game_os == "win":
         window:
             background Frame("Assets/gui/frame_win.png", 20, 40, 110, 20)
             xalign 0.1
@@ -387,7 +387,7 @@ screen window_frame(appname, exitaction):
             yminimum 700
             text appname xpos 20 ypos 10 color "#000" size 16
             imagebutton auto "Assets/gui/close_win_%s.png" focus_mask True action [exitaction] xpos 1295 ypos 2            
-    elif os == "mac":
+    elif game_os == "mac":
         window:
             background Frame("Assets/gui/frame_mac.png", 70, 39, 15, 24)
             xalign 0.1

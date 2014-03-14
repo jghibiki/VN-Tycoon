@@ -1,3 +1,6 @@
+init -9 python:
+    import random
+
 define Phone = Character('Phone', color="#36393D", show_two_window=True)
 define Mom = Character('Mom', color="#356AA0", show_two_window=True)
 define Martha = Character('Martha', color="#356AA0", show_two_window=True, image="artist", window_left_padding=410, who_left_padding=410)

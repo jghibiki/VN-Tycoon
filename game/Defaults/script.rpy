@@ -59,7 +59,7 @@ label start:
         tarzanStore.append(book_d)
         tarzanStore.append(tablet)
 
-        
+    
         #rest of the item definitions here (including software)
     
         time=Time(24)
@@ -79,22 +79,34 @@ label start:
         
     scene black
     
+    
+    
+    
+    
     #show screen phone_button
 #    show screen inventory_button
-    $ os = "win"
+
+
+    
+    $ game_os = "win"
     $ job = cclass
+    
+    
+    
     $ posts_list = make_posts_list()
+    
+    
     if cclass=="artist":
         #jump artist_event1
-        #jump artist_event2
-        jump test
+        jump artist_event2
+        #jump test
     if cclass=="writer":
         jump writer
     if cclass=="coder":
-        $ os = "mac"
+        $ game_os = "mac"
         jump coder
     if cclass=="composer":
-        $ os = "mac"
+        $ game_os = "mac"
         jump composer        
     
 
