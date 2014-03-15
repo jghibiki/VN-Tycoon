@@ -94,24 +94,27 @@ screen game_button:
 screen new_game:
     tag game
     modal True
-    add "#000"
+    add "#FFF"
     
-    vbox:
-        hbox:
-            text "Gameplay:"    
+    vbox xalign 0.5:
+        null height 30
+        text "Gameplay:" xalign 0.5 style "my_text"
+        hbox xalign 0.5:
             textbutton "Visual Novel" action SetField(mygame, "gameplay", "vn")
             textbutton "Kinetic Novel" action SetField(mygame, "gameplay", "kn")
             textbutton "Role-Playing Game" action SetField(mygame, "gameplay", "rpg")
             textbutton "Simulation" action SetField(mygame, "gameplay", "sim")
-        hbox:
-            text "Relationship:"
+        null height 30
+        text "Relationship:" xalign 0.5 style "my_text"
+        hbox xalign 0.5:
             textbutton "Boy pursues Girl" action SetField(mygame, "relationship", "bxg")
             textbutton "Boy pursues Boy" action SetField(mygame, "relationship", "bxb")
             textbutton "Girl pursues Boy" action SetField(mygame, "relationship", "gxb")
             textbutton "Girl pursues Girl" action SetField(mygame, "relationship", "gxg")
             textbutton "None" action SetField(mygame, "relationship", "none")
-        hbox:
-            text "Genre:"
+        null height 30
+        text "Genre:" xalign 0.5 style "my_text"
+        hbox xalign 0.5:
             textbutton "Mystery" action SetField(mygame, "genre", "mystery")
             textbutton "Comedy" action SetField(mygame, "genre", "comedy")
             textbutton "Horror" action SetField(mygame, "genre", "horror")
@@ -119,24 +122,25 @@ screen new_game:
             textbutton "Romance" action SetField(mygame, "genre", "romance")
             textbutton "Fantasy" action SetField(mygame, "genre", "fantasy")
             textbutton "Slice of life" action SetField(mygame, "genre", "slice")
-            
-    
-        hbox:
-            text "Scope / wordcount:"
-            $ my_text = str(mygame.scope)
-            text my_text
-            textbutton "+" action If( mygame.scope < 200000, true = [ SetField(mygame, "scope", mygame.scope + 10000)], false = None )
+        null height 30
+        text "Word count:" xalign 0.5 style "my_text"
+        hbox xalign 0.5:
             textbutton "-" action If( mygame.scope > 10000, true = [ SetField(mygame, "scope", mygame.scope - 10000)], false = None )
-
-        hbox:
-            text "Commercial:"
+            #$ my_text = str(mygame.scope)
+            #$ my_text = "{:,.2d}".format(mygame.scope)
+            $ my_text = "{:8,d}".format(mygame.scope)
+            text my_text style "my_text"
+            textbutton "+" action If( mygame.scope < 200000, true = [ SetField(mygame, "scope", mygame.scope + 10000)], false = None )
+        null height 30
+        text "Commercial?" xalign 0.5 style "my_text"
+        hbox xalign 0.5:
             textbutton "Yes" action SetField(mygame, "commercial", True)
             textbutton "No" action SetField(mygame, "commercial", False)
-
-        hbox:
+        null height 30
+        hbox xalign 0.5:
             textbutton "Cancel" action Hide("new_game")
             textbutton "OK" action [SetField(mygame, "started", True), Hide("new_game"), Jump("new_game")]
-    
+
 label new_game:
     call name_gen
             
@@ -210,8 +214,7 @@ label publish:
 screen game_progress(curr_game = mygame):
     tag game
     modal True
-    add "#000"
-    
+    add "#FFF"
     
     vbox:
         hbox:
@@ -220,50 +223,71 @@ screen game_progress(curr_game = mygame):
 
     
         hbox:
-            text "Name:"
-            text curr_game.title
+            text "Title: " style "my_text"
+            text curr_game.title style "my_text"
             #Title could be automatically generated based on your choices and maybe editable. Just for flavor.
             #textbutton "Change" action Show("change_game_name")
         hbox:
-            text str(curr_game.scope)
+            $ my_text = "{:8,d}".format(mygame.scope)
+            text "Word count: [my_text]" style "my_text"
         hbox:
-            text str(curr_game.gameplay)
+            text "gameplay: " style "my_text"
+            text str(curr_game.gameplay) style "my_text"
         hbox:
-            text str(curr_game.relationship)
+            text "relationship: " style "my_text"
+            text str(curr_game.relationship) style "my_text"
         hbox:
-            text str(curr_game.genre)
+            text "genre: " style "my_text"
+            text str(curr_game.genre) style "my_text"
             
         hbox:
-            text "Commercial"
+            text "Commercial: " style "my_text"
             if curr_game.commercial:
-                text "Yes"
+                text "Yes" style "my_text"
             else:
-                text "No"
+                text "No" style "my_text"
         if curr_game==mygame:
-            hbox:
-                text "Writing:"
-                text str(mygame.writing_done)
-                text "/"
-                text str(mygame.writing_needed)
+            #hbox:
+            grid 4 4:
+                text "Writing:" style "my_text"
+                bar value mygame.writing_done range mygame.writing_needed style "stat_bar" xpos -100
+                hbox:
+                    text str(round(mygame.writing_done, 2)) style "my_text"
+                    text "/" style "my_text"
+                    text str(mygame.writing_needed) style "my_text"
+                $completion = round(((mygame.writing_done/mygame.writing_needed)*100),2) 
+                text " ([completion] %)" style "my_text"
+                
+                
                 #bar value mygame.writing_done range mygame.writing_needed
-            hbox:
-                text "Art:"
-                text str(mygame.art_done)
-                text "/"
-                text str(mygame.art_needed)
-                #bar value mygame.art_done range mygame.art_needed
-            hbox:
-                text "Music:"
-                text str(mygame.music_done)
-                text "/"
-                text str(mygame.music_needed)
-                #bar value mygame.music_done range mygame.music_needed          
-            hbox:
-                text "Coding:"
-                text str(mygame.coding_done)
-                text "/"
-                text str(mygame.coding_needed)
-                #bar value mygame.coding_done range mygame.coding_needed
+            
+                text "Art:" style "my_text"
+                bar value mygame.art_done range mygame.art_needed style "stat_bar" xpos -100
+                hbox:
+                    text str(round(mygame.art_done, 2)) style "my_text"
+                    text "/" style "my_text"
+                    text str(mygame.art_needed) style "my_text"
+                $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
+                text " ([completion] %)" style "my_text"
+                
+            
+                text "Music:" style "my_text"
+                bar value mygame.music_done range mygame.music_needed style "stat_bar" xpos -100
+                hbox:
+                    text str(round(mygame.music_done, 2)) style "my_text"
+                    text "/" style "my_text"
+                    text str(mygame.music_needed) style "my_text"
+                $completion = round(((mygame.music_done/mygame.music_needed)*100),2) 
+                text " ([completion] %)" style "my_text"  
+            
+                text "Coding:" style "my_text"
+                bar value mygame.coding_done range mygame.coding_needed style "stat_bar" xpos -100
+                hbox:
+                    text str(round(mygame.coding_done, 2)) style "my_text"
+                    text "/" style "my_text"
+                    text str(mygame.coding_needed) style "my_text"
+                $completion = round(((mygame.coding_done/mygame.coding_needed)*100),2) 
+                text " ([completion] %)" style "my_text"  
         else:
             hbox:
                 text "Quality:"

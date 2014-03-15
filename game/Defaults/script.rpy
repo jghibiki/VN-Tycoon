@@ -19,6 +19,7 @@ label start:
         userNames = []
     
     call screen char_select
+    $ renpy.block_rollback()
     python:
         cclass = _return
         art_min = 0
@@ -38,7 +39,7 @@ label start:
             music_min = 6
             skills.music += music_min
     call screen set_attributes(cclass)
-
+    $ renpy.block_rollback()
     python:
         inventory = Inventory()
         tablet = Item("Drawing Tablet", 199.00)

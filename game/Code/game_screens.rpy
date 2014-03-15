@@ -54,7 +54,7 @@ init -2 python:
             return True
         
 init -1 python:
-    points = 5
+    points = 3
     inventory = Inventory()
     time=Time(24)
     day=0
@@ -98,7 +98,7 @@ init:
 #    imagebutton auto "Assets/gui/writer_%s.png" focus_mask True xpos 600 ypos 200 action Return("writer") #at main_effect2_var
 #    imagebutton auto "Assets/gui/programmer_%s.png" focus_mask True xpos 200 ypos 400 action Return("coder") #at main_effect2_var
 #    imagebutton auto "Assets/gui/composer_%s.png" focus_mask True xpos 600 ypos 400 action Return("composer") #at main_effect2_var
-        
+
 screen set_attributes(cclass=''):
     #add "#FFF"
     if cclass=="artist":
@@ -190,6 +190,7 @@ init:
         thumb None
         ymaximum 50        
         xmaximum 350
-
+        right_bar "Assets/gui/stat_empty.png"
+        left_bar "Assets/gui/stat_full.png"
         
         

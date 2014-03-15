@@ -174,8 +174,8 @@ label computer:
                         "You are too sleepy to write."
                 else:
                     if time.dec(dur):
-                        $mygame.do_art(dur)
-                        $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
+                        $mygame.do_writing(dur)
+                        $completion = round(((mygame.writing_done/mygame.writing_needed)*100),2) 
                         call screen writingAnimation
                         "You write a few scenes for your game.
                         [completion]\% Completed"
