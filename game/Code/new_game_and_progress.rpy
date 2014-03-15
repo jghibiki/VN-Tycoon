@@ -145,14 +145,15 @@ label new_game:
     call name_gen
             
     python:
+        mygame.price = 0.0
         coding_needed = random.randint(1, 3)
         coding_needed += int(mygame.scope/10000) * 4
         if mygame.gameplay=="sim":
             coding_needed += 16
-            mygame.price = 5
+            mygame.price = 5.0
         if mygame.gameplay=="rpg":
             coding_needed += 24
-            mygame.price = 10
+            mygame.price = 10.0
         #coding_needed = coding_needed * (11-coding)
         mygame.coding_needed = coding_needed
 
