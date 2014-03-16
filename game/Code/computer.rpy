@@ -356,7 +356,7 @@ label drawingAnimation:
     return
 
 screen writingAnimation:
-    $ mytext = "It would have required an intimate familiarity with the habitual demeanor of the people of Londongrove to detect in them an access of interest (we dare not say excitement), of whatever kind."
+    $ mytext = random.choice(writing_snippets)
     $ typeSpeed = 20 + int(skills.writing*6)
     $ wait_to_hide = 1 + len(mytext) / typeSpeed
     use window_frame("Sentence", Return("desktop"))
