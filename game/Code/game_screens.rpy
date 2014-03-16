@@ -6,6 +6,9 @@ init -2 python:
             minutes = 24*60 - self.value*60 + 8*60
         def dec(self, hours):
             global minutes
+            res = eventcheck()
+            if res[0] == "story":
+                renpy.jump(res[1])
             
             if self.value-hours>=8:
                 self.value -= hours

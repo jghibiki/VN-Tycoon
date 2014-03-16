@@ -1,51 +1,57 @@
 init python:
     class Sale:
-        def __init__(self, game):
+        def __init__(self, game, day=day, minutes=minutes):
             self.name = game.title
             self.price = game.price
-            #self.date = ...
-            #self.price = "12.34"
-            self.date = "1.1.2014"
+            self.minutes = minutes
+            self.day = day
+            #self.date = "1.1.2014"
             
     class Sales:
         def __init__(self):
             self.earnings = []
-        def sell(self, game):
-            sale = Sale(game)
+        def sell(self, game, day=day, minutes=minutes):
+            sale = Sale(game, day, minutes)
             self.earnings.append(sale)
-        
+            inventory.earn(sale.price)
     sales=Sales()
         
 screen sales:
-    add "#000"
     $ y = len(sales.earnings)+2
-    grid 4 y:
-        spacing 10
-        null
-        text "item name"
-        text "date"
-        text "price"
-        for sale in sales.earnings:
-            null
-            text sale.name
-            text sale.date
-            text sale.price
-    
-        text "Total:"
-        null
-        null
-        text "$0.00"
+    add "#000"
+    window:
+        right_margin 55
+        viewport id "vp":
+            mousewheel True
+            grid 4 y:
+                spacing 10
+                null
+                text "item name"
+                text "date"
+                text "price"
+                $ total = 0
+                for sale in sales.earnings:
+                    null
+                    text sale.name
+
+                    $ date = "Day " + str(sale.day) + " " + str(sale.minutes / 60) + ":" + str(sale.minutes % 60)
+                    text date
+                    $ price = str(sale.price)
+                    text price
+                    $ total += sale.price
+                    
+                text "Total:"
+                null
+                null
+                $ total = "$" + str(total)
+                text total
+            
+    vbar value YScrollValue("vp") style "v_bar" xalign 1.0
     textbutton "Return" ypos 700 action Return()
 
 screen game_list:
     $ num_games = len(games)
-    $ pages =  num_games / 4
     add "#000"
-    #vbox:
-        #text "Your games:"
-    # hbox:
-        # null width 60
-        # text "sdfgsdfg sd"
     window:
         right_margin 55
         viewport id "vp":

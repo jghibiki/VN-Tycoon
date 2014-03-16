@@ -32,6 +32,7 @@ label sim:
                 "You are too sleepy to draw."
                 
     if action == "sleep":
+        $ time.dec(0)
         $ day += 1
         $ time = Time(24)
     
@@ -121,6 +122,7 @@ label sim:
                 "You are too sleepy to compose."
 
     if action == "sales":
+        
         call screen sales
     
     if action == "list":
@@ -135,7 +137,7 @@ label sim:
 
     if action == "post":
         $ post = random.choice(posts_list)
-        call screen autoPost(323, 214, 628, 684, "Assets/gui/lsf_post_test.png", post)
+        call screen autoPost(323, 214, 628, 684, "Assets/gui/lsf_post_test.png", post, moveCursor=True)
         
     if action == "cheat":
         $ inventory.money += 1000

@@ -98,8 +98,8 @@ label start:
     
     
     if cclass=="artist":
-        #jump artist_event1
-        jump artist_event2
+        jump artist_event1
+        #jump artist_event2
         #jump test
     if cclass=="writer":
         jump writer
