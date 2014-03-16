@@ -27,7 +27,7 @@ transform textPause(showImage, start_curx, start_cury, end_curx, end_cury):
         time showImage
         linear 1.0 xpos end_curx ypos end_cury
 
-screen autoPost(x, y, curx, cury, bg, autoText, typeSpeed = 40, moveCursor=False, textSize=12):
+screen autoPost(x, y, curx, cury, bg, autoText, typeSpeed = 40, moveCursor=False, textSize=12, wait=False):
     add bg
     default showImage = len(autoText) / typeSpeed
     $ start_curx = x+50
@@ -35,5 +35,6 @@ screen autoPost(x, y, curx, cury, bg, autoText, typeSpeed = 40, moveCursor=False
     if moveCursor:
         add "Assets/gui/cursor.png" at textPause(showImage, start_curx, start_cury, curx, cury)
     add Text(autoText, slow = True, slow_speed = typeSpeed, slow_abortable = True, color="#000", size=textSize) xpos x ypos y
-    $ wait_to_hide = showImage+1.5
-    timer wait_to_hide action [Hide("autoPost"), Return()]
+    if not wait:
+        $ wait_to_hide = showImage+1.5
+        timer wait_to_hide action [Hide("autoPost"), Return()]

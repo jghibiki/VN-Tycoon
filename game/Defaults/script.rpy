@@ -102,7 +102,7 @@ label start:
         #jump artist_event2
         #jump test
     if cclass=="writer":
-        jump writer
+        jump writer_event1
     if cclass=="coder":
         $ game_os = "mac"
         jump coder
