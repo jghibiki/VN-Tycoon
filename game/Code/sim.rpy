@@ -15,7 +15,7 @@ label sim:
         
     if action == "draw":
         call screen select_time
-	    if not _return:
+        if not _return:
 	        $pass
 	    else:
             $ duration = int(_return[1])
