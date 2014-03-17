@@ -33,6 +33,7 @@ label sim:
                 "You are too sleepy to draw."
                 
     if action == "sleep":
+        $ time.dec(0)
         $ day += 1
         $ time = Time(24)
     
@@ -134,6 +135,7 @@ label sim:
                     "You are too sleepy to compose."
 
     if action == "sales":
+        
         call screen sales
     
     if action == "list":
@@ -148,17 +150,22 @@ label sim:
 
     if action == "post":
         $ post = random.choice(posts_list)
-        call screen autoPost(323, 214, 628, 684, "Assets/gui/lsf_post_test.png", post)
+        call screen autoPost(323, 214, 628, 684, "Assets/gui/lsf_post_test.png", post, moveCursor=True)
         
     if action == "cheat":
-        $ inventory.money += 100
+        $ inventory.money += 1000
         $ skills.music = 10.0
-        $ skills.drawing = 10.0
+        $ skills.art = 10.0
         $ skills.coding = 10.0
         $ skills.writing = 10.0
+    
+    if action == "stats":
+        call screen stats
         
+    
         
     jump sim
+    
     
     
     
@@ -176,9 +183,19 @@ init:
 
     image room_closed = LiveComposite(
         (1366, 768),
+        (0, 0), ConditionSwitch("job=='writer' or job=='artist'", "Assets/bg/room/picture1.png", "True", "Assets/bg/room/picture2.png"),
         (0, 0), "Assets/bg/room/room_base_closed.png",
+        (0, 0), "Assets/bg/room/hand1.png",
+        (0, 0), "Assets/bg/room/hand2.png",
+        (0, 0), ConditionSwitch("day%7>0", "Assets/bg/room/pizza1.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>1", "Assets/bg/room/soda1.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>2", "Assets/bg/room/pizza2.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>3", "Assets/bg/room/soda2.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>4", "Assets/bg/room/pizza3.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>5", "Assets/bg/room/soda3.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>5", "Assets/bg/room/pizza4.png", "True", Solid("#00000000")),
         (0, 0), ConditionSwitch("job=='writer'", "Assets/bg/room/books.png", "True", Solid("#ffffff00")),
-        (0, 0), ConditionSwitch("job=='composer'", "Assets/bg/room/synth.png", "True", Solid("#ffffff00")),
+        (0, 0), ConditionSwitch("job=='composer'", "Assets/bg/room/speakers2.png", "True", "Assets/bg/room/speakers1.png"),
         (0, 0), ConditionSwitch(
                 "minutes > 60*17", im.MatrixColor("Assets/bg/room/room_shadow2_closed.png",im.matrix.opacity(1.0)),
                 "minutes > 60*16", im.MatrixColor("Assets/bg/room/room_shadow1_closed.png",im.matrix.opacity(1.0)),
@@ -190,16 +207,26 @@ init:
                 "minutes > 60*10", im.MatrixColor("Assets/bg/room/room_shadow1_closed.png",im.matrix.opacity(0.4)),
                 "minutes > 60*9", im.MatrixColor("Assets/bg/room/room_shadow1_closed.png",im.matrix.opacity(0.3)),
                 "True", im.MatrixColor("Assets/bg/room/room_shadow1_closed.png",im.matrix.opacity(0.2))),
-        (0, 0), ConditionSwitch(
-                "minutes > 60*17", "Assets/bg/room/room_light1.png",
-                "True", Solid("#ffffff00"))
+        # (0, 0), ConditionSwitch(
+                # "minutes > 60*17", "Assets/bg/room/room_light1.png",
+                # "True", Solid("#ffffff00"))
     )
 
     image room_left = LiveComposite(
         (1366, 768),
+        (0, 0), ConditionSwitch("job=='writer' or job=='artist'", "Assets/bg/room/picture1.png", "True", "Assets/bg/room/picture2.png"),
         (0, 0), "Assets/bg/room/room_base_left.png",
+        (0, 0), "Assets/bg/room/hand1.png",
+        (0, 0), "Assets/bg/room/hand2.png",
+        (0, 0), ConditionSwitch("day%7>0", "Assets/bg/room/pizza1.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>1", "Assets/bg/room/soda1.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>2", "Assets/bg/room/pizza2.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>3", "Assets/bg/room/soda2.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>4", "Assets/bg/room/pizza3.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>5", "Assets/bg/room/soda3.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>5", "Assets/bg/room/pizza4.png", "True", Solid("#00000000")),
         (0, 0), ConditionSwitch("job=='writer'", "Assets/bg/room/books.png", "True", Solid("#ffffff00")),
-        (0, 0), ConditionSwitch("job=='composer'", "Assets/bg/room/synth.png", "True", Solid("#ffffff00")),
+        (0, 0), ConditionSwitch("job=='composer'", "Assets/bg/room/speakers2.png", "True", "Assets/bg/room/speakers1.png"),
         (0, 0), ConditionSwitch(
                 "minutes > 60*17", im.MatrixColor("Assets/bg/room/room_shadow2_left.png",im.matrix.opacity(1.0)),
                 "minutes > 60*16", im.MatrixColor("Assets/bg/room/room_shadow1_left.png",im.matrix.opacity(1.0)),
@@ -211,16 +238,26 @@ init:
                 "minutes > 60*10", im.MatrixColor("Assets/bg/room/room_shadow1_left.png",im.matrix.opacity(0.4)),
                 "minutes > 60*9", im.MatrixColor("Assets/bg/room/room_shadow1_left.png",im.matrix.opacity(0.3)),
                 "True", im.MatrixColor("Assets/bg/room/room_shadow1_left.png",im.matrix.opacity(0.2))),
-        (0, 0), ConditionSwitch(
-                "minutes > 60*17", "Assets/bg/room/room_light1.png",
-                "True", Solid("#ffffff00"))
+        # (0, 0), ConditionSwitch(
+                # "minutes > 60*17", "Assets/bg/room/room_light1.png",
+                # "True", Solid("#ffffff00"))
     )
     
     image room_right = LiveComposite(
         (1366, 768),
+        (0, 0), ConditionSwitch("job=='writer' or job=='artist'", "Assets/bg/room/picture1.png", "True", "Assets/bg/room/picture2.png"),
         (0, 0), "Assets/bg/room/room_base_right.png",
+        (0, 0), "Assets/bg/room/hand1.png",
+        (0, 0), "Assets/bg/room/hand2.png",
+        (0, 0), ConditionSwitch("day%7>0", "Assets/bg/room/pizza1.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>1", "Assets/bg/room/soda1.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>2", "Assets/bg/room/pizza2.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>3", "Assets/bg/room/soda2.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>4", "Assets/bg/room/pizza3.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>5", "Assets/bg/room/soda3.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>5", "Assets/bg/room/pizza4.png", "True", Solid("#00000000")),
         (0, 0), ConditionSwitch("job=='writer'", "Assets/bg/room/books.png", "True", Solid("#ffffff00")),
-        (0, 0), ConditionSwitch("job=='composer'", "Assets/bg/room/synth.png", "True", Solid("#ffffff00")),
+        (0, 0), ConditionSwitch("job=='composer'", "Assets/bg/room/speakers2.png", "True", "Assets/bg/room/speakers1.png"),
         (0, 0), ConditionSwitch(
                 "minutes > 60*17", im.MatrixColor("Assets/bg/room/room_shadow2_right.png",im.matrix.opacity(1.0)),
                 "minutes > 60*16", im.MatrixColor("Assets/bg/room/room_shadow1_right.png",im.matrix.opacity(1.0)),
@@ -232,9 +269,9 @@ init:
                 "minutes > 60*10", im.MatrixColor("Assets/bg/room/room_shadow1_right.png",im.matrix.opacity(0.4)),
                 "minutes > 60*9", im.MatrixColor("Assets/bg/room/room_shadow1_right.png",im.matrix.opacity(0.3)),
                 "True", im.MatrixColor("Assets/bg/room/room_shadow1_right.png",im.matrix.opacity(0.2))),
-        (0, 0), ConditionSwitch(
-                "minutes > 60*17", "Assets/bg/room/room_light1.png",
-                "True", Solid("#ffffff00"))
+        # (0, 0), ConditionSwitch(
+                # "minutes > 60*17", "Assets/bg/room/room_light1.png",
+                # "True", Solid("#ffffff00"))
     )
     
 
@@ -254,9 +291,12 @@ screen sim:
     
     imagebutton idle "Assets/bg/room/computer_off.png" hover "Assets/bg/room/computer_on.png" focus_mask "Assets/bg/room/computer_mask.png" action [Return("computer")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_computer") ] unhovered [Hide("gui_tooltip")]
     if inventory.has_item(tablet):
-        imagebutton auto "Assets/gui/tablet_%s.png" focus_mask True action [Return("draw")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_draw") ] unhovered [Hide("gui_tooltip")]
+        imagebutton auto "Assets/bg/room/tablet_%s.png" focus_mask True action [Return("draw")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_draw") ] unhovered [Hide("gui_tooltip")]
     else
         imagebutton auto "Assets/bg/room/sketchpad_%s.png" focus_mask True action [Return("draw")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_draw") ] unhovered [Hide("gui_tooltip")]
+    
+    if inventory.has_item(keyboard):
+        imagebutton auto "Assets/bg/room/keyboard_%s.png" focus_mask True action [Return("compose")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_compose") ] unhovered [Hide("gui_tooltip")]
     
     
     if inventory.has_item(book_d):
@@ -268,6 +308,8 @@ screen sim:
     if inventory.has_item(book_c):
         imagebutton auto "Assets/bg/room/book4_%s.png" focus_mask True action [Return("read4")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_read4") ] unhovered [Hide("gui_tooltip")]
     
+    if minutes > 60*17:
+        add "Assets/bg/room/room_light1.png"
     
     
 #    imagebutton auto "Assets/gui/bedroom_%s.png" focus_mask True action [Return("sleep")] 
@@ -281,16 +323,21 @@ screen sim:
     frame:
         top_margin 150
         hbox:
-            textbutton "Write" action Return("write")
-            textbutton "Compose" action Return("compose")
+            textbutton "debug" action ToggleVariable("debug", true_value=True, false_value=False)
+            textbutton "cheat" action Return("cheat")            
+            #textbutton "Write" action Return("write")
+            #textbutton "Compose" action Return("compose")
             textbutton "Code" action Return("code")
+            
             textbutton "Sales" action Return("sales")
             textbutton "List" action Return("list")
             textbutton "Event" action Return("event")
-            textbutton "Pic" action Return("pic")
+            #textbutton "Pic" action Return("pic")
             textbutton "Post" action Return("post")
-            textbutton "cheat" action Return("cheat")
+            textbutton "stats" action Return("stats")
             
+            
+
             
             
 init:
@@ -299,7 +346,7 @@ init:
     image tooltip_computer=LiveComposite((665, 73), (3,56), Text("Turn on the computer.", style="tips_bottom"))
     image tooltip_draw=LiveComposite((665, 73), (3,56), Text("Draw.", style="tips_bottom"))
     
-    
+    image tooltip_compose=LiveComposite((665, 73), (3,56), Text("Compose music.", style="tips_bottom"))
     
     image tooltip_read1=LiveComposite((665, 73), (3,56), Text("Read Drawing for Losers. Time needed: 1 hour.", style="tips_bottom"))
     image tooltip_read2=LiveComposite((665, 73), (3,56), Text("Read Programming for Idiots. Time needed: 1 hour.", style="tips_bottom"))

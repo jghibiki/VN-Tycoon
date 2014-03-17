@@ -19,6 +19,7 @@ label start:
         userNames = []
     
     call screen char_select
+    $ renpy.block_rollback()
     python:
         cclass = _return
         art_min = 0
@@ -38,7 +39,7 @@ label start:
             music_min = 6
             skills.music += music_min
     call screen set_attributes(cclass)
-
+    $ renpy.block_rollback()
     python:
         inventory = Inventory()
         tablet = Item("Drawing Tablet", 199.00)
@@ -59,7 +60,7 @@ label start:
         tarzanStore.append(book_d)
         tarzanStore.append(tablet)
 
-        
+    
         #rest of the item definitions here (including software)
     
         time=Time(24)
@@ -79,22 +80,34 @@ label start:
         
     scene black
     
+    
+    
+    
+    
     #show screen phone_button
 #    show screen inventory_button
-    $ os = "win"
+
+
+    
+    $ game_os = "win"
     $ job = cclass
+    
+    
+    
     $ posts_list = make_posts_list()
+    
+    
     if cclass=="artist":
-        #jump artist_event1
+        jump artist_event1
         #jump artist_event2
-        jump test
+        #jump test
     if cclass=="writer":
-        jump writer
+        jump writer_event1
     if cclass=="coder":
-        $ os = "mac"
+        $ game_os = "mac"
         jump coder
     if cclass=="composer":
-        $ os = "mac"
+        $ game_os = "mac"
         jump composer        
     
 

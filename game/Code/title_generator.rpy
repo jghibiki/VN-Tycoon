@@ -1,6 +1,7 @@
+
+
 label name_gen:
     python:
-        import random
         first_title_type = random.choice(["noun", "adjective"])
         if first_title_type == "noun":
             #nouns:

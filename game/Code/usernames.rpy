@@ -1,7 +1,7 @@
 init python:
     userNames = []
     def make_user():
-        import random   
+        
         users1 = ["hard", "black", "angry", "happy", "tricky", "silly", "solid", "liquid", "friendly", "tsundere", "silver", "morpheus", "cool", "fatal", "evil", "kitty", "moe", "moemoe", "bara", "bishie", "ecchi", "gei", "loli", "shota", "mecha", "baka", "hime", "kami", "kawaii"]
         users2 = ["guard", "reset", "white", "darkness", "rabbit", "panda", "dragon", "snake", "fool", "sake", "wolf", "kid", "Z", "unicorn", "pcguy", "kitty", "cat", "fish", "catgirl", "dere", "guro", "chan", "kokoro", "oni"]
         users3 = ["tsundere", "morpheus", "kitty", "moemoe", "bishie", "shota", "reset", "panda", "dragon", "snake", "wolf", "unicorn", "pcguy", "catgirl", "kokoro", "akuma", "uragirimono", "2freenscr", "ChikkWriter", "DubyaMarsBillion", "MediumGhoul", "SizzlinFix", "slypedump", "vengeance", "coolediate", "EarSnoopy", "EasyPeasyLemonSqueezy", "Fantasymark"]

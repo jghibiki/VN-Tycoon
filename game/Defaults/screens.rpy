@@ -386,7 +386,7 @@ init -1 python:
     style.title = Style(style.default)
     style.title.size=32
     style.title.bold=True
-    style.title.font="Assets/gui/animeace2_reg.ttf"
+    style.title.font="Assets/gui/animeace.ttf"
     style.title.outlines=[(3, "4abff2", 0, 0)]
     style.title.color="fff"
 
@@ -730,7 +730,7 @@ screen sound_options:
 init -2 python:
     style.pref_frame.background=None
     style.pref_text.color = "000"
-    style.pref_text.font = "Assets/gui/animeace2_reg.ttf"
+    style.pref_text.font = "Assets/gui/animeace.ttf"
     style.pref_text.xalign = .5
     style.pref_label.xalign = .5
     
