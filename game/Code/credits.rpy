@@ -38,6 +38,6 @@ init python:
     credits_s += "\n{size=40}Engine\n{size=60}" + renpy.version()
     
 init:
-    image cred = Text(credits_s, text_align=0.5, font="Assets/gui/animeace2_reg.ttf", color="FFF" )
+    image cred = Text(credits_s, text_align=0.5, font="Assets/gui/animeace.ttf", color="FFF" )
     image theend = Text("{size=80}The end", text_align=0.5, color="FFF" )
     image thanks = Text("{size=80}Thanks for Playing!", text_align=0.5, color="FFF" )

@@ -174,8 +174,8 @@ label computer:
                         "You are too sleepy to write."
                 else:
                     if time.dec(dur):
-                        $mygame.do_art(dur)
-                        $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
+                        $mygame.do_writing(dur)
+                        $completion = round(((mygame.writing_done/mygame.writing_needed)*100),2) 
                         call screen writingAnimation
                         "You write a few scenes for your game.
                         [completion]\% Completed"
@@ -356,7 +356,7 @@ label drawingAnimation:
     return
 
 screen writingAnimation:
-    $ mytext = "It would have required an intimate familiarity with the habitual demeanor of the people of Londongrove to detect in them an access of interest (we dare not say excitement), of whatever kind."
+    $ mytext = random.choice(writing_snippets)
     $ typeSpeed = 20 + int(skills.writing*6)
     $ wait_to_hide = 1 + len(mytext) / typeSpeed
     use window_frame("Sentence", Return("desktop"))
@@ -378,7 +378,7 @@ init:
 
 
 screen window_frame(appname, exitaction):
-    if os == "win":
+    if game_os == "win":
         window:
             background Frame("Assets/gui/frame_win.png", 20, 40, 110, 20)
             xalign 0.1
@@ -387,7 +387,7 @@ screen window_frame(appname, exitaction):
             yminimum 700
             text appname xpos 20 ypos 10 color "#000" size 16
             imagebutton auto "Assets/gui/close_win_%s.png" focus_mask True action [exitaction] xpos 1295 ypos 2            
-    elif os == "mac":
+    elif game_os == "mac":
         window:
             background Frame("Assets/gui/frame_mac.png", 70, 39, 15, 24)
             xalign 0.1
