@@ -9,7 +9,7 @@
 persistant
 saves/
 photos/
-
+*.sh
 
 #################
 ## Eclipse
