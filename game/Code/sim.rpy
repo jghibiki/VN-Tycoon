@@ -15,22 +15,25 @@ label sim:
         
     if action == "draw":
         call screen select_time
-        $ duration = int(_return[1])
-        if _return[0]=="p":
-            if time.dec(duration):
-                if skills.increase("art", duration):
-                    "You spend some time practicing drawing."
+	    if not _return:
+	        $pass
+	    else:
+            $ duration = int(_return[1])
+            if _return[0]=="p":
+                if time.dec(duration):
+                    if skills.increase("art", duration):
+                        "You spend some time practicing drawing."
+                    else:
+                        "You are the very best. Like no one ever was."
                 else:
-                    "You are the very best. Like no one ever was."
+                    "You are too sleepy to draw."
             else:
-                "You are too sleepy to draw."
-        else:
-            if time.dec(duration):
-                $ mygame.do_art(duration)
-                $ completion = round((mygame.art_done/mygame.art_needed)*100, 2)
-                "You draw some sprites for your game.[completion]\% Completed"
-            else:
-                "You are too sleepy to draw."
+                if time.dec(duration):
+                    $ mygame.do_art(duration)
+                    $ completion = round((mygame.art_done/mygame.art_needed)*100, 2)
+                    "You draw some sprites for your game.[completion]\% Completed"
+                else:
+                    "You are too sleepy to draw."
                 
     if action == "sleep":
         $ time.dec(0)
