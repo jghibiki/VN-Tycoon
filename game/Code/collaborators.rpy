@@ -10,6 +10,6 @@ init python:
 
         def generatePersonality():
             import random
-            pType = ["happy", "stressed", "angry", "irritable", "thankful", "guilty", "lazy", "random"]
+            pType = ["happy", "irritable", "lazy"]
 
             return pType[randint(len(pType)-1)]

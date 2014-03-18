@@ -16,8 +16,8 @@ label sim:
     if action == "draw":
         call screen select_time
         if not _return:
-	        $pass
-	    else:
+            $pass
+        else:
             $ duration = int(_return[1])
             if _return[0]=="p":
                 if time.dec(duration):
