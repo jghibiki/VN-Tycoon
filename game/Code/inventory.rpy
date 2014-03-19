@@ -1,8 +1,9 @@
 init -2 python:
     class Item:
-        def __init__(self, name, price):
+        def __init__(self, name, price, pic="#FFF"):
             self.name = name
             self.price = price 
+            self.pic = pic
 
     class Inventory:
         def __init__(self, money=0):

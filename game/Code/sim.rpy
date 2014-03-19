@@ -288,28 +288,28 @@ screen sim:
     add "room_closed"
     
     #imagebutton idle "Assets/bg/room/room_base_closed.png" hover "Assets/bg/room/room_base_left.png" focus_mask "Assets/bg/room/left-door-mask.png" action [Return("work")] 
-    imagebutton idle "#00000000" hover "room_left" focus_mask "Assets/bg/room/left_door_mask.png" action [Return("work")] hovered [Play("sound", "Assets/sfx/door open.ogg"), Show("gui_tooltip", my_picture="tooltip_work") ] unhovered [Hide("gui_tooltip")]
+    imagebutton idle "#00000000" hover "room_left" focus_mask "Assets/bg/room/left_door_mask.png" action [Hide("gui_tooltip"), Return("work")] hovered [Play("sound", "Assets/sfx/door open.ogg"), Show("gui_tooltip", my_picture="tooltip_work") ] unhovered [Hide("gui_tooltip")]
     
-    imagebutton idle "#00000000" hover "room_right" focus_mask "Assets/bg/room/right_door_mask.png" action [Return("sleep")] hovered [Play("sound", "Assets/sfx/door open.ogg"), Show("gui_tooltip", my_picture="tooltip_sleep") ] unhovered [Hide("gui_tooltip")]
+    imagebutton idle "#00000000" hover "room_right" focus_mask "Assets/bg/room/right_door_mask.png" action [Hide("gui_tooltip"), Return("sleep")] hovered [Play("sound", "Assets/sfx/door open.ogg"), Show("gui_tooltip", my_picture="tooltip_sleep") ] unhovered [Hide("gui_tooltip")]
     
-    imagebutton idle "Assets/bg/room/computer_off.png" hover "Assets/bg/room/computer_on.png" focus_mask "Assets/bg/room/computer_mask.png" action [Return("computer")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_computer") ] unhovered [Hide("gui_tooltip")]
+    imagebutton idle "Assets/bg/room/computer_off.png" hover "Assets/bg/room/computer_on.png" focus_mask "Assets/bg/room/computer_mask.png" action [Hide("gui_tooltip"), Return("computer")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_computer") ] unhovered [Hide("gui_tooltip")]
     if inventory.has_item(tablet):
-        imagebutton auto "Assets/bg/room/tablet_%s.png" focus_mask True action [Return("draw")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_draw") ] unhovered [Hide("gui_tooltip")]
+        imagebutton auto "Assets/bg/room/tablet_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("draw")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_draw") ] unhovered [Hide("gui_tooltip")]
     else
-        imagebutton auto "Assets/bg/room/sketchpad_%s.png" focus_mask True action [Return("draw")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_draw") ] unhovered [Hide("gui_tooltip")]
+        imagebutton auto "Assets/bg/room/sketchpad_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("draw")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_draw") ] unhovered [Hide("gui_tooltip")]
     
     if inventory.has_item(keyboard):
-        imagebutton auto "Assets/bg/room/keyboard_%s.png" focus_mask True action [Return("compose")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_compose") ] unhovered [Hide("gui_tooltip")]
+        imagebutton auto "Assets/bg/room/keyboard_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("compose")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_compose") ] unhovered [Hide("gui_tooltip")]
     
     
     if inventory.has_item(book_d):
-        imagebutton auto "Assets/bg/room/book1_%s.png" focus_mask True action [Return("read1")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_read1") ] unhovered [Hide("gui_tooltip")]
+        imagebutton auto "Assets/bg/room/book1_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("read1")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_read1") ] unhovered [Hide("gui_tooltip")]
     if inventory.has_item(book_p):
-        imagebutton auto "Assets/bg/room/book2_%s.png" focus_mask True action [Return("read2")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_read2") ] unhovered [Hide("gui_tooltip")]
+        imagebutton auto "Assets/bg/room/book2_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("read2")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_read2") ] unhovered [Hide("gui_tooltip")]
     if inventory.has_item(book_w):
-        imagebutton auto "Assets/bg/room/book3_%s.png" focus_mask True action [Return("read3")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_read3") ] unhovered [Hide("gui_tooltip")]
+        imagebutton auto "Assets/bg/room/book3_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("read3")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_read3") ] unhovered [Hide("gui_tooltip")]
     if inventory.has_item(book_c):
-        imagebutton auto "Assets/bg/room/book4_%s.png" focus_mask True action [Return("read4")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_read4") ] unhovered [Hide("gui_tooltip")]
+        imagebutton auto "Assets/bg/room/book4_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("read4")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_read4") ] unhovered [Hide("gui_tooltip")]
     
     if minutes > 60*17:
         add "Assets/bg/room/room_light1.png"
