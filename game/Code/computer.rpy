@@ -55,7 +55,7 @@ label computer:
         if _return == "tarzan":
             $showBrowser = "tarzan"
         if _return == "lsf_recruitment":
-            $poll()
+            $pollThreads()
             $showBrowser = "lsf_recruitment"
         if _return == "lsf_messages":
             $showBrowser = "lsf_messages"
@@ -327,7 +327,13 @@ screen lsf:
         textbutton "Visit Recruitment Forum" action Return("lsf_recruitment")
         textbutton "Messages" action Return("lsf_messages")
         textbutton "Back" action Return("web_browser")
-        #todo: show an icon that indicates the number of messages the player has
+    
+        if len(messages) == 0:
+            text "No new messages"
+        else:
+            $msgLen = len(messages)
+            text "[msgLen] New Messages"
+            $del msgLen
 
 screen lsf_recruitment:
     vbox:

@@ -17,7 +17,8 @@ label start:
         skills = Skills()
         sales = Sales()
         userNames = []
-    
+        repBonus = 0.04
+
     call screen char_select
     $ renpy.block_rollback()
     python:

@@ -24,6 +24,10 @@ init python:
                             event = "sales", str(x)
                     else: #downloads
                         pass
+        if time_passed>45:
+            x = time_passed/(45) #should allow for polling of threads once for every 45 minutes that have passed
+            for i in range(x):
+                pollThreads()
 
         #story events:
         if day==2 and job=="artist" and not artist_event2:
@@ -38,44 +42,36 @@ init python:
     messages = []
     
     #the messages in the recruitment forum
-    recruitmentPosts = []
+    threads = []
 
     #the chance of getting a message
     repBounus = .04
 
-    #rolls for messages to add to the messages list
-    def pollMessages():
+    #polls for threads  to display for the recruitment forum
+    def pollThreads():
         import random
-        if random.random() < repBonus:
-            messages.append(generateMessage())
-
-    #generates messages to populate the messages list
-    def generateMessage():
-        import random
-        pass
-   
-    #screen info - stuff the recruitment page should use to display itself
-    messages = []
-   
-    #generates posts in the recruitment forum
-    def generateForumPosts():
-        import random
-
-        colabList = generateCollaborators(random.randInt(0,6)) 
-        for colab in colabList:
-            messages.append(colab)
-        
-
+        if len(threads) == 0:
+            for i in range(random.randInt(5,15):
+                threads.append(generateThread())
+        else:
+            threads.remove(0)
+            threads.append(generateThread)
     
-    #a function ment to provide a similar interface as polling for messages
-    def pollForum():
-        genterateForumPosts()
+    #generates threads to be displayed for the recruitment forum
+    def generateThread():
+        return Thread(repBonus)
 
-    #a function that creates a list of collaborators which will be able to 
-    def generateCollaborators(num):
-       colabList = [] 
-       for x in range(num):
-            colabList.append(Collaborator())
-       return collabList 
-   
 
+    #In essence threads will work like missions, completing the "mission" will result in an increased repBonus
+    # and the gain of some asset progress for one of your games. The higher your repBonus, the greater the amount of 
+    # asset progress you will recieve (as though with a higher reputation you can ask more reputable sources for help)
+    class Thread:
+        categories = ["art", "music", "writing", "coding"]
+        def __init__(self, repBonus):
+            import random
+            self.in = Thread.categories[randint(3)]
+            self.out = Thread.categories[randint(3)]
+
+            
+
+  
