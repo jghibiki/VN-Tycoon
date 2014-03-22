@@ -78,7 +78,10 @@ screen game_list:
                         $ price1 = "Free"
                     text price1 xalign 0.5
                     #text g.genre
-                    textbutton "Change Price" action Jump("change_price")
+                    if g.commercial:
+                        textbutton "Change Price" action Jump("change_price")
+                    else:
+                        null
                     textbutton "View Cover" action Show("show_cover", game=g)                
                     #text g.relationship
                     

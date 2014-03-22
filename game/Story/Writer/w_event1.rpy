@@ -7,7 +7,7 @@ label writer_event1:
 
 #    In a world filled with endless water... where humanity has made an effort to eke out a living on flying islands...
     $ post = "In a world filled with endless water... where humanity has made an effort to eke out a living on flying islands..."
-    show screen window_frame("Sentence", Return("desktop"))
+    show screen window_frame("Sentence", "icon16_sentence", Return("desktop"))
     #use autoPost(28, 84, 0, 0, "#00000000", mytext, typeSpeed = typeSpeed, moveCursor=False, textSize=24)
     
     show screen autoPost(28, 84, 0, 0, "#00000000", post, moveCursor=False, textSize=24, wait=False)

@@ -258,7 +258,7 @@ screen main_menu:
             button background None focus_mask True action [Hide("gui_tooltip"), my_action] hovered [ Play ("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture=tip_name) ] unhovered [Hide("gui_tooltip")]:
                 add button_name
                 hover_child button_name_hover
-    
+
 init -2:
     transform main_eff:
         xalign .5

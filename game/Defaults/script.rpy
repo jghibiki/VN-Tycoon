@@ -6,7 +6,7 @@ init -1 python:
     book_w = None
     book_p = None
     book_d = None
-
+    repBonus = 0
 
 # The game starts here.
 label start:
@@ -43,12 +43,12 @@ label start:
     $ renpy.block_rollback()
     python:
         inventory = Inventory()
-        tablet = Item("Drawing Tablet", 199.00)
-        keyboard = Item("Keyboard", 299.00)
-        book_c = Item("Composing for Morons", 35.00)
-        book_w = Item("Writing for the Asinine", 35.00)
-        book_p = Item("Programming for Idiots",35.00)
-        book_d = Item("Drawing for Losers", 35.00)
+        tablet = Item("Drawing Tablet", 199.00, "Assets/gui/shop_tablet.png")
+        keyboard = Item("Keyboard", 299.00, "Assets/gui/shop_keyboard.png")
+        book_c = Item("Composing for Morons", 35.00, "Assets/gui/shop_book.png")
+        book_w = Item("Writing for the Asinine", 35.00, "Assets/gui/shop_book.png")
+        book_p = Item("Programming for Idiots",35.00, "Assets/gui/shop_book.png")
+        book_d = Item("Drawing for Losers", 35.00, "Assets/gui/shop_book.png")
         
         #variables for tarzan
         showCart = False

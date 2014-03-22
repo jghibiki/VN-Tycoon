@@ -9,17 +9,14 @@ label computer:
     while(computerLoop):
         #show screens
         if showDesktop:
-            show computer
             call screen computer
         elif showBrowser and type(showBrowser) == bool:
-            show computer browser
             call screen webBrowser
         elif showBrowser == "lsf":
             #poll the message genereator to see if there are any new messages
             show computer browser lsf
             call screen lsf
         elif showBrowser == "tarzan":
-            show computer browser tarzan
             call screen tarzan
         elif showBrowser == "lsf_recruitment":
             show computer browser lsf recruitment
@@ -28,16 +25,14 @@ label computer:
             show computer browser lsf messages
             call screen lsf_messages
         elif showBrowser == "stalkmeplz":
-            show computer browser stalkMePlz
+            #show computer browser stalkMePlz
             call screen stalkMePlz
         elif showSentence and type(showSentence) == bool:
-            show computer sentence
             call screen sentence
             if not _return:
                 $selTime = False
                 call screen mikie
         elif showMikie and type(showMikie) == bool:
-            show computer michelangelo
             call screen mikie
             if not _return:
                 $selTime = False
@@ -137,6 +132,7 @@ label computer:
                 $tarzanStore.append(tarzanCart[item])
                 $item += 1
             $tarzanCart = [] #clear the cart
+            
         if _return[0] == "select_time":
             $selTime = _return[1]
         if _return[0] == "a" or _return[0] == "p":
@@ -186,21 +182,96 @@ label computer:
 #######################
 ## Computer Screens
 
+init:
+    image icon64_browser_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_browser.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_browser.png",0.5), vertical=True))
+    image icon64_browser_hover = LiveComposite((64,100), (0,0), "icon64_browser_idle" , (0,0), "Assets/gui/desk_glow.png")
+    image icon32_browser_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_browser.png", 32, 50))
+    image icon32_browser_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_browser.png", 32, 50))
+    image icon16_browser = im.Crop (im.Scale("Assets/gui/desk_browser.png", 16, 25), 0, 4, 16, 16)
+    
+    
+    
+    image icon64_sentence_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_sentence.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_sentence.png",0.5), vertical=True))
+    image icon64_sentence_hover = LiveComposite((64,100), (0,0), "icon64_sentence_idle" , (0,0), "Assets/gui/desk_glow.png")
+    image icon32_sentence_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_sentence.png", 32, 50))
+    image icon32_sentence_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_sentence.png", 32, 50))
+    image icon16_sentence = im.Crop (im.Scale("Assets/gui/desk_sentence.png", 16, 25), 0, 4, 16, 16)
+    
+    image icon64_michelangelo_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_michelangelo.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_michelangelo.png",0.5), vertical=True))
+    image icon64_michelangelo_hover = LiveComposite((64,100), (0,0), "icon64_michelangelo_idle" , (0,0), "Assets/gui/desk_glow.png")
+    image icon32_michelangelo_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_michelangelo.png", 32, 50))
+    image icon32_michelangelo_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_michelangelo.png", 32, 50))
+    image icon16_michelangelo = im.Crop (im.Scale("Assets/gui/desk_michelangelo.png", 16, 25), 0, 4, 16, 16)
+
+    image icon64_player_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_music_player.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_music_player.png",0.5), vertical=True))
+    image icon64_player_hover = LiveComposite((64,100), (0,0), "icon64_player_idle" , (0,0), "Assets/gui/desk_glow.png")
+    image icon32_player_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_music_player.png", 32, 50))
+    image icon32_player_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_music_player.png", 32, 50))
+    image icon16_player = im.Crop (im.Scale("Assets/gui/desk_music_player.png", 16, 25), 0, 4, 16, 16)
+    
+    
+    
+    
+    
+    
 screen computer:
-    #if we end up using different bgs based on the job change this
+    if job=="writer":
+        add "Assets/gui/desk_bg1.jpg"
+    if job=="artist":
+        add "Assets/gui/desk_bg1.jpg"
+    if job=="coder":
+        add "Assets/gui/desk_bg1.jpg"
+    if job=="composer":
+        add "Assets/gui/desk_bg1.jpg"
+    
+    if game_os == "win":
+        add "Assets/gui/desk_tray.png" yalign 1.0
+        imagebutton auto "Assets/gui/desk_win_start_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("leave")] xpos 0 yalign 1.0
+        $ x = 60
+        imagebutton idle "icon32_browser_idle" hover "icon32_browser_hover" action [Hide("gui_tooltip"), Return("web_browser")] xpos x yanchor 1.0 ypos 1.0 
+        $ x += 60
+        
+        imagebutton idle "icon32_sentence_idle" hover "icon32_sentence_hover" action [Hide("gui_tooltip"), Return("open_sentence")] xpos x yanchor 1.0 ypos 1.0 
+        $ x += 60
+        imagebutton idle "icon32_michelangelo_idle" hover "icon32_michelangelo_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 1.0 
+        $ x += 60
+        imagebutton idle "icon32_player_idle" hover "icon32_player_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 1.0 
+        $ x += 60
+
+    else:
+        add "Assets/gui/desk_menu_top.png" yalign 0.0
+        add "Assets/gui/desk_dock.png" yalign 1.0
+        imagebutton auto "Assets/gui/desk_mac_start_%s.png" action [Hide("gui_tooltip"), Return("leave")] xpos 0 ypos 0
+        
+        
+        $ x = 190
+        #imagebutton auto "icon64_browser_%s" action [Hide("gui_tooltip"), Return("web_browser")] xpos 190 yanchor 1.0 ypos 764 
+        imagebutton idle "icon64_browser_idle" hover "icon64_browser_hover" action [Hide("gui_tooltip"), Return("web_browser")] xpos x yanchor 1.0 ypos 764 
+        #hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_writer") ] unhovered [Hide("gui_tooltip")]
+        #add "icon64_browser_flip" xpos 190 yanchor 1.0 ypos 818
+        $ x += 80
+        
+        imagebutton idle "icon64_sentence_idle" hover "icon64_sentence_hover" action [Hide("gui_tooltip"), Return("open_sentence")] xpos x yanchor 1.0 ypos 764 
+        $ x += 80
+        imagebutton idle "icon64_michelangelo_idle" hover "icon64_michelangelo_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 764 
+        $ x += 80
+        imagebutton idle "icon64_player_idle" hover "icon64_player_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 764 
+        $ x += 80
     vbox: 
         xpos 0.01
         ypos 0.2
-        textbutton "Open Web Browser" action Return("web_browser")
-        textbutton "Open Sentence Word-processor" action Return("open_sentence")
-        textbutton "Open Michelangelo" action Return("open_mikie")
-        textbutton "Leave Computer" action Return("leave") 
+#        textbutton "Open Web Browser" action Return("web_browser")
+#        textbutton "Open Sentence Word-processor" action Return("open_sentence")
+#        textbutton "Open Michelangelo" action Return("open_mikie")
+#        textbutton "Leave Computer" action Return("leave") 
 
 
 #############################
 ## Word Processor (Sentence)
 screen sentence:
-    use window_frame("Sentence", Return("desktop"))
+    tag app
+    use computer
+    use window_frame("Sentence", "icon16_sentence", Return("desktop"))
     vbox:
         xpos 0.01
         ypos 0.2
@@ -215,6 +286,9 @@ screen sentence:
 ############################################
 ## Drawing/Painting Software (Michelangelo)
 screen mikie:
+    tag app
+    use computer
+    use window_frame("Michelangelo", "icon16_michelangelo", Return("desktop"))
     vbox:
         xpos 0.01
         ypos 0.2
@@ -228,35 +302,59 @@ screen mikie:
 ########################
 ## Web Browser Screens
 screen webBrowser:
-    use window_frame("Icewolf", Return("desktop"))
+    tag app
+    use computer
+    use window_frame("Icewolf", "icon16_browser", Return("desktop"))
+    
+    add "Assets/gui/browser_toolbar.png" xpos 29 ypos 74
+    add "Assets/gui/browser_tab_selected.png" xpos 34 ypos 49
+    #add "Assets/gui/browser_tab_idle.png" xpos 284 ypos 49
+    
+    $ my_bg = "Assets/gui/browser_tab_idle.png"
+    if showBrowser == "lsf":
+        $ my_bg = "Assets/gui/browser_tab_selected.png"
+    button background my_bg focus_mask True action Return("lsf") xpos 34 ypos 49:
+        text "LemmingSoft Forums" color "#000" size 18
+
+    $ my_bg = "Assets/gui/browser_tab_idle.png"
+    if showBrowser == "tarzan":
+        $ my_bg = "Assets/gui/browser_tab_selected.png"        
+    button background my_bg focus_mask True action Return("tarzan") xpos 284 ypos 49:
+        text "Tarzan Shop" color "#000" size 18
         
-    vbox:
-        xpos 0.01
-        ypos 0.2
-        textbutton "LemmingSoft Forums" action Return("lsf")
-        textbutton "Tarzan" action Return("tarzan")
-        textbutton "Exit Browser" action Return("desktop")
+        
+    # vbox:
+        # xpos 0.01
+        # ypos 0.2
+        # textbutton "LemmingSoft Forums" action Return("lsf")
+        # textbutton "Tarzan" action Return("tarzan")
+        # textbutton "Exit Browser" action Return("desktop")
 
 screen tarzan:
+    use webBrowser
     vbox:
-        xpos 0.01
-        ypos 0.2
+        #xpos 0.01
+        #ypos 0.2
+        xpos 29 ypos 111
         hbox:
             if len(tarzanStore) != 0 or len(tarzanCart) != 0:
                 vbox:
-                    text "Tarzan!"
-                    textbutton "Back" action Return("web_browser")
+                    add "Assets/gui/logo_tarzan.png" xpos 50 ypos 20
+                    #text "Tarzan!" color "#000"
+                    #textbutton "Back" action Return("web_browser")
                     if not showCart:
-                        frame:
-                            xmaximum 810
-                            ymaximum 300
+                        frame ypos 20:
+                            #xmaximum 810
+                            ymaximum 450
                             background None
                             hbox:
                                 frame:
                                     background "#fff"
-                                    xmaximum 800
-                                    ymaximum 300
+                                    xmaximum 1200
+                                    xminimum 1200
+                                    ymaximum 450
                                     viewport id "tarzanVp":
+                                        mousewheel True
                                         vbox:
                                             for item in range(len(tarzanStore)):
                                                 frame:
@@ -267,24 +365,28 @@ screen tarzan:
                                                             null width 20 
                                                             text str(tarzanStore[item].price)
                                                         hbox:
+                                                            add tarzanStore[item].pic
+                                                            
                                                             null width 80
-                                                            textbutton "Add to cart" action Return(("tarzanAdd", item))
+                                                            textbutton "Add to cart" action Return(("tarzanAdd", item)) ypos 80
 
                                                 null height 3
                                 vbar value YScrollValue("tarzanVp")
                         textbutton "My Cart" action SetVariable("showCart", True)
 
                     else:
-                        frame:
-                            xmaximum 810
-                            ymaximum 300
+                        frame ypos 20:
+                            #xmaximum 810
+                            ymaximum 450
                             background None
                             hbox:
                                 frame:
                                     background "#fff"
-                                    xmaximum 800
-                                    ymaximum 300
+                                    xmaximum 1200
+                                    xminimum 1200
+                                    ymaximum 450
                                     viewport id "tarzanCartVp":
+                                        mousewheel True
                                         vbox:
                                             for item in range(len(tarzanCart)):
                                                 frame:
@@ -312,6 +414,7 @@ screen tarzan:
                     null height 30
                     textbutton "Return" action Return("web_browser")
 screen stalkMePlz:
+    use webBrowser
     vbox:
         xpos 0.01
         ypos 0.2
@@ -320,10 +423,14 @@ screen stalkMePlz:
         textbutton "Back" action Return("web_browser")
 
 screen lsf:
+    use webBrowser
+    add "Assets/gui/lsf_back.png" #xpos 29 ypos 111
     vbox:
-        xpos 0.01
-        ypos 0.2
-        text "LemmingSoft Forums"
+        xpos 0.4
+        ypos 0.4
+        #xpos 0.01
+        #ypos 0.2
+        #text "LemmingSoft Forums"
         textbutton "Visit Recruitment Forum" action Return("lsf_recruitment")
         textbutton "Messages" action Return("lsf_messages")
         textbutton "Back" action Return("web_browser")
@@ -365,7 +472,7 @@ screen writingAnimation:
     $ mytext = random.choice(writing_snippets)
     $ typeSpeed = 20 + int(skills.writing*6)
     $ wait_to_hide = 1 + len(mytext) / typeSpeed
-    use window_frame("Sentence", Return("desktop"))
+    use window_frame("Sentence", "icon16_sentence", Return("desktop"))
     use autoPost(28, 84, 0, 0, "#00000000", mytext, typeSpeed = typeSpeed, moveCursor=False, textSize=24)
     timer wait_to_hide action [Hide("writingAnimation"), Return()]
 
@@ -383,16 +490,21 @@ init:
     image computer stalkMePlz = "#fff"
 
 
-screen window_frame(appname, exitaction):
+screen window_frame(appname, icon, exitaction):
     if game_os == "win":
         window:
             background Frame("Assets/gui/frame_win.png", 20, 40, 110, 20)
-            xalign 0.1
-            yalign 0.1
+            xanchor 0.0
+            yanchor 0.0
+            xpos 10#align 0.1
+            ypos 10#align 0.1
             xminimum 1300
             yminimum 700
-            text appname xpos 20 ypos 10 color "#000" size 16
-            imagebutton auto "Assets/gui/close_win_%s.png" focus_mask True action [exitaction] xpos 1295 ypos 2            
+            xmaximum 1300
+            ymaximum 700
+            add icon xpos 20 ypos 10
+            text appname xpos 40 ypos 10 color "#000" size 16
+            imagebutton auto "Assets/gui/close_win_%s.png" focus_mask True action [exitaction] xpos 1230 ypos 2            
     elif game_os == "mac":
         window:
             background Frame("Assets/gui/frame_mac.png", 70, 39, 15, 24)
@@ -400,5 +512,7 @@ screen window_frame(appname, exitaction):
             yalign 0.1
             xminimum 1300
             yminimum 700
-            text appname ypos 12 color "#000" size 16 text_align 0.5 min_width 1300
+            ymaximum 700
+            #add icon ypos 12
+            text appname  xpos 20 ypos 12 color "#000" size 16 text_align 0.5 min_width 1300
             imagebutton auto "Assets/gui/close_mac_%s.png" focus_mask True action [exitaction] xpos 7 ypos 11
