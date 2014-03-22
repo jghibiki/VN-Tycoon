@@ -38,7 +38,13 @@ label computer:
             if not _return:
                 $selTime = False
                 call screen mikie
-
+        elif showNotepad and type(showNotepad) == bool:
+            call screen notepad
+            if not _return:
+                $selTime = False            
+                call screen notepad
+                
+                
         #parse returns
         if _return == "web_browser":
             $showDesktop = False
@@ -68,6 +74,10 @@ label computer:
         if _return == "open_mikie":
             $showMikie = True
             $showDesktop = False
+        if _return == "open_notepad":
+            $showNotepad = True
+            $showDesktop = False
+            
         if type(_return) == tuple:
             if _return[0] == "tarzanAdd":
                 $tarzanCart.append(tarzanStore.pop(_return[1]))
@@ -178,7 +188,52 @@ label computer:
                         [completion]\% Completed"
                     else:
                         "You are too sleepy to draw."
+            elif showNotepad:
+                $dur = int(_return[1])
+                if _return[0] == "p":
+                    if time.dec(dur):
+                        if skills.increase("coding", dur):
+                        
+                            show screen computer
+                            $ speed = 40 + skills.coding * 2
+                            $ post = random.choice(code_snippets_fixed1)
+                            show screen window_frame("Notepad--", "icon16_notepad", None)
+                            show screen autoPostFixed(82, 122, "Assets/gui/notepad.png", post, textSize=15)
+                            $ post = random.choice(code_snippets_typed1)
+                            call screen autoPost(82, 300, 0, 0, "#00000000", post, typeSpeed=speed, moveCursor=False, textSize=15)
+                            hide screen autoPostFixed
+                            hide screen window_frame
+                            hide screen computer
 
+                            
+                            "You spend some time practing coding."
+                        else:
+                            "You are the very best. Like no one ever was."
+                    else:
+                        "You are too sleepy to code."
+                else:
+                    if time.dec(dur):
+                        $mygame.do_coding(dur)
+                        $completion = round(((mygame.coding_done/mygame.coding_needed)*100),2) 
+                        
+                        show screen computer
+                        $ speed = 40 + skills.coding * 2
+                        $ post = random.choice(code_snippets_fixed1)
+                        show screen window_frame("Notepad--", "icon16_notepad", None)
+                        show screen autoPostFixed(82, 122, "Assets/gui/notepad.png", post, textSize=15)
+                        $ post = random.choice(code_snippets_typed1)
+                        call screen autoPost(82, 300, 0, 0, "#00000000", post, typeSpeed=speed, moveCursor=False, textSize=15)
+                        hide screen autoPostFixed
+                        hide screen window_frame
+                        hide screen computer
+
+
+                        
+                        "You code a few scenes for your game.
+                        [completion]\% Completed"
+                    else:
+                        "You are too sleepy to code."
+            
                                          
 #######################
 ## Computer Screens
@@ -210,8 +265,11 @@ init:
     image icon32_player_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_music_player.png", 32, 50))
     image icon16_player = im.Crop (im.Scale("Assets/gui/desk_music_player.png", 16, 25), 0, 4, 16, 16)
     
-    
-    
+    image icon64_notepad_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_notepad.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_notepad.png",0.5), vertical=True))
+    image icon64_notepad_hover = LiveComposite((64,100), (0,0), "icon64_notepad_idle" , (0,0), "Assets/gui/desk_glow.png")
+    image icon32_notepad_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_notepad.png", 32, 50))
+    image icon32_notepad_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_notepad.png", 32, 50))
+    image icon16_notepad = im.Crop (im.Scale("Assets/gui/desk_notepad.png", 16, 25), 0, 4, 16, 16)
     
     
     
@@ -239,6 +297,8 @@ screen computer:
         imagebutton idle "icon32_player_idle" hover "icon32_player_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 1.0 
         $ x += 60
 
+        imagebutton idle "icon32_notepad_idle" hover "icon32_notepad_hover" action [Hide("gui_tooltip"), Return("open_notepad")] xpos x yanchor 1.0 ypos 1.0 
+        
     else:
         add "Assets/gui/desk_menu_top.png" yalign 0.0
         add "Assets/gui/desk_dock.png" yalign 1.0
@@ -258,6 +318,9 @@ screen computer:
         $ x += 80
         imagebutton idle "icon64_player_idle" hover "icon64_player_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 764 
         $ x += 80
+        
+        imagebutton idle "icon64_notepad_idle" hover "icon64_notepad_hover" action [Hide("gui_tooltip"), Return("open_notepad")] xpos x yanchor 1.0 ypos 764 
+        
     vbox: 
         xpos 0.01
         ypos 0.2
@@ -299,6 +362,22 @@ screen mikie:
             textbutton "Exit program" action Return("desktop")
         else:
             use select_time
+
+screen notepad:
+    tag app
+    use computer
+    use window_frame("Notepad--", "icon16_notepad", Return("desktop"))
+    
+    vbox:
+        xpos 0.01
+        ypos 0.2
+        if not selTime:
+            text "Welcome to Notepad--!"
+            textbutton "code!" action Return(("select_time", "code"))
+            textbutton "Exit program" action Return("desktop")
+        else:
+            use select_time
+
             
 ########################
 ## Web Browser Screens
@@ -486,6 +565,7 @@ init:
 
 
 screen window_frame(appname, icon, exitaction):
+    zorder 10
     if game_os == "win":
         window:
             background Frame("Assets/gui/frame_win.png", 20, 40, 110, 20)
@@ -503,12 +583,14 @@ screen window_frame(appname, icon, exitaction):
     elif game_os == "mac":
         window:
             background Frame("Assets/gui/frame_mac.png", 70, 39, 15, 24)
-            xalign 0.1
-            yalign 0.1
-            xminimum 1300
-            xmaximum 1300
-            yminimum 700
-            ymaximum 700
+            xanchor 0.0
+            yanchor 0.0
+            xpos 18
+            ypos 8
+            xminimum 1286
+            xmaximum 1286
+            yminimum 714
+            ymaximum 714
             #add icon ypos 12
-            text appname  xpos 20 ypos 12 color "#000" size 16 text_align 0.5 min_width 1300
+            text appname  xpos 20 ypos 12 color "#000" size 16 text_align 0.5 min_width 1286
             imagebutton auto "Assets/gui/close_mac_%s.png" focus_mask True action [exitaction] xpos 7 ypos 11

@@ -14,10 +14,6 @@ init:
     image slice1 = "Assets/covers/slice1.jpg"
     image slice2 = "Assets/covers/slice2.jpg"
     
-    ###
-    image azura angry smile large = "Assets/covers/azura angry smile large.png"
-    image lee = "Assets/covers/lee-novelty-set-700.png"
-    
 init python:
     for expression in ["smile1", "smile2", "smile3", "smile4"]:
         for hair in ["black", "blue"]:

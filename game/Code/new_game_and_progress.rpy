@@ -96,6 +96,8 @@ screen new_game:
     modal True
     add "#FFF"
     
+    default checkOptions = 0
+    
     vbox xalign 0.5:
         null height 30
         text "Gameplay:" xalign 0.5 style "my_text"
@@ -139,7 +141,10 @@ screen new_game:
         null height 30
         hbox xalign 0.5:
             textbutton "Cancel" action Hide("new_game")
-            textbutton "OK" action [SetField(mygame, "started", True), Hide("new_game"), Jump("new_game")]
+            if mygame.gameplay and mygame.relationship and mygame.genre and mygame.scope:
+                textbutton "OK" action [SetField(mygame, "started", True), Hide("new_game"), Jump("new_game")]
+            else:
+                textbutton "OK" action [[]]
 
 label new_game:
     call name_gen
@@ -295,7 +300,3 @@ screen game_progress(curr_game = mygame):
                 text str(curr_game.quality)
         hbox:
             textbutton "Back" action Hide("game_progress")
-
-            
-
-            
