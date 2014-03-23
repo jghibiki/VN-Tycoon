@@ -362,6 +362,9 @@ screen mikie:
         else:
             use select_time
 
+
+#########################
+## Notepad (for coding)
 screen notepad:
     tag app
     use computer
@@ -380,6 +383,9 @@ screen notepad:
             
 ########################
 ## Web Browser Screens
+
+##################
+###   Web Browser
 screen webBrowser:
     tag app
     use computer
@@ -409,6 +415,8 @@ screen webBrowser:
         # textbutton "Tarzan" action Return("tarzan")
         # textbutton "Exit Browser" action Return("desktop")
 
+##############
+###    Tarzan
 screen tarzan:
     use webBrowser
     vbox:
@@ -492,6 +500,9 @@ screen tarzan:
                     text "This website has been taken down as part of an investigation into several claims of credit card fraud against the owners. If you feel you may have fallen victim to this scheme, please contact us right away."
                     null height 30
                     textbutton "Return" action Return("web_browser")
+
+#################
+###    StalkMePlz
 screen stalkMePlz:
     use webBrowser
     vbox:
@@ -501,6 +512,9 @@ screen stalkMePlz:
         #show messages here
         textbutton "Back" action Return("web_browser")
 
+
+#########################
+###    LemmingSoft Forums
 screen lsf:
     use webBrowser
     add "Assets/gui/lsf_back.png" #xpos 29 ypos 111
@@ -521,6 +535,8 @@ screen lsf:
             text "[msgLen] New Messages"
             $del msgLen
 
+####################################
+###    LemmingSoft Recruitment Page
 screen lsf_recruitment:
     vbox:
         xpos 0.01
@@ -528,6 +544,9 @@ screen lsf_recruitment:
         text"Recruitment Forum"
         textbutton "Back" action Return("lsf")
         #todo: show randomly generated recruitment adds/offers here.
+
+#################################
+###    LemmingSofe Messages Page
 
 screen lsf_messages:
     hbox:
@@ -555,8 +574,8 @@ screen writingAnimation:
     use autoPost(28, 84, 0, 0, "#00000000", mytext, typeSpeed = typeSpeed, moveCursor=False, textSize=24)
     timer wait_to_hide action [Hide("writingAnimation"), Return()]
 
-############################3
-## Computer Images
+############################
+## Computer Images -- FINISH DEPRECIATING AND REMOVE !!
 init:
     image computer = "#CF6800"
     image computer browser = "#B2FB69"
@@ -568,6 +587,8 @@ init:
     image computer michelangelo = "#007D0F"
     image computer stalkMePlz = "#fff"
 
+############################
+# Window Frame - Used to show a winodows/mac style window manager simulation
 
 screen window_frame(appname, icon, exitaction):
     zorder 10
