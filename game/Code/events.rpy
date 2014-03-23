@@ -54,7 +54,7 @@ init python:
             for i in range(random.randint(5,15)):
                 threads.append(generateThread())
         else:
-            threads.remove(0)
+            threads.pop(0)
             threads.append(generateThread)
     
     #generates threads to be displayed for the recruitment forum
