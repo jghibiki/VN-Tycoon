@@ -155,6 +155,18 @@ label sim:
         $ post = random.choice(posts_list)
         call screen autoPost(323, 214, 628, 684, "Assets/gui/lsf_post_test.png", post, moveCursor=True)
         
+    if action == "code_ani":
+        show screen computer
+        $ speed = 40 + skills.coding * 2
+        $ post = random.choice(code_snippets_fixed1)
+        show screen window_frame("Notepad--", "icon16_sentence", None)
+        show screen autoPostFixed(82, 122, "Assets/gui/notepad.png", post, textSize=15)
+        $ post = random.choice(code_snippets_typed1)
+        call screen autoPost(82, 300, 0, 0, "#00000000", post, typeSpeed=speed, moveCursor=False, textSize=15)
+        hide screen autoPostFixed
+        hide screen window_frame
+        hide screen computer
+        
     if action == "cheat":
         $ inventory.money += 1000
         $ skills.music = 10.0
@@ -339,7 +351,7 @@ screen sim:
             textbutton "Post" action Return("post")
             textbutton "stats" action Return("stats")
             
-            
+            textbutton "Code ani" action Return("code_ani")
 
             
             
@@ -368,10 +380,11 @@ screen select_time:
             textbutton "1h" action Return("p1")
             textbutton "4h" action Return("p4")
             textbutton "8h" action Return("p8")
-        text "Make assets:"
-        hbox:
-            textbutton "1h" action Return("a1")
-            textbutton "4h" action Return("a4")
-            textbutton "8h" action Return("a8")
+        if mygame.started:
+            text "Make assets:"
+            hbox:
+                textbutton "1h" action Return("a1")
+                textbutton "4h" action Return("a4")
+                textbutton "8h" action Return("a8")
         textbutton "Back" action Return(False) # a lazy work around to make
                                                     #back work 
