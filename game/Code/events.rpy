@@ -51,7 +51,7 @@ init python:
     def pollThreads():
         import random
         if len(threads) == 0:
-            for i in range(random.randInt(5,15):
+            for i in range(random.randint(5,15)):
                 threads.append(generateThread())
         else:
             threads.remove(0)
@@ -66,12 +66,13 @@ init python:
     # and the gain of some asset progress for one of your games. The higher your repBonus, the greater the amount of 
     # asset progress you will recieve (as though with a higher reputation you can ask more reputable sources for help)
     class Thread:
-        categories = ["art", "music", "writing", "coding"]
+        categories = ["art", "music", "writing", "coding", "money"]
         def __init__(self, repBonus):
             import random
-            self.in = Thread.categories[randint(3)]
-            self.out = Thread.categories[randint(3)]
-
+            self.input = Thread.categories[random.randint(0,2)]
+            self.output = Thread.categories[random.randint(0,2)]
+            
+            self.description = "TODO"
             
 
   

@@ -52,7 +52,6 @@ label computer:
         if _return == "leave":
             return # or maybe jump to sim instead
         if _return == "lsf":
-            $pollMessages()
             $showBrowser = "lsf"
         if _return == "tarzan":
             $showBrowser = "tarzan"
