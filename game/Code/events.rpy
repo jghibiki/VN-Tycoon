@@ -59,7 +59,7 @@ init python:
                 threads.append(generateThread())
         else:
             threads.pop(0)
-            threads.append(generateThread)
+            threads.append(generateThread())
     
     #generates threads to be displayed for the recruitment forum
     def generateThread():
@@ -97,6 +97,7 @@ init python:
             self.outputQuantity =  self.inputQuantity > Thread.returnScalar+1 if  self.inputQuantity - Thread.returnScalar else Thread.returnScalar
             self.user = make_user()
             self.description = self.generateDescription()
+            #todo: create a means of generating a post title that is semi-relivant, will likely use the same format for inserting info as the descriptions do
 
         def generateDescription(self):
             #This function should generate a formatted string to be used by the renpy text statement when displaying the thread
@@ -114,19 +115,24 @@ init python:
                 desc += Thread.descInputOption["skill"][random.randint(0,len(Thread.descInputOption["skill"])-1)]
 
             if not recurse:
+                desc += " " #add a space between sentences :P
                 if self.output == "money":
                     desc += Thread.descOutputOption["non-skill"][random.randint(0,len(Thread.descOutputOption["non-skill"])-1)]
                 else: 
                     desc += Thread.descOutputOption["skill"][random.randint(0,len(Thread.descOutputOption["skill"])-1)]
 
                 #replace flags with values
-                desc = desc.replace("<*input*>", str(self.input))
+                desc = desc.replace("<*input*>",self.input)
                 desc = desc.replace("<*inputQuantity*>", str(self.inputQuantity))
-                desc = desc.replace("<*output*>", str(self.output))
+                desc = desc.replace("<*output*>",self.output)
                 desc = desc.replace("<*outputQuantity*>", str(self.outputQuantity))
 
             return desc
- 
+        
+        def reply(self):
+            #adds this instance to the message list and removes it from the threads list
+            pass
+
 #A function to get a random float with a step
     def randrangef(start, stop, step):
         import random

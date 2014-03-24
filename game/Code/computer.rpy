@@ -56,7 +56,6 @@ label computer:
         if _return == "tarzan":
             $showBrowser = "tarzan"
         if _return == "lsf_recruitment":
-            $pollThreads()
             $showBrowser = "lsf_recruitment"
         if _return == "lsf_messages":
             $showBrowser = "lsf_messages"
@@ -304,7 +303,7 @@ screen sentence:
         xpos 0.01
         ypos 0.2
         if not selTime:
-            text "Welcome to Word-processor Sentence!"
+            text "Welcome to Word-processor Sentence!" style "stdTxt"
             textbutton "Write!" action Return(("select_time", "write"))
             textbutton "Exit program" action Return("desktop")
         else:
@@ -321,7 +320,7 @@ screen mikie:
         xpos 0.01
         ypos 0.2
         if not selTime:
-            text "Welcome to Michelangelo!"
+            text "Welcome to Michelangelo!" style "stdTxt"
             textbutton "Draw!" action Return(("select_time", "draw"))
             textbutton "Exit program" action Return("desktop")
         else:
@@ -339,7 +338,7 @@ screen notepad:
         xpos 0.01
         ypos 0.2
         if not selTime:
-            text "Welcome to Notepad--!"
+            text "Welcome to Notepad--!" style "stdTxt"
             textbutton "code!" action Return(("select_time", "code"))
             textbutton "Exit program" action Return("desktop")
         else:
@@ -413,9 +412,9 @@ screen tarzan:
                                                     background "#ccc"
                                                     vbox:
                                                         hbox:
-                                                            text tarzanStore[item].name
+                                                            text tarzanStore[item].name style "stdTxt"
                                                             null width 20 
-                                                            text str(tarzanStore[item].price)
+                                                            text str(tarzanStore[item].price) style "stdTxt"
                                                         hbox:
                                                             add tarzanStore[item].pic
                                                             
@@ -445,9 +444,9 @@ screen tarzan:
                                                     background "#ccc"
                                                     vbox:
                                                         hbox:
-                                                            text tarzanCart[item].name
+                                                            text tarzanCart[item].name style "stdTxt"
                                                             null width 20 
-                                                            text str(tarzanCart[item].price)
+                                                            text str(tarzanCart[item].price) style "stdTxt"
                                                         hbox:
                                                             null width 80
                                                             textbutton "Remove from cart" action Return(("tarzanRemove", item))
@@ -460,9 +459,9 @@ screen tarzan:
                             textbutton "Check Out" action Return("tarzanBuy")
             else:
                 vbox:
-                    text "Official Notice" 
+                    text "Official Notice" style "stdTxt"
                     null height 10
-                    text "This website has been taken down as part of an investigation into several claims of credit card fraud against the owners. If you feel you may have fallen victim to this scheme, please contact us right away."
+                    text "This website has been taken down as part of an investigation into several claims of credit card fraud against the owners. If you feel you may have fallen victim to this scheme, please contact us right away." style "stdTxt"
                     null height 30
                     textbutton "Return" action Return("web_browser")
 
@@ -473,7 +472,7 @@ screen stalkMePlz:
     vbox:
         xpos 0.01
         ypos 0.2
-        text "Welcome to StalkMePlz!"
+        text "Welcome to StalkMePlz!" style "stdTxt"
         #show messages here
         textbutton "Back" action Return("web_browser")
 
@@ -494,26 +493,56 @@ screen lsf:
         textbutton "Back" action Return("web_browser")
     
         if len(messages) == 0:
-            text "No new messages"
+            text "No new messages" style "stdTxt"
         else:
             $msgLen = len(messages)
-            text "[msgLen] New Messages"
+            text "[msgLen] New Messages" style "stdTxt"
             $del msgLen
 
 ####################################
 ###    LemmingSoft Recruitment Page
 screen lsf_recruitment:
+    use webBrowser
+                                        #Working Back button ???
     vbox:
-        xpos 0.01
-        ypos 0.2
-        text"Recruitment Forum"
+        text"Recruitment Forum" style "stdTxt"
         textbutton "Back" action Return("lsf")
-        #todo: show randomly generated recruitment adds/offers here.
+        
+        frame ypos 20:
+            #xmaximum 810
+            ymaximum 450
+            background None
+            hbox:
+                frame:
+                    background "#fff"
+                    xmaximum 1200
+                    xminimum 1200
+                    ymaximum 450
+                    viewport id "lsfThreads":
+                        mousewheel True
+                        vbox:
+                            for item in threads:
+                                frame:
+                                    background "#ccc"
+                                    vbox:
+                                        hbox:
+                                            #make this line a different color than the main post
+                                            text "Post Title: XXXXXXX" style "stdTxt"
+                                            null width 20
+                                            text "[item.user]" style "stdTxt"
+
+                                        hbox:
+                                            text "[item.description]" style "stdTxt"
+                                        hbox:
+                                            textbutton "PM" action item.reply()
+                vbar value YScrollValue("lsfThreads")
+
 
 #################################
 ###    LemmingSofe Messages Page
 
 screen lsf_messages:
+    use webBrowser
     hbox:
         xpos 0.01
         ypos 0.2
@@ -616,3 +645,12 @@ screen window_frame(appname, icon, exitaction):
             #add icon ypos 12
             text appname  xpos 20 ypos 12 color "#000" size 16 text_align 0.5 min_width 1286
             imagebutton auto "Assets/gui/close_mac_%s.png" focus_mask True action [exitaction] xpos 7 ypos 11
+
+###################
+# Computer Styles
+init:
+    style stdTxt is text:
+        color "#000"
+
+
+

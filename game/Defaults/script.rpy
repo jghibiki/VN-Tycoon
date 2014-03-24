@@ -61,6 +61,8 @@ label start:
         tarzanStore.append(book_d)
         tarzanStore.append(tablet)
 
+        #the initial poll for the message board threads
+        pollThreads()
     
         #rest of the item definitions here (including software)
     
