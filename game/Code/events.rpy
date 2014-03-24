@@ -38,6 +38,10 @@ init python:
         last_time = curr_time
         return event
 
+
+##############################
+## Messaging and Forum Threads 
+
     #the players message box
     messages = []
     
@@ -66,13 +70,67 @@ init python:
     # and the gain of some asset progress for one of your games. The higher your repBonus, the greater the amount of 
     # asset progress you will recieve (as though with a higher reputation you can ask more reputable sources for help)
     class Thread:
+        import random
         categories = ["art", "music", "writing", "coding", "money"]
+        scalar = 20 #the base number of hours to be input
+        returnScalar = 2 #the difference between the return and the input
+        descInputOption = {
+                            "skill" : [
+                                        "Hey all! looking to hire someone to do some <*input*> for a project of mine. I need about <*inputQuantity*> <*input*> actually."
+                                      ],
+                            "non-skill": [
+                                            "I'm looking to sell some work of mine for $<*inputQuantity*>."
+                                         ]
+                          }
+        descOutputOption = {
+                             "skill" : [
+                                            "I'd be willing to trade for <*outputQuantity*> <*output*>. If your intrested let me know.",
+                                       ],
+                             "non-skill": [
+                                            "I'd be willing to pay $<*outputQuantity*>. PM me if interested. 8)"
+                                          ]
+                            }
         def __init__(self, repBonus):
-            import random
-            self.input = Thread.categories[random.randint(0,2)]
-            self.output = Thread.categories[random.randint(0,2)]
-            
-            self.description = "TODO"
-            
+            self.input = Thread.categories[random.randint(0,4)]
+            self.output = Thread.categories[random.randint(0,4)]
+            self.inputQuantity = round(Thread.scalar - (store.repBonus + randrangef(0.2,0.6, 0.01)) * Thread.scalar) 
+            self.outputQuantity =  self.inputQuantity > Thread.returnScalar+1 if  self.inputQuantity - Thread.returnScalar else Thread.returnScalar
+            self.user = make_user()
+            self.description = self.generateDescription()
 
-  
+        def generateDescription(self):
+            #This function should generate a formatted string to be used by the renpy text statement when displaying the thread
+            #Basically this function will randomly select a format and replace statements following a format similar to this <*input*> to place the generated values into the string accordingly  
+            recurse = False
+            desc = ""
+            if self.input == "money":
+                if self.output == "money":
+                    recurse = True
+                    self.output = Thread.categories[random.randint(0,4)]
+                    self.generateDescription()
+                else:
+                    desc += Thread.descInputOption["non-skill"][random.randint(0,len(Thread.descInputOption["non-skill"])-1)]
+            elif not self.input == "money":
+                desc += Thread.descInputOption["skill"][random.randint(0,len(Thread.descInputOption["skill"])-1)]
+
+            if not recurse:
+                if self.output == "money":
+                    desc += Thread.descOutputOption["non-skill"][random.randint(0,len(Thread.descOutputOption["non-skill"])-1)]
+                else: 
+                    desc += Thread.descOutputOption["skill"][random.randint(0,len(Thread.descOutputOption["skill"])-1)]
+
+                #replace flags with values
+                desc = desc.replace("<*input*>", str(self.input))
+                desc = desc.replace("<*inputQuantity*>", str(self.inputQuantity))
+                desc = desc.replace("<*output*>", str(self.output))
+                desc = desc.replace("<*outputQuantity*>", str(self.outputQuantity))
+
+            return desc
+ 
+#A function to get a random float with a step
+    def randrangef(start, stop, step):
+        import random
+        return round(((random.randint(0,int((stop-start)/step))*step)+start),2)
+
+
+

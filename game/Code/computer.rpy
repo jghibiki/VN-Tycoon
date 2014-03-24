@@ -237,41 +237,6 @@ label computer:
 #######################
 ## Computer Screens
 
-init:
-    image icon64_browser_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_browser.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_browser.png",0.5), vertical=True))
-    image icon64_browser_hover = LiveComposite((64,100), (0,0), "icon64_browser_idle" , (0,0), "Assets/gui/desk_glow.png")
-    image icon32_browser_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_browser.png", 32, 50))
-    image icon32_browser_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_browser.png", 32, 50))
-    image icon16_browser = im.Crop (im.Scale("Assets/gui/desk_browser.png", 16, 25), 0, 4, 16, 16)
-    
-    
-    
-    image icon64_sentence_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_sentence.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_sentence.png",0.5), vertical=True))
-    image icon64_sentence_hover = LiveComposite((64,100), (0,0), "icon64_sentence_idle" , (0,0), "Assets/gui/desk_glow.png")
-    image icon32_sentence_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_sentence.png", 32, 50))
-    image icon32_sentence_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_sentence.png", 32, 50))
-    image icon16_sentence = im.Crop (im.Scale("Assets/gui/desk_sentence.png", 16, 25), 0, 4, 16, 16)
-    
-    image icon64_michelangelo_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_michelangelo.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_michelangelo.png",0.5), vertical=True))
-    image icon64_michelangelo_hover = LiveComposite((64,100), (0,0), "icon64_michelangelo_idle" , (0,0), "Assets/gui/desk_glow.png")
-    image icon32_michelangelo_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_michelangelo.png", 32, 50))
-    image icon32_michelangelo_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_michelangelo.png", 32, 50))
-    image icon16_michelangelo = im.Crop (im.Scale("Assets/gui/desk_michelangelo.png", 16, 25), 0, 4, 16, 16)
-
-    image icon64_player_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_music_player.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_music_player.png",0.5), vertical=True))
-    image icon64_player_hover = LiveComposite((64,100), (0,0), "icon64_player_idle" , (0,0), "Assets/gui/desk_glow.png")
-    image icon32_player_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_music_player.png", 32, 50))
-    image icon32_player_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_music_player.png", 32, 50))
-    image icon16_player = im.Crop (im.Scale("Assets/gui/desk_music_player.png", 16, 25), 0, 4, 16, 16)
-    
-    image icon64_notepad_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_notepad.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_notepad.png",0.5), vertical=True))
-    image icon64_notepad_hover = LiveComposite((64,100), (0,0), "icon64_notepad_idle" , (0,0), "Assets/gui/desk_glow.png")
-    image icon32_notepad_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_notepad.png", 32, 50))
-    image icon32_notepad_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_notepad.png", 32, 50))
-    image icon16_notepad = im.Crop (im.Scale("Assets/gui/desk_notepad.png", 16, 25), 0, 4, 16, 16)
-    
-    
-    
 screen computer:
     if job=="writer":
         add "Assets/gui/desk_bg1.jpg"
@@ -575,7 +540,7 @@ screen writingAnimation:
     timer wait_to_hide action [Hide("writingAnimation"), Return()]
 
 ############################
-## Computer Images -- FINISH DEPRECIATING AND REMOVE !!
+## Computer Images 
 init:
     image computer = "#CF6800"
     image computer browser = "#B2FB69"
@@ -587,6 +552,39 @@ init:
     image computer michelangelo = "#007D0F"
     image computer stalkMePlz = "#fff"
 
+    image icon64_browser_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_browser.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_browser.png",0.5), vertical=True))
+    image icon64_browser_hover = LiveComposite((64,100), (0,0), "icon64_browser_idle" , (0,0), "Assets/gui/desk_glow.png")
+    image icon32_browser_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_browser.png", 32, 50))
+    image icon32_browser_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_browser.png", 32, 50))
+    image icon16_browser = im.Crop (im.Scale("Assets/gui/desk_browser.png", 16, 25), 0, 4, 16, 16)
+    
+    
+    
+    image icon64_sentence_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_sentence.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_sentence.png",0.5), vertical=True))
+    image icon64_sentence_hover = LiveComposite((64,100), (0,0), "icon64_sentence_idle" , (0,0), "Assets/gui/desk_glow.png")
+    image icon32_sentence_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_sentence.png", 32, 50))
+    image icon32_sentence_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_sentence.png", 32, 50))
+    image icon16_sentence = im.Crop (im.Scale("Assets/gui/desk_sentence.png", 16, 25), 0, 4, 16, 16)
+    
+    image icon64_michelangelo_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_michelangelo.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_michelangelo.png",0.5), vertical=True))
+    image icon64_michelangelo_hover = LiveComposite((64,100), (0,0), "icon64_michelangelo_idle" , (0,0), "Assets/gui/desk_glow.png")
+    image icon32_michelangelo_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_michelangelo.png", 32, 50))
+    image icon32_michelangelo_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_michelangelo.png", 32, 50))
+    image icon16_michelangelo = im.Crop (im.Scale("Assets/gui/desk_michelangelo.png", 16, 25), 0, 4, 16, 16)
+
+    image icon64_player_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_music_player.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_music_player.png",0.5), vertical=True))
+    image icon64_player_hover = LiveComposite((64,100), (0,0), "icon64_player_idle" , (0,0), "Assets/gui/desk_glow.png")
+    image icon32_player_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_music_player.png", 32, 50))
+    image icon32_player_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_music_player.png", 32, 50))
+    image icon16_player = im.Crop (im.Scale("Assets/gui/desk_music_player.png", 16, 25), 0, 4, 16, 16)
+    
+    image icon64_notepad_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_notepad.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_notepad.png",0.5), vertical=True))
+    image icon64_notepad_hover = LiveComposite((64,100), (0,0), "icon64_notepad_idle" , (0,0), "Assets/gui/desk_glow.png")
+    image icon32_notepad_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_notepad.png", 32, 50))
+    image icon32_notepad_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_notepad.png", 32, 50))
+    image icon16_notepad = im.Crop (im.Scale("Assets/gui/desk_notepad.png", 16, 25), 0, 4, 16, 16)
+    
+ 
 ############################
 # Window Frame - Used to show a winodows/mac style window manager simulation
 
