@@ -6,6 +6,8 @@ label computer:
         showBrowser = False
         showSentence = False
         showMikie = False
+        showNotepad = False
+        showGrunge = False
         selTime = False
     while(computerLoop):
         #show screens
@@ -43,7 +45,11 @@ label computer:
             if not _return:
                 $selTime = False            
                 call screen notepad
-                
+        elif showGrunge and type(showGrunge) == bool:
+            call screen grunge
+            if not _return:
+                $selTime = False            
+                call screen grunge
                 
         #parse returns
         if _return == "web_browser":
@@ -77,6 +83,10 @@ label computer:
         if _return == "open_notepad":
             $showNotepad = True
             $showDesktop = False
+        if _return == "open_grunge":
+            $showGrunge = True
+            $showDesktop = False
+            
             
         if type(_return) == tuple:
             if _return[0] == "tarzanAdd":
@@ -233,7 +243,27 @@ label computer:
                         [completion]\% Completed"
                     else:
                         "You are too sleepy to code."
-            
+            elif showGrunge:
+                $dur = int(_return[1])
+                if _return[0] == "p":
+                    if time.dec(dur):
+                        if skills.increase("music", dur):
+                            #call screen composingAnimation
+                            "You spend some time practing composing music."
+                        else:
+                            "You are the very best. Like no one ever was."
+                    else:
+                        "You are too sleepy to compose."
+                else:
+                    if time.dec(dur):
+                        $mygame.do_music(dur)
+                        $completion = round(((mygame.music_done/mygame.music_needed)*100),2) 
+                        #call screen composingAnimation
+                        "You make some music for your game.
+                        [completion]\% Completed"
+                    else:
+                        "You are too sleepy to compose."
+
                                          
 #######################
 ## Computer Screens
@@ -310,7 +340,7 @@ screen computer:
         imagebutton idle "icon32_notepad_idle" hover "icon32_notepad_hover" action [Hide("gui_tooltip"), Return("open_notepad")] xpos x yanchor 1.0 ypos 1.0 
         
         $ x += 60
-        imagebutton idle "icon32_grunge_band_idle" hover "icon32_grunge_band_hover" action [Hide("gui_tooltip"), Return("open_notepad")] xpos x yanchor 1.0 ypos 1.0 
+        imagebutton idle "icon32_grunge_band_idle" hover "icon32_grunge_band_hover" action [Hide("gui_tooltip"), Return("open_grunge")] xpos x yanchor 1.0 ypos 1.0 
 
         $ x += 60
         imagebutton idle "icon32_henpie_idle" hover "icon32_henpie_hover" action [Hide("gui_tooltip"), Show("game_progress")] xpos x yanchor 1.0 ypos 1.0
@@ -341,7 +371,7 @@ screen computer:
         imagebutton idle "icon64_notepad_idle" hover "icon64_notepad_hover" action [Hide("gui_tooltip"), Return("open_notepad")] xpos x yanchor 1.0 ypos 764 
         
         $ x += 80
-        imagebutton idle "icon64_grunge_band_idle" hover "icon64_grunge_band_hover" action [Hide("gui_tooltip"), Return("open_notepad")] xpos x yanchor 1.0 ypos 764
+        imagebutton idle "icon64_grunge_band_idle" hover "icon64_grunge_band_hover" action [Hide("gui_tooltip"), Return("open_grunge")] xpos x yanchor 1.0 ypos 764
         
         $ x += 80
         imagebutton idle "icon64_henpie_idle" hover "icon64_henpie_hover" action [Hide("gui_tooltip"), Show("game_progress")] xpos x yanchor 1.0 ypos 764 
@@ -398,6 +428,7 @@ screen notepad:
     tag app
     use computer
     use window_frame("Notepad--", "icon16_notepad", Return("desktop"))
+    add "Assets/gui/notepad.png"
     
     vbox:
         xpos 0.01
@@ -405,6 +436,22 @@ screen notepad:
         if not selTime:
             text "Welcome to Notepad--!"
             textbutton "code!" action Return(("select_time", "code"))
+            textbutton "Exit program" action Return("desktop")
+        else:
+            use select_time
+
+screen grunge:
+    tag app
+    use computer
+    use window_frame("GrungeBand", "icon16_grunge_band", Return("desktop"))
+    add "Assets/gui/grunge_band.png"
+    
+    vbox:
+        xpos 0.01
+        ypos 0.2
+        if not selTime:
+            text "Welcome to GrungeBand!"
+            textbutton "Compose!" action Return(("select_time", "compose"))
             textbutton "Exit program" action Return("desktop")
         else:
             use select_time
