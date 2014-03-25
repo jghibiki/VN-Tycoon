@@ -6,6 +6,8 @@ label computer:
         showBrowser = False
         showSentence = False
         showMikie = False
+        showNotepad = False
+        showGrunge = False
         selTime = False
     while(computerLoop):
         #show screens
@@ -43,7 +45,11 @@ label computer:
             if not _return:
                 $selTime = False            
                 call screen notepad
-                
+        elif showGrunge and type(showGrunge) == bool:
+            call screen grunge
+            if not _return:
+                $selTime = False            
+                call screen grunge
                 
         #parse returns
         if _return == "web_browser":
@@ -75,6 +81,10 @@ label computer:
         if _return == "open_notepad":
             $showNotepad = True
             $showDesktop = False
+        if _return == "open_grunge":
+            $showGrunge = True
+            $showDesktop = False
+            
             
         if type(_return) == tuple:
             if _return[0] == "tarzanAdd":
@@ -231,11 +241,79 @@ label computer:
                         [completion]\% Completed"
                     else:
                         "You are too sleepy to code."
-            
+            elif showGrunge:
+                $dur = int(_return[1])
+                if _return[0] == "p":
+                    if time.dec(dur):
+                        if skills.increase("music", dur):
+                            #call screen composingAnimation
+                            "You spend some time practing composing music."
+                        else:
+                            "You are the very best. Like no one ever was."
+                    else:
+                        "You are too sleepy to compose."
+                else:
+                    if time.dec(dur):
+                        $mygame.do_music(dur)
+                        $completion = round(((mygame.music_done/mygame.music_needed)*100),2) 
+                        #call screen composingAnimation
+                        "You make some music for your game.
+                        [completion]\% Completed"
+                    else:
+                        "You are too sleepy to compose."
+
                                          
 #######################
 ## Computer Screens
 
+init:
+    image icon64_browser_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_browser.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_browser.png",0.5), vertical=True))
+    image icon64_browser_hover = LiveComposite((64,100), (0,0), "icon64_browser_idle" , (0,0), "Assets/gui/desk_glow.png")
+    image icon32_browser_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_browser.png", 32, 50))
+    image icon32_browser_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_browser.png", 32, 50))
+    image icon16_browser = im.Crop (im.Scale("Assets/gui/desk_browser.png", 16, 25), 0, 4, 16, 16)
+    
+    
+    
+    image icon64_sentence_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_sentence.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_sentence.png",0.5), vertical=True))
+    image icon64_sentence_hover = LiveComposite((64,100), (0,0), "icon64_sentence_idle" , (0,0), "Assets/gui/desk_glow.png")
+    image icon32_sentence_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_sentence.png", 32, 50))
+    image icon32_sentence_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_sentence.png", 32, 50))
+    image icon16_sentence = im.Crop (im.Scale("Assets/gui/desk_sentence.png", 16, 25), 0, 4, 16, 16)
+    
+    image icon64_michelangelo_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_michelangelo.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_michelangelo.png",0.5), vertical=True))
+    image icon64_michelangelo_hover = LiveComposite((64,100), (0,0), "icon64_michelangelo_idle" , (0,0), "Assets/gui/desk_glow.png")
+    image icon32_michelangelo_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_michelangelo.png", 32, 50))
+    image icon32_michelangelo_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_michelangelo.png", 32, 50))
+    image icon16_michelangelo = im.Crop (im.Scale("Assets/gui/desk_michelangelo.png", 16, 25), 0, 4, 16, 16)
+
+    image icon64_player_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_music_player.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_music_player.png",0.5), vertical=True))
+    image icon64_player_hover = LiveComposite((64,100), (0,0), "icon64_player_idle" , (0,0), "Assets/gui/desk_glow.png")
+    image icon32_player_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_music_player.png", 32, 50))
+    image icon32_player_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_music_player.png", 32, 50))
+    image icon16_player = im.Crop (im.Scale("Assets/gui/desk_music_player.png", 16, 25), 0, 4, 16, 16)
+    
+    image icon64_notepad_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_notepad.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_notepad.png",0.5), vertical=True))
+    image icon64_notepad_hover = LiveComposite((64,100), (0,0), "icon64_notepad_idle" , (0,0), "Assets/gui/desk_glow.png")
+    image icon32_notepad_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_notepad.png", 32, 50))
+    image icon32_notepad_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_notepad.png", 32, 50))
+    image icon16_notepad = im.Crop (im.Scale("Assets/gui/desk_notepad.png", 16, 25), 0, 4, 16, 16)
+    
+    image icon64_henpie_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_henpie.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_henpie.png",0.5), vertical=True))
+    image icon64_henpie_hover = LiveComposite((64,100), (0,0), "icon64_henpie_idle" , (0,0), "Assets/gui/desk_glow.png")
+    image icon32_henpie_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_henpie.png", 32, 50))
+    image icon32_henpie_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_henpie.png", 32, 50))
+    image icon16_henpie = im.Crop (im.Scale("Assets/gui/desk_henpie.png", 16, 25), 0, 4, 16, 16)
+    
+
+    image icon64_grunge_band_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_grunge_band.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_grunge_band.png",0.5), vertical=True))
+    image icon64_grunge_band_hover = LiveComposite((64,100), (0,0), "icon64_grunge_band_idle" , (0,0), "Assets/gui/desk_glow.png")
+    image icon32_grunge_band_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_grunge_band.png", 32, 50))
+    image icon32_grunge_band_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_grunge_band.png", 32, 50))
+    image icon16_grunge_band = im.Crop (im.Scale("Assets/gui/desk_grunge_band.png", 16, 25), 0, 4, 16, 16)
+    
+    
+    
 screen computer:
     if job=="writer":
         add "Assets/gui/desk_bg1.jpg"
@@ -257,10 +335,17 @@ screen computer:
         $ x += 60
         imagebutton idle "icon32_michelangelo_idle" hover "icon32_michelangelo_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 1.0 
         $ x += 60
+        imagebutton idle "icon32_notepad_idle" hover "icon32_notepad_hover" action [Hide("gui_tooltip"), Return("open_notepad")] xpos x yanchor 1.0 ypos 1.0 
+        
+        $ x += 60
+        imagebutton idle "icon32_grunge_band_idle" hover "icon32_grunge_band_hover" action [Hide("gui_tooltip"), Return("open_grunge")] xpos x yanchor 1.0 ypos 1.0 
+
+        $ x += 60
+        imagebutton idle "icon32_henpie_idle" hover "icon32_henpie_hover" action [Hide("gui_tooltip"), Show("game_progress")] xpos x yanchor 1.0 ypos 1.0
+
+        
         imagebutton idle "icon32_player_idle" hover "icon32_player_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 1.0 
         $ x += 60
-
-        imagebutton idle "icon32_notepad_idle" hover "icon32_notepad_hover" action [Hide("gui_tooltip"), Return("open_notepad")] xpos x yanchor 1.0 ypos 1.0 
         
     else:
         add "Assets/gui/desk_menu_top.png" yalign 0.0
@@ -278,11 +363,21 @@ screen computer:
         imagebutton idle "icon64_sentence_idle" hover "icon64_sentence_hover" action [Hide("gui_tooltip"), Return("open_sentence")] xpos x yanchor 1.0 ypos 764 
         $ x += 80
         imagebutton idle "icon64_michelangelo_idle" hover "icon64_michelangelo_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 764 
+        
+        $ x += 80
+        imagebutton idle "icon64_notepad_idle" hover "icon64_notepad_hover" action [Hide("gui_tooltip"), Return("open_notepad")] xpos x yanchor 1.0 ypos 764 
+        
+        $ x += 80
+        imagebutton idle "icon64_grunge_band_idle" hover "icon64_grunge_band_hover" action [Hide("gui_tooltip"), Return("open_grunge")] xpos x yanchor 1.0 ypos 764
+        
+        $ x += 80
+        imagebutton idle "icon64_henpie_idle" hover "icon64_henpie_hover" action [Hide("gui_tooltip"), Show("game_progress")] xpos x yanchor 1.0 ypos 764 
+        
+                
+        
         $ x += 80
         imagebutton idle "icon64_player_idle" hover "icon64_player_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 764 
-        $ x += 80
         
-        imagebutton idle "icon64_notepad_idle" hover "icon64_notepad_hover" action [Hide("gui_tooltip"), Return("open_notepad")] xpos x yanchor 1.0 ypos 764 
         
     vbox: 
         xpos 0.01
@@ -333,6 +428,7 @@ screen notepad:
     tag app
     use computer
     use window_frame("Notepad--", "icon16_notepad", Return("desktop"))
+    add "Assets/gui/notepad.png"
     
     vbox:
         xpos 0.01
@@ -340,6 +436,22 @@ screen notepad:
         if not selTime:
             text "Welcome to Notepad--!" style "stdTxt"
             textbutton "code!" action Return(("select_time", "code"))
+            textbutton "Exit program" action Return("desktop")
+        else:
+            use select_time
+
+screen grunge:
+    tag app
+    use computer
+    use window_frame("GrungeBand", "icon16_grunge_band", Return("desktop"))
+    add "Assets/gui/grunge_band.png"
+    
+    vbox:
+        xpos 0.01
+        ypos 0.2
+        if not selTime:
+            text "Welcome to GrungeBand!"
+            textbutton "Compose!" action Return(("select_time", "compose"))
             textbutton "Exit program" action Return("desktop")
         else:
             use select_time
@@ -412,9 +524,9 @@ screen tarzan:
                                                     background "#ccc"
                                                     vbox:
                                                         hbox:
-                                                            text tarzanStore[item].name style "stdTxt"
+                                                            text tarzanStore[item].name
                                                             null width 20 
-                                                            text str(tarzanStore[item].price) style "stdTxt"
+                                                            text str(tarzanStore[item].price)
                                                         hbox:
                                                             add tarzanStore[item].pic
                                                             
@@ -444,9 +556,9 @@ screen tarzan:
                                                     background "#ccc"
                                                     vbox:
                                                         hbox:
-                                                            text tarzanCart[item].name style "stdTxt"
+                                                            text tarzanCart[item].name
                                                             null width 20 
-                                                            text str(tarzanCart[item].price) style "stdTxt"
+                                                            text str(tarzanCart[item].price)
                                                         hbox:
                                                             null width 80
                                                             textbutton "Remove from cart" action Return(("tarzanRemove", item))
@@ -581,76 +693,90 @@ init:
     image computer michelangelo = "#007D0F"
     image computer stalkMePlz = "#fff"
 
-    image icon64_browser_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_browser.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_browser.png",0.5), vertical=True))
-    image icon64_browser_hover = LiveComposite((64,100), (0,0), "icon64_browser_idle" , (0,0), "Assets/gui/desk_glow.png")
-    image icon32_browser_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_browser.png", 32, 50))
-    image icon32_browser_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_browser.png", 32, 50))
-    image icon16_browser = im.Crop (im.Scale("Assets/gui/desk_browser.png", 16, 25), 0, 4, 16, 16)
     
-    
-    
-    image icon64_sentence_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_sentence.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_sentence.png",0.5), vertical=True))
-    image icon64_sentence_hover = LiveComposite((64,100), (0,0), "icon64_sentence_idle" , (0,0), "Assets/gui/desk_glow.png")
-    image icon32_sentence_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_sentence.png", 32, 50))
-    image icon32_sentence_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_sentence.png", 32, 50))
-    image icon16_sentence = im.Crop (im.Scale("Assets/gui/desk_sentence.png", 16, 25), 0, 4, 16, 16)
-    
-    image icon64_michelangelo_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_michelangelo.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_michelangelo.png",0.5), vertical=True))
-    image icon64_michelangelo_hover = LiveComposite((64,100), (0,0), "icon64_michelangelo_idle" , (0,0), "Assets/gui/desk_glow.png")
-    image icon32_michelangelo_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_michelangelo.png", 32, 50))
-    image icon32_michelangelo_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_michelangelo.png", 32, 50))
-    image icon16_michelangelo = im.Crop (im.Scale("Assets/gui/desk_michelangelo.png", 16, 25), 0, 4, 16, 16)
-
-    image icon64_player_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_music_player.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_music_player.png",0.5), vertical=True))
-    image icon64_player_hover = LiveComposite((64,100), (0,0), "icon64_player_idle" , (0,0), "Assets/gui/desk_glow.png")
-    image icon32_player_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_music_player.png", 32, 50))
-    image icon32_player_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_music_player.png", 32, 50))
-    image icon16_player = im.Crop (im.Scale("Assets/gui/desk_music_player.png", 16, 25), 0, 4, 16, 16)
-    
-    image icon64_notepad_idle = im.Composite((64,100), (0,0), "Assets/gui/desk_notepad.png" , (0,64), im.Flip(im.Alpha("Assets/gui/desk_notepad.png",0.5), vertical=True))
-    image icon64_notepad_hover = LiveComposite((64,100), (0,0), "icon64_notepad_idle" , (0,0), "Assets/gui/desk_glow.png")
-    image icon32_notepad_idle = im.Composite((59,40), (14,-5), im.Scale("Assets/gui/desk_notepad.png", 32, 50))
-    image icon32_notepad_hover = im.Composite((59,40), (0,0), "Assets/gui/desk_hover.png", (14,-5), im.Scale("Assets/gui/desk_notepad.png", 32, 50))
-    image icon16_notepad = im.Crop (im.Scale("Assets/gui/desk_notepad.png", 16, 25), 0, 4, 16, 16)
-    
- 
 ############################
 # Window Frame - Used to show a winodows/mac style window manager simulation
 
-screen window_frame(appname, icon, exitaction):
+screen window_frame(appname, icon, exitaction=None, width=1266, height = 648):
     zorder 10
+    
     if game_os == "win":
+        $ full_width = width + 34
+        $ full_height = height + 52
+        $ exit_button_xpos = full_width - 70
         window:
             background Frame("Assets/gui/frame_win.png", 20, 40, 110, 20)
             xanchor 0.0
             yanchor 0.0
-            xpos 10#align 0.1
-            ypos 10#align 0.1
-            xminimum 1300
-            yminimum 700
-            xmaximum 1300
-            ymaximum 700
+            xpos 10
+            ypos 10
+            
+            xminimum full_width
+            yminimum full_height
+            xmaximum full_width
+            ymaximum full_height
             add icon xpos 20 ypos 10
             text appname xpos 40 ypos 10 color "#000" size 16
-            imagebutton auto "Assets/gui/close_win_%s.png" focus_mask True action [exitaction] xpos 1230 ypos 2            
+            imagebutton auto "Assets/gui/close_win_%s.png" focus_mask True action [exitaction] xpos exit_button_xpos ypos 2            
     elif game_os == "mac":
+        $ full_width = width + 20
+        $ full_height = height + 66
+
         window:
             background Frame("Assets/gui/frame_mac.png", 70, 39, 15, 24)
             xanchor 0.0
             yanchor 0.0
             xpos 18
             ypos 8
-            xminimum 1286
-            yminimum 714
-            #add icon ypos 12
-            text appname  xpos 20 ypos 12 color "#000" size 16 text_align 0.5 min_width 1286
+            
+            xminimum full_width
+            yminimum full_height
+            xmaximum full_width
+            ymaximum full_height
+            
+            # xminimum 1286
+            # xmaximum 1286
+            # yminimum 714
+            # ymaximum 714
+
+            text appname  xpos 20 ypos 12 color "#000" size 16 text_align 0.5 min_width full_width
             imagebutton auto "Assets/gui/close_mac_%s.png" focus_mask True action [exitaction] xpos 7 ypos 11
+
+    
+    
+    # if game_os == "win":
+        # window:
+            # background Frame("Assets/gui/frame_win.png", 20, 40, 110, 20)
+            # xanchor 0.0
+            # yanchor 0.0
+            # xpos 10
+            # ypos 10
+            # xminimum 1300
+            # yminimum 700
+            # xmaximum 1300
+            # ymaximum 700
+            # add icon xpos 20 ypos 10
+            # text appname xpos 40 ypos 10 color "#000" size 16
+            # imagebutton auto "Assets/gui/close_win_%s.png" focus_mask True action [exitaction] xpos 1230 ypos 2            
+    # elif game_os == "mac":
+        # window:
+            # background Frame("Assets/gui/frame_mac.png", 70, 39, 15, 24)
+            # xanchor 0.0
+            # yanchor 0.0
+            # xpos 18
+            # ypos 8
+            # xminimum 1286
+            # xmaximum 1286
+            # yminimum 714
+            # ymaximum 714
+            add icon ypos 12
+            # text appname  xpos 20 ypos 12 color "#000" size 16 text_align 0.5 min_width 1286
+            # imagebutton auto "Assets/gui/close_mac_%s.png" focus_mask True action [exitaction] xpos 7 ypos 11
+
 
 ###################
 # Computer Styles
 init:
     style stdTxt is text:
         color "#000"
-
-
 
