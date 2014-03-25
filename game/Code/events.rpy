@@ -129,9 +129,10 @@ init python:
 
             return desc
         
-        def reply(self):
+        def reply(self, index):
             #adds this instance to the message list and removes it from the threads list
-            pass
+            threads.pop(index)
+            messages.append(self)
 
 #A function to get a random float with a step
     def randrangef(start, stop, step):

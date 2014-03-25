@@ -81,6 +81,8 @@ label computer:
                 $tarzanCart.append(tarzanStore.pop(_return[1]))
             if _return[0] == "tarzanRemove":
                 $tarzanStore.append(tarzanCart.pop(_return[1]))
+            if _return[0] == "replyThread":
+                $messages.append(threads.pop(_return[1]))
         if _return == "tarzanBuy":
             $totalPrice = 0
             $item = 0
@@ -521,6 +523,7 @@ screen lsf_recruitment:
                     viewport id "lsfThreads":
                         mousewheel True
                         vbox:
+                            $threadCount = 0
                             for item in threads:
                                 frame:
                                     background "#ccc"
@@ -534,7 +537,8 @@ screen lsf_recruitment:
                                         hbox:
                                             text "[item.description]" style "stdTxt"
                                         hbox:
-                                            textbutton "PM" action item.reply()
+                                            textbutton "PM" action Return(("replyThread", threadCount))
+                                        $threadCount += 1
                 vbar value YScrollValue("lsfThreads")
 
 
@@ -543,15 +547,33 @@ screen lsf_recruitment:
 
 screen lsf_messages:
     use webBrowser
-    hbox:
+    vbox:
         xpos 0.01
         ypos 0.2
         vbox:
-            text "Messages"
+            text "Messages" style "stdTxt"
             textbutton "Back" action Return("lsf")
         vbox:
-            #change this to update the list of available messages appropriately
-            text "No new messages."
+            if len(messages) == 0:
+                text "No new messages." style "stdTxt"
+            else:
+                hbox:
+                    frame:
+                        background "#fff"
+                        xmaximum 1200
+                        xminimum 1200
+                        ymaximum 450
+                        viewport id "lsfMessages":
+                            mousewheel True
+                            vbox:
+                                for item in messages:
+                                    frame:
+                                        background "#ccc"
+                                        vbox:
+                                            hbox:
+                                                text "Message Here!"
+                    vbar value YScrollValue("lsfMessages")
+                textbutton "Back" action Return("lsf")
 
 
 ################################
