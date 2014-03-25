@@ -345,8 +345,9 @@ screen computer:
         $ x += 60
         imagebutton idle "icon32_henpie_idle" hover "icon32_henpie_hover" action [Hide("gui_tooltip"), Show("game_progress")] xpos x yanchor 1.0 ypos 1.0
 
-        
+        $ x += 60
         imagebutton idle "icon32_player_idle" hover "icon32_player_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 1.0 
+        
         $ x += 60
         
     else:
