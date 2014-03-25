@@ -350,6 +350,9 @@ screen computer:
         
         $ x += 60
         
+        
+        
+        $ Clocks (1282, 727, 12)
     else:
         add "Assets/gui/desk_menu_top.png" yalign 0.0
         add "Assets/gui/desk_dock.png" yalign 1.0
@@ -381,10 +384,12 @@ screen computer:
         $ x += 80
         imagebutton idle "icon64_player_idle" hover "icon64_player_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 764 
         
+        $ Clocks (1250, -2, 14, "000")
         
-    vbox: 
-        xpos 0.01
-        ypos 0.2
+        
+#    vbox: 
+#        xpos 0.01
+#        ypos 0.2
 #        textbutton "Open Web Browser" action Return("web_browser")
 #        textbutton "Open Sentence Word-processor" action Return("open_sentence")
 #        textbutton "Open Michelangelo" action Return("open_mikie")
@@ -720,7 +725,7 @@ init:
 ############################
 # Window Frame - Used to show a winodows/mac style window manager simulation
 
-screen window_frame(appname, icon, exitaction=None, width=1266, height = 648):
+screen window_frame(appname, icon, exitaction=None, width=1266, height=648):
     zorder 10
     
     if game_os == "win":

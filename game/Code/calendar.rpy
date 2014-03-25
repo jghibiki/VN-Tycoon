@@ -103,31 +103,31 @@ init python:
         ui.text("(%s) - %s %d %d" % (stringweekday, stringmonth, theday, theyear), xalign=1.0, size=size, color = "bccacc")
         ui.close()
         
-    def Clocks(x=0, y=0, size=14):
+    def Clocks(x=0, y=0, size=14, color="bccacc"):
         ui.frame(xfill=False, xminimum = 110, yminimum=None, xpos=x, ypos=y, background=None)
         ui.vbox()
         if (minutes > 719):
             if ((minutes - (int(minutes/60))*60) < 10):
                 if((int(minutes/60)) == 12):
-                    ui.text("12:0%d PM" % ((minutes - (int(minutes/60))*60)), xalign=1.0, size=size, color = "bccacc")
+                    ui.text("12:0%d PM" % ((minutes - (int(minutes/60))*60)), xalign=1.0, size=size, color = color)
                 else:
-                    ui.text("%d:0%d PM" % ((int(minutes/60)-12), (minutes - (int(minutes/60))*60)), xalign=1.0, size=size, color = "bccacc")
+                    ui.text("%d:0%d PM" % ((int(minutes/60)-12), (minutes - (int(minutes/60))*60)), xalign=1.0, size=size, color = color)
             else:
                 if((int(minutes/60)) == 12):
-                    ui.text("12:%d PM" % ((minutes - (int(minutes/60))*60)), xalign=1.0, size=size, color = "bccacc")
+                    ui.text("12:%d PM" % ((minutes - (int(minutes/60))*60)), xalign=1.0, size=size, color = color)
                 else:
-                    ui.text("%d:%d PM" % ((int(minutes/60)-12), (minutes - (int(minutes/60))*60)), xalign=1.0, size=size, color = "bccacc")
+                    ui.text("%d:%d PM" % ((int(minutes/60)-12), (minutes - (int(minutes/60))*60)), xalign=1.0, size=size, color = color)
         else:
             if ((minutes - (int(minutes/60))*60) < 10):
                 if((int(minutes/60)) == 0):
-                    ui.text("12:0%d AM" % ((minutes - (int(minutes/60))*60)), xalign=1.0, size=size, color = "bccacc")
+                    ui.text("12:0%d AM" % ((minutes - (int(minutes/60))*60)), xalign=1.0, size=size, color = color)
                 else:
-                    ui.text("%d:0%d AM" % ((int(minutes/60)), (minutes - (int(minutes/60))*60)), xalign=1.0, size=size, color = "bccacc")
+                    ui.text("%d:0%d AM" % ((int(minutes/60)), (minutes - (int(minutes/60))*60)), xalign=1.0, size=size, color = color)
             else:
                 if((int(minutes/60)) == 0):
-                    ui.text("12:%d AM" % ((minutes - (int(minutes/60))*60)), xalign=1.0, size=size, color = "bccacc")
+                    ui.text("12:%d AM" % ((minutes - (int(minutes/60))*60)), xalign=1.0, size=size, color = color)
                 else:
-                    ui.text("%d:%d AM" % ((int(minutes/60)), (minutes - (int(minutes/60))*60)), xalign=1.0, size=size, color = "bccacc")
+                    ui.text("%d:%d AM" % ((int(minutes/60)), (minutes - (int(minutes/60))*60)), xalign=1.0, size=size, color = color)
         ui.close()
         
         
