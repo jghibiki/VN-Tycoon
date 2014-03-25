@@ -622,15 +622,16 @@ screen lsf_recruitment:
         text"Recruitment Forum" style "stdTxt"
         textbutton "Back" action Return("lsf")
         
-        frame ypos 20:
-            #xmaximum 810
+        frame:
+            xpos 75
+            ypos 75
             ymaximum 450
             background None
             hbox:
                 frame:
                     background "#fff"
-                    xmaximum 1200
-                    xminimum 1200
+                    xmaximum 1000
+                    xminimum 1000
                     ymaximum 450
                     viewport id "lsfThreads":
                         mousewheel True
@@ -639,6 +640,8 @@ screen lsf_recruitment:
                             for item in threads:
                                 frame:
                                     background "#ccc"
+                                    xmaximum 1000
+                                    xminimum 1000
                                     vbox:
                                         hbox:
                                             #make this line a different color than the main post
@@ -651,6 +654,8 @@ screen lsf_recruitment:
                                         hbox:
                                             textbutton "PM" action Return(("replyThread", threadCount))
                                         $threadCount += 1
+                                null height 3
+                null width 10
                 vbar value YScrollValue("lsfThreads")
 
 
@@ -659,33 +664,36 @@ screen lsf_recruitment:
 
 screen lsf_messages:
     use webBrowser
+    
     vbox:
-        xpos 0.01
-        ypos 0.2
-        vbox:
-            text "Messages" style "stdTxt"
+        if len(messages) == 0:
+            text "No new messages." style "stdTxt"
             textbutton "Back" action Return("lsf")
-        vbox:
-            if len(messages) == 0:
-                text "No new messages." style "stdTxt"
-            else:
-                hbox:
-                    frame:
-                        background "#fff"
-                        xmaximum 1200
-                        xminimum 1200
-                        ymaximum 450
-                        viewport id "lsfMessages":
-                            mousewheel True
-                            vbox:
-                                for item in messages:
-                                    frame:
-                                        background "#ccc"
-                                        vbox:
-                                            hbox:
-                                                text "Message Here!"
-                    vbar value YScrollValue("lsfMessages")
-                textbutton "Back" action Return("lsf")
+        else:
+            frame:
+                xpos 75
+                ypos 75
+                ymaximum 450
+                background None
+                vbox:
+                    hbox:
+                        frame:
+                            background "#fff"
+                            xmaximum 1200
+                            xminimum 1200
+                            ymaximum 450
+                            viewport id "lsfMessages":
+                                mousewheel True
+                                vbox:
+                                    for item in messages:
+                                        frame:
+                                            background "#ccc"
+                                            vbox:
+                                                hbox:
+                                                    text "Message Here!"
+                                        null height 3
+                        vbar value YScrollValue("lsfMessages")
+                    textbutton "Back" action Return("lsf")
 
 
 ################################
