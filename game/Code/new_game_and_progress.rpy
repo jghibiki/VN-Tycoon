@@ -28,6 +28,7 @@ init python:
             
             self.downloads = 0
             self.price = 0.0
+            self.recommended_price = 0.0
             self.profits = 0.0
             
             self.bg = ""
@@ -180,6 +181,10 @@ label new_game:
         mygame.writing_needed = writing_needed
 
         mygame.price += int(mygame.scope/10000)
+        mygame.recommended_price = mygame.price
+        mygame.price += random.uniform(-1*(mygame.price/3), mygame.price/3)
+        
+        
 # -->Resources are determined by your selections (scope and gameplay)
     
 # Coding: with max coding skill(10): 4 hours + 4h for every 10,000 words; add 16h for sim and 24h for RPG. With coding skill 1: everything takes 10 times longer.
@@ -239,6 +244,19 @@ init:
         selected_background "#78a5c5"
         hover_color "#d86c46"
         
+        
+label edit_name:
+    call screen edit_name(mygame.title)
+    $ mygame.title = _return
+    return
+        
+screen edit_name(game_name=""):
+    add "#000"
+    window:
+        has vbox
+        text "Enter a new name:"
+        input default game_name
+
 screen game_progress(curr_game = mygame):
     tag game
     modal True
@@ -249,15 +267,18 @@ screen game_progress(curr_game = mygame):
     #add "Assets/gui/henpie.png" xpos win_x ypos win_y
     
     window background "Assets/gui/henpie.png" xmaximum 800 xminimum 800 ymaximum 600 yminimum 600 anchor(0.0, 0.0) xpos 27 ypos 47:
-        text curr_game.title style "henpie" size 22 color "#565656" xpos 318 ypos 65 #xpos 338 ypos 85
-
+        hbox:
+            text curr_game.title style "henpie" size 22 color "#565656" xpos 318 ypos 65
+            if mygame.started and curr_game == mygame:
+                textbutton "- change" action ui.callsinnewcontext("edit_name") style "henpy_button" xpos 330 ypos 65
+        
         window background None xmaximum 290 xminimum 290 ymaximum 250 yminimum 250 anchor(0.0, 0.0) xpos 10 ypos 156:
             viewport id "vp_games":
                 mousewheel True             
                 vbox:
                     spacing 0
                     if mygame.started:
-                        textbutton curr_game.title action Show("game_progress", curr_game = curr_game) style "henpy_button" size_group "games_list" left_margin 20
+                        textbutton mygame.title action Show("game_progress") style "henpy_button" size_group "games_list" left_margin 20
                     for g in games:
                         textbutton g.title action Show("game_progress", curr_game = g) style "henpy_button" size_group "games_list" left_margin 20
             vbar value YScrollValue("vp_games")

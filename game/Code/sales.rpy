@@ -16,6 +16,27 @@ init python:
             inventory.earn(sale.price)
     sales=Sales()
         
+init -1:
+    $ game_tmp = None
+    
+label edit_price:
+    call screen edit_price(game_tmp.price)
+    python:
+    try 
+        game_tmp.price = float(_return)
+    except ValueError:
+        pass
+
+    return
+        
+screen edit_price(game_price=""):
+    add "#000"
+    window:
+        has vbox
+        text "Enter a new price:"
+        input default game_price allow "0123456789"
+
+        
 screen sales:
     $ y = len(sales.earnings)+2
     add "#000"
@@ -29,6 +50,7 @@ screen sales:
                 text "item name"
                 text "date"
                 text "price"
+                
                 $ total = 0
                 for sale in sales.earnings:
                     null
@@ -40,12 +62,13 @@ screen sales:
                     text price
                     $ total += sale.price
                     
+                    
                 text "Total:"
                 null
                 null
                 $ total = "$" + str(total)
                 text total
-            
+                
     vbar value YScrollValue("vp") style "v_bar" xalign 1.0
     textbutton "Return" ypos 700 action Return()
 
@@ -79,7 +102,7 @@ screen game_list:
                     text price1 xalign 0.5
                     #text g.genre
                     if g.commercial:
-                        textbutton "Change Price" action Jump("change_price")
+                        textbutton "Change Price" action [SetVariable("game_tmp", g), ui.callsinnewcontext("edit_price")]# style "henpy_button"
                     else:
                         null
                     textbutton "View Cover" action Show("show_cover", game=g)                

@@ -26,8 +26,8 @@ label the_end:
     return
     
 init python:
-    credits = ('Writing (the artist path)', 'Maelstrom-Fenrir'), ('Writing (the composer path), composer & stunt double', 'Marc Straight'), ('Writing (the coder path)', 'The Zerglinator'), ('Character Art', 'chocojax'), ('Programming, Background & GUI Art', 'Leon Zavšek'), ('Programming & GUI art', 'jghibiki'), ('Programming', 'DragoonHP'), ('Special thanks', '15385bic (free character art)'),  ('Special thanks ', 'mugenjohncel (free character art and backgrounds)')
-    
+    credits = ('Writing (the artist path)', 'Maelstrom-Fenrir'), ('Writing (the composer path), composer & stunt double', 'Marc Straight'), ('Writing (the programmer path)', 'KomiTsuku'), ('Character Art', 'chocojax'), ('Programming, Background & GUI Art', 'Leon Zavšek'), ('Programming & GUI art', 'jghibiki'), ('Programming', 'DragoonHP'), ('Special thanks', '15385bic (free character art)'),  ('Special thanks ', 'mugenjohncel (free character art and backgrounds)'), ('Special thanks', 'The Zerglinator')
+
     credits_s = "{size=80}Credits\n\n"
     c1 = ''
     for c in credits:
