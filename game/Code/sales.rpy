@@ -22,13 +22,12 @@ init -1:
 label edit_price:
     call screen edit_price(game_tmp.price)
     python:
-    try 
-        game_tmp.price = float(_return)
-    except ValueError:
-        pass
-
+        try:
+            game_tmp.price = float(_return)
+        except ValueError:
+            pass
     return
-        
+    
 screen edit_price(game_price=""):
     add "#000"
     window:
