@@ -74,30 +74,22 @@ init python:
         categories = ["art", "music", "writing", "coding", "money"]
         scalar = 20 #the base number of hours to be input
         returnScalar = 2 #the difference between the return and the input
-        descInputOption = {
-                            "skill" : [
-                                        "Hey all! looking to hire someone to do some <*input*> for a project of mine. I need about <*inputQuantity*> <*input*> actually."
-                                      ],
-                            "non-skill": [
-                                            "I'm looking to sell some work of mine for $<*inputQuantity*>."
-                                         ]
-                          }
-        descOutputOption = {
-                             "skill" : [
-                                            "I'd be willing to trade for <*outputQuantity*> <*output*>. If your intrested let me know.",
-                                       ],
-                             "non-skill": [
-                                            "I'd be willing to pay $<*outputQuantity*>. PM me if interested. 8)"
-                                          ]
-                            }
+        
         def __init__(self, repBonus):
             self.input = Thread.categories[random.randint(0,4)]
             self.output = Thread.categories[random.randint(0,4)]
             self.inputQuantity = round(Thread.scalar - (store.repBonus + randrangef(0.2,0.6, 0.01)) * Thread.scalar) 
             self.outputQuantity =  self.inputQuantity > Thread.returnScalar+1 if  self.inputQuantity - Thread.returnScalar else Thread.returnScalar
+            self.stage = "reminder" #or response
             self.user = make_user()
-            self.description = self.generateDescription()
+            self.description  = ""
+            while(self.description  == ""):
+                self.description = self.generateDescription()
             #todo: create a means of generating a post title that is semi-relivant, will likely use the same format for inserting info as the descriptions do
+            self.reminder  = ""
+            self.response = ""
+            while self.reminder == "" or self.response == "":
+                  self.reminder, self.response = self.generateMessages()
 
         def generateDescription(self):
             #This function should generate a formatted string to be used by the renpy text statement when displaying the thread
@@ -110,25 +102,44 @@ init python:
                     self.output = Thread.categories[random.randint(0,4)]
                     self.generateDescription()
                 else:
-                    desc += Thread.descInputOption["non-skill"][random.randint(0,len(Thread.descInputOption["non-skill"])-1)]
+                    desc += descInputOption["non-skill"][random.randint(0,len(descInputOption["non-skill"])-1)]
             elif not self.input == "money":
-                desc += Thread.descInputOption["skill"][random.randint(0,len(Thread.descInputOption["skill"])-1)]
+                desc += descInputOption["skill"][random.randint(0,len(descInputOption["skill"])-1)]
 
             if not recurse:
-                desc += " " #add a space between sentences :P
+                desc += " " #add a space between sentences 
                 if self.output == "money":
-                    desc += Thread.descOutputOption["non-skill"][random.randint(0,len(Thread.descOutputOption["non-skill"])-1)]
+                    desc += descOutputOption["non-skill"][random.randint(0,len(descOutputOption["non-skill"])-1)]
                 else: 
-                    desc += Thread.descOutputOption["skill"][random.randint(0,len(Thread.descOutputOption["skill"])-1)]
+                    desc += descOutputOption["skill"][random.randint(0,len(descOutputOption["skill"])-1)]
 
                 #replace flags with values
                 desc = desc.replace("<*input*>",self.input)
                 desc = desc.replace("<*inputQuantity*>", str(self.inputQuantity))
                 desc = desc.replace("<*output*>",self.output)
                 desc = desc.replace("<*outputQuantity*>", str(self.outputQuantity))
+                desc = desc.replace("True ", "")
 
             return desc
         
+        def generateMessages(self):
+            if self.input == "money":
+                reminder = msgReminderOptions["non-skill"]["in"][random.randint(0,len(msgReminderOptions["non-skill"]["in"])-1)]
+            elif self.output == "money":
+                reminder = msgReminderOptions["non-skill"]["out"][random.randint(0,len(msgReminderOptions["non-skill"]["out"])-1)]
+            else:
+                reminder = msgReminderOptions["skill"][random.randint(0,len(msgReminderOptions["skill"])-1)]
+
+            reminder = reminder.replace("<*input*>",str(self.input))
+            reminder = reminder.replace("<*inputQuantity*>", str(self.inputQuantity))
+            reminder = reminder.replace("<*output*>",str(self.output))
+            reminder = reminder.replace("<*outputQuantity*>", str(self.outputQuantity))
+            reminder = reminder.replace("True " , "")
+
+            response = msgResponseOptions[random.randint(0, len(msgResponseOptions)-1)]
+
+            return reminder, response
+
         def reply(self, index):
             #adds this instance to the message list and removes it from the threads list
             threads.pop(index)

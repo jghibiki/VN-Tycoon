@@ -625,12 +625,11 @@ screen lsf_recruitment:
     use webBrowser
                                         #Working Back button ???
     vbox:
-        text"Recruitment Forum" style "stdTxt"
-        textbutton "Back" action Return("lsf")
-        
+        xpos 1
+        ypos 1
         frame:
             xpos 75
-            ypos 75
+            ypos 125
             ymaximum 450
             background None
             hbox:
@@ -664,7 +663,6 @@ screen lsf_recruitment:
                 null width 10
                 vbar value YScrollValue("lsfThreads")
 
-
 #################################
 ###    LemmingSofe Messages Page
 
@@ -673,12 +671,21 @@ screen lsf_messages:
     
     vbox:
         if len(messages) == 0:
-            text "No new messages." style "stdTxt"
-            textbutton "Back" action Return("lsf")
+            frame:
+                xpos 75
+                ypos 125
+                ymaximum 450
+                background None
+                
+                vbox:
+                    text "Messages:" style "stdTxt"
+                    hbox:
+                        null width 5
+                        text "No new messages." style "stdTxt"
         else:
             frame:
                 xpos 75
-                ypos 75
+                ypos 125
                 ymaximum 450
                 background None
                 vbox:
@@ -695,8 +702,20 @@ screen lsf_messages:
                                         frame:
                                             background "#ccc"
                                             vbox:
-                                                hbox:
-                                                    text "Message Here!"
+                                                text "User: [item.user]" style "stdTxt"
+                                                if item.stage == "reminder":
+                                                    text "[item.reminder]" style "stdTxt"
+                                                    hbox:
+                                                        textbutton "Reply" action NullAction() #turn in work if it is done
+                                                        null width 5
+                                                        textbutton "Delete" action NullAction() #delete a messege 
+
+                                                elif item.stage == "response":
+                                                    text "[item.response]" style "stdTxt"
+                                                    hbox:
+                                                        textbutton "Reply"
+                                                        null width 5
+                                                        textbutton "Delete" action NullAction() # delete message
                                         null height 3
                         vbar value YScrollValue("lsfMessages")
                     textbutton "Back" action Return("lsf")
