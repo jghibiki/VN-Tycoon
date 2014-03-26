@@ -93,6 +93,11 @@ label computer:
                 $tarzanStore.append(tarzanCart.pop(_return[1]))
             if _return[0] == "replyThread":
                 $messages.append(threads.pop(_return[1]))
+            if _return[0] == "msgReply":
+                $messages[_return[1]].stage = "response"
+                #add mechanism to turn in work i.e. subtract progress from work done
+            if _return[0] == "msgDelete":
+                $messages.pop(_return[1])
         if _return == "tarzanBuy":
             $totalPrice = 0
             $item = 0
@@ -698,6 +703,7 @@ screen lsf_messages:
                             viewport id "lsfMessages":
                                 mousewheel True
                                 vbox:
+                                    $msgCounter = 0
                                     for item in messages:
                                         frame:
                                             background "#ccc"
@@ -706,16 +712,17 @@ screen lsf_messages:
                                                 if item.stage == "reminder":
                                                     text "[item.reminder]" style "stdTxt"
                                                     hbox:
-                                                        textbutton "Reply" action NullAction() #turn in work if it is done
+                                                        textbutton "Reply" action Return(("msgReply", msgCounter))#turn in work if it is done
                                                         null width 5
-                                                        textbutton "Delete" action NullAction() #delete a messege 
+                                                        textbutton "Delete" action Return(("msgDelete", msgCounter)) #delete a messege 
 
                                                 elif item.stage == "response":
                                                     text "[item.response]" style "stdTxt"
                                                     hbox:
                                                         textbutton "Reply"
                                                         null width 5
-                                                        textbutton "Delete" action NullAction() # delete message
+                                                        textbutton "Delete" action Return(("msgDelete", msgCounter)) # delete message
+                                                $msgCounter += 1
                                         null height 3
                         vbar value YScrollValue("lsfMessages")
                     textbutton "Back" action Return("lsf")
