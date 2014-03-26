@@ -6,6 +6,7 @@
 # Screen that's used to display adv-mode dialogue.
 # http://www.renpy.org/doc/html/screen_special.html#say
 screen say:
+    zorder 100
     # Defaults for side_image and two_window
     default side_image = None
     default two_window = False

@@ -128,7 +128,7 @@ screen mainphonescreen:
                 imagebutton idle "Assets/phone/icons/map.png" hover "Assets/phone/icons/map.png" focus_mask True xalign .5
                 text "Maps" style "phone_icons_text" 
             vbox ypos 30:
-                imagebutton idle "Assets/phone/icons/ipod.png" hover "Assets/phone/icons/ipod.png" focus_mask True action ShowMenu("phone_sound_options") xalign .5
+                imagebutton idle "Assets/phone/icons/ipod.png" hover "Assets/phone/icons/ipod.png" focus_mask True action [Hide("mainphonescreen"), ShowMenu("music_room_phone")] xalign .5
                 text "iPod" style "phone_icons_text" 
             vbox ypos 30:
                 if photo_sv>0:
@@ -180,10 +180,10 @@ screen blank_phone_screen:
     add phone_screen_bg
     add "Assets/phone/phone_bg.png"
     
-    imagebutton idle "Assets/phone/phone_button_idle.png" hover "Assets/phone/phone_button_hover.png" focus_mask True action [Play ("sound", "Assets/sfx/click.wav"), Hide("phone_sound_options"),Hide("calendar"),Hide("clock"),SetVariable("clock", False),Show("mainphonescreen")]    
+    imagebutton idle "Assets/phone/phone_button_idle.png" hover "Assets/phone/phone_button_hover.png" focus_mask True action [Play ("sound", "Assets/sfx/click.wav"), Hide("music_room_phone"),Hide("calendar"),Hide("clock"),SetVariable("clock", False),Show("mainphonescreen")]    
     add "Assets/phone/phone_reflection.png"
     #add "phone/300x400 phone no icons.png"
-    #imagebutton pos(127, 492) idle "phone/back_button.png" hover "phone/back_button.png" action [Play ("sound", "sfx/click.wav"), Hide("phone_sound_options"),Hide("calendar"),Hide("clock"),SetVariable("clock", False),Show("mainphonescreen")]
+    #imagebutton pos(127, 492) idle "phone/back_button.png" hover "phone/back_button.png" action [Play ("sound", "sfx/click.wav"), Hide("music_room_phone"),Hide("calendar"),Hide("clock"),SetVariable("clock", False),Show("mainphonescreen")]
     
     
 screen phone_sound_options:
@@ -306,16 +306,11 @@ screen calendar:
 screen clock:
     tag phone
     modal True
-
     use blank_phone_screen
     frame:
         background None
         area (18, 133, 261, 368)
         $ Calendar(20,0, 20)
-        #xpos .5
-        #ypos .5
-        #xpos 22
-        #ypos 100    
         $ AClocks(y=.55)
         
         #$ clock = True

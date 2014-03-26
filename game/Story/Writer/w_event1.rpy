@@ -6,12 +6,19 @@ label writer_event1:
 # Scene:
 
 #    In a world filled with endless water... where humanity has made an effort to eke out a living on flying islands...
-    $ post = "In a world filled with endless water... where humanity has made an effort to eke out a living on flying islands..."
-    show screen window_frame("Sentence", "icon16_sentence", Return("desktop"))
+    show screen computer
+    $ post = "In a world filled with endless water... where humanity has made an effort to eke out a living on flying \nislands..."
+    # $ post += "                                                                                          "
+    # $ post += "                                                                                          "
+    # $ post += "                                                                                          "
+    # $ post += "                                                                                          "
+    # $ post += "                                                                                          "
+    
+    show screen window_frame("Sentence", "icon16_sentence", None)
     #use autoPost(28, 84, 0, 0, "#00000000", mytext, typeSpeed = typeSpeed, moveCursor=False, textSize=24)
     
     show screen autoPost(28, 84, 0, 0, "#00000000", post, moveCursor=False, textSize=24, wait=False)
-    $ renpy.pause()
+    #$ renpy.pause()
     
     Joan "No! Nononono! Aaagh... that won't work at all! Urgh, I'm such a moron."
     Joan "There was just this one thing you had to do, me. Ignore the pompous bastard. Don't listen to him. He's just provoking you."
@@ -22,5 +29,7 @@ label writer_event1:
     Joan "I'm doomed. I'm friggin' doomed. My life is over. Oh god. It's never going to work out. Write a Visual Novel. Who the hell does that? Why the hell would I want to?! Aaagghhhhh... I'm a moron. Gold? More like Chengdeite."
     Joan "H'ooookay, enough despair. Joan Gold, you're going to write a Visual Novel. Like, starting right the hell now! Show that pompous bastard just what effort can produce!"
     Joan "I can't wait to wipe that arrogant smirk off of his damn face!"
+    hide screen window_frame
+    hide screen computer
     
     jump sim
