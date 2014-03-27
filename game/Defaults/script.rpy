@@ -15,9 +15,11 @@ label start:
         mygame=Game()
         games=[]
         skills = Skills()
+        comishWork = ComishWork()
         sales = Sales()
         userNames = []
         repBonus = 0.04
+
 
     call screen char_select
     $ renpy.block_rollback()

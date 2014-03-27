@@ -177,7 +177,8 @@ label sim:
     if action == "stats":
         call screen stats
         
-    
+    if action == "comishWork":
+        call screen workDone
         
     jump sim
     
@@ -350,7 +351,7 @@ screen sim:
             #textbutton "Pic" action Return("pic")
             textbutton "Post" action Return("post")
             textbutton "stats" action Return("stats")
-            
+            textbutton "Comish Work" action Return("comishWork")            
             textbutton "Code ani" action Return("code_ani")
 
             
@@ -368,23 +369,31 @@ init:
     image tooltip_read3=LiveComposite((665, 73), (3,56), Text("Read Writing for Retards. Time needed: 1 hour.", style="tips_bottom"))
     image tooltip_read4=LiveComposite((665, 73), (3,56), Text("Read Composing for Morons. Time needed: 1 hour.", style="tips_bottom"))
     
-    
 
-screen select_time:
+screen select_time(workType):
     modal False
     vbox: 
-        xpos 0.01
+        xpos 0.1
         ypos 0.2
-        text "Practice:"
+        text "Practice:" style "stdTxt"
         hbox:
             textbutton "1h" action Return("p1")
             textbutton "4h" action Return("p4")
             textbutton "8h" action Return("p8")
+
+        text "Work on commissions:" style "stdTxt"
+        hbox:
+            textbutton "1h" action Return("w1")
+            textbutton "4h" action Return("w4")
+            textbutton "8h" action Return("w8")
+
         if mygame.started:
-            text "Make assets:"
+            text "Make assets:" style "stdTxt"
             hbox:
                 textbutton "1h" action Return("a1")
                 textbutton "4h" action Return("a4")
                 textbutton "8h" action Return("a8")
+                    
+           
         textbutton "Back" action Return(False) # a lazy work around to make
                                                     #back work 

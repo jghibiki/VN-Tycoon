@@ -1,5 +1,4 @@
 init python:
-    
     class Game:
         def __init__(self):
             self.started = False
