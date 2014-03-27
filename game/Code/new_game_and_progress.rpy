@@ -365,6 +365,9 @@ screen game_progress(curr_game = mygame):
                         text "Quality:"
                         text str(curr_game.quality)
                         
+                        
+            
+                        
             if mygame.started:
                 textbutton "Release the Game" action [Hide("game_progress"), Jump("publish")] xpos 550 ypos 490 style "henpy_button" text_size 24
                 

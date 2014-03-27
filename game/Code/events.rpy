@@ -6,7 +6,7 @@ init python:
     def eventcheck():
         global last_time
         event = None, None
-                
+
         curr_time = minutes + day * 24 * 60
         time_passed = curr_time - last_time
 
@@ -15,15 +15,21 @@ init python:
             x = time_passed/(60)#how many hours have passed?
             for i in range(x): #do a check for every hour that has passed
                 for g in games:
-                    if g.commercial: #sales
+#                    if g.commercial: #sales
                         chance = 12 - int(g.quality) #bigger game quality means bigger chance of sale
                         if chance<2:
                             chance = 2
+                        diff = g.price - g.recommended_price
+                        if diff > 0:
+                            chance = int(chance+diff)
                         if random.randint(1,chance)==1:
-                            sales.sell(g, day=day+i/24,minutes=i%24*60)###
-                            event = "sales", str(x)
-                    else: #downloads
-                        pass
+                            if g.commercial:
+                                sales.sell(g, day=day+i/24,minutes=i%24*60)###
+                                event = "sales", str(x)
+                            else:
+                                g.downloads += random.randint(30,50)
+#                    else: #downloads
+#                        pass
         if time_passed>45:
             x = time_passed/(45) #should allow for polling of threads once for every 45 minutes that have passed
             for i in range(x):

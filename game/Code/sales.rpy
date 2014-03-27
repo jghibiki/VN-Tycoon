@@ -113,13 +113,6 @@ screen game_list:
 
     textbutton "Return" ypos 700 action Return()
     
-label change_price:
-    scene black
-    $ price = "0.0"
-    $ price = renpy.input("New price?", price, length=6)
-    jump sim
-
-    
 init:
     style v_bar:
         thumb "Assets/gui/vbar_thumb.png"
