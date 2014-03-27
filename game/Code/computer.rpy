@@ -30,6 +30,8 @@ label computer:
         elif showBrowser == "stalkmeplz":
             #show computer browser stalkMePlz
             call screen stalkMePlz
+        elif showBrowser == "BMTMezzo":
+            call screen game_list
         elif showSentence and type(showSentence) == bool:
             call screen sentence
             if not _return:
@@ -67,6 +69,8 @@ label computer:
             $showBrowser = "lsf_messages"
         if _return == "stalkmeplz":
             $showBrowser = "stalkmeplz"
+        if _return == "BMTMezzo":
+            $showBrowser = "BMTMezzo"
         if _return == "desktop":
             $showDesktop = True
             $showBrowser = False
@@ -159,56 +163,81 @@ label computer:
                 $item += 1
             $tarzanCart = [] #clear the cart
             
-        if _return[0] == "select_time":
-            $selTime = _return[1]
-        if _return[0] == "a" or _return[0] == "p":
-            $selTime = None
-            if showMikie:
-                $dur = int(_return[1])
-                if _return[0] == "p":
-                    if time.dec(dur):
-                        if skills.increase("art", dur):
+        if type(_return) == tuple:
+            if _return[0] == "select_time":
+                $selTime = _return[1]
+                
+        if type(_return) == type(''): #string
+            if _return[0] == "a" or _return[0] == "p":
+                $selTime = None
+                if showMikie:
+                    $dur = int(_return[1])
+                    if _return[0] == "p":
+                        if time.dec(dur):
+                            if skills.increase("art", dur):
+                                call drawingAnimation
+                                "You spend some time practing drawing."
+                            else:
+                                "You are the very best. Like no one ever was."
+                        else:
+                            "You are too sleepy to draw."
+                    else:
+                        if time.dec(dur):
+                            $mygame.do_art(dur)
+                            $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
                             call drawingAnimation
-                            "You spend some time practing drawing."
+                            "You draw some sprites for your game.
+                            [completion]\% Completed"
                         else:
-                            "You are the very best. Like no one ever was."
+                            "You are too sleepy to draw."
+                elif showSentence:
+                    $dur = int(_return[1])
+                    if _return[0] == "p":
+                        if time.dec(dur):
+                            if skills.increase("writing", dur):
+                                call screen writingAnimation
+                                "You spend some time practing writing."
+                            else:
+                                "You are the very best. Like no one ever was."
+                        else:
+                            "You are too sleepy to write."
                     else:
-                        "You are too sleepy to draw."
-                else:
-                    if time.dec(dur):
-                        $mygame.do_art(dur)
-                        $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
-                        call drawingAnimation
-                        "You draw some sprites for your game.
-                        [completion]\% Completed"
-                    else:
-                        "You are too sleepy to draw."
-            elif showSentence:
-                $dur = int(_return[1])
-                if _return[0] == "p":
-                    if time.dec(dur):
-                        if skills.increase("writing", dur):
+                        if time.dec(dur):
+                            $mygame.do_writing(dur)
+                            $completion = round(((mygame.writing_done/mygame.writing_needed)*100),2) 
                             call screen writingAnimation
-                            "You spend some time practing writing."
+                            "You write a few scenes for your game.
+                            [completion]\% Completed"
                         else:
-                            "You are the very best. Like no one ever was."
+                            "You are too sleepy to draw."
+                elif showNotepad:
+                    $dur = int(_return[1])
+                    if _return[0] == "p":
+                        if time.dec(dur):
+                            if skills.increase("coding", dur):
+                            
+                                show screen computer
+                                $ speed = 40 + skills.coding * 2
+                                $ post = random.choice(code_snippets_fixed1)
+                                show screen window_frame("Notepad--", "icon16_notepad", None)
+                                show screen autoPostFixed(82, 122, "Assets/gui/notepad.png", post, textSize=15)
+                                $ post = random.choice(code_snippets_typed1)
+                                call screen autoPost(82, 300, 0, 0, "#00000000", post, typeSpeed=speed, moveCursor=False, textSize=15)
+                                hide screen autoPostFixed
+                                hide screen window_frame
+                                hide screen computer
+
+                                
+                                "You spend some time practing coding."
+                            else:
+                                "You are the very best. Like no one ever was."
+                        else:
+                            "You are too sleepy to code."
                     else:
-                        "You are too sleepy to write."
-                else:
-                    if time.dec(dur):
-                        $mygame.do_writing(dur)
-                        $completion = round(((mygame.writing_done/mygame.writing_needed)*100),2) 
-                        call screen writingAnimation
-                        "You write a few scenes for your game.
-                        [completion]\% Completed"
-                    else:
-                        "You are too sleepy to draw."
-            elif showNotepad:
-                $dur = int(_return[1])
-                if _return[0] == "p":
-                    if time.dec(dur):
-                        if skills.increase("coding", dur):
-                        
+                        if time.dec(dur):
+                            $mygame.do_coding(dur)
+                            $completion = round(((mygame.coding_done/mygame.coding_needed)*100),2) 
+                            
                             show screen computer
                             $ speed = 40 + skills.coding * 2
                             $ post = random.choice(code_snippets_fixed1)
@@ -220,54 +249,32 @@ label computer:
                             hide screen window_frame
                             hide screen computer
 
+
                             
-                            "You spend some time practing coding."
+                            "You code a few scenes for your game.
+                            [completion]\% Completed"
                         else:
-                            "You are the very best. Like no one ever was."
+                            "You are too sleepy to code."
+                elif showGrunge:
+                    $dur = int(_return[1])
+                    if _return[0] == "p":
+                        if time.dec(dur):
+                            if skills.increase("music", dur):
+                                #call screen composingAnimation
+                                "You spend some time practing composing music."
+                            else:
+                                "You are the very best. Like no one ever was."
+                        else:
+                            "You are too sleepy to compose."
                     else:
-                        "You are too sleepy to code."
-                else:
-                    if time.dec(dur):
-                        $mygame.do_coding(dur)
-                        $completion = round(((mygame.coding_done/mygame.coding_needed)*100),2) 
-                        
-                        show screen computer
-                        $ speed = 40 + skills.coding * 2
-                        $ post = random.choice(code_snippets_fixed1)
-                        show screen window_frame("Notepad--", "icon16_notepad", None)
-                        show screen autoPostFixed(82, 122, "Assets/gui/notepad.png", post, textSize=15)
-                        $ post = random.choice(code_snippets_typed1)
-                        call screen autoPost(82, 300, 0, 0, "#00000000", post, typeSpeed=speed, moveCursor=False, textSize=15)
-                        hide screen autoPostFixed
-                        hide screen window_frame
-                        hide screen computer
-
-
-                        
-                        "You code a few scenes for your game.
-                        [completion]\% Completed"
-                    else:
-                        "You are too sleepy to code."
-            elif showGrunge:
-                $dur = int(_return[1])
-                if _return[0] == "p":
-                    if time.dec(dur):
-                        if skills.increase("music", dur):
+                        if time.dec(dur):
+                            $mygame.do_music(dur)
+                            $completion = round(((mygame.music_done/mygame.music_needed)*100),2) 
                             #call screen composingAnimation
-                            "You spend some time practing composing music."
+                            "You make some music for your game.
+                            [completion]\% Completed"
                         else:
-                            "You are the very best. Like no one ever was."
-                    else:
-                        "You are too sleepy to compose."
-                else:
-                    if time.dec(dur):
-                        $mygame.do_music(dur)
-                        $completion = round(((mygame.music_done/mygame.music_needed)*100),2) 
-                        #call screen composingAnimation
-                        "You make some music for your game.
-                        [completion]\% Completed"
-                    else:
-                        "You are too sleepy to compose."
+                            "You are too sleepy to compose."
 
                                          
 #######################
@@ -495,6 +502,12 @@ screen webBrowser:
         $ my_bg = "Assets/gui/browser_tab_selected.png"        
     button background my_bg focus_mask True action Return("tarzan") xpos 284 ypos 49:
         text "Tarzan Shop" color "#000" size 18
+
+    $ my_bg = "Assets/gui/browser_tab_idle.png"
+    if showBrowser == "BMTMezzo":
+        $ my_bg = "Assets/gui/browser_tab_selected.png"        
+    button background my_bg focus_mask True action Return("BMTMezzo") xpos 534 ypos 49:
+        text "BMTMezzo" color "#000" size 18
         
         
     # vbox:
@@ -800,8 +813,12 @@ screen window_frame(appname, icon, exitaction=None, width=1266, height=648):
             # xmaximum 1286
             # yminimum 714
             # ymaximum 714
+            
 
-            text appname  xpos 20 ypos 12 color "#000" size 16 text_align 0.5 min_width full_width
+            #add icon ypos 12
+            $ icon_pos = full_width - 40
+            add icon ypos 12 xpos icon_pos
+            text appname xpos 20 ypos 12 color "#000" size 16 text_align 0.5 min_width full_width
             imagebutton auto "Assets/gui/close_mac_%s.png" focus_mask True action [exitaction] xpos 7 ypos 11
 
     
@@ -831,7 +848,7 @@ screen window_frame(appname, icon, exitaction=None, width=1266, height=648):
             # xmaximum 1286
             # yminimum 714
             # ymaximum 714
-            add icon ypos 12
+            #add icon ypos 12
             # text appname  xpos 20 ypos 12 color "#000" size 16 text_align 0.5 min_width 1286
             # imagebutton auto "Assets/gui/close_mac_%s.png" focus_mask True action [exitaction] xpos 7 ypos 11
 
