@@ -3,7 +3,7 @@ init -1 python:
 
 init python:
     #this function checks all the story events and handles all other time-sensitive events, such as replies on the forums, game downloads, etc.
-    def eventcheck():
+    def eventcheck(curr_action=None):
         global last_time
         event = None, None
 
@@ -36,11 +36,20 @@ init python:
                 pollThreads()
 
         #story events:
+        
+        
         if day==2 and job=="artist" and not artist_event2:
             event = "story", "artist_event2"
         if day==4 and job=="artist" and not artist_event3:
             event = "story", "artist_event3"
-            
+        
+
+        if job=="writer": 
+            if not writer_event2 and curr_action=="writing" and day>3:
+                event = "story", "writer_event2"
+                
+                
+                
         last_time = curr_time
         return event
 

@@ -101,7 +101,7 @@ init -1 python:
     
 init python:
     writing = 0
-    debug = True
+    debug = False
     def display_stats_overlay():
         if config.developer and debug:
             text_show = ""

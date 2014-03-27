@@ -457,19 +457,22 @@ screen computer:
 
 #############################
 ## Word Processor (Sentence)
-screen sentence:
+screen sentence (showOptions=True):
     tag app
     use computer
     use window_frame("Sentence", "icon16_sentence", Return("desktop"))
-    vbox:
-        xpos 0.01
-        ypos 0.2
-        if not selTime:
-            text "Welcome to Word-processor Sentence!" style "stdTxt"
-            textbutton "Write!" action Return(("select_time", "write"))
-            textbutton "Exit program" action Return("desktop")
-        else:
-            use select_time
+    add "Assets/gui/sentence.png"
+    
+    if showOptions:
+        vbox:
+            xpos 0.01
+            ypos 0.2
+            if not selTime:
+                text "Welcome to Word-processor Sentence!" style "stdTxt"
+                textbutton "Write!" action Return(("select_time", "write"))
+                textbutton "Exit program" action Return("desktop")
+            else:
+                use select_time
 
 
 ############################################

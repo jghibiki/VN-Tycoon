@@ -83,6 +83,9 @@ label start:
         artist_event2 = False
         artist_event3 = False
         
+        writer_event2 = False
+        
+        
     scene black
     
     
