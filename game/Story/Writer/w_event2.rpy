@@ -7,6 +7,7 @@ label writer_event2:
     $ post = "Close to the village street stood the one-story house in which Luella Miller, who had an evil\nname in the village, had dwelt. She had been dead for years, yet there were those in the village\nwho, in spite of the clearer light which comes on a vantage-point from a long-past danger, half\nbelieved in the tale which they had heard from their childhood. In their hearts, although they\nscarcely would have owned it, was a survival of the wild horror and frenzied fear of their\nancestors who had dwelt in the same age with Luella Miller. Young people even would stare with\na shudder at the old house as they passed, and children never played around it as was their wont\naround an untenanted building. Not a window in the old Miller house was broken: the panes\nreflected the morning sunlight in patches of emerald and blue, and the latch of the sagging front\ndoor was never lifted, although no bolt secured it. Since Luella Miller had been carried out of it,\nthe house had had no tenant except one friendless old soul who had no choice between that and\nthe far-off shelter of the open sky."
     
     show screen sentence (showOptions=False)
+    with dissolve
 #    show screen window_frame("Sentence", "icon16_sentence", None)
 #    show "Assets/gui/sentence.png"
     show screen autoPostFixed(278, 302, "#00000000", post, textSize=16)

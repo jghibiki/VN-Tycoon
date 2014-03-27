@@ -168,7 +168,7 @@ label computer:
                 $selTime = _return[1]
                 
         if type(_return) == type(''): #string
-            if _return[0] == "a" or _return[0] == "p" or _return[0] == "w":
+            if _return[0] == "a" or _return[0] == "p":
                 $selTime = None
                 if showMikie:
                     $dur = int(_return[1])
@@ -181,21 +181,13 @@ label computer:
                                 "You are the very best. Like no one ever was."
                         else:
                             "You are too sleepy to draw."
-                    elif _return[0] == "w":
-                        if time.dec(dur):
-                            if comishWork.increase("art", dur):
-                                call drawingAnimation
-                                "You spend some time working on comissions."
-                            else:
-                                "You should really turn in your work already."
-                        else:
-                            "You are too sleepy to draw."
                     else:
                         if time.dec(dur):
                             $mygame.do_art(dur)
                             $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
                             call drawingAnimation
-                            "You draw some sprites for your game. [completion]\% Completed"
+                            "You draw some sprites for your game.
+                            [completion]\% Completed"
                         else:
                             "You are too sleepy to draw."
                 elif showSentence:
@@ -209,25 +201,15 @@ label computer:
                                 "You are the very best. Like no one ever was."
                         else:
                             "You are too sleepy to write."
-
-                    elif _return[0] == "w":
-                        if time.dec(dur):
-                            if comishWork.increase("art", dur):
-                                call screen writingAnimation
-                                "You spend some time working on comissions."
-                            else:
-                                "You should really turn in your work already."
-                        else:
-                            "You are too sleepy to draw."
-                    else: 
+                    else:
                         if time.dec(dur):
                             $mygame.do_writing(dur)
                             $completion = round(((mygame.writing_done/mygame.writing_needed)*100),2) 
                             call screen writingAnimation
-                            "You write a few scenes for your game. [completion]\% Completed"
+                            "You write a few scenes for your game.
+                            [completion]\% Completed"
                         else:
                             "You are too sleepy to draw."
-
                 elif showNotepad:
                     $dur = int(_return[1])
                     if _return[0] == "p":
@@ -245,31 +227,10 @@ label computer:
                                 hide screen window_frame
                                 hide screen computer
 
-
                                 
                                 "You spend some time practing coding."
                             else:
                                 "You are the very best. Like no one ever was."
-                        else:
-                            "You are too sleepy to code."
-                    elif _return[0] == "w":
-                        if time.dec(dur):
-                            if comishWork.increase("coding", dur):
-
-                                show screen computer
-                                $ speed = 40 + skills.coding * 2
-                                $ post = random.choice(code_snippets_fixed1)
-                                show screen window_frame("Notepad--", "icon16_notepad", None)
-                                show screen autoPostFixed(82, 122, "Assets/gui/notepad.png", post, textSize=15)
-                                $ post = random.choice(code_snippets_typed1)
-                                call screen autoPost(82, 300, 0, 0, "#00000000", post, typeSpeed=speed, moveCursor=False, textSize=15)
-                                hide screen autoPostFixed
-                                hide screen window_frame
-                                hide screen computer
-
-                                "You spend some time working on comissions."
-                            else:
-                                "You should really turn in your work already."
                         else:
                             "You are too sleepy to code."
                     else:
@@ -290,7 +251,8 @@ label computer:
 
 
                             
-                            "You code a few scenes for your game. [completion]\% Completed"
+                            "You code a few scenes for your game.
+                            [completion]\% Completed"
                         else:
                             "You are too sleepy to code."
                 elif showGrunge:
@@ -302,15 +264,6 @@ label computer:
                                 "You spend some time practing composing music."
                             else:
                                 "You are the very best. Like no one ever was."
-                        else:
-                            "You are too sleepy to compose."
-                    elif _return[0] == "w":
-                        if time.dec(dur):
-                            if comishWork.increase("music", dur):
-                                #call composingAnimation
-                                "You spend some time working on comissions."
-                            else:
-                                "You should really turn in your work already."
                         else:
                             "You are too sleepy to compose."
                     else:
@@ -464,14 +417,15 @@ screen sentence (showOptions=True):
     add "Assets/gui/sentence.png"
     
     if showOptions:
-        vbox:
-            xpos 0.01
-            ypos 0.2
-            if not selTime:
-                text "Welcome to Word-processor Sentence!" style "stdTxt"
-                textbutton "Write!" action Return(("select_time", "write"))
-                textbutton "Exit program" action Return("desktop")
-            else:
+    
+        # vbox:
+            # xpos 0.01
+            # ypos 0.2
+            # if not selTime:
+                # text "Welcome to Word-processor Sentence!" style "stdTxt"
+                # textbutton "Write!" action Return(("select_time", "write"))
+                # textbutton "Exit program" action Return("desktop")
+            # else:
                 use select_time
 
 

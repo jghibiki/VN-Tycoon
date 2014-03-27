@@ -6,11 +6,16 @@ label writer_event1:
 # Scene:
 
 #    In a world filled with endless water... where humanity has made an effort to eke out a living on flying islands...
-    show screen computer
-    $ post = "In a world filled with endless water... where humanity has made an effort to eke out a living on flying \nislands..."
-    show screen window_frame("Sentence", "icon16_sentence", None)
+    #show screen computer
+    $ post = "In a world filled with endless water... where humanity has made an effort to eke out a living\non flying islands..."
+    #show screen window_frame("Sentence", "icon16_sentence", None)
+    show screen sentence (showOptions=False)
     with dissolve
-    show screen autoPost(28, 84, 0, 0, "#00000000", post, moveCursor=False, textSize=24, wait=True)
+    
+    #show screen autoPostFixed(278, 302, "#00000000", post, textSize=16)
+    
+    #show screen autoPost(28, 84, 0, 0, "#00000000", post, moveCursor=False, textSize=24, wait=True)
+    show screen autoPost(278, 302, 0, 0, "#00000000", post, moveCursor=False, textSize= 16, wait=True)
     $ renpy.pause()
     Joan scowl_open "No! Nononono! Aaagh... that won't work at all! Urgh, I'm such a moron."
     Joan neutral "There was just this one thing you had to do, me. Ignore the pompous bastard. Don't listen to him. He's just provoking you."
