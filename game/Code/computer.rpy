@@ -168,72 +168,115 @@ label computer:
                 $selTime = _return[1]
                 
         if type(_return) == type(''): #string
-            if _return[0] == "a" or _return[0] == "p":
+            if _return[0] == "a" or _return[0] == "p" or _return[0] == "w":
                 $selTime = None
                 if showMikie:
-                $dur = int(_return[1])
-                if _return[0] == "p":
-                    if time.dec(dur):
-                        if skills.increase("art", dur):
+                    $dur = int(_return[1])
+                    if _return[0] == "p":
+                        if time.dec(dur):
+                            if skills.increase("art", dur):
+                                call drawingAnimation
+                                "You spend some time practing drawing."
+                            else:
+                                "You are the very best. Like no one ever was."
+                        else:
+                            "You are too sleepy to draw."
+                    elif _return[0] == "w":
+                        if time.dec(dur):
+                            if comishWork.increase("art", dur):
+                                call drawingAnimation
+                                "You spend some time working on comissions."
+                            else:
+                                "You should really turn in your work already."
+                        else:
+                            "You are too sleepy to draw."
+                    else:
+                        if time.dec(dur):
+                            $mygame.do_art(dur)
+                            $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
                             call drawingAnimation
-                            "You spend some time practing drawing."
+                            "You draw some sprites for your game. [completion]\% Completed"
                         else:
-                            "You are the very best. Like no one ever was."
-                    else:
-                        "You are too sleepy to draw."
-                elif _return[0] == "w":
-                    if time.dec(dur):
-                        if comishWork.increase("art", dur):
-                            call drawingAnimation
-                            "You spend some time working on comissions."
+                            "You are too sleepy to draw."
+                elif showSentence:
+                    $dur = int(_return[1])
+                    if _return[0] == "p":
+                        if time.dec(dur):
+                            if skills.increase("writing", dur):
+                                call screen writingAnimation
+                                "You spend some time practing writing."
+                            else:
+                                "You are the very best. Like no one ever was."
                         else:
-                            "You should really turn in your work already."
-                    else:
-                        "You are too sleepy to draw."
-                else:
-                    if time.dec(dur):
-                        $mygame.do_art(dur)
-                        $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
-                        call drawingAnimation
-                        "You draw some sprites for your game. [completion]\% Completed"
-                    else:
-                        "You are too sleepy to draw."
-            elif showSentence:
-                $dur = int(_return[1])
-                if _return[0] == "p":
-                    if time.dec(dur):
-                        if skills.increase("writing", dur):
-                            call screen writingAnimation
-                            "You spend some time practing writing."
-                        else:
-                            "You are the very best. Like no one ever was."
-                    else:
-                        "You are too sleepy to write."
+                            "You are too sleepy to write."
 
-                elif _return[0] == "w":
-                    if time.dec(dur):
-                        if comishWork.increase("art", dur):
-                            call screen writingAnimation
-                            "You spend some time working on comissions."
+                    elif _return[0] == "w":
+                        if time.dec(dur):
+                            if comishWork.increase("art", dur):
+                                call screen writingAnimation
+                                "You spend some time working on comissions."
+                            else:
+                                "You should really turn in your work already."
                         else:
-                            "You should really turn in your work already."
-                    else:
-                        "You are too sleepy to draw."
-                else: 
-                    if time.dec(dur):
-                        $mygame.do_writing(dur)
-                        $completion = round(((mygame.writing_done/mygame.writing_needed)*100),2) 
-                        call screen writingAnimation
-                        "You write a few scenes for your game. [completion]\% Completed"
-                    else:
-                        "You are too sleepy to draw."
+                            "You are too sleepy to draw."
+                    else: 
+                        if time.dec(dur):
+                            $mygame.do_writing(dur)
+                            $completion = round(((mygame.writing_done/mygame.writing_needed)*100),2) 
+                            call screen writingAnimation
+                            "You write a few scenes for your game. [completion]\% Completed"
+                        else:
+                            "You are too sleepy to draw."
 
-            elif showNotepad:
-                $dur = int(_return[1])
-                if _return[0] == "p":
-                    if time.dec(dur):
-                        if skills.increase("coding", dur):
-                        
+                elif showNotepad:
+                    $dur = int(_return[1])
+                    if _return[0] == "p":
+                        if time.dec(dur):
+                            if skills.increase("coding", dur):
+                            
+                                show screen computer
+                                $ speed = 40 + skills.coding * 2
+                                $ post = random.choice(code_snippets_fixed1)
+                                show screen window_frame("Notepad--", "icon16_notepad", None)
+                                show screen autoPostFixed(82, 122, "Assets/gui/notepad.png", post, textSize=15)
+                                $ post = random.choice(code_snippets_typed1)
+                                call screen autoPost(82, 300, 0, 0, "#00000000", post, typeSpeed=speed, moveCursor=False, textSize=15)
+                                hide screen autoPostFixed
+                                hide screen window_frame
+                                hide screen computer
+
+
+                                
+                                "You spend some time practing coding."
+                            else:
+                                "You are the very best. Like no one ever was."
+                        else:
+                            "You are too sleepy to code."
+                    elif _return[0] == "w":
+                        if time.dec(dur):
+                            if comishWork.increase("coding", dur):
+
+                                show screen computer
+                                $ speed = 40 + skills.coding * 2
+                                $ post = random.choice(code_snippets_fixed1)
+                                show screen window_frame("Notepad--", "icon16_notepad", None)
+                                show screen autoPostFixed(82, 122, "Assets/gui/notepad.png", post, textSize=15)
+                                $ post = random.choice(code_snippets_typed1)
+                                call screen autoPost(82, 300, 0, 0, "#00000000", post, typeSpeed=speed, moveCursor=False, textSize=15)
+                                hide screen autoPostFixed
+                                hide screen window_frame
+                                hide screen computer
+
+                                "You spend some time working on comissions."
+                            else:
+                                "You should really turn in your work already."
+                        else:
+                            "You are too sleepy to code."
+                    else:
+                        if time.dec(dur):
+                            $mygame.do_coding(dur)
+                            $completion = round(((mygame.coding_done/mygame.coding_needed)*100),2) 
+                            
                             show screen computer
                             $ speed = 40 + skills.coding * 2
                             $ post = random.choice(code_snippets_fixed1)
@@ -247,81 +290,38 @@ label computer:
 
 
                             
-                            "You spend some time practing coding."
+                            "You code a few scenes for your game. [completion]\% Completed"
                         else:
-                            "You are the very best. Like no one ever was."
-                    else:
-                        "You are too sleepy to code."
-                elif _return[0] == "w":
-                    if time.dec(dur):
-                        if comishWork.increase("coding", dur):
-
-                            show screen computer
-                            $ speed = 40 + skills.coding * 2
-                            $ post = random.choice(code_snippets_fixed1)
-                            show screen window_frame("Notepad--", "icon16_notepad", None)
-                            show screen autoPostFixed(82, 122, "Assets/gui/notepad.png", post, textSize=15)
-                            $ post = random.choice(code_snippets_typed1)
-                            call screen autoPost(82, 300, 0, 0, "#00000000", post, typeSpeed=speed, moveCursor=False, textSize=15)
-                            hide screen autoPostFixed
-                            hide screen window_frame
-                            hide screen computer
-
-                            "You spend some time working on comissions."
+                            "You are too sleepy to code."
+                elif showGrunge:
+                    $dur = int(_return[1])
+                    if _return[0] == "p":
+                        if time.dec(dur):
+                            if skills.increase("music", dur):
+                                #call screen composingAnimation
+                                "You spend some time practing composing music."
+                            else:
+                                "You are the very best. Like no one ever was."
                         else:
-                            "You should really turn in your work already."
+                            "You are too sleepy to compose."
+                    elif _return[0] == "w":
+                        if time.dec(dur):
+                            if comishWork.increase("music", dur):
+                                #call composingAnimation
+                                "You spend some time working on comissions."
+                            else:
+                                "You should really turn in your work already."
+                        else:
+                            "You are too sleepy to compose."
                     else:
-                        "You are too sleepy to code."
-                else:
-                    if time.dec(dur):
-                        $mygame.do_coding(dur)
-                        $completion = round(((mygame.coding_done/mygame.coding_needed)*100),2) 
-                        
-                        show screen computer
-                        $ speed = 40 + skills.coding * 2
-                        $ post = random.choice(code_snippets_fixed1)
-                        show screen window_frame("Notepad--", "icon16_notepad", None)
-                        show screen autoPostFixed(82, 122, "Assets/gui/notepad.png", post, textSize=15)
-                        $ post = random.choice(code_snippets_typed1)
-                        call screen autoPost(82, 300, 0, 0, "#00000000", post, typeSpeed=speed, moveCursor=False, textSize=15)
-                        hide screen autoPostFixed
-                        hide screen window_frame
-                        hide screen computer
-
-
-                        
-                        "You code a few scenes for your game. [completion]\% Completed"
-                    else:
-                        "You are too sleepy to code."
-            elif showGrunge:
-                $dur = int(_return[1])
-                if _return[0] == "p":
-                    if time.dec(dur):
-                        if skills.increase("music", dur):
+                        if time.dec(dur):
+                            $mygame.do_music(dur)
+                            $completion = round(((mygame.music_done/mygame.music_needed)*100),2) 
                             #call screen composingAnimation
-                            "You spend some time practing composing music."
+                            "You make some music for your game.
+                            [completion]\% Completed"
                         else:
-                            "You are the very best. Like no one ever was."
-                    else:
-                        "You are too sleepy to compose."
-                elif _return[0] == "w":
-                    if time.dec(dur):
-                        if comishWork.increase("music", dur):
-                            #call composingAnimation
-                            "You spend some time working on comissions."
-                        else:
-                            "You should really turn in your work already."
-                    else:
-                        "You are too sleepy to compose."
-                else:
-                    if time.dec(dur):
-                        $mygame.do_music(dur)
-                        $completion = round(((mygame.music_done/mygame.music_needed)*100),2) 
-                        #call screen composingAnimation
-                        "You make some music for your game.
-                        [completion]\% Completed"
-                    else:
-                        "You are too sleepy to compose."
+                            "You are too sleepy to compose."
 
                                          
 #######################

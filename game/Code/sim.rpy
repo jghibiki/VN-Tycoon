@@ -370,7 +370,7 @@ init:
     image tooltip_read4=LiveComposite((665, 73), (3,56), Text("Read Composing for Morons. Time needed: 1 hour.", style="tips_bottom"))
     
 
-screen select_time(workType):
+screen select_time:
     modal False
     vbox: 
         xpos 0.1
