@@ -114,6 +114,9 @@ label computer:
                   if tarzanCart[item] == keyboard:
                         if not inventory.has_item(keyboard):
                             if inventory.buy(keyboard):
+                                $ event = eventcheck("purchase")
+                                if event[0]=="story":
+                                    $ renpy.jump(event[1])
                                 "You have purcased a keyboard, Tazan Droid will air lift it you you shortly."
                             else:
                                 "You don't have enough money to buy a keyboard."
@@ -123,6 +126,9 @@ label computer:
                   elif tarzanCart[item] == book_c:
                         if not inventory.has_item(book_c):
                             if inventory.buy(book_c):
+                                $ event = eventcheck("purchase")
+                                if event[0]=="story":
+                                    $ renpy.jump(event[1])
                                 "You have purcased \"Composing for Morons\", Tazan Droid will air lift it you you shortly."
                             else:
                                 "You don't have enough money to buy this \"Composing for Morons\". Moron. Get a job and try again."
@@ -130,6 +136,9 @@ label computer:
                   elif tarzanCart[item] == book_w:
                         if not inventory.has_item(book_w):
                             if inventory.buy(book_w):
+                                $ event = eventcheck("purchase")
+                                if event[0]=="story":
+                                    $ renpy.jump(event[1])
                                 "You have purcased \"Writing for the Asinine\", Tazan Droid will air lift it you you shortly."
                             else:
                                 "You don't have enough money to buy this \"Writing for the Asinine\". Shows how much of an {b}ASS{/b}inine fool you are."
@@ -137,6 +146,9 @@ label computer:
                   elif tarzanCart[item] == book_p:
                         if not inventory.has_item(book_p):
                             if inventory.buy(book_p):
+                                $ event = eventcheck("purchase")
+                                if event[0]=="story":
+                                    $ renpy.jump(event[1])
                                 "You have purcased \"Programming for Idiots\", Tazan Droid will air lift it you you shortly."
                             else:
                                 "You don't have enough money to buy this \"Programming for Idiots\". Come on! Only idiots read books to learn to program. I mean, \"Hello!?\", the internet was invented, what 60+ years ago?."
@@ -144,6 +156,9 @@ label computer:
                   elif tarzanCart[item] == book_d:
                         if not inventory.has_item(book_d):
                             if inventory.buy(book_d):
+                                $ event = eventcheck("purchase")
+                                if event[0]=="story":
+                                    $ renpy.jump(event[1])
                                 "You have purcased \"Drawing for Losers\", Tazan Droid will air lift it you you shortly."
                             else:
                                 "You don't have enough money to buy this \"Drawing for Losers\". There is only one type of person that would try to buy a book they couldn't affort. A {i}LOSER{/i}."
@@ -152,6 +167,9 @@ label computer:
                   elif tarzanCart[item] == tablet:
                         if not inventory.has_item(tablet):
                             if inventory.buy(tablet):
+                                $ event = eventcheck("purchase")
+                                if event[0]=="story":
+                                    $ renpy.jump(event[1])
                                 "You have purcased \"Drawing Tablet\", Tazan Droid will air lift it you you shortly."
                             else:
                                 "You don't have enough money to buy a \"Drawing Tablet\"."

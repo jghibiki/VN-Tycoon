@@ -15,11 +15,9 @@ label start:
         mygame=Game()
         games=[]
         skills = Skills()
-        comishWork = ComishWork()
         sales = Sales()
         userNames = []
         repBonus = 0.04
-
 
     call screen char_select
     $ renpy.block_rollback()
@@ -80,10 +78,9 @@ label start:
             persistent.playtrough += 1
         playtrough = persistent.playtrough
         
-        artist_event2 = False
-        artist_event3 = False
-        
-        writer_event2 = False
+        artist_event2, artist_event3, artist_event4, artist_event5, artist_event6, artist_event7, artist_event8, artist_event9, artist_event10 = False, False, False, False, False, False, False, False, False
+
+        writer_event2, writer_event3, writer_event4, writer_event5, writer_event6, writer_event7, writer_event8, writer_event9, writer_event10 = False, False, False, False, False, False, False, False, False
         
         
     scene black

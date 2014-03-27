@@ -197,6 +197,9 @@ label new_game:
         mygame.recommended_price = mygame.price
         mygame.price += random.uniform(-1*(mygame.price/3), mygame.price/3)
         
+        event = eventcheck("new_game")
+        if event[0]=="story":
+            renpy.jump(event[1])
         
 # -->Resources are determined by your selections (scope and gameplay)
     

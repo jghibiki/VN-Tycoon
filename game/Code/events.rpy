@@ -45,10 +45,26 @@ init python:
         
 
         if job=="writer": 
-            if not writer_event2 and curr_action=="writing" and day>3:
+            if not writer_event2 and curr_action=="writing" and day>2:
                 event = "story", "writer_event2"
-                
-                
+            if not writer_event3 and curr_action=="new_game" and mygame.genre == "romance" and mygame.relationship == "bxg":
+                event = "story", "writer_event3"
+            if not writer_event4 and curr_action=="new_game" and mygame.genre == "horror":
+                event = "story", "writer_event4"
+#            if not writer_event5 and ... : # Joan recruits help for her Visual Novel. Happens if progress on other assets isn't working too well.
+#                event = "story", "writer_event5"
+            if not writer_event6  and day>10:# Joan finally interacts with someone. Happens after some time has passed automatically irrespective of choices.
+                event = "story", "writer_event6"
+            if not writer_event7 and len(inventory.items)>2 and curr_action=="purchase":# Joan thinks about the economy while making another purchase from the story. You need to have bought at least two items before.
+                event = "story", "writer_event7"
+            if not writer_event8 and curr_action=="new_game" and mygame.relationship == "gxb":# Joan writes a Girl x Boy story. Unfortunately, she has a strong opinion about this as well. Doesn't need to be a Romance.
+                event = "story", "writer_event8"
+            if not writer_event9 and curr_action=="job":# Joan goes out to work, but she hasn't had stable employment in a while. She earns money in a different way instead: Odd jobs.
+                event = "story", "writer_event9"
+#            if not writer_event10:# Joan's managed to snag the programmer for her project, and considers him for a bit. Must have attempted to recruit and gotten a programmer, must be paying him.
+#                event = "story", "writer_event10"
+
+    
                 
         last_time = curr_time
         return event
