@@ -342,27 +342,33 @@ screen sim:
     #imagebutton auto "Assets/gui/exit_%s.png" focus_mask True action [Return("work")] 
     #imagebutton auto "Assets/gui/tablet_%s.png" focus_mask True action [Return("draw")] 
 
-    use phone_button
-    use game_button
+    #use phone_button
+    #use game_button
     
     frame:
         top_margin 150
         hbox:
             textbutton "debug" action ToggleVariable("debug", true_value=True, false_value=False)
-            textbutton "cheat" action Return("cheat")            
-            #textbutton "Write" action Return("write")
-            #textbutton "Compose" action Return("compose")
-            textbutton "Code" action Return("code")
-            
-            textbutton "Sales" action Return("sales")
-            textbutton "List" action Return("list")
-            textbutton "Event" action Return("event")
-            #textbutton "Pic" action Return("pic")
-            textbutton "Post" action Return("post")
-            textbutton "stats" action Return("stats")
-            textbutton "Comission Work" action Return("showWorkDone")
-            textbutton "Code ani" action Return("code_ani")
+            if debug:
+                textbutton "cheat" action Return("cheat")            
+                #textbutton "Write" action Return("write")
+                #textbutton "Compose" action Return("compose")
+                textbutton "Code" action Return("code")
+                
+                #textbutton "Sales" action Return("sales")
+                textbutton "List" action Return("list")
+                textbutton "Event" action Return("event")
+                #textbutton "Pic" action Return("pic")
+                textbutton "Post" action Return("post")
+                textbutton "stats" action Return("stats")
+                textbutton "Comish" action Return("showWorkDone")
+                textbutton "Code ani" action Return("code_ani")
 
+                textbutton "G. stats" action Show("game_progress")
+                textbutton "New game!" action Show("new_game")
+            
+                if mygame.started:
+                    textbutton "Release" action Jump("publish")
             
             
 init:

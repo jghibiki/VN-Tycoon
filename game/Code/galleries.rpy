@@ -51,16 +51,20 @@ init +1 python:
 screen music_room_phone:
     tag phone
     modal True
-    use blank_phone_screen
-    side "c b r":
-        area (28, 107, 284, 442)
-        viewport id "vp":
-            frame background None xpos 250 ypos 150:
-                has vbox spacing 15
-                for song in song_list:
-                    textbutton song["title"] action mr.Play(song["name"]) style "henpie"
-    on "replace" action mr.Play()
-    on "replaced" action Play("music", config.main_menu_music)
+    window:
+        background None
+        xalign 0.99
+        xsize 307
+        use blank_phone_screen
+        side "c b r":
+            area (28, 107, 284, 442)
+            viewport id "vp":
+                frame background None xpos 250 ypos 150:
+                    has vbox spacing 15
+                    for song in song_list:
+                        textbutton song["title"] action mr.Play(song["name"]) style "henpie"
+        on "replace" action mr.Play()
+        on "replaced" action Play("music", config.main_menu_music)
 
     
 screen music_room:

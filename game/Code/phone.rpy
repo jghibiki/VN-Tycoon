@@ -81,15 +81,18 @@ image photo_view_forward:
             # action [Hide("phone_button"), Show ("mainphonescreen")]
 
 screen phone_button:
+    tag phone
     zorder 200
     imagebutton:
-        align (.04,.04)
+        #align (.04,.04)
+        align (.99,.01)
         focus_mask True
         idle "Assets/phone/phone_icon.png"
         hover "Assets/phone/phone_icon.png"
         action [Hide("phone_button"), Show ("mainphonescreen")]
-    $ Clocks (55, 45, 11)
-            
+    #$ Clocks (55, 45, 11)
+    $ Clocks (1292, 30, 11)
+    
 init -1 python:
     style.phone_icons_text = Style(style.default)
     style.phone_icons_text.outlines = [(1, "000000", 0, 0)] 
@@ -99,74 +102,78 @@ init -1 python:
 screen mainphonescreen:
     tag phone
     modal True
-    add phone_screen_bg
-    add "Assets/phone/phone_bg.png"
-    
-    add "Assets/phone/phone_icons_bg.png"
-    $ Clocks(130, 113)
-    frame:
+    window:
         background None
-#        area (23, 133, 261, 368)
-        #area (18, 133, 261, 368)
-        area (12, 133, 337, 368)
-        style_group "phone"
-        grid 4 4:
-            vbox ypos 15:
-                imagebutton idle "Assets/phone/icons/camera.png" hover "Assets/phone/icons/camera.png" focus_mask True action ui.callsinnewcontext("take_a_photo") xalign .5
-                text "Camera" style "phone_icons_text"
-            vbox ypos 15:
-                imagebutton idle "Assets/phone/icons/clock.png" hover "Assets/phone/icons/clock.png" focus_mask True action [Hide("mainphonescreen"), Show("clock")] xalign .5
-                text "Clock" style "phone_icons_text" 
-            vbox ypos 15:
-                imagebutton idle "Assets/phone/icons/web.png" hover "Assets/phone/icons/web.png" focus_mask True xalign .5
-                text "Web" style "phone_icons_text" 
-            vbox ypos 15:
-                imagebutton idle "Assets/phone/icons/pong.png" hover "Assets/phone/icons/pong.png" focus_mask True action ui.callsinnewcontext("pong") xalign .5
-                text "Pong" style "phone_icons_text" 
+        xalign 0.99
+        xsize 307
+        
+        add phone_screen_bg
+        add "Assets/phone/phone_bg.png"
+        add "Assets/phone/phone_icons_bg.png"
+        $ Clocks(130, 113)
+        frame:
+            background None
+    #        area (23, 133, 261, 368)
+            #area (18, 133, 261, 368)
+            area (12, 133, 337, 368)
+            style_group "phone"
+            grid 4 4:
+                vbox ypos 15:
+                    imagebutton idle "Assets/phone/icons/camera.png" hover "Assets/phone/icons/camera.png" focus_mask True action ui.callsinnewcontext("take_a_photo") xalign .5
+                    text "Camera" style "phone_icons_text"
+                vbox ypos 15:
+                    imagebutton idle "Assets/phone/icons/clock.png" hover "Assets/phone/icons/clock.png" focus_mask True action [Hide("mainphonescreen"), Show("clock")] xalign .5
+                    text "Clock" style "phone_icons_text" 
+                vbox ypos 15:
+                    imagebutton idle "Assets/phone/icons/web.png" hover "Assets/phone/icons/web.png" focus_mask True xalign .5
+                    text "Web" style "phone_icons_text" 
+                vbox ypos 15:
+                    imagebutton idle "Assets/phone/icons/pong.png" hover "Assets/phone/icons/pong.png" focus_mask True action ui.callsinnewcontext("pong") xalign .5
+                    text "Pong" style "phone_icons_text" 
 
-            vbox ypos 30:
-                imagebutton idle "Assets/phone/icons/map.png" hover "Assets/phone/icons/map.png" focus_mask True xalign .5
-                text "Maps" style "phone_icons_text" 
-            vbox ypos 30:
-                imagebutton idle "Assets/phone/icons/ipod.png" hover "Assets/phone/icons/ipod.png" focus_mask True action [Hide("mainphonescreen"), Show("music_room_phone")] xalign .5
-                text "iPod" style "phone_icons_text" 
-            vbox ypos 30:
-                if photo_sv>0:
-                    imagebutton idle "Assets/phone/icons/photos.png" hover "Assets/phone/icons/photos.png" focus_mask True action [Hide("mainphonescreen"), Show("view_photos")] xalign .5
-                    text "Photos" style "phone_icons_text" 
-                else:
-                    null
-            null
+                vbox ypos 30:
+                    imagebutton idle "Assets/phone/icons/map.png" hover "Assets/phone/icons/map.png" focus_mask True xalign .5
+                    text "Maps" style "phone_icons_text" 
+                vbox ypos 30:
+                    imagebutton idle "Assets/phone/icons/ipod.png" hover "Assets/phone/icons/ipod.png" focus_mask True action [Hide("mainphonescreen"), Show("music_room_phone")] xalign .5
+                    text "iPod" style "phone_icons_text" 
+                vbox ypos 30:
+                    if photo_sv>0:
+                        imagebutton idle "Assets/phone/icons/photos.png" hover "Assets/phone/icons/photos.png" focus_mask True action [Hide("mainphonescreen"), Show("view_photos")] xalign .5
+                        text "Photos" style "phone_icons_text" 
+                    else:
+                        null
+                null
 
-            vbox ypos 50:
-                imagebutton idle "Assets/phone/icons/save.png" hover "Assets/phone/icons/save.png" focus_mask True action [Hide("mainphonescreen"), Show("phone_button"), ShowMenu('save')] xalign .5
-                text "Save" style "phone_icons_text" 
-            vbox ypos 50:
-                imagebutton idle "Assets/phone/icons/skip.png" hover "Assets/phone/icons/skip.png" focus_mask True action [Hide("mainphonescreen"), Show("phone_button"), Skip()] xalign .5
-                text "Skip" style "phone_icons_text" 
-            vbox ypos 50:
-                imagebutton idle "Assets/phone/icons/auto.png" hover "Assets/phone/icons/auto.png" focus_mask True action [Hide("mainphonescreen"), Show("phone_button"), Preference("auto-forward", "toggle")] xalign .5
-                text "Auto" style "phone_icons_text" 
-            vbox ypos 50:
-                imagebutton idle "Assets/phone/icons/settings.png" hover "Assets/phone/icons/settings.png" focus_mask True action [Hide("mainphonescreen"), Show("phone_button"), ShowMenu("preferences")] xalign .5
-                text "Settings" style "phone_icons_text" 
+                vbox ypos 50:
+                    imagebutton idle "Assets/phone/icons/save.png" hover "Assets/phone/icons/save.png" focus_mask True action [Hide("mainphonescreen"), Show("phone_button"), ShowMenu('save')] xalign .5
+                    text "Save" style "phone_icons_text" 
+                vbox ypos 50:
+                    imagebutton idle "Assets/phone/icons/skip.png" hover "Assets/phone/icons/skip.png" focus_mask True action [Hide("mainphonescreen"), Show("phone_button"), Skip()] xalign .5
+                    text "Skip" style "phone_icons_text" 
+                vbox ypos 50:
+                    imagebutton idle "Assets/phone/icons/auto.png" hover "Assets/phone/icons/auto.png" focus_mask True action [Hide("mainphonescreen"), Show("phone_button"), Preference("auto-forward", "toggle")] xalign .5
+                    text "Auto" style "phone_icons_text" 
+                vbox ypos 50:
+                    imagebutton idle "Assets/phone/icons/settings.png" hover "Assets/phone/icons/settings.png" focus_mask True action [Hide("mainphonescreen"), Show("phone_button"), ShowMenu("preferences")] xalign .5
+                    text "Settings" style "phone_icons_text" 
 
-            vbox ypos 69:
-                imagebutton idle "Assets/phone/icons/phone.png" hover "Assets/phone/icons/phone.png" focus_mask True action ui.callsinnewcontext("phone_call") xalign .5
-                text "Phone" outlines [(2, "50626b", 0, 0)]
-            vbox ypos 69:
-                imagebutton idle "Assets/phone/icons/text.png" hover "Assets/phone/icons/text.png" focus_mask True xalign .5
-                text "Text" outlines [(2, "50626b", 0, 0)]
-                
-            vbox ypos 69:
-                imagebutton idle "Assets/phone/icons/notes.png" hover "Assets/phone/icons/notes.png" focus_mask True  xalign .5
-                text "Notes" outlines [(2, "50626b", 0, 0)]
-            vbox ypos 69:
-                imagebutton idle "Assets/phone/icons/calendar.png" hover "Assets/phone/icons/calendar.png" focus_mask True xalign .5
-                text "Calendar" outlines [(2, "50626b", 0, 0)]
+                vbox ypos 69:
+                    imagebutton idle "Assets/phone/icons/phone.png" hover "Assets/phone/icons/phone.png" focus_mask True  xalign .5#action ui.callsinnewcontext("phone_call")
+                    text "Phone" outlines [(2, "50626b", 0, 0)]
+                vbox ypos 69:
+                    imagebutton idle "Assets/phone/icons/text.png" hover "Assets/phone/icons/text.png" focus_mask True xalign .5
+                    text "Text" outlines [(2, "50626b", 0, 0)]
+                    
+                vbox ypos 69:
+                    imagebutton idle "Assets/phone/icons/notes.png" hover "Assets/phone/icons/notes.png" focus_mask True  xalign .5
+                    text "Notes" outlines [(2, "50626b", 0, 0)]
+                vbox ypos 69:
+                    imagebutton idle "Assets/phone/icons/calendar.png" hover "Assets/phone/icons/calendar.png" focus_mask True xalign .5
+                    text "Calendar" outlines [(2, "50626b", 0, 0)]
 
-    imagebutton idle "Assets/phone/phone_button_idle.png" hover "Assets/phone/phone_button_hover.png" focus_mask True action [Play ("sound", "Assets/sfx/click.wav"), Hide("mainphonescreen"), Show("phone_button")]
-    add "Assets/phone/phone_reflection.png"
+        imagebutton idle "Assets/phone/phone_button_idle.png" hover "Assets/phone/phone_button_hover.png" focus_mask True action [Play ("sound", "Assets/sfx/click.wav"), Hide("mainphonescreen"), Show("phone_button")]
+        add "Assets/phone/phone_reflection.png"
 
 init -1 python:
     style.phone_text.size = 14
@@ -306,14 +313,18 @@ screen calendar:
 screen clock:
     tag phone
     modal True
-    use blank_phone_screen
-    frame:
+    window:
         background None
-        area (18, 133, 261, 368)
-        $ Calendar(20,0, 20)
-        $ AClocks(y=.55)
+        xalign 0.99
+        xsize 307
+        use blank_phone_screen
+        frame:
+            background None
+            area (18, 133, 261, 368)
+            $ Calendar(20,0, 20)
+            $ AClocks(y=.55)
         
-        #$ clock = True
+
         
 
         

@@ -12,7 +12,12 @@ label writer_event1:
     $ renpy.block_rollback()
     
     stop music
-    $ mr.Play(BRE) #???
+    python:
+        for song in song_list:
+            renpy.music.queue(song['file'], channel='music', loop=True, clear_queue=False, fadein=2.0, tight=True)
+
+    
+    
     
     $ post = "In a world filled with endless water... where humanity has made an effort to eke out a living\non flying islands..."
     show screen sentence (showOptions=False)

@@ -116,7 +116,14 @@ init python:
             text_show += "\nComish Coding: " + str(comishWork.coding)
             text_show += "\nComish Composing: " + str(comishWork.music)
             text_show += "\nComish Art: " + str(comishWork.art)
-
+            if mygame.started:
+                text_show += "\nGame progress:"
+                #completion = round(((mygame.writing_done/mygame.writing_needed)*100),2) 
+                #text_show += "[" + str(completion) + "]"
+                #text_show += "\nWriting: " + str(round(mygame.writing_done, 2)) + "/" + str(mygame.writing_needed) + "[" + str(completion) + "]"
+                
+            
+            
             ui.frame(xalign=1.0, yalign=0.1)
             ui.text(text_show)
     config.overlay_functions.append(display_stats_overlay)
@@ -197,7 +204,10 @@ screen set_attributes(cclass=''):
             
 screen stats:
     add "#FFF"
-    add "artist pose1 happy"
+    if job=="artist":
+        add "artist happy"
+    if job=="writer":
+        add "writer neutral hat"
 
     $ y=195
     text "Writing" xpos 488 ypos y style "my_text"
