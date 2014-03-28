@@ -2,8 +2,7 @@ label artist_event1:
     #Story Event one:  Requirements:  None
     hide screen phone_button
     
-    scene bg bedroom
-        
+    scene bg bedroom        
     $ renpy.music.play ("Assets/sfx/phone ring.ogg", channel="sound", loop=True, fadeout=1.0, fadein=1.0)
     Phone "Ring ring ring ring ring ring phone call phone call! Ring ring ring ring ring ring phone call!"
     stop sound

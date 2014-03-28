@@ -14,6 +14,7 @@ label writer_event2:
     $ days_word = numToWords(day)
     $ words = mygame.writing_done
     $ words = str(int(words)) + ",000"
+
     Joan neutral "Ugh. Just staring at this .doc makes me suicidal. How did I not get past [words] words after [days_word] days? I said I was a writer, dammit, so why am I not writing? This is a cardinal rule of the damn universe: An artist makes art, a programmer programs, composers compose and writers... write, dammit!"
     Joan despair "Bah, it's just not coming to me. Screw it, I give up. This isn't working out. They say to 'just write', but how the hell am I supposed to 'just write' if I can't figure out where to even start? Like, whoever thought of the entire 'just write': I want to punch you in the balls."
     Joan neutral "I'm not even joking. I will find out where you live. I will come down to your house and punch you in the friggin' balls. And then punch your wife in the tits. And your dog on the snout."

@@ -66,6 +66,16 @@ init python:
 #                event = "story", "writer_event10"
 
     
+        if job=="coder":
+            if not coder_event2 and curr_action=="coding":#first coding attempt
+                event = "story", "coder_event2"
+                
+            if not writer_event3 and curr_action=="new_game" and mygame.genre == "romance":
+                event = "story", "coder_event3"
+            if not writer_event4 and curr_action=="new_game" and mygame.genre == "horror":
+                event = "story", "coder_event4"
+                
+                
                 
         last_time = curr_time
         return event

@@ -82,6 +82,8 @@ label start:
 
         writer_event2, writer_event3, writer_event4, writer_event5, writer_event6, writer_event7, writer_event8, writer_event9, writer_event10 = False, False, False, False, False, False, False, False, False
         
+        coder_event2, coder_event3, coder_event4, coder_event5, coder_event6, coder_event7, coder_event8, coder_event9, coder_event10 = False, False, False, False, False, False, False, False, False
+        
         
     scene black
     
@@ -110,7 +112,7 @@ label start:
         jump writer_event1
     if cclass=="coder":
         $ game_os = "mac"
-        jump coder
+        jump coder_event1
     if cclass=="composer":
         $ game_os = "mac"
         jump composer        
