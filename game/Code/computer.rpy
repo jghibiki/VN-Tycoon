@@ -134,6 +134,9 @@ label computer:
                         $mygame.music_done += messages[_return[1]].outputQuantity
                     elif messages[_return[1]].output == "writing":
                         $mygame.writing_done += messages[_return[1]].outputQuantity
+                    ###
+                    $ repBonus += .01
+                    ###
             if _return[0] == "msgDelete":
                 $messages.pop(_return[1])
         if _return == "tarzanBuy":
@@ -270,7 +273,7 @@ label computer:
                             else:
                                 "You should really turn in your work already."
                         else:
-                            "You are too sleepy to draw."
+                            "You are too sleepy to write."
                     else: 
                         if time.dec(dur):
                             $mygame.do_writing(dur)
@@ -278,7 +281,7 @@ label computer:
                             call screen writingAnimation
                             "You write a few scenes for your game. [completion]\% Completed"
                         else:
-                            "You are too sleepy to draw."
+                            "You are too sleepy to write."
 
                 elif showNotepad:
                     $dur = int(_return[1])
@@ -810,11 +813,14 @@ label drawingAnimation:
     return
 
 screen writingAnimation:
-    $ mytext = random.choice(writing_snippets)
-    $ typeSpeed = 20 + int(skills.writing*6)
-    $ wait_to_hide = 1 + len(mytext) / typeSpeed
-    use window_frame("Sentence", "icon16_sentence", Return("desktop"))
-    use autoPost(28, 84, 0, 0, "#00000000", mytext, typeSpeed = typeSpeed, moveCursor=False, textSize=24)
+    text "writing animation"
+    $ wait_to_hide = 1
+    
+    # $ mytext = random.choice(writing_snippets)
+    # $ typeSpeed = 20 + int(skills.writing*6)
+    # $ wait_to_hide = 1 + len(mytext) / typeSpeed
+    # use window_frame("Sentence", "icon16_sentence", Return("desktop"))
+    # use autoPost(28, 84, 0, 0, "#00000000", mytext, typeSpeed = typeSpeed, moveCursor=False, textSize=24)
     timer wait_to_hide action [Hide("writingAnimation"), Return()]
 
 ############################

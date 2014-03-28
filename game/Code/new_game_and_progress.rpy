@@ -226,17 +226,12 @@ label publish:
     else:
         "It's not finished!"
         
-        "But let's go ahead and cheat."
-        # $ self.coding_done = self.coding_needed
-        # $ self.writing_done = self.writing_needed
-        # $ self.art_done = self.art_needed
-        # $ self.music_done = self.music_needed
+        #"But let's go ahead and cheat."
         
-        $ mygame.publish()
-        $ make_cover(mygame)
-        $ games.append(mygame)
-        
-        $ mygame = Game()
+        #$ mygame.publish()
+        #$ make_cover(mygame)
+        #$ games.append(mygame)
+        #$ mygame = Game()
     jump sim
     
 init:

@@ -12,13 +12,15 @@ define Artgirl = Character('Artgirl', color="#36393D", show_two_window=True, kin
 
 #writer:
 define Joan = Character('Joan', color="#356AA0", show_two_window=True, image="writer", window_left_padding=210, who_left_padding=210)
+define Antagonist = Character('Antagonist', color="#356AA0", show_two_window=True)
+
 
 #coder:
 define t = Character('Toby', color="#356AA0", show_two_window=True)#, image="coder", window_left_padding=210, who_left_padding=210)
 define m = Character('Mark', color="#356AA0", show_two_window=True)
 
 
-    
+
 
 
 init -2 python:

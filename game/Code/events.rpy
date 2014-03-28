@@ -91,7 +91,7 @@ init python:
     threads = []
 
     #the chance of getting a message
-    repBounus = .04
+    repBonus = .04
 
     #polls for threads  to display for the recruitment forum
     def pollThreads():
@@ -105,7 +105,10 @@ init python:
     
     #generates threads to be displayed for the recruitment forum
     def generateThread():
-        return Thread(repBonus)
+        repBonus_tmp = repBonus
+        if repBonus_tmp>0.39:
+            repBonus_tmp = 0.39
+        return Thread(repBonus_tmp)
 
 
     #In essence threads will work like missions, completing the "mission" will result in an increased repBonus
@@ -120,7 +123,8 @@ init python:
         def __init__(self, repBonus):
             self.input = Thread.categories[random.randint(0,4)]
             self.output = Thread.categories[random.randint(0,4)]
-            self.inputQuantity = round(Thread.scalar - (store.repBonus + randrangef(0.2,0.6, 0.01)) * Thread.scalar) 
+            #self.inputQuantity = round(Thread.scalar - (store.repBonus + randrangef(0.2,0.6, 0.01)) * Thread.scalar) 
+            self.inputQuantity = round(Thread.scalar - (repBonus + randrangef(0.2,0.6, 0.01)) * Thread.scalar) 
             self.outputQuantity =  self.inputQuantity > Thread.returnScalar+1 if  self.inputQuantity - Thread.returnScalar else Thread.returnScalar
             self.stage = "reminder" #or response
             self.user = make_user()

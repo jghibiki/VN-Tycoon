@@ -109,6 +109,7 @@ init python:
             text_show += "\nWriting: " + str(skills.writing)
             text_show += "\nCoding: " + str(skills.coding)
             text_show += "\nComposing: " + str(skills.music)
+            text_show += "\nrepBonus: " + str(repBonus)
             text_show += "\nMoney: $" + str(inventory.money)
             text_show += "\nDay:" + str(day)
             text_show += "\nTime: " + str(time.value)
@@ -118,9 +119,14 @@ init python:
             text_show += "\nComish Art: " + str(comishWork.art)
             if mygame.started:
                 text_show += "\nGame progress:"
-                #completion = round(((mygame.writing_done/mygame.writing_needed)*100),2) 
-                #text_show += "[" + str(completion) + "]"
-                #text_show += "\nWriting: " + str(round(mygame.writing_done, 2)) + "/" + str(mygame.writing_needed) + "[" + str(completion) + "]"
+                completion = round(((mygame.writing_done/mygame.writing_needed)*100),2) 
+                text_show += "\nWriting: " + str(round(mygame.writing_done, 2)) + "/" + str(mygame.writing_needed) + "(" + str(completion) + ")"
+                completion = round(((mygame.coding_done/mygame.coding_needed)*100),2) 
+                text_show += "\nCoding: " + str(round(mygame.coding_done, 2)) + "/" + str(mygame.coding_needed) + "(" + str(completion) + ")"
+                completion = round(((mygame.music_done/mygame.music_needed)*100),2) 
+                text_show += "\nMusic: " + str(round(mygame.music_done, 2)) + "/" + str(mygame.music_needed) + "(" + str(completion) + ")"
+                completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
+                text_show += "\nArt: " + str(round(mygame.art_done, 2)) + "/" + str(mygame.art_needed) + "(" + str(completion) + ")"
                 
             
             
