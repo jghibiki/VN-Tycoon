@@ -107,7 +107,7 @@ screen game_button:
             textbutton "Publish the game" action Jump("publish")
 
 screen new_game:
-    tag game
+    tag app
     modal True
     add "#FFF"
     
@@ -274,10 +274,10 @@ screen edit_name(game_name=""):
         input default game_name
 
 screen game_progress(curr_game = mygame):
-    tag game
+    tag app
     modal True
     use computer
-    use window_frame("HenPie", "icon16_henpie", Hide("game_progress"), width=800, height=600)
+    use window_frame("HenPie", "icon16_henpie", Return("desktop"), width=800, height=600)
     $ win_x=27
     $ win_y=47
     #add "Assets/gui/henpie.png" xpos win_x ypos win_y
@@ -387,7 +387,7 @@ screen game_progress(curr_game = mygame):
             if mygame.started:
                 textbutton "Release the Game" action [Hide("game_progress"), Jump("publish")] xpos 550 ypos 490 style "henpy_button" text_size 24
                 
-            textbutton "quit" action Hide("game_progress") xpos 725 ypos 530 style "henpy_button" text_size 12
+            textbutton "quit" action Return("desktop") xpos 725 ypos 530 style "henpy_button" text_size 12
 
 
 

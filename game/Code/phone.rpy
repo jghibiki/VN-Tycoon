@@ -81,14 +81,14 @@ image photo_view_forward:
             # action [Hide("phone_button"), Show ("mainphonescreen")]
 
 screen phone_button:
-    #vbox align (.04,.04):
-        imagebutton:
-            align (.04,.04)
-            focus_mask True
-            idle "Assets/phone/phone_icon.png"
-            hover "Assets/phone/phone_icon.png"
-            action [Hide("phone_button"), Show ("mainphonescreen")]
-        $ Clocks (55, 45, 11)
+    zorder 200
+    imagebutton:
+        align (.04,.04)
+        focus_mask True
+        idle "Assets/phone/phone_icon.png"
+        hover "Assets/phone/phone_icon.png"
+        action [Hide("phone_button"), Show ("mainphonescreen")]
+    $ Clocks (55, 45, 11)
             
 init -1 python:
     style.phone_icons_text = Style(style.default)
@@ -128,7 +128,7 @@ screen mainphonescreen:
                 imagebutton idle "Assets/phone/icons/map.png" hover "Assets/phone/icons/map.png" focus_mask True xalign .5
                 text "Maps" style "phone_icons_text" 
             vbox ypos 30:
-                imagebutton idle "Assets/phone/icons/ipod.png" hover "Assets/phone/icons/ipod.png" focus_mask True action [Hide("mainphonescreen"), ShowMenu("music_room_phone")] xalign .5
+                imagebutton idle "Assets/phone/icons/ipod.png" hover "Assets/phone/icons/ipod.png" focus_mask True action [Hide("mainphonescreen"), Show("music_room_phone")] xalign .5
                 text "iPod" style "phone_icons_text" 
             vbox ypos 30:
                 if photo_sv>0:

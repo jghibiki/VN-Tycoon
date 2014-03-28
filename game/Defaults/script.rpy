@@ -10,8 +10,9 @@ init -1 python:
 
 # The game starts here.
 label start:
-    
     python:
+        config.rollback_enabled = False
+                
         mygame=Game()
         comishWork = ComishWork()
         games=[]
@@ -21,7 +22,7 @@ label start:
         repBonus = 0.04
 
     call screen char_select
-    $ renpy.block_rollback()
+    #$ renpy.block_rollback()
     python:
         cclass = _return
         art_min = 0
@@ -41,7 +42,7 @@ label start:
             music_min = 6
             skills.music += music_min
     call screen set_attributes(cclass)
-    $ renpy.block_rollback()
+    #$ renpy.block_rollback()
     python:
         inventory = Inventory()
         tablet = Item("Drawing Tablet", 199.00, "Assets/gui/shop_tablet.png")
@@ -92,9 +93,8 @@ label start:
     
     
     
-    #show screen phone_button
+    show screen phone_button
 #    show screen inventory_button
-
 
     
     $ game_os = "win"

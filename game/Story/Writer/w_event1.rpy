@@ -7,6 +7,13 @@ label writer_event1:
 
 #    In a world filled with endless water... where humanity has made an effort to eke out a living on flying islands...
     #show screen computer
+    
+    $ config.rollback_enabled = True
+    $ renpy.block_rollback()
+    
+    stop music
+    $ mr.Play(BRE) #???
+    
     $ post = "In a world filled with endless water... where humanity has made an effort to eke out a living\non flying islands..."
     show screen sentence (showOptions=False)
     with dissolve

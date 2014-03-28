@@ -9,6 +9,7 @@ label computer:
         showMikie = False
         showNotepad = False
         showGrunge = False
+        showHenPie = False
         selTime = False
     while(computerLoop):
         #show screens
@@ -37,6 +38,10 @@ label computer:
             call screen notepad
         elif showGrunge and type(showGrunge) == bool:
             call screen grunge
+        elif showHenPie and  type(showHenPie) == bool:
+            call screen game_progress
+        
+        
                 
         #parse returns
         if _return == "web_browser":
@@ -63,6 +68,7 @@ label computer:
             $showMikie = False
             $showNotepad = False
             $showGrunge = False
+            $showHenPie = False
         if _return == "open_sentence":
             $showDesktop = False
             $showSentence = True
@@ -75,7 +81,9 @@ label computer:
         if _return == "open_grunge":
             $showGrunge = True
             $showDesktop = False
-            
+        if _return == "game_progress":
+            $showHenPie = True
+            $showDesktop = False
             
         if type(_return) == tuple:
             if _return[0] == "tarzanAdd":
@@ -446,7 +454,7 @@ screen computer:
         imagebutton idle "icon32_grunge_band_idle" hover "icon32_grunge_band_hover" action [Hide("gui_tooltip"), Return("open_grunge")] xpos x yanchor 1.0 ypos 1.0 
 
         $ x += 60
-        imagebutton idle "icon32_henpie_idle" hover "icon32_henpie_hover" action [Hide("gui_tooltip"), Show("game_progress")] xpos x yanchor 1.0 ypos 1.0
+        imagebutton idle "icon32_henpie_idle" hover "icon32_henpie_hover" action [Hide("gui_tooltip"), Return("game_progress")] xpos x yanchor 1.0 ypos 1.0
 
         $ x += 60
         imagebutton idle "icon32_player_idle" hover "icon32_player_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 1.0 
@@ -480,9 +488,7 @@ screen computer:
         imagebutton idle "icon64_grunge_band_idle" hover "icon64_grunge_band_hover" action [Hide("gui_tooltip"), Return("open_grunge")] xpos x yanchor 1.0 ypos 764
         
         $ x += 80
-        imagebutton idle "icon64_henpie_idle" hover "icon64_henpie_hover" action [Hide("gui_tooltip"), Show("game_progress")] xpos x yanchor 1.0 ypos 764 
-        
-                
+        imagebutton idle "icon64_henpie_idle" hover "icon64_henpie_hover" action [Hide("gui_tooltip"), Return("game_progress")] xpos x yanchor 1.0 ypos 764 
         
         $ x += 80
         imagebutton idle "icon64_player_idle" hover "icon64_player_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 764 
@@ -506,8 +512,8 @@ screen sentence(showOptions=True):
     use computer
     use window_frame("Sentence", "icon16_sentence", Return("desktop"))
     add "Assets/gui/sentence.png"
-    use select_time
-
+    if showOptions:
+        use select_time
 
 ############################################
 ## Drawing/Painting Software (Michelangelo)
@@ -815,15 +821,6 @@ screen writingAnimation:
 ## Computer Images 
 init:
     image computer = "Assets/gui/desk_bg1.jpg"
-#    image computer = "#CF6800"
-#    image computer browser = "#B2FB69"
-#    image computer browser tarzan = "#C8CF00"
-#    image computer browser lsf = "#CF0026"
-#    image computer browser lsf recruitment = "#F86CA2"
-#    image computer browser lsf messages = "#6CF8C2" 
-#    image computer sentence = "#7D001B"
-#    image computer michelangelo = "#007D0F"
-#    image computer stalkMePlz = "#fff"
 
     
 ############################
@@ -877,38 +874,6 @@ screen window_frame(appname, icon, exitaction=None, width=1266, height=648):
             add icon ypos 12 xpos icon_pos
             text appname xpos 20 ypos 12 color "#000" size 16 text_align 0.5 min_width full_width
             imagebutton auto "Assets/gui/close_mac_%s.png" focus_mask True action [exitaction] xpos 7 ypos 11
-
-    
-    
-    # if game_os == "win":
-        # window:
-            # background Frame("Assets/gui/frame_win.png", 20, 40, 110, 20)
-            # xanchor 0.0
-            # yanchor 0.0
-            # xpos 10
-            # ypos 10
-            # xminimum 1300
-            # yminimum 700
-            # xmaximum 1300
-            # ymaximum 700
-            # add icon xpos 20 ypos 10
-            # text appname xpos 40 ypos 10 color "#000" size 16
-            # imagebutton auto "Assets/gui/close_win_%s.png" focus_mask True action [exitaction] xpos 1230 ypos 2            
-    # elif game_os == "mac":
-        # window:
-            # background Frame("Assets/gui/frame_mac.png", 70, 39, 15, 24)
-            # xanchor 0.0
-            # yanchor 0.0
-            # xpos 18
-            # ypos 8
-            # xminimum 1286
-            # xmaximum 1286
-            # yminimum 714
-            # ymaximum 714
-            #add icon ypos 12
-            # text appname  xpos 20 ypos 12 color "#000" size 16 text_align 0.5 min_width 1286
-            # imagebutton auto "Assets/gui/close_mac_%s.png" focus_mask True action [exitaction] xpos 7 ypos 11
-
 
 ###################
 # Computer Styles

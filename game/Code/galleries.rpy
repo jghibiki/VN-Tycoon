@@ -45,8 +45,9 @@ init python:
 init +1 python:
     mr = MusicRoom(fadeout=1.0)
     for song in song_list:
-        mr.add(song["name"])
+        mr.add(song["name"], always_unlocked=True)
 
+        
 screen music_room_phone:
     tag phone
     modal True

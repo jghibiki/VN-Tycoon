@@ -1,4 +1,5 @@
 label sim:
+    $ config.rollback_enabled = False
     call screen sim
     scene black
     show room_closed
