@@ -131,6 +131,8 @@ screen char_select:
     imagebutton auto "Assets/gui/char_select_coder_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("coder")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_coder") ] unhovered [Hide("gui_tooltip")]
     imagebutton auto "Assets/gui/char_select_composer_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("composer")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_composer") ] unhovered [Hide("gui_tooltip")]
 
+    add "Assets/gui/char_select_fore.png"
+    
 init:
     image tooltip_writer=LiveComposite((1300, 73), (3,0), ImageReference("information"), (3,30), Text("Select the writer class.", style="tips_bottom"))
     image tooltip_artist=LiveComposite((1300, 73), (3,0), ImageReference("information"), (3,30), Text("Select the artist class.", style="tips_bottom"))
