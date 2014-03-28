@@ -17,6 +17,43 @@ init -2 python:
             else:
                 return False
 
+    class ComishWork:
+        def __init__(self):
+            self.art = 0.0
+            self.writing = 0.0
+            self.coding = 0.0
+            self.music = 0.0
+
+        def increase(self, skill, hours):
+            inc_by=hours
+            if skill == "art":
+                inc_by = inc_by * ((25.00-skills.art)/10)/10
+                if self.art + inc_by <= 25.0 and not self.art==25.0:
+                    self.art += inc_by
+                else:
+                    self.art = 25.0
+            elif skill == "writing":
+                inc_by = inc_by *((25.00-skills.writing)/10)/10
+                if self.writing + inc_by <= 25.0 and not self.writing== 25.0:
+                    self.writing += inc_by
+                else:
+                    self.writing = 25.0
+            elif skill=="coding":
+                inc_by = inc_by *((25.00-skills.coding)/10)/10
+                if self.coding + inc_by <= 25.0 and not self.writing == 25.0:
+                    self.coding += inc_by
+                else:
+                    self.coding = 25.0
+            elif skill=="music":
+                inc_by = inc_by *((25.00-skills.music)/10)/10
+                if self.music + inc_by <= 25.0 and not self.music == 25.0:
+                    self.music += inc_by
+                else:
+                    self.music = 25.0
+            return True
+
+
+
     class Skills:
         def __init__(self):
             self.art = 0
@@ -75,7 +112,11 @@ init python:
             text_show += "\nMoney: $" + str(inventory.money)
             text_show += "\nDay:" + str(day)
             text_show += "\nTime: " + str(time.value)
-     
+            text_show += "\nComish Writing: " + str(comishWork.writing)
+            text_show += "\nComish Coding: " + str(comishWork.coding)
+            text_show += "\nComish Composing: " + str(comishWork.music)
+            text_show += "\nComish Art: " + str(comishWork.art)
+
             ui.frame(xalign=1.0, yalign=0.1)
             ui.text(text_show)
     config.overlay_functions.append(display_stats_overlay)
@@ -179,9 +220,31 @@ screen stats:
     $ y+=58
     text "Day" xpos 488 ypos y style "my_text"
     text str(day) xpos 854 ypos y style "my_text"
+   
+    textbutton "OK" action Return() xalign 0.1 yalign 0.9
+
+screen workDone:
     
+    add "#FFF"
+    add "artist pose1 happy"
     
-            
+    text "Comission Work" style "my_text"
+
+    $ y=195
+    text "Writing" xpos 488 ypos y style "my_text"
+    bar value comishWork.writing range 10.0 style "stat_bar" xpos 854 ypos y right_bar "Assets/gui/stat_writing_empty.png" left_bar "Assets/gui/stat_writing_full.png"
+    
+    $ y+=58
+    text "Drawing" xpos 488 ypos y style "my_text"
+    bar value comishWork.art range 10.0 style "stat_bar" xpos 854 ypos y right_bar "Assets/gui/stat_drawing_empty.png" left_bar "Assets/gui/stat_drawing_full.png"
+    
+    $ y+=58
+    text "Programming" xpos 488 ypos y style "my_text"
+    bar value comishWork.coding range 10.0 style "stat_bar" xpos 854 ypos y right_bar "Assets/gui/stat_programming_empty.png" left_bar "Assets/gui/stat_programming_full.png"
+    
+    $ y+=58
+    text "Composing" xpos 488 ypos y style "my_text"
+    bar value comishWork.music range 10.0 style "stat_bar" xpos 854 ypos y right_bar "Assets/gui/stat_composing_empty.png" left_bar "Assets/gui/stat_composing_full.png"
     
     textbutton "OK" action Return() xalign 0.1 yalign 0.9
 

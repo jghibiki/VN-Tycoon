@@ -177,11 +177,16 @@ label sim:
         $ skills.art = 10.0
         $ skills.coding = 10.0
         $ skills.writing = 10.0
+        $ comishWork.writing = 25.0
+        $ comishWork.coding = 25.0
+        $ comishWork.music = 25.0
+        $ comishWork.art = 25.0
     
     if action == "stats":
         call screen stats
         
-    
+    if action == "showWorkDone":
+        call screen workDone
         
     jump sim
     
@@ -354,7 +359,7 @@ screen sim:
             #textbutton "Pic" action Return("pic")
             textbutton "Post" action Return("post")
             textbutton "stats" action Return("stats")
-            
+            textbutton "Comission Work" action Return("showWorkDone")
             textbutton "Code ani" action Return("code_ani")
 
             
@@ -376,19 +381,29 @@ init:
 
 screen select_time:
     modal False
-    vbox: 
-        xpos 0.01
-        ypos 0.2
-        text "Practice:"
-        hbox:
-            textbutton "1h" action Return("p1")
-            textbutton "4h" action Return("p4")
-            textbutton "8h" action Return("p8")
-        if mygame.started:
-            text "Make assets:"
-            hbox:
-                textbutton "1h" action Return("a1")
-                textbutton "4h" action Return("a4")
-                textbutton "8h" action Return("a8")
-        textbutton "Back" action Return(False) # a lazy work around to make
-                                                    #back work 
+    frame:
+        xpos 0.35
+        ypos 0.35
+        background "#000"
+        frame:
+            background "#fff"
+            vbox: 
+                text "Practice:" style "stdTxt"
+                hbox:
+                    textbutton "1h" action Return("p1")
+                    textbutton "4h" action Return("p4")
+                    textbutton "8h" action Return("p8")
+                text "Work on Comissions:" style "stdTxt"
+                hbox:
+                    textbutton "1h" action Return("w1")
+                    textbutton "4h" action Return("w4")
+                    textbutton "8h" action Return("w8")
+
+                if mygame.started:
+                    text "Make assets:" style "stdTxt"
+                    hbox:
+                        textbutton "1h" action Return("a1")
+                        textbutton "4h" action Return("a4")
+                        textbutton "8h" action Return("a8")
+                textbutton "Back" action Return("desktop") # a lazy work around to make
+                                                            #back work 

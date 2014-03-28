@@ -1,5 +1,6 @@
 
 label computer:
+    scene computer
     python:
         computerLoop = True
         showDesktop = True
@@ -16,16 +17,12 @@ label computer:
         elif showBrowser and type(showBrowser) == bool:
             call screen webBrowser
         elif showBrowser == "lsf":
-            #poll the message genereator to see if there are any new messages
-            show computer browser lsf
             call screen lsf
         elif showBrowser == "tarzan":
             call screen tarzan
         elif showBrowser == "lsf_recruitment":
-            show computer browser lsf recruitment
             call screen lsf_recruitment
         elif showBrowser == "lsf_messages":
-            show computer browser lsf messages
             call screen lsf_messages
         elif showBrowser == "stalkmeplz":
             #show computer browser stalkMePlz
@@ -34,24 +31,12 @@ label computer:
             call screen game_list
         elif showSentence and type(showSentence) == bool:
             call screen sentence
-            if not _return:
-                $selTime = False
-                call screen mikie
         elif showMikie and type(showMikie) == bool:
             call screen mikie
-            if not _return:
-                $selTime = False
-                call screen mikie
         elif showNotepad and type(showNotepad) == bool:
             call screen notepad
-            if not _return:
-                $selTime = False            
-                call screen notepad
         elif showGrunge and type(showGrunge) == bool:
             call screen grunge
-            if not _return:
-                $selTime = False            
-                call screen grunge
                 
         #parse returns
         if _return == "web_browser":
@@ -76,6 +61,8 @@ label computer:
             $showBrowser = False
             $showSentence = False
             $showMikie = False
+            $showNotepad = False
+            $showGrunge = False
         if _return == "open_sentence":
             $showDesktop = False
             $showSentence = True
@@ -98,8 +85,47 @@ label computer:
             if _return[0] == "replyThread":
                 $messages.append(threads.pop(_return[1]))
             if _return[0] == "msgReply":
-                $messages[_return[1]].stage = "response"
-                #add mechanism to turn in work i.e. subtract progress from work done
+                #first gather work 
+                $turnedIn = False
+                if messages[_return[1]].input == "money":
+                    if inventory.money >= messages[_return[1]].inputQuantity:
+                        $inventory.money -= messages[_return[1]].inputQuantity
+                        $turnedIn = True
+                    else:
+                        "You don't have enough money yet! (Must have $[messages[_return[1]].inputQuantity])."
+                elif messages[_return[1]].input == "art":
+                    if comishWork.art >= messages[_return[1]].inputQuantity:
+                        $comishWork.art -= messages[_return[1]].inputQuantity
+                        $turnedIn = True
+                    else:
+                        "You don't have enough art to turn in! (Must have [messages[_return[1]].inputQuantity])"
+                elif messages[_return[1]].input == "coding":
+                    if comishWork.coding >= messages[_return[1]].inputQuantity:
+                        $comishWork.coding -= messages[_return[1]].inputQuantity
+                        $turnedIn = True
+                    else:
+                        "You don't have enough code written to turn in! (Must have [messages[_return[1]].inputQuantity])"
+                elif messages[_return[1]].input == "music":
+                    if comishWork.music >= messages[_return[1]].inputQuantity:
+                        $comishWork.music -= messages[_return[1]].inputQuantity
+                        $turnedIn = True
+                elif messages[_return[1]].input == "writing":
+                    if comishWork.writing >= messages[_return[1]].inputQuantity:
+                        $comishWork.writing -= messages[_return[1]].inputQuantity
+                        $turnedIn = True
+                #then provide reward
+                if turnedIn:
+                    $messages[_return[1]].stage = "response"
+                    if messages[_return[1]].output == "money":
+                        $inventory.money += messages[_return[1]].outputQuantity
+                    elif messages[_return[1]].output == "art":
+                        $mygame.art_done += messages[_return[1]].outputQuantity
+                    elif messages[_return[1]].output == "coding":
+                        $mygame.coding_done += messages[_return[1]].outputQuantity
+                    elif messages[_return[1]].output == "music":
+                        $mygame.music_done += messages[_return[1]].outputQuantity
+                    elif messages[_return[1]].output == "writing":
+                        $mygame.writing_done += messages[_return[1]].outputQuantity
             if _return[0] == "msgDelete":
                 $messages.pop(_return[1])
         if _return == "tarzanBuy":
@@ -186,7 +212,7 @@ label computer:
                 $selTime = _return[1]
                 
         if type(_return) == type(''): #string
-            if _return[0] == "a" or _return[0] == "p":
+            if _return[0] == "a" or _return[0] == "p" or _return[0] == "w":
                 $selTime = None
                 if showMikie:
                     $dur = int(_return[1])
@@ -199,13 +225,21 @@ label computer:
                                 "You are the very best. Like no one ever was."
                         else:
                             "You are too sleepy to draw."
+                    elif _return[0] == "w":
+                        if time.dec(dur):
+                            if comishWork.increase("art", dur):
+                                call drawingAnimation
+                                "You spend some time working on comissions."
+                            else:
+                                "You should really turn in your work already."
+                        else:
+                            "You are too sleepy to draw."
                     else:
                         if time.dec(dur):
                             $mygame.do_art(dur)
                             $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
                             call drawingAnimation
-                            "You draw some sprites for your game.
-                            [completion]\% Completed"
+                            "You draw some sprites for your game. [completion]\% Completed"
                         else:
                             "You are too sleepy to draw."
                 elif showSentence:
@@ -219,15 +253,25 @@ label computer:
                                 "You are the very best. Like no one ever was."
                         else:
                             "You are too sleepy to write."
-                    else:
+
+                    elif _return[0] == "w":
+                        if time.dec(dur):
+                            if comishWork.increase("writing", dur):
+                                call screen writingAnimation
+                                "You spend some time working on comissions."
+                            else:
+                                "You should really turn in your work already."
+                        else:
+                            "You are too sleepy to draw."
+                    else: 
                         if time.dec(dur):
                             $mygame.do_writing(dur)
                             $completion = round(((mygame.writing_done/mygame.writing_needed)*100),2) 
                             call screen writingAnimation
-                            "You write a few scenes for your game.
-                            [completion]\% Completed"
+                            "You write a few scenes for your game. [completion]\% Completed"
                         else:
                             "You are too sleepy to draw."
+
                 elif showNotepad:
                     $dur = int(_return[1])
                     if _return[0] == "p":
@@ -245,10 +289,31 @@ label computer:
                                 hide screen window_frame
                                 hide screen computer
 
+
                                 
                                 "You spend some time practing coding."
                             else:
                                 "You are the very best. Like no one ever was."
+                        else:
+                            "You are too sleepy to code."
+                    elif _return[0] == "w":
+                        if time.dec(dur):
+                            if comishWork.increase("coding", dur):
+
+                                show screen computer
+                                $ speed = 40 + skills.coding * 2
+                                $ post = random.choice(code_snippets_fixed1)
+                                show screen window_frame("Notepad--", "icon16_notepad", None)
+                                show screen autoPostFixed(82, 122, "Assets/gui/notepad.png", post, textSize=15)
+                                $ post = random.choice(code_snippets_typed1)
+                                call screen autoPost(82, 300, 0, 0, "#00000000", post, typeSpeed=speed, moveCursor=False, textSize=15)
+                                hide screen autoPostFixed
+                                hide screen window_frame
+                                hide screen computer
+
+                                "You spend some time working on comissions."
+                            else:
+                                "You should really turn in your work already."
                         else:
                             "You are too sleepy to code."
                     else:
@@ -268,9 +333,8 @@ label computer:
                             hide screen computer
 
 
-                            
-                            "You code a few scenes for your game.
-                            [completion]\% Completed"
+                                                          
+                            "You code a few scenes for your game. [completion]\% Completed"
                         else:
                             "You are too sleepy to code."
                 elif showGrunge:
@@ -284,6 +348,15 @@ label computer:
                                 "You are the very best. Like no one ever was."
                         else:
                             "You are too sleepy to compose."
+                    elif _return[0] == "w":
+                        if time.dec(dur):
+                            if comishWork.increase("music", dur):
+                                #call composingAnimation
+                                "You spend some time working on comissions."
+                            else:
+                                "You should really turn in your work already."
+                        else:
+                            "You are too sleepy to compose."
                     else:
                         if time.dec(dur):
                             $mygame.do_music(dur)
@@ -292,9 +365,9 @@ label computer:
                             "You make some music for your game.
                             [completion]\% Completed"
                         else:
-                            "You are too sleepy to compose."
-
-                                         
+                            "You are too sleepy to compose."           
+                            
+                            
 #######################
 ## Computer Screens
 
@@ -433,18 +506,7 @@ screen sentence(showOptions=True):
     use computer
     use window_frame("Sentence", "icon16_sentence", Return("desktop"))
     add "Assets/gui/sentence.png"
-    
-    if showOptions:
-    
-        # vbox:
-            # xpos 0.01
-            # ypos 0.2
-            # if not selTime:
-                # text "Welcome to Word-processor Sentence!" style "stdTxt"
-                # textbutton "Write!" action Return(("select_time", "write"))
-                # textbutton "Exit program" action Return("desktop")
-            # else:
-                use select_time
+    use select_time
 
 
 ############################################
@@ -453,15 +515,7 @@ screen mikie:
     tag app
     use computer
     use window_frame("Michelangelo", "icon16_michelangelo", Return("desktop"))
-    vbox:
-        xpos 0.01
-        ypos 0.2
-        if not selTime:
-            text "Welcome to Michelangelo!" style "stdTxt"
-            textbutton "Draw!" action Return(("select_time", "draw"))
-            textbutton "Exit program" action Return("desktop")
-        else:
-            use select_time
+    use select_time
 
 
 #########################
@@ -471,32 +525,14 @@ screen notepad:
     use computer
     use window_frame("Notepad--", "icon16_notepad", Return("desktop"))
     add "Assets/gui/notepad.png"
-    
-    vbox:
-        xpos 0.01
-        ypos 0.2
-        if not selTime:
-            text "Welcome to Notepad--!" style "stdTxt"
-            textbutton "code!" action Return(("select_time", "code"))
-            textbutton "Exit program" action Return("desktop")
-        else:
-            use select_time
+    use select_time
 
 screen grunge:
     tag app
     use computer
     use window_frame("GrungeBand", "icon16_grunge_band", Return("desktop"))
     add "Assets/gui/grunge_band.png"
-    
-    vbox:
-        xpos 0.01
-        ypos 0.2
-        if not selTime:
-            text "Welcome to GrungeBand!"
-            textbutton "Compose!" action Return(("select_time", "compose"))
-            textbutton "Exit program" action Return("desktop")
-        else:
-            use select_time
+    use select_time
 
             
 ########################
@@ -537,21 +573,14 @@ screen webBrowser:
             text "stalkmeplz" color "#000" size 18
         
         
-    # vbox:
-        # xpos 0.01
-        # ypos 0.2
-        # textbutton "LemmingSoft Forums" action Return("lsf")
-        # textbutton "Tarzan" action Return("tarzan")
-        # textbutton "Exit Browser" action Return("desktop")
 
 ##############
 ###    Tarzan
 screen tarzan:
     use webBrowser
     vbox:
-        #xpos 0.01
-        #ypos 0.2
-        xpos 29 ypos 111
+        xpos 29 
+        ypos 111
         hbox:
             if len(tarzanStore) != 0 or len(tarzanCart) != 0:
                 vbox:
@@ -785,15 +814,16 @@ screen writingAnimation:
 ############################
 ## Computer Images 
 init:
-    image computer = "#CF6800"
-    image computer browser = "#B2FB69"
-    image computer browser tarzan = "#C8CF00"
-    image computer browser lsf = "#CF0026"
-    image computer browser lsf recruitment = "#F86CA2"
-    image computer browser lsf messages = "#6CF8C2" 
-    image computer sentence = "#7D001B"
-    image computer michelangelo = "#007D0F"
-    image computer stalkMePlz = "#fff"
+    image computer = "Assets/gui/desk_bg1.jpg"
+#    image computer = "#CF6800"
+#    image computer browser = "#B2FB69"
+#    image computer browser tarzan = "#C8CF00"
+#    image computer browser lsf = "#CF0026"
+#    image computer browser lsf recruitment = "#F86CA2"
+#    image computer browser lsf messages = "#6CF8C2" 
+#    image computer sentence = "#7D001B"
+#    image computer michelangelo = "#007D0F"
+#    image computer stalkMePlz = "#fff"
 
     
 ############################

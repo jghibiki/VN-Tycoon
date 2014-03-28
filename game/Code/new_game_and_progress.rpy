@@ -10,13 +10,13 @@ init python:
             self.commercial = False
 
             self.coding_done = 0.0
-            self.coding_needed = 0.0
+            self.coding_needed = 1.0
             self.writing_done = 0.0
-            self.writing_needed = 0.0
+            self.writing_needed = 1.0
             self.art_done = 0.0
-            self.art_needed = 0.0
+            self.art_needed = 1.0
             self.music_done = 0.0
-            self.music_needed = 0.0
+            self.music_needed = 1.0
             
             self.coding_quality = 0
             self.writing_quality = 0
