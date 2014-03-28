@@ -35,7 +35,7 @@ init -2 python:
             elif skill == "writing":
                 inc_by = inc_by *((25.00-skills.writing)/10)/10
                 if self.writing + inc_by <= 25.0 and not self.writing== 25.0:
-                    self.coding += inc_by
+                    self.writing += inc_by
                 else:
                     self.writing = 25.0
             elif skill=="coding":

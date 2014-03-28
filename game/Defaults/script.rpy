@@ -13,6 +13,7 @@ label start:
     
     python:
         mygame=Game()
+        comishWork = ComishWork()
         games=[]
         skills = Skills()
         sales = Sales()
