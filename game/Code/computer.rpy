@@ -428,7 +428,7 @@ screen computer:
 
 #############################
 ## Word Processor (Sentence)
-screen sentence (showOptions=True):
+screen sentence(showOptions=True):
     tag app
     use computer
     use window_frame("Sentence", "icon16_sentence", Return("desktop"))
@@ -530,6 +530,11 @@ screen webBrowser:
         $ my_bg = "Assets/gui/browser_tab_selected.png"        
     button background my_bg focus_mask True action Return("BMTMezzo") xpos 534 ypos 49:
         text "BMTMezzo" color "#000" size 18
+   
+    if showBrowser == "stalkmeplz":
+        $ my_bg = "Assets/gui/browser_tab_selected.png"        
+        button background my_bg focus_mask True action Return("stalkmeplz") xpos 784 ypos 49:
+            text "stalkmeplz" color "#000" size 18
         
         
     # vbox:
@@ -627,37 +632,37 @@ screen tarzan:
 
 #################
 ###    StalkMePlz
-screen stalkMePlz:
-    use webBrowser
-    vbox:
-        xpos 0.01
-        ypos 0.2
-        text "Welcome to StalkMePlz!" style "stdTxt"
-        #show messages here
-        textbutton "Back" action Return("web_browser")
+# screen stalkMePlz:
+    # use webBrowser
+    # vbox:
+        # xpos 0.01
+        # ypos 0.2
+        # text "Welcome to StalkMePlz!" style "stdTxt"
+        # textbutton "Back" action Return("web_browser")
 
 
 #########################
 ###    LemmingSoft Forums
-screen lsf:
+screen lsf(showOptions=True):
     use webBrowser
     add "Assets/gui/lsf_back.png" #xpos 29 ypos 111
-    vbox:
-        xpos 0.4
-        ypos 0.4
-        #xpos 0.01
-        #ypos 0.2
-        #text "LemmingSoft Forums"
-        textbutton "Visit Recruitment Forum" action Return("lsf_recruitment")
-        textbutton "Messages" action Return("lsf_messages")
-        textbutton "Back" action Return("web_browser")
-    
-        if len(messages) == 0:
-            text "No new messages" style "stdTxt"
-        else:
-            $msgLen = len(messages)
-            text "[msgLen] New Messages" style "stdTxt"
-            $del msgLen
+    if showOptions:
+        vbox:
+            xpos 0.4
+            ypos 0.4
+            #xpos 0.01
+            #ypos 0.2
+            #text "LemmingSoft Forums"
+            textbutton "Visit Recruitment Forum" action Return("lsf_recruitment")
+            textbutton "Messages" action Return("lsf_messages")
+            textbutton "Back" action Return("web_browser")
+        
+            if len(messages) == 0:
+                text "No new messages" style "stdTxt"
+            else:
+                $msgLen = len(messages)
+                text "[msgLen] New Messages" style "stdTxt"
+                $del msgLen
 
 ####################################
 ###    LemmingSoft Recruitment Page

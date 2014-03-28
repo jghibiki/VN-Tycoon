@@ -1,9 +1,18 @@
+screen stalkmeplz_mom:
+    use webBrowser
+    add "Assets/bg/stalkmeplz.png"
+
 label artist_event3:
 #Story Event 3:
 
 #Requirements: Auto - Day 4 or so
-
-    "I started my day checking my email to see if anything important appeared. Sadly the only important thing was notifications for (Facebook)."
+    show screen computer
+    "I started my day checking my email to see if anything important appeared. Sadly the only important thing was notifications for stalkmepls."
+    $ showBrowser = "stalkmeplz"
+    show screen stalkmeplz_mom
+    
+    
+    
     "It is a status update from my mom."
 
     "I read it aloud to myself."
@@ -18,8 +27,8 @@ label artist_event3:
 
     "This just gave me all the more desire to want to prove myself to her and get far away from her!"
     
+    hide screen computer
+    hide screen stalkmeplz_mom
     
-    
-    $ artist_event3 = True
-    
+    $ artist_event3 = True    
     jump sim

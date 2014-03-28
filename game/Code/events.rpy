@@ -37,12 +37,13 @@ init python:
 
         #story events:
         
-        
-        if day==2 and job=="artist" and not artist_event2:
-            event = "story", "artist_event2"
-        if day==4 and job=="artist" and not artist_event3:
-            event = "story", "artist_event3"
-        
+        if job=="artist":
+            if day==2 and not artist_event2:
+                event = "story", "artist_event2"
+            if day==4 and not artist_event3:
+                event = "story", "artist_event3"
+            if day==5 and not artist_event4:
+                event = "story", "artist_event4"
 
         if job=="writer": 
             if not writer_event2 and curr_action=="writing" and day>2:

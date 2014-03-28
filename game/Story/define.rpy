@@ -83,7 +83,8 @@ image side artist surprise:
     crop (0, 0, 613, 426) size (392, 272)
 image side artist upset:
     "artist upset"
-
+    crop (0, 0, 613, 426) size (392, 272)
+    
 image phone_mom:
     "Assets/sprites/phone_mom.png"
     yalign 0.0

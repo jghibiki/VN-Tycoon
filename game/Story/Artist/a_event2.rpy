@@ -3,9 +3,11 @@
 #Requirements: Auto - Day 2 or so
 
 label artist_event2:
-    scene bg computer
-
+    
+    #scene bg computer
+    show screen computer
     "I let out a sigh,  it was honestly hard to decide just where to begin. It was so much to do and was also intimidating. I honestly wondered what I was getting into, maybe I had made the wrong choice."
+    
     "The was going to be a lot more work than I thought. Just how was I going to prove to my mother that I can do this."
     Lazylandcat "Hey there."
     "I was just sitting in front of my computer staring at the screen when a friend of mine sent me an instant message."
@@ -62,5 +64,5 @@ label artist_event2:
     "I was going to prove my friends wrong. I can put effort into things. I can go the distance."
     
     $ artist_event2 = True
-    
+    hide screen computer
     jump sim
