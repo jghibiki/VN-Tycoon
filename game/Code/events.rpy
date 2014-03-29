@@ -137,11 +137,10 @@ init python:
             else:
                 self.outputQuantity = Thread.returnScalar
             
-            if self.input=="money":
-                self.inputQuantity *= 8
-
-            if self.output=="money":
-                self.outputQuantity *= 8
+            # if self.input=="money":
+                # self.inputQuantity *= 8
+            # if self.output=="money":
+                # self.outputQuantity *= 8
 
                 
             self.stage = "reminder" #or response
