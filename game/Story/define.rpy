@@ -99,6 +99,41 @@ image side artist upset:
     "artist upset"
     crop (0, 0, 613, 426) size (392, 272)
     
+image side coder confused:
+    "coder confused"
+    crop (0, 0, 613, 426) size (392, 272)
+image side coder confused_glasses:
+    "coder confused_glasses"
+    crop (0, 0, 613, 426) size (392, 272)
+image side coder excited:
+    "coder excited"
+    crop (0, 0, 613, 426) size (392, 272)
+image side coder happy:
+    "coder happy"
+    crop (0, 0, 613, 426) size (392, 272)
+image side coder neutral:
+    "coder neutral"
+    crop (0, 0, 613, 426) size (392, 272)
+image side coder neutral_2:
+    "coder neutral_2"
+    crop (0, 0, 613, 426) size (392, 272)
+image side coder sad:
+    "coder sad"
+    crop (0, 0, 613, 426) size (392, 272)
+image side coder scared:
+    "coder scared"
+    crop (0, 0, 613, 426) size (392, 272)
+image side coder tense:
+    "coder tense"
+    crop (0, 0, 613, 426) size (392, 272)
+image side coder tense_glasses:
+    "coder tense_glasses"
+    crop (0, 0, 613, 426) size (392, 272)
+image side coder tense_hardcore:
+    "coder tense_hardcore"
+    crop (0, 0, 613, 426) size (392, 272)
+
+    
 image phone_mom:
     "Assets/sprites/phone_mom.png"
     yalign 0.0
