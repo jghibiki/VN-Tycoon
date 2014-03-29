@@ -251,17 +251,8 @@ init:
         (1366, 768),
         (0, 0), ConditionSwitch("job=='writer' or job=='artist'", "Assets/bg/room/picture1.png", "True", "Assets/bg/room/picture2.png"),
         (0, 0), "Assets/bg/room/room_base_closed.png",
-        (0, 0), "Assets/bg/room/hand1.png",
-        (0, 0), "Assets/bg/room/hand2.png",
-        (0, 0), ConditionSwitch("day%7>0", "Assets/bg/room/pizza1.png", "True", Solid("#00000000")),
-        (0, 0), ConditionSwitch("day%7>1", "Assets/bg/room/soda1.png", "True", Solid("#00000000")),
-        (0, 0), ConditionSwitch("day%7>2", "Assets/bg/room/pizza2.png", "True", Solid("#00000000")),
-        (0, 0), ConditionSwitch("day%7>3", "Assets/bg/room/soda2.png", "True", Solid("#00000000")),
-        (0, 0), ConditionSwitch("day%7>4", "Assets/bg/room/pizza3.png", "True", Solid("#00000000")),
-        (0, 0), ConditionSwitch("day%7>5", "Assets/bg/room/soda3.png", "True", Solid("#00000000")),
-        (0, 0), ConditionSwitch("day%7>5", "Assets/bg/room/pizza4.png", "True", Solid("#00000000")),
-        (0, 0), ConditionSwitch("job=='writer'", "Assets/bg/room/books.png", "True", Solid("#ffffff00")),
-        (0, 0), ConditionSwitch("job=='composer'", "Assets/bg/room/speakers2.png", "True", "Assets/bg/room/speakers1.png"),
+        #(0, 0), "Assets/bg/room/hand1.png",
+        #(0, 0), "Assets/bg/room/hand2.png",
         (0, 0), ConditionSwitch(
                 "minutes > 60*17", im.MatrixColor("Assets/bg/room/room_shadow2_closed.png",im.matrix.opacity(1.0)),
                 "minutes > 60*16", im.MatrixColor("Assets/bg/room/room_shadow1_closed.png",im.matrix.opacity(1.0)),
@@ -273,17 +264,7 @@ init:
                 "minutes > 60*10", im.MatrixColor("Assets/bg/room/room_shadow1_closed.png",im.matrix.opacity(0.4)),
                 "minutes > 60*9", im.MatrixColor("Assets/bg/room/room_shadow1_closed.png",im.matrix.opacity(0.3)),
                 "True", im.MatrixColor("Assets/bg/room/room_shadow1_closed.png",im.matrix.opacity(0.2))),
-        # (0, 0), ConditionSwitch(
-                # "minutes > 60*17", "Assets/bg/room/room_light1.png",
-                # "True", Solid("#ffffff00"))
-    )
 
-    image room_left = LiveComposite(
-        (1366, 768),
-        (0, 0), ConditionSwitch("job=='writer' or job=='artist'", "Assets/bg/room/picture1.png", "True", "Assets/bg/room/picture2.png"),
-        (0, 0), "Assets/bg/room/room_base_left.png",
-        (0, 0), "Assets/bg/room/hand1.png",
-        (0, 0), "Assets/bg/room/hand2.png",
         (0, 0), ConditionSwitch("day%7>0", "Assets/bg/room/pizza1.png", "True", Solid("#00000000")),
         (0, 0), ConditionSwitch("day%7>1", "Assets/bg/room/soda1.png", "True", Solid("#00000000")),
         (0, 0), ConditionSwitch("day%7>2", "Assets/bg/room/pizza2.png", "True", Solid("#00000000")),
@@ -293,6 +274,16 @@ init:
         (0, 0), ConditionSwitch("day%7>5", "Assets/bg/room/pizza4.png", "True", Solid("#00000000")),
         (0, 0), ConditionSwitch("job=='writer'", "Assets/bg/room/books.png", "True", Solid("#ffffff00")),
         (0, 0), ConditionSwitch("job=='composer'", "Assets/bg/room/speakers2.png", "True", "Assets/bg/room/speakers1.png"),
+        
+
+    )
+
+    image room_left = LiveComposite(
+        (1366, 768),
+        (0, 0), ConditionSwitch("job=='writer' or job=='artist'", "Assets/bg/room/picture1.png", "True", "Assets/bg/room/picture2.png"),
+        (0, 0), "Assets/bg/room/room_base_left.png",
+        #(0, 0), "Assets/bg/room/hand1.png",
+        #(0, 0), "Assets/bg/room/hand2.png",
         (0, 0), ConditionSwitch(
                 "minutes > 60*17", im.MatrixColor("Assets/bg/room/room_shadow2_left.png",im.matrix.opacity(1.0)),
                 "minutes > 60*16", im.MatrixColor("Assets/bg/room/room_shadow1_left.png",im.matrix.opacity(1.0)),
@@ -304,17 +295,7 @@ init:
                 "minutes > 60*10", im.MatrixColor("Assets/bg/room/room_shadow1_left.png",im.matrix.opacity(0.4)),
                 "minutes > 60*9", im.MatrixColor("Assets/bg/room/room_shadow1_left.png",im.matrix.opacity(0.3)),
                 "True", im.MatrixColor("Assets/bg/room/room_shadow1_left.png",im.matrix.opacity(0.2))),
-        # (0, 0), ConditionSwitch(
-                # "minutes > 60*17", "Assets/bg/room/room_light1.png",
-                # "True", Solid("#ffffff00"))
-    )
-    
-    image room_right = LiveComposite(
-        (1366, 768),
-        (0, 0), ConditionSwitch("job=='writer' or job=='artist'", "Assets/bg/room/picture1.png", "True", "Assets/bg/room/picture2.png"),
-        (0, 0), "Assets/bg/room/room_base_right.png",
-        (0, 0), "Assets/bg/room/hand1.png",
-        (0, 0), "Assets/bg/room/hand2.png",
+
         (0, 0), ConditionSwitch("day%7>0", "Assets/bg/room/pizza1.png", "True", Solid("#00000000")),
         (0, 0), ConditionSwitch("day%7>1", "Assets/bg/room/soda1.png", "True", Solid("#00000000")),
         (0, 0), ConditionSwitch("day%7>2", "Assets/bg/room/pizza2.png", "True", Solid("#00000000")),
@@ -324,6 +305,15 @@ init:
         (0, 0), ConditionSwitch("day%7>5", "Assets/bg/room/pizza4.png", "True", Solid("#00000000")),
         (0, 0), ConditionSwitch("job=='writer'", "Assets/bg/room/books.png", "True", Solid("#ffffff00")),
         (0, 0), ConditionSwitch("job=='composer'", "Assets/bg/room/speakers2.png", "True", "Assets/bg/room/speakers1.png"),
+
+    )
+    
+    image room_right = LiveComposite(
+        (1366, 768),
+        (0, 0), ConditionSwitch("job=='writer' or job=='artist'", "Assets/bg/room/picture1.png", "True", "Assets/bg/room/picture2.png"),
+        (0, 0), "Assets/bg/room/room_base_right.png",
+        #(0, 0), "Assets/bg/room/hand1.png",
+        #(0, 0), "Assets/bg/room/hand2.png",
         (0, 0), ConditionSwitch(
                 "minutes > 60*17", im.MatrixColor("Assets/bg/room/room_shadow2_right.png",im.matrix.opacity(1.0)),
                 "minutes > 60*16", im.MatrixColor("Assets/bg/room/room_shadow1_right.png",im.matrix.opacity(1.0)),
@@ -335,9 +325,17 @@ init:
                 "minutes > 60*10", im.MatrixColor("Assets/bg/room/room_shadow1_right.png",im.matrix.opacity(0.4)),
                 "minutes > 60*9", im.MatrixColor("Assets/bg/room/room_shadow1_right.png",im.matrix.opacity(0.3)),
                 "True", im.MatrixColor("Assets/bg/room/room_shadow1_right.png",im.matrix.opacity(0.2))),
-        # (0, 0), ConditionSwitch(
-                # "minutes > 60*17", "Assets/bg/room/room_light1.png",
-                # "True", Solid("#ffffff00"))
+
+        (0, 0), ConditionSwitch("day%7>0", "Assets/bg/room/pizza1.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>1", "Assets/bg/room/soda1.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>2", "Assets/bg/room/pizza2.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>3", "Assets/bg/room/soda2.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>4", "Assets/bg/room/pizza3.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>5", "Assets/bg/room/soda3.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("day%7>5", "Assets/bg/room/pizza4.png", "True", Solid("#00000000")),
+        (0, 0), ConditionSwitch("job=='writer'", "Assets/bg/room/books.png", "True", Solid("#ffffff00")),
+        (0, 0), ConditionSwitch("job=='composer'", "Assets/bg/room/speakers2.png", "True", "Assets/bg/room/speakers1.png"),
+
     )
     
 
@@ -350,10 +348,14 @@ screen sim:
     add "#000"
     add "room_closed"
     
+    
+    
     #imagebutton idle "Assets/bg/room/room_base_closed.png" hover "Assets/bg/room/room_base_left.png" focus_mask "Assets/bg/room/left-door-mask.png" action [Return("work")] 
     imagebutton idle "#00000000" hover "room_left" focus_mask "Assets/bg/room/left_door_mask.png" action [Hide("gui_tooltip"), Return("work")] hovered [Play("sound", "Assets/sfx/door open.ogg"), Show("gui_tooltip", my_picture="tooltip_work") ] unhovered [Hide("gui_tooltip")]
     
     imagebutton idle "#00000000" hover "room_right" focus_mask "Assets/bg/room/right_door_mask.png" action [Hide("gui_tooltip"), Return("sleep")] hovered [Play("sound", "Assets/sfx/door open.ogg"), Show("gui_tooltip", my_picture="tooltip_sleep") ] unhovered [Hide("gui_tooltip")]
+    
+    
     
     imagebutton idle "Assets/bg/room/computer_off.png" hover "Assets/bg/room/computer_on.png" focus_mask "Assets/bg/room/computer_mask.png" action [Hide("gui_tooltip"), Return("computer")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_computer") ] unhovered [Hide("gui_tooltip")]
     if inventory.has_item(tablet):
@@ -374,6 +376,7 @@ screen sim:
     if inventory.has_item(book_c):
         imagebutton auto "Assets/bg/room/book4_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("read4")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_read4") ] unhovered [Hide("gui_tooltip")]
     
+    $ AClocks2(715, 203)
     if minutes > 60*17:
         add "Assets/bg/room/room_light1.png"
     
@@ -455,3 +458,18 @@ screen select_time:
                         textbutton "8h" action Return("a8")
                 textbutton "Back" action Return("desktop") # a lazy work around to make
                                                             #back work 
+
+init python:
+    def AClocks2(x=.5, y=.5):
+#            ui.at(Position(xpos=x, ypos=y, xanchor="center", yanchor="center"))
+#            ui.add("clock_2")
+           
+
+
+            ui.at(Position(xpos=x, ypos=y, xanchor="center", yanchor="center"))
+            ui.at(RotoZoom ((minutes*0.5), (minutes*0.5), 5.0, 1, 1, 1, rot_bounce= False, rot_anim_timebase=False, opaque=False))
+            ui.add("Assets/gui/c_hand1.png")
+                                                            
+            ui.at(Position(xpos=x, ypos=y, xanchor="center", yanchor="center"))
+            ui.at(RotoZoom((minutes*6), (minutes*6), 5.0, 1, 1, 1, rot_bounce= False, rot_anim_timebase=False, opaque=False), )
+            ui.add("Assets/gui/c_hand2.png")
