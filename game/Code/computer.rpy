@@ -25,9 +25,8 @@ label computer:
             call screen lsf_recruitment
         elif showBrowser == "lsf_messages":
             call screen lsf_messages
-        elif showBrowser == "stalkmeplz":
-            #show computer browser stalkMePlz
-            call screen stalkMePlz
+#        elif showBrowser == "stalkmeplz":
+#            call screen stalkMePlz
         elif showBrowser == "BMTMezzo":
             call screen game_list
         elif showSentence and type(showSentence) == bool:

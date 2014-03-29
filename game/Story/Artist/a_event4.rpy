@@ -10,7 +10,11 @@ label artist_event4:
     show screen lsf(showOptions=False)
     Martha "I needed to take my mind off my problems so I began scanning through Lemming Soft Forums, and then I noticed it. A forum called 'Rant about your problems.'"
     Martha "It was perfect. Like some kind of miracle had called me to this place. It was just want I needed a place where people talked about their issues and other people helped them out by just talking with them. A place to rant and vent."
-    if skills.writing>=1:
+    $ writing_fail = False
+    if skills.writing<1:
+        $ writing_fail = True
+    
+    if not writing_fail:
         Martha happy "I found out I had more issues than I thought. They just kept flowing out and the post began more paragraphs than I had originally wanted."
         Martha "They are probably going to think I'm some kind of whiny babby...."
         Martha "I let out a sigh and just to push myself out there, like I did in my art. I couldn't stay holded up never showing myself to anyone."
