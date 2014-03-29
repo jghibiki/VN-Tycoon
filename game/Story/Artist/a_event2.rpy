@@ -3,7 +3,8 @@
 #Requirements: Auto - Day 2 or so
 
 label artist_event2:
-    
+    $ config.rollback_enabled = True
+    $ renpy.block_rollback()    
     #scene bg computer
     show screen computer
     "I let out a sigh,  it was honestly hard to decide just where to begin. It was so much to do and was also intimidating. I honestly wondered what I was getting into, maybe I had made the wrong choice."

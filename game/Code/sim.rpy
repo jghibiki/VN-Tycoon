@@ -23,22 +23,49 @@ label sim:
         if not _return or _return=="desktop":
             $pass
         else:
-            $ duration = int(_return[1])
-            if _return[0]=="p":
-                if time.dec(duration):
-                    if skills.increase("art", duration):
-                        "You spend some time practicing drawing."
+            $ dur = int(_return[1])
+            if _return[0] == "p":
+                if time.dec(dur):
+                    if skills.increase("art", dur):
+                        call drawingAnimation
+                        "You spend some time practing drawing."
                     else:
                         "You are the very best. Like no one ever was."
                 else:
                     "You are too sleepy to draw."
-            else:
-                if time.dec(duration):
-                    $ mygame.do_art(duration)
-                    $ completion = round((mygame.art_done/mygame.art_needed)*100, 2)
-                    "You draw some sprites for your game.[completion]\% Completed"
+            elif _return[0] == "w":
+                if time.dec(dur):
+                    if comishWork.increase("art", dur):
+                        call drawingAnimation
+                        "You spend some time working on comissions."
+                    else:
+                        "You should really turn in your work already."
                 else:
                     "You are too sleepy to draw."
+            else:
+                if time.dec(dur):
+                    $mygame.do_art(dur)
+                    $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
+                    call drawingAnimation
+                    "You draw some sprites for your game. [completion]\% Completed"
+                else:
+                    "You are too sleepy to draw."
+            
+            # if _return[0]=="p":
+                # if time.dec(duration):
+                    # if skills.increase("art", duration):
+                        # "You spend some time practicing drawing."
+                    # else:
+                        # "You are the very best. Like no one ever was."
+                # else:
+                    # "You are too sleepy to draw."
+            # else:
+                # if time.dec(duration):
+                    # $ mygame.do_art(duration)
+                    # $ completion = round((mygame.art_done/mygame.art_needed)*100, 2)
+                    # "You draw some sprites for your game.[completion]\% Completed"
+                # else:
+                    # "You are too sleepy to draw."
                 
     if action == "sleep":
         $ time.dec(0)
@@ -127,20 +154,34 @@ label sim:
         if not _return or _return=="desktop":
             $pass
         else:
-            $ duration = int(_return[1])
-            if _return[0]=="p":
-                if time.dec(duration):
-                    $ skills.increase("music", duration)
-                    "You spend some time practicing composing."
+            $ dur = int(_return[1])
+            if _return[0] == "p":
+                if time.dec(dur):
+                    if skills.increase("music", dur):
+                        #call screen composingAnimation
+                        "You spend some time practing composing music."
+                    else:
+                        "You are the very best. Like no one ever was."
                 else:
                     "You are too sleepy to compose."
-            elif _return[0] == "a":
-                if time.dec(duration):
-                    $ mygame.do_music(duration)
-                    $ completion = round((mygame.music_done/mygame.music_needed)*100, 2)
-                    "You work on composing some music for your game.[completion]\% Completed"            
+            elif _return[0] == "w":
+                if time.dec(dur):
+                    if comishWork.increase("music", dur):
+                        #call composingAnimation
+                        "You spend some time working on comissions."
+                    else:
+                        "You should really turn in your work already."
                 else:
                     "You are too sleepy to compose."
+            else:
+                if time.dec(dur):
+                    $mygame.do_music(dur)
+                    $completion = round(((mygame.music_done/mygame.music_needed)*100),2) 
+                    #call screen composingAnimation
+                    "You make some music for your game.
+                    [completion]\% Completed"
+                else:
+                    "You are too sleepy to compose."           
 
     if action == "sales":
         
@@ -367,8 +408,8 @@ screen sim:
                 #textbutton "G. stats" action Show("game_progress")
                 #textbutton "New game!" action Show("new_game")
             
-                if mygame.started:
-                    textbutton "Release" action Jump("publish")
+                #if mygame.started:
+                #    textbutton "Release" action Jump("publish")
             
             
 init:

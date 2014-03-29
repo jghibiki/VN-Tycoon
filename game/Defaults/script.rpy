@@ -47,10 +47,10 @@ label start:
         inventory = Inventory()
         tablet = Item("Drawing Tablet", 149.00, "Assets/gui/shop_tablet.png", "art", 56)
         keyboard = Item("Keyboard", 129.99, "Assets/gui/shop_keyboard.png", "music", 56)
-        book_c = Item("Composing for Morons", 39.99, "Assets/gui/shop_book.png", "music", 40)
-        book_w = Item("Writing for the Asinine", 39.99, "Assets/gui/shop_book.png", "writing", 40)
-        book_p = Item("Programming for Idiots",39.99, "Assets/gui/shop_book.png", "coding", 40)
-        book_d = Item("Drawing for Losers", 39.99, "Assets/gui/shop_book.png", "art", 40)
+        book_c = Item("Composing for Morons", 29.99, "Assets/gui/shop_book.png", "music", 40)
+        book_w = Item("Writing for the Asinine", 29.99, "Assets/gui/shop_book.png", "writing", 40)
+        book_p = Item("Programming for Idiots",29.99, "Assets/gui/shop_book.png", "coding", 40)
+        book_d = Item("Drawing for Losers", 29.99, "Assets/gui/shop_book.png", "art", 40)
         
         #variables for tarzan
         showCart = False

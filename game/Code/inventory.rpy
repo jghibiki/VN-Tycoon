@@ -4,6 +4,9 @@ init -2 python:
             self.name = name
             self.price = price 
             self.pic = pic
+            self.skill=skill
+            self.skill_inc=skill_inc
+            
 
     class Inventory:
         def __init__(self, money=0):
