@@ -89,10 +89,10 @@ init python:
 ## Messaging and Forum Threads 
 
     #the players message box
-    messages = []
+    #messages = []
     
     #the messages in the recruitment forum
-    threads = []
+    #threads = []
 
     #the chance of getting a message
     repBonus = .04
@@ -129,7 +129,21 @@ init python:
             self.output = Thread.categories[random.randint(0,4)]
             #self.inputQuantity = round(Thread.scalar - (store.repBonus + randrangef(0.2,0.6, 0.01)) * Thread.scalar) 
             self.inputQuantity = round(Thread.scalar - (repBonus + randrangef(0.2,0.6, 0.01)) * Thread.scalar) 
-            self.outputQuantity =  self.inputQuantity > Thread.returnScalar+1 if  self.inputQuantity - Thread.returnScalar else Thread.returnScalar
+            
+            #self.outputQuantity =  self.inputQuantity > Thread.returnScalar+1 if  self.inputQuantity - Thread.returnScalar else Thread.returnScalar
+            
+            if self.inputQuantity > Thread.returnScalar+1:
+                self.outputQuantity = self.inputQuantity - Thread.returnScalar
+            else:
+                self.outputQuantity = Thread.returnScalar
+            
+            if self.input=="money":
+                self.inputQuantity *= 8
+
+            if self.output=="money":
+                self.outputQuantity *= 8
+
+                
             self.stage = "reminder" #or response
             self.user = make_user()
             self.description  = ""

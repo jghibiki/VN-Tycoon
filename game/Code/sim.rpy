@@ -5,7 +5,7 @@ label sim:
     show room_closed
     $ action = _return
     if action == "work":
-        $ salary = max(skills.art, skills.writing, skills.coding, skills.music)
+        $ salary = max(skills.art, skills.writing, skills.coding, skills.music) * 4
         if time.dec(4):
             $ event = eventcheck("job")            
             if event[0]=="story":
