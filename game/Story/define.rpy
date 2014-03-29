@@ -17,8 +17,8 @@ define Antagonist = Character('Antagonist', color="#356AA0", show_two_window=Tru
 
 
 #coder:
-define t = Character('Toby', color="#356AA0", show_two_window=True)#, image="coder", window_left_padding=210, who_left_padding=210)
-define ts = Character('Toby', color="#356AA0", show_two_window=True, what_prefix="\"", what_suffix="\"")
+define t = Character('Toby', color="#356AA0", show_two_window=True, image="coder", window_left_padding=210, who_left_padding=210)
+define ts = Character('Toby', color="#356AA0", show_two_window=True, image="coder", window_left_padding=210, who_left_padding=210, what_prefix="\"", what_suffix="\"")
 define m = Character('Mark', color="#356AA0", show_two_window=True, what_prefix="\"", what_suffix="\"")
 
 
@@ -26,13 +26,17 @@ define m = Character('Mark', color="#356AA0", show_two_window=True, what_prefix=
 
 
 init -2 python:
-    for expression in ["annoyed", "crying", "crying_less", "happy", "happy_blush", "sad", "surprise", "upset"]:
+    for expression in ["annoyed", "crying", "crying_less", "crying_happy", "happy", "happy_blush", "sad", "surprise", "upset"]:
             renpy.image("artist " + expression, "Assets/sprites/artist/"+expression+".png")
 
     for expression in ["despair", "laugh_big", "laugh_med", "neutral", "scowl_closed", "scowl_open"]:
         renpy.image("writer " + expression + " hat", "Assets/sprites/writer/hat/"+expression+".png")
         renpy.image("writer " + expression, "Assets/sprites/writer/nohat/"+expression+".png")
-            
+
+    for expression in ["confused", "confused_glasses", "excited", "happy", "neutral", "neutral_2", "sad", "scared", "tense", "tense_glasses", "tense_hardcore"]:
+        renpy.image("coder " + expression, "Assets/sprites/coder/"+expression+".png")
+
+        
 image side writer despair:
     "writer despair"
     crop (0, 0, 613, 426) size (392, 272)
