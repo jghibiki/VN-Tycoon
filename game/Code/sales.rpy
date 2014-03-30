@@ -18,7 +18,7 @@ init python:
         
 init -1:
     $ game_tmp = None
-    
+
 label edit_price:
     $ price = round(game_tmp.price, 2)
     call screen edit_price(game_tmp.price)

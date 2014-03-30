@@ -222,6 +222,10 @@ label publish:
     if mygame.publish():
         $ make_cover(mygame)
         $ games.append(mygame)
+        if mygame.commercial:
+            $ repBonus += 0.1
+        else:
+            $ repBonus += 1.0
         $ mygame = Game()
     else:
         "It's not finished!"

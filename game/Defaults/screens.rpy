@@ -54,7 +54,7 @@ init -1 python:
     style.say_window.bottom_padding=67
     style.say_window.top_padding=25
     
-    style.say_window.yminimum = 169
+    style.say_window.yminimum = 200
     
     style.say_who_window.background = Frame("Assets/gui/namebox1.png", 15, 15)
     style.say_who_window.left_margin = 66

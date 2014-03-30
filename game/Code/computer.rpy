@@ -123,18 +123,27 @@ label computer:
                 #then provide reward
                 if turnedIn:
                     $messages[_return[1]].stage = "response"
+                    $ skill_tmp = (repBonus * 10)
+                    if skill_tmp > 6:
+                        $ skill_tmp = 6
+                    $ quantity_tmp = messages[_return[1]].outputQuantity
+                    
                     if messages[_return[1]].output == "money":
-                        $inventory.money += messages[_return[1]].outputQuantity
+                        $inventory.money += quantity_tmp
                     elif messages[_return[1]].output == "art":
-                        $mygame.art_done += messages[_return[1]].outputQuantity
+                        $mygame.art_done += quantity_tmp
+                        $mygame.art_quality += skill_tmp * (quantity_tmp/2)
                     elif messages[_return[1]].output == "coding":
-                        $mygame.coding_done += messages[_return[1]].outputQuantity
+                        $mygame.coding_done += quantity_tmp
+                        $mygame.coding_quality += skill_tmp * (quantity_tmp / 2)
                     elif messages[_return[1]].output == "music":
-                        $mygame.music_done += messages[_return[1]].outputQuantity
+                        $mygame.music_done += quantity_tmp
+                        $mygame.music_quality += skill_tmp * (quantity_tmp / 2)
                     elif messages[_return[1]].output == "writing":
-                        $mygame.writing_done += messages[_return[1]].outputQuantity
+                        $mygame.writing_done += quantity_tmp
+                        $mygame.writing_quality += skill_tmp * (quantity_tmp / 2)
                     ###
-                    $ repBonus += .01
+                    $ repBonus += .1
                     ###
             if _return[0] == "msgDelete":
                 $messages.pop(_return[1])
@@ -777,6 +786,7 @@ screen lsf_messages:
                         elif item.stage == "response":
                             text "[item.response]" style "stdTxt" size 18 xpos 330 xsize 900 ypos -110
                         imagebutton auto "Assets/gui/lsf_delete_%s.png" focus_mask True action Return(("msgDelete", msgCounter)) xpos 1012 ypos -100 #delete a messege 
+                        $msgCounter += 1
                         
         vbar value YScrollValue("lsfMessages") xpos 1250
     

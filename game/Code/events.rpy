@@ -16,7 +16,12 @@ init python:
             for i in range(x): #do a check for every hour that has passed
                 for g in games:
 #                    if g.commercial: #sales
-                        chance = 12 - int(g.quality) #bigger game quality means bigger chance of sale
+                        #base_chance = 22
+                        repBonus_tmp = repBonus
+                        if repBonus_tmp > 10:
+                            repBonus_tmp=10
+                        chance = 2 - int(g.quality) - int(repBonus_tmp) #bigger game quality and reputation mean bigger chance of sale
+                        
                         if chance<2:
                             chance = 2
                         diff = g.price - g.recommended_price

@@ -4,21 +4,21 @@ init -9 python:
 #artist:   
 define Phone = Character('Phone', color="#36393D", show_two_window=True)
 define Mom = Character('Mom', color="#356AA0", show_two_window=True, what_prefix="\"", what_suffix="\"")
-define Martha = Character('Martha', color="#356AA0", show_two_window=True, image="artist", window_left_padding=210, who_left_padding=210)
-define Marthas = Character('Marthas', color="#356AA0", show_two_window=True, image="artist", window_left_padding=210, who_left_padding=210, what_prefix="\"", what_suffix="\"")
+define Martha = Character('Martha', color="#356AA0", show_two_window=True, image="artist", window_left_padding=220, who_left_padding=220)
+define Marthas = Character('Martha', color="#356AA0", show_two_window=True, image="artist", window_left_padding=220, who_left_padding=220, what_prefix="\"", what_suffix="\"")
 define Fancymom = Character('Fancymom', color="#FF0084", show_two_window=True, what_prefix="\"", what_suffix="\"") #Facebook
 define Lazylandcat = Character('Lazylandcat', color="#FF7400", show_two_window=True, kind=nvl) #chat
 define Artgirl = Character('Artgirl', color="#36393D", show_two_window=True, kind=nvl) #chat
 
 #writer:
-define Joan = Character('Joan', color="#356AA0", show_two_window=True, image="writer", window_left_padding=210, who_left_padding=210)
-define Joans = Character('Joan', color="#356AA0", show_two_window=True, image="writer", window_left_padding=210, who_left_padding=210, what_prefix="\"", what_suffix="\"")
+define Joan = Character('Joan', color="#356AA0", show_two_window=True, image="writer", window_left_padding=220, who_left_padding=220)
+define Joans = Character('Joan', color="#356AA0", show_two_window=True, image="writer", window_left_padding=220, who_left_padding=220, what_prefix="\"", what_suffix="\"")
 define Antagonist = Character('Antagonist', color="#356AA0", show_two_window=True, what_prefix="\"", what_suffix="\"")
 
 
 #coder:
-define t = Character('Toby', color="#356AA0", show_two_window=True, image="coder", window_left_padding=210, who_left_padding=210)
-define ts = Character('Toby', color="#356AA0", show_two_window=True, image="coder", window_left_padding=210, who_left_padding=210, what_prefix="\"", what_suffix="\"")
+define t = Character('Toby', color="#356AA0", show_two_window=True, image="coder", window_left_padding=220, who_left_padding=220)
+define ts = Character('Toby', color="#356AA0", show_two_window=True, image="coder", window_left_padding=220, who_left_padding=220, what_prefix="\"", what_suffix="\"")
 define m = Character('Mark', color="#356AA0", show_two_window=True, what_prefix="\"", what_suffix="\"")
 
 
