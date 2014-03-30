@@ -706,29 +706,16 @@ screen lsf(showOptions=True):
 screen lsf_recruitment:
     use webBrowser
                                         #Working Back button ???
-#vbox:
-    #xpos 1
-    #ypos 1
-    #frame:
     window:
         xpos 0#28 #75
         ypos 110 #125
         xanchor 0.0
         yanchor 0.0
-        #xsize 1216
         xsize 1266
         ymaximum 580
         background None
         hbox:
-            #frame:
-            
-            #    background None#"#fff"
-                #xmaximum 1000
-                #xminimum 1000
-            #    xsize 1216
-            #    ymaximum 450
             viewport id "lsfThreads":
-                    
                     mousewheel True
                     vbox:
                         $threadCount = 0
@@ -736,30 +723,20 @@ screen lsf_recruitment:
                         for item in threads:
                             frame:
                                 xpos 47
-                                #xanchor 0.0
-                                #background "#ccc"
                                 background "#FFF"
-                                #xsize 1216
                                 xsize 1200
-                                #xmaximum 1000
-                                #xminimum 1000
                                 vbox:
                                     hbox:
                                         add "Assets/gui/lsf_unread.png"
+                                        
                                         window:
                                             ysize 39
                                             background Frame("Assets/gui/lsf_title_frame.png", 2, 2, 2, 2)
-                                            
-                                        #make this line a different color than the main post
-                                            text "[item.title]" style "stdTxt" color "006597" size 18
-                                            #null width 20
-                                            text "[item.user]" style "stdTxt" xpos 900 size 14
+                                    text "[item.title]" style "stdTxt" color "006597" size 18 xpos 61 ypos -30
+                                    text "[item.user]" style "stdTxt" xpos 961 size 14 ypos -40
+                                    text "[item.description]" style "stdTxt" ypos -30
 
-                                    hbox:
-                                        text "[item.description]" style "stdTxt"
-                                    hbox:
-                                        imagebutton auto "Assets/gui/lsf_pm_%s.png" focus_mask True action Return(("replyThread", threadCount))
-                                        
+                                    imagebutton auto "Assets/gui/lsf_pm_%s.png" focus_mask True action Return(("replyThread", threadCount))
                                         #textbutton "PM" action Return(("replyThread", threadCount))
                                     $threadCount += 1
                             null height 3

@@ -101,7 +101,8 @@ init python:
     def pollThreads():
         import random
         if len(threads) < 3:
-            for i in range(random.randint(5,15)):
+            #for i in range(random.randint(5,15)):
+            for i in range(random.randint(105,115)):
                 threads.append(generateThread())
         else:
             threads.pop(0)
@@ -126,7 +127,10 @@ init python:
         
         def __init__(self, repBonus):
             self.input = Thread.categories[random.randint(0,4)]
-            self.output = Thread.categories[random.randint(0,4)]
+            self.output=self.input
+            while self.output==self.input:
+                self.output = Thread.categories[random.randint(0,4)]
+            
             #self.inputQuantity = round(Thread.scalar - (store.repBonus + randrangef(0.2,0.6, 0.01)) * Thread.scalar) 
             self.inputQuantity = round(Thread.scalar - (repBonus + randrangef(0.2,0.6, 0.01)) * Thread.scalar) 
             
@@ -137,10 +141,11 @@ init python:
             else:
                 self.outputQuantity = Thread.returnScalar
             
-            #if self.input=="money":
-                #self.inputQuantity *= 8
-            # if self.output=="money":
-                # self.outputQuantity *= 8
+            if random.randint(1,10)>1:
+                if self.input=="money":
+                    self.inputQuantity *= 50
+                if self.output=="money":
+                    self.outputQuantity *= 50
 
                 
             self.stage = "reminder" #or response
@@ -152,10 +157,7 @@ init python:
             self.title = ""
             while(self.title  == ""):
                 self.title = self.generateTitle()
-            
-            
-                
-            #todo: create a means of generating a post title that is semi-relivant, will likely use the same format for inserting info as the descriptions do
+  
             self.reminder = ""
             self.response = ""
             while self.reminder == "" or self.response == "":
@@ -224,7 +226,29 @@ init python:
                 desc = desc.replace("<*output*>",self.output)
                 desc = desc.replace("<*outputQuantity*>", str(self.outputQuantity))
                 desc = desc.replace("True ", "")
+                desc = desc.replace("<*user*>", self.user)
 
+                job_in = ""
+                job_out = ""
+                if self.input == "art":
+                    job_in = random.choice(["artist", "Artist", "an artist", "an Artist"])
+                if self.input == "music":
+                    job_in = random.choice(["composer", "music composer", "a composer", "Music Composer", "musician"])                
+                if self.input == "writing":
+                    job_in = random.choice(["writer", "a writer", "Writer", "a Writer"])
+                if self.input == "coding":
+                    job_in = random.choice(["coder", "a coder", "Coder", "a Coder", "programmer", "a programmer", "Programmer", "a Programmer"])
+                if self.output == "art":
+                    job_out = random.choice(["artist", "Artist", "an artist", "an Artist"])
+                if self.output == "music":
+                    job_out = random.choice(["composer", "music composer", "a composer", "Music Composer", "musician"])                
+                if self.output == "writing":
+                    job_out = random.choice(["writer", "a writer", "Writer", "a Writer"])
+                if self.output == "coding":
+                    job_out = random.choice(["coder", "a coder", "Coder", "a Coder", "programmer", "a programmer", "Programmer", "a Programmer"])
+                desc = desc.replace("<*job_in*>", job_in)
+                desc = desc.replace("<*job_out*>", job_out)
+                
             return desc
         
         def generateMessages(self):
@@ -243,6 +267,8 @@ init python:
 
             response = msgResponseOptions[random.randint(0, len(msgResponseOptions)-1)]
 
+            
+            
             return reminder, response
 
         def reply(self, index):
