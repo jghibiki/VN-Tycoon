@@ -373,8 +373,9 @@ screen game_progress(curr_game = mygame):
                         text " ([completion] %)" style "henpie"  
                 else:
                     hbox:
-                        text "Quality:"
-                        text str(curr_game.quality)
+                        text "Quality:" style "henpie"
+                        $ quality = round(curr_game.quality,2)
+                        text str(quality) style "henpie"
                         
                         
             

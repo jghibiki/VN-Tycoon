@@ -101,7 +101,7 @@ init python:
     def pollThreads():
         import random
         if len(threads) == 0:
-            for i in range(random.randint(5,15)):
+            for i in range(random.randint(105,115)):
                 threads.append(generateThread())
         else:
             threads.pop(0)
@@ -119,7 +119,7 @@ init python:
     # and the gain of some asset progress for one of your games. The higher your repBonus, the greater the amount of 
     # asset progress you will recieve (as though with a higher reputation you can ask more reputable sources for help)
     class Thread:
-        import random
+        #import random
         categories = ["art", "music", "writing", "coding", "money"]
         scalar = 20 #the base number of hours to be input
         returnScalar = 2 #the difference between the return and the input
@@ -137,8 +137,8 @@ init python:
             else:
                 self.outputQuantity = Thread.returnScalar
             
-            # if self.input=="money":
-                # self.inputQuantity *= 8
+            #if self.input=="money":
+                #self.inputQuantity *= 8
             # if self.output=="money":
                 # self.outputQuantity *= 8
 
@@ -148,12 +148,53 @@ init python:
             self.description  = ""
             while(self.description  == ""):
                 self.description = self.generateDescription()
+            
+            #while(self.title  == ""):
+            self.title = self.generateTitle()
+            
+            
+                
             #todo: create a means of generating a post title that is semi-relivant, will likely use the same format for inserting info as the descriptions do
-            self.reminder  = ""
+            self.reminder = ""
             self.response = ""
             while self.reminder == "" or self.response == "":
                   self.reminder, self.response = self.generateMessages()
 
+        def generateTitle(self):
+            title_type = random.choice(["input", "output"])
+            title_extra2 = ""
+            if self.input == "money":
+                title_type = "output"
+            if self.output == "money":
+                title_type = "input"
+                title_extra2 = random.choice(["", "", "", " [paid]", " [PAID]", " [PAID]", " ($" + str(self.outputQuantity) + ")"])
+                
+            if title_type=="input":
+                title = random.choice(threadTitlesInput)
+                title_extra = random.choice(threadTitlesInputExtras)
+            if title_type=="output":
+                title = random.choice(threadTitlesOutput)
+                title_extra = random.choice(threadTitlesOutputExtras)
+            
+            title_job = ""
+            
+            if (self.input == "art" and title_type == "input") or (self.output == "art" and title_type == "output"):
+                title_job = random.choice(["artist", "Artist", "an artist", "an Artist"])
+            if (self.input == "music" and title_type == "input") or (self.output == "music" and title_type == "output"):
+                title_job = random.choice(["composer", "music composer", "a composer", "Music Composer", "musician"])                
+            if (self.input == "writing" and title_type == "input") or (self.output == "writing" and title_type == "output"):
+                title_job = random.choice(["writer", "a writer", "Writer", "a Writer"])
+            if (self.input == "coding" and title_type == "input") or (self.output == "coding" and title_type == "output"):
+                title_job = random.choice(["coder", "a coder", "Coder", "a Coder", "programmer", "a programmer", "Programmer", "a Programmer"])
+
+            title = title.replace(" <*job*>", " " + title_job)
+            title = title.replace("<*job*>", title_job.title())
+            title = title.replace("<*user*>", self.user)
+            title = title.replace("<*output*>", self.output)
+            
+            title = title + title_extra + title_extra2
+            return title
+                  
         def generateDescription(self):
             #This function should generate a formatted string to be used by the renpy text statement when displaying the thread
             #Basically this function will randomly select a format and replace statements following a format similar to this <*input*> to place the generated values into the string accordingly  

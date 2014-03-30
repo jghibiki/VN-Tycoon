@@ -10,6 +10,7 @@ init -1 python:
 
 # The game starts here.
 label start:
+
     python:
         config.rollback_enabled = False
 

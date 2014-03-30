@@ -732,9 +732,9 @@ screen lsf_recruitment:
                                     vbox:
                                         hbox:
                                             #make this line a different color than the main post
-                                            text "Post Title: XXXXXXX" style "stdTxt"
+                                            text "Post Title: [item.title]" style "stdTxt"
                                             null width 20
-                                            text "[item.user]" style "stdTxt"
+                                            text "Author: [item.user]" style "stdTxt"
 
                                         hbox:
                                             text "[item.description]" style "stdTxt"

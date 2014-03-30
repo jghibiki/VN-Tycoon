@@ -10,7 +10,7 @@ init python:
 
     descOutputOption = {
                          "skill" : [
-                                        "I'd be willing to trade for <*outputQuantity*> <*output*>. If your intrested let me know.",
+                                        "I'd be willing to trade for <*outputQuantity*> <*output*>. If you are intrested let me know.",
                                    ],
                          "non-skill": [
                                         "I'd be willing to pay $<*outputQuantity*>. PM me if interested. 8)"
@@ -35,3 +35,44 @@ init python:
                             "Nice doing business with you!",
                             "Nice working with you!"
                          ]
+
+    threadTitlesInput = ["Looking for <*job*>",
+                         "Looking for <*job*>, please!",
+                         "Recruiting <*job*>",
+                         "<*job*> is needed",
+                         "<*job*> Wanted",
+                         "Hiring <*job*>",
+                         "Looking for visual novel <*job*>",
+                        ]
+    threadTitlesOutput = ["<*job*> for hire",
+                          "<*job*> Looking for Work",
+                          "<*user*>'s <*output*> services",
+                          "Need a <*job*>?",
+                          "<*job*> Available",
+                          "<*job*> Here",
+                          "<*job*> looking for projects",
+                          "<*job*> open for commissions",
+                          "<*job*> for your <*output*> needs",
+                          "Experienced <*job*> for Hire",
+                          "<*job*> willing to work",
+                          "Need a professional <*job*>",
+                         ]
+    threadTitlesOutputExtras = ["","","","",
+                                "!","!",
+                                " - High Quality",
+                                " - Fast Delivery",
+                                " - Affordable!",
+                                " {{OPEN}",
+                                " [OPEN]"," [OPEN]",
+                                "[open]",
+    ]
+    
+    threadTitlesInputExtras = ["","","","",
+                                "!","!",
+                                " {{OPEN}",
+                                " [OPEN]"," [OPEN]",
+                                " [open]",
+                                
+    ]
+    
+                         

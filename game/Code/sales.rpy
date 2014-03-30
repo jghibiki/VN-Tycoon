@@ -20,6 +20,7 @@ init -1:
     $ game_tmp = None
     
 label edit_price:
+    $ price = round(game_tmp.price, 2)
     call screen edit_price(game_tmp.price)
     python:
         try:
@@ -33,7 +34,7 @@ screen edit_price(game_price=""):
     window:
         has vbox
         text "Enter a new price:"
-        input default game_price allow "0123456789"
+        input default game_price allow "0123456789."
 
 screen bmt_mezzo:
     use computer
@@ -105,7 +106,7 @@ screen sales:
 
                         $ date = "Day " + str(sale.day) + " " + str(sale.minutes / 60) + ":" + str(sale.minutes % 60)
                         text date
-                        $ price = str(sale.price)
+                        $ price = "$" + str(round(sale.price, 2))
                         text price
                         $ total += sale.price
                         
@@ -113,7 +114,7 @@ screen sales:
                     text "Total:"
                     null
                     null
-                    $ total = "$" + str(total)
+                    $ total = "$" + str(round(total, 2))
                     text total
                     
         vbar value YScrollValue("vp") style "v_bar" xalign 1.0
