@@ -210,7 +210,7 @@ screen set_attributes(cclass=''):
             
 screen stats_button:
     zorder 200
-    imagebutton idle "Assets/gui/stats_icon.png" hover "Assets/gui/stats_icon.png" action Show("stats") align (.95,.02)
+    imagebutton idle "Assets/gui/stats_icon.png" hover "Assets/gui/stats_icon.png" action Show("stats") align (.93,.03)
 
             
 screen stats:
@@ -246,8 +246,9 @@ screen stats:
     text "Day" xpos 488 ypos y style "my_text"
     text str(day) xpos 854 ypos y style "my_text"
    
-    textbutton "OK" action Return() xalign 0.1 yalign 0.9
-
+    #textbutton "OK" action Return() xalign 0.1 yalign 0.9
+    textbutton "OK" action Hide("stats") xalign 0.1 yalign 0.9
+    
 screen workDone:
     
     add "#FFF"

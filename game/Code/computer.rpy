@@ -452,13 +452,16 @@ screen computer:
         add "Assets/gui/desk_tray.png" yalign 1.0
         imagebutton auto "Assets/gui/desk_win_start_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("leave")] xpos 0 yalign 1.0
         $ x = 60
+        
         imagebutton idle "icon32_browser_idle" hover "icon32_browser_hover" action [Hide("gui_tooltip"), Return("web_browser")] xpos x yanchor 1.0 ypos 1.0 
         $ x += 60
         
         imagebutton idle "icon32_sentence_idle" hover "icon32_sentence_hover" action [Hide("gui_tooltip"), Return("open_sentence")] xpos x yanchor 1.0 ypos 1.0 
         $ x += 60
-        imagebutton idle "icon32_michelangelo_idle" hover "icon32_michelangelo_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 1.0 
-        $ x += 60
+        
+        #imagebutton idle "icon32_michelangelo_idle" hover "icon32_michelangelo_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 1.0 
+        #$ x += 60
+        
         imagebutton idle "icon32_notepad_idle" hover "icon32_notepad_hover" action [Hide("gui_tooltip"), Return("open_notepad")] xpos x yanchor 1.0 ypos 1.0 
         
         $ x += 60
@@ -467,10 +470,10 @@ screen computer:
         $ x += 60
         imagebutton idle "icon32_henpie_idle" hover "icon32_henpie_hover" action [Hide("gui_tooltip"), Return("game_progress")] xpos x yanchor 1.0 ypos 1.0
 
-        $ x += 60
-        imagebutton idle "icon32_player_idle" hover "icon32_player_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 1.0 
+        #$ x += 60
+        #imagebutton idle "icon32_player_idle" hover "icon32_player_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 1.0 
         
-        $ x += 60
+        
         
         
         
@@ -489,8 +492,8 @@ screen computer:
         $ x += 80
         
         imagebutton idle "icon64_sentence_idle" hover "icon64_sentence_hover" action [Hide("gui_tooltip"), Return("open_sentence")] xpos x yanchor 1.0 ypos 764 
-        $ x += 80
-        imagebutton idle "icon64_michelangelo_idle" hover "icon64_michelangelo_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 764 
+        #$ x += 80
+        #imagebutton idle "icon64_michelangelo_idle" hover "icon64_michelangelo_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 764 
         
         $ x += 80
         imagebutton idle "icon64_notepad_idle" hover "icon64_notepad_hover" action [Hide("gui_tooltip"), Return("open_notepad")] xpos x yanchor 1.0 ypos 764 
@@ -501,8 +504,8 @@ screen computer:
         $ x += 80
         imagebutton idle "icon64_henpie_idle" hover "icon64_henpie_hover" action [Hide("gui_tooltip"), Return("game_progress")] xpos x yanchor 1.0 ypos 764 
         
-        $ x += 80
-        imagebutton idle "icon64_player_idle" hover "icon64_player_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 764 
+        #$ x += 80
+        #imagebutton idle "icon64_player_idle" hover "icon64_player_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 764 
         
         $ Clocks (1250, -2, 14, "000")
         

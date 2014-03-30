@@ -85,7 +85,7 @@ screen phone_button:
     zorder 200
     imagebutton:
         #align (.04,.04)
-        align (.99,.02)
+        align (.99,.03)
         focus_mask True
         idle "Assets/phone/phone_icon.png"
         hover "Assets/phone/phone_icon.png"
