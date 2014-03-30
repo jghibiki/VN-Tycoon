@@ -99,27 +99,36 @@ label computer:
                         $inventory.money -= messages[_return[1]].inputQuantity
                         $turnedIn = True
                     else:
-                        "You don't have enough money yet! (Must have $[messages[_return[1]].inputQuantity])."
+                        $needed = messages[_return[int(1)]].inputQuantity
+                        "You don't have enough money yet! (Must have $[needed])."
                 elif messages[_return[1]].input == "art":
                     if comishWork.art >= messages[_return[1]].inputQuantity:
                         $comishWork.art -= messages[_return[1]].inputQuantity
                         $turnedIn = True
                     else:
-                        "You don't have enough art to turn in! (Must have [messages[_return[1]].inputQuantity])"
+                        $needed = messages[_return[int(1)]].inputQuantity
+                        "You don't have enough art to turn in! (Must have [needed])"
                 elif messages[_return[1]].input == "coding":
                     if comishWork.coding >= messages[_return[1]].inputQuantity:
                         $comishWork.coding -= messages[_return[1]].inputQuantity
                         $turnedIn = True
                     else:
-                        "You don't have enough code written to turn in! (Must have [messages[_return[1]].inputQuantity])"
+                        $needed = messages[_return[int(1)]].inputQuantity
+                        "You don't have enough code written to turn in! (Must have [needed])"
                 elif messages[_return[1]].input == "music":
                     if comishWork.music >= messages[_return[1]].inputQuantity:
                         $comishWork.music -= messages[_return[1]].inputQuantity
                         $turnedIn = True
+                    else:
+                        $needed = messages[_return[int(1)]].inputQuantity
+                        "You don't have enough music written to turn in! (Must have [needed])"
                 elif messages[_return[1]].input == "writing":
                     if comishWork.writing >= messages[_return[1]].inputQuantity:
                         $comishWork.writing -= messages[_return[1]].inputQuantity
                         $turnedIn = True
+                    else:
+                        $needed = messages[_return[int(1)]].inputQuantity
+                        "You don't have enough writing done to turn in! (Must have [needed])"
                 #then provide reward
                 if turnedIn:
                     $messages[_return[1]].stage = "response"
@@ -459,7 +468,7 @@ screen computer:
         imagebutton idle "icon32_henpie_idle" hover "icon32_henpie_hover" action [Hide("gui_tooltip"), Return("game_progress")] xpos x yanchor 1.0 ypos 1.0
 
         $ x += 60
-        imagebutton idle "icon32_player_idle" hover "icon32_player_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 1.0 
+        #imagebutton idle "icon32_player_idle" hover "icon32_player_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 1.0 
         
         $ x += 60
         
@@ -493,7 +502,7 @@ screen computer:
         imagebutton idle "icon64_henpie_idle" hover "icon64_henpie_hover" action [Hide("gui_tooltip"), Return("game_progress")] xpos x yanchor 1.0 ypos 764 
         
         $ x += 80
-        imagebutton idle "icon64_player_idle" hover "icon64_player_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 764 
+        #imagebutton idle "icon64_player_idle" hover "icon64_player_hover" action [Hide("gui_tooltip"), Return("open_mikie")] xpos x yanchor 1.0 ypos 764 
         
         $ Clocks (1250, -2, 14, "000")
         
@@ -777,6 +786,7 @@ screen lsf_messages:
                         elif item.stage == "response":
                             text "[item.response]" style "stdTxt" size 18 xpos 330 xsize 900 ypos -110
                         imagebutton auto "Assets/gui/lsf_delete_%s.png" focus_mask True action Return(("msgDelete", msgCounter)) xpos 1012 ypos -100 #delete a messege 
+                        $msgCounter += 1
                         
         vbar value YScrollValue("lsfMessages") xpos 1250
     
