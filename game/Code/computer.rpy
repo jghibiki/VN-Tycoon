@@ -46,6 +46,11 @@ label computer:
         if _return == "web_browser":
             $showDesktop = False
             $showBrowser = True
+            $showSentence = False
+            $showMikie = False
+            $showNotepad = False
+            $showGrunge = False
+            $showHenPie = False
         if _return == "leave":
             return # or maybe jump to sim instead
         if _return == "lsf":
@@ -230,7 +235,7 @@ label computer:
             if _return[0] == "select_time":
                 $selTime = _return[1]
                 
-        if type(_return) == type(''): #string
+        if type(_return) == type(""): #string
             if _return[0] == "a" or _return[0] == "p" or _return[0] == "w":
                 $selTime = None
                 if showMikie:
