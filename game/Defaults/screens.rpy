@@ -210,7 +210,7 @@ init python:
 # http://www.renpy.org/doc/html/screen_special.html#main-menu
 
 init:
-    $ menu_actions = {"return": Return(), "config": ShowMenu("preferences"), "save": ShowMenu("save"), "load": ShowMenu("load"), "main": MainMenu(), "help": ShowMenu("help_screen"), "quit": Quit(), "start": Start(), "extras": ShowMenu("extras_blank"), "cg_gallery": ShowMenu("cg_gallery"), "ch_gallery": ShowMenu("ch_gallery"), "bg_gallery": ShowMenu("bg_gallery"), "music_room": ShowMenu("music_room"), "dev_gallery": ShowMenu("dev_gallery")}
+    $ menu_actions = {"return": Return(), "config": ShowMenu("preferences"), "save": ShowMenu("save"), "load": ShowMenu("load"), "main": MainMenu(), "help": ShowMenu("help_screen"), "quit": Quit(), "start": Start(), "extras": ShowMenu("extras_blank"), "cg_gallery": ShowMenu("cg_gallery"), "ch_gallery": ShowMenu("ch_gallery"), "bg_gallery": ShowMenu("bg_gallery"), "music_room": ShowMenu("music_room"), "dev_gallery": ShowMenu("dev_gallery"), "update": ShowMenu("update")}
     
     $ button_text = "Start"
     image m_button_start = At(LiveComposite ((312, 80), (0,0), "Assets/gui/main_button.png", (8, 6), Text(button_text, style="main_butt")), main_eff)
@@ -232,6 +232,10 @@ init:
     image m_button_help = At(LiveComposite ((312, 80), (0,0), "Assets/gui/main_button.png", (8, 6), Text(button_text, style="main_butt")), main_eff)
     image m_button_help_hover = At(LiveComposite ((312, 80), (0,0), "Assets/gui/main_button.png", (3, 1), Text(button_text, style="main_butt_hover")), main_eff)
 
+    $ button_text = "Update"
+    image m_button_update = At(LiveComposite ((312, 80), (0,0), "Assets/gui/main_button.png", (8, 6), Text(button_text, style="main_butt")), main_eff)
+    image m_button_update_hover = At(LiveComposite ((312, 80), (0,0), "Assets/gui/main_button.png", (3, 1), Text(button_text, style="main_butt_hover")), main_eff)
+
     $ button_text = "Quit"
     image m_button_quit = At(LiveComposite ((312, 80), (0,0), "Assets/gui/main_button.png", (8, 6), Text(button_text, style="main_butt")), main_eff)
     image m_button_quit_hover = At(LiveComposite ((312, 80), (0,0), "Assets/gui/main_button.png", (3, 1), Text(button_text, style="main_butt_hover")), main_eff)
@@ -248,7 +252,7 @@ screen main_menu:
     add "main_menu_cg"
     add "Assets/gui/main_menu_ground.png"
     add "Assets/gui/main_menu_title.png"
-    $ main_menu_items = ["start", "load", "config", "extras", "help", "quit"]
+    $ main_menu_items = ["start", "load", "config", "extras", "help", "update", "quit"]
     $ y = 129
     vbox xalign .5 yalign .5:
         for item in main_menu_items:
@@ -453,7 +457,7 @@ init:
     image tooltip_extras=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("View the additional unlockable\ncontent", style="tips_bottom"))
     # tooltip_load, tooltip_config and tooltip_quit are already defined above
     image tooltip_help=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("View the game help.", style="tips_bottom"))
-
+    image tooltip_update=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("Check the web for game updates", style="tips_bottom"))
 
     image tooltip_cg_gallery=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("View the event CG Gallery", style="tips_bottom"))
     image tooltip_ch_gallery=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("View the characters Gallery", style="tips_bottom"))

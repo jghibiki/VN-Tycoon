@@ -38,15 +38,26 @@ label start:
         if cclass=="artist":
             art_min = 6
             skills.art += art_min
+            style.say_who_window.background = Frame("Assets/gui/namebox4.png", 15, 15)
+            style.say_window.background = Frame("Assets/gui/textbox4.png", 25, 25)
         if cclass=="writer":
             writing_min = 6
             skills.writing += writing_min
+            style.say_who_window.background = Frame("Assets/gui/namebox1.png", 15, 15)
+            style.say_window.background = Frame("Assets/gui/textbox1.png", 25, 25)
         if cclass=="coder":
             coding_min = 6
             skills.coding += coding_min
+            style.say_who_window.background = Frame("Assets/gui/namebox3.png", 15, 15)
+            style.say_window.background = Frame("Assets/gui/textbox3.png", 25, 25)
         if cclass=="composer":
             music_min = 6
             skills.music += music_min
+            style.say_who_window.background = Frame("Assets/gui/namebox2.png", 15, 15)
+            style.say_window.background = Frame("Assets/gui/textbox2.png", 25, 25)
+            
+        style.rebuild()
+            
     call screen set_attributes(cclass)
     #$ renpy.block_rollback()
     python:
@@ -100,6 +111,7 @@ label start:
     
     
     show screen phone_button
+    show screen stats_button
 #    show screen inventory_button
 
     

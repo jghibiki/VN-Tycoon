@@ -139,10 +139,10 @@ screen char_select:
     add "Assets/gui/char_select_bg.png"
     
     
-    imagebutton auto "Assets/gui/char_select_writer_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("writer")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_writer") ] unhovered [Hide("gui_tooltip")]
-    imagebutton auto "Assets/gui/char_select_artist_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("artist")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_artist") ] unhovered [Hide("gui_tooltip")]
-    imagebutton auto "Assets/gui/char_select_coder_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("coder")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_coder") ] unhovered [Hide("gui_tooltip")]
-    imagebutton auto "Assets/gui/char_select_composer_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("composer")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_composer") ] unhovered [Hide("gui_tooltip")]
+    imagebutton auto "Assets/gui/char_select_writer_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("writer")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_writer") ] unhovered [Hide("gui_tooltip")] xpos 100
+    imagebutton auto "Assets/gui/char_select_artist_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("artist")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_artist") ] unhovered [Hide("gui_tooltip")] xpos 180
+    imagebutton auto "Assets/gui/char_select_coder_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("coder")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_coder") ] unhovered [Hide("gui_tooltip")] xpos 260
+    #imagebutton auto "Assets/gui/char_select_composer_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("composer")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_composer") ] unhovered [Hide("gui_tooltip")]
 
     add "Assets/gui/char_select_fore.png"
     
@@ -208,7 +208,14 @@ screen set_attributes(cclass=''):
 
         textbutton "Continue" action Return()
             
+screen stats_button:
+    zorder 200
+    imagebutton idle "Assets/gui/stats_icon.png" hover "Assets/gui/stats_icon.png" action Show("stats") align (.95,.02)
+
+            
 screen stats:
+    modal True
+    
     add "#FFF"
     if job=="artist":
         add "artist happy"
