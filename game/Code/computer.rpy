@@ -558,7 +558,7 @@ screen webBrowser:
     #add "Assets/gui/browser_tab_idle.png" xpos 284 ypos 49
     
     $ my_bg = "Assets/gui/browser_tab_idle.png"
-    if showBrowser == "lsf":
+    if showBrowser == "lsf" or showBrowser == "lsf_recruitment" or showBrowser == "lsf_messages":    
         $ my_bg = "Assets/gui/browser_tab_selected.png"
     button background my_bg focus_mask True action Return("lsf") xpos 34 ypos 49:
         text "LemmingSoft Forums" color "#000" size 18
@@ -706,44 +706,65 @@ screen lsf(showOptions=True):
 screen lsf_recruitment:
     use webBrowser
                                         #Working Back button ???
-    vbox:
-        xpos 1
-        ypos 1
-        frame:
-            xpos 75
-            ypos 125
-            ymaximum 450
-            background None
-            hbox:
-                frame:
-                    background "#fff"
-                    xmaximum 1000
-                    xminimum 1000
-                    ymaximum 450
-                    viewport id "lsfThreads":
-                        mousewheel True
-                        vbox:
-                            $threadCount = 0
-                            for item in threads:
-                                frame:
-                                    background "#ccc"
-                                    xmaximum 1000
-                                    xminimum 1000
-                                    vbox:
-                                        hbox:
-                                            #make this line a different color than the main post
-                                            text "Post Title: [item.title]" style "stdTxt"
-                                            null width 20
-                                            text "Author: [item.user]" style "stdTxt"
+#vbox:
+    #xpos 1
+    #ypos 1
+    #frame:
+    window:
+        xpos 0#28 #75
+        ypos 110 #125
+        xanchor 0.0
+        yanchor 0.0
+        #xsize 1216
+        xsize 1266
+        ymaximum 580
+        background None
+        hbox:
+            #frame:
+            
+            #    background None#"#fff"
+                #xmaximum 1000
+                #xminimum 1000
+            #    xsize 1216
+            #    ymaximum 450
+            viewport id "lsfThreads":
+                    
+                    mousewheel True
+                    vbox:
+                        $threadCount = 0
+                        add "Assets/gui/LSF_threads_head.png"
+                        for item in threads:
+                            frame:
+                                xpos 47
+                                #xanchor 0.0
+                                #background "#ccc"
+                                background "#FFF"
+                                #xsize 1216
+                                xsize 1200
+                                #xmaximum 1000
+                                #xminimum 1000
+                                vbox:
+                                    hbox:
+                                        add "Assets/gui/lsf_unread.png"
+                                        window:
+                                            ysize 39
+                                            background Frame("Assets/gui/lsf_title_frame.png", 2, 2, 2, 2)
+                                            
+                                        #make this line a different color than the main post
+                                            text "[item.title]" style "stdTxt" color "006597" size 18
+                                            #null width 20
+                                            text "[item.user]" style "stdTxt" xpos 900 size 14
 
-                                        hbox:
-                                            text "[item.description]" style "stdTxt"
-                                        hbox:
-                                            textbutton "PM" action Return(("replyThread", threadCount))
-                                        $threadCount += 1
-                                null height 3
-                null width 10
-                vbar value YScrollValue("lsfThreads")
+                                    hbox:
+                                        text "[item.description]" style "stdTxt"
+                                    hbox:
+                                        imagebutton auto "Assets/gui/lsf_pm_%s.png" focus_mask True action Return(("replyThread", threadCount))
+                                        
+                                        #textbutton "PM" action Return(("replyThread", threadCount))
+                                    $threadCount += 1
+                            null height 3
+            null width 10
+            vbar value YScrollValue("lsfThreads")
 
 #################################
 ###    LemmingSofe Messages Page
@@ -885,4 +906,3 @@ screen window_frame(appname, icon, exitaction=None, width=1266, height=648):
 init:
     style stdTxt is text:
         color "#000"
-

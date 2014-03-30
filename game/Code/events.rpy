@@ -100,8 +100,8 @@ init python:
     #polls for threads  to display for the recruitment forum
     def pollThreads():
         import random
-        if len(threads) == 0:
-            for i in range(random.randint(105,115)):
+        if len(threads) < 3:
+            for i in range(random.randint(5,15)):
                 threads.append(generateThread())
         else:
             threads.pop(0)
@@ -149,8 +149,9 @@ init python:
             while(self.description  == ""):
                 self.description = self.generateDescription()
             
-            #while(self.title  == ""):
-            self.title = self.generateTitle()
+            self.title = ""
+            while(self.title  == ""):
+                self.title = self.generateTitle()
             
             
                 

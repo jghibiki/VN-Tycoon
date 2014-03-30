@@ -55,7 +55,7 @@ init python:
                           "<*job*> for your <*output*> needs",
                           "Experienced <*job*> for Hire",
                           "<*job*> willing to work",
-                          "Need a professional <*job*>",
+                          "Need a professional <*job*>?",
                          ]
     threadTitlesOutputExtras = ["","","","",
                                 "!","!",
