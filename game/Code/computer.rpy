@@ -690,16 +690,17 @@ screen lsf(showOptions=True):
             #xpos 0.01
             #ypos 0.2
             #text "LemmingSoft Forums"
-            textbutton "Visit Recruitment Forum" action Return("lsf_recruitment")
-            textbutton "Messages" action Return("lsf_messages")
-            textbutton "Back" action Return("web_browser")
+            textbutton "Visit Recruitment Forum" action Return("lsf_recruitment") size_group "lsf"
+            $msgLen = len(messages)
+            textbutton "Messages ([msgLen] New)" action Return("lsf_messages") size_group "lsf"
+            #textbutton "Back" action Return("web_browser") size_group "lsf"
         
-            if len(messages) == 0:
-                text "No new messages" style "stdTxt"
-            else:
-                $msgLen = len(messages)
-                text "[msgLen] New Messages" style "stdTxt"
-                $del msgLen
+            # if len(messages) == 0:
+                # text "No new messages" style "stdTxt"
+            # else:
+                # $msgLen = len(messages)
+                # text "[msgLen] New Messages" style "stdTxt"
+                # $del msgLen
 
 ####################################
 ###    LemmingSoft Recruitment Page
@@ -742,66 +743,104 @@ screen lsf_recruitment:
                             null height 3
             null width 10
             vbar value YScrollValue("lsfThreads")
-
+    textbutton "Back" action Return("lsf") ypos 640 xpos 40
+    
 #################################
 ###    LemmingSofe Messages Page
 
 screen lsf_messages:
-    use webBrowser
     
-    vbox:
-        if len(messages) == 0:
-            frame:
-                xpos 75
-                ypos 125
-                ymaximum 450
-                background None
+    use webBrowser
+    add "Assets/gui/lsf_messages_top.png"
+    window:
+        background Frame("Assets/gui/lsf_messages_bg.png", 2, 1, 2, 1)
+        ysize 560
+        xpos 0#
+        ypos 135
+        xanchor 0.0
+        yanchor 0.0
+        viewport id "lsfMessages":
+            mousewheel True
+            vbox:
+                $msgCounter = 0
+                for item in messages: 
+                        window:
+                            xpos 52
+                            xanchor 0.0
+                            xsize 1246
+                            ysize 123
+                            background "Assets/gui/lsf_messages_post.png"
+                        text "[item.user]" style "stdTxt" size 14 xpos 80 ypos -80 #ypos 50
+                        if item.stage == "reminder":
+                            text "[item.reminder]" style "stdTxt" size 18 xpos 330 xsize 900 ypos -110
+                            imagebutton auto "Assets/gui/lsf_reply_%s.png" focus_mask True action Return(("msgReply", msgCounter)) xpos 1126 ypos -81#turn in work if it is done
+                        elif item.stage == "response":
+                            text "[item.response]" style "stdTxt" size 18 xpos 330 xsize 900 ypos -110
+                        imagebutton auto "Assets/gui/lsf_delete_%s.png" focus_mask True action Return(("msgDelete", msgCounter)) xpos 1012 ypos -100 #delete a messege 
+                        
+        vbar value YScrollValue("lsfMessages") xpos 1250
+    
+    add "Assets/gui/lsf_messages_bottom.png" ypos 640
+    textbutton "Back" action Return("lsf") ypos 640 xpos 40
+                        
+                        
+    #lsf_messages_post
+    
+#    vbox:
+        # if len(messages) == 0:
+            # frame:
+                # xpos 75
+                # ypos 125
+                # ymaximum 450
+                # background None
                 
-                vbox:
-                    text "Messages:" style "stdTxt"
-                    hbox:
-                        null width 5
-                        text "No new messages." style "stdTxt"
-        else:
-            frame:
-                xpos 75
-                ypos 125
-                ymaximum 450
-                background None
-                vbox:
-                    hbox:
-                        frame:
-                            background "#fff"
-                            xmaximum 1200
-                            xminimum 1200
-                            ymaximum 450
-                            viewport id "lsfMessages":
-                                mousewheel True
-                                vbox:
-                                    $msgCounter = 0
-                                    for item in messages:
-                                        frame:
-                                            background "#ccc"
-                                            vbox:
-                                                text "User: [item.user]" style "stdTxt"
-                                                if item.stage == "reminder":
-                                                    text "[item.reminder]" style "stdTxt"
-                                                    hbox:
-                                                        textbutton "Reply" action Return(("msgReply", msgCounter))#turn in work if it is done
-                                                        null width 5
-                                                        textbutton "Delete" action Return(("msgDelete", msgCounter)) #delete a messege 
+                # vbox:
+                    # text "Messages:" style "stdTxt"
+                    # hbox:
+                        # null width 5
+                        # text "No new messages." style "stdTxt"
+        # else:
+            # frame:
+                # xpos 75
+                # ypos 125
+                # ymaximum 450
+                # background None
+                # vbox:
+                    # hbox:
+                        # frame:
+                            # background "#fff"
+                            # xmaximum 1200
+                            # xminimum 1200
+                            # ymaximum 450
+                            # viewport id "lsfMessages":
+                                # mousewheel True
+                                # vbox:
+                                    # $msgCounter = 0
+                                    
+                                    
+                                    
+                                    # for item in messages:
+                                        # frame:
+                                            # background "#ccc"
+                                            # vbox:
+                                                # text "User: [item.user]" style "stdTxt"
+                                                # if item.stage == "reminder":
+                                                    # text "[item.reminder]" style "stdTxt"
+                                                    # hbox:
+                                                        # textbutton "Reply" action Return(("msgReply", msgCounter))#turn in work if it is done
+                                                        # null width 5
+                                                        # textbutton "Delete" action Return(("msgDelete", msgCounter)) #delete a messege 
 
-                                                elif item.stage == "response":
-                                                    text "[item.response]" style "stdTxt"
-                                                    hbox:
-                                                        textbutton "Reply"
-                                                        null width 5
-                                                        textbutton "Delete" action Return(("msgDelete", msgCounter)) # delete message
-                                                $msgCounter += 1
-                                        null height 3
-                        vbar value YScrollValue("lsfMessages")
-                    textbutton "Back" action Return("lsf")
-
+                                                # elif item.stage == "response":
+                                                    # text "[item.response]" style "stdTxt"
+                                                    # hbox:
+                                                        # textbutton "Reply"
+                                                        # null width 5
+                                                        # textbutton "Delete" action Return(("msgDelete", msgCounter)) # delete message
+                                                # $msgCounter += 1
+                                        # null height 3
+                        # vbar value YScrollValue("lsfMessages")
+                    # textbutton "Back" action Return("lsf")
 
 ################################
 ## Computer screen animations

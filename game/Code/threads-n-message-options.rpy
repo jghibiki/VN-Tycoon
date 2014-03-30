@@ -6,7 +6,7 @@ init python:
                                             
                                             "Hello! I have an idea for a visual novel and am looking for someone that would be interested in doing the <*input*> for me. I estimate that aproximately <*inputQuantity*> <*input*> will be needed.",
                                             "Hey all, <*user*> here. The goal of my project is to create a visual novel intended for commercial release on a BMTMezzo managed site and on Vapor.\n\nOpen Positions:\n<*job_in*> 1,\n<*job_in*> 2,\nVoice actor\n\nI need <*inputQuantity*> <*input*>.\n\n",
-                                            "Looking for <*job_in*>, willing to lend a hand with some <*input*> (about <*inputQuantity*> will be required).",
+                                            "Looking for <*job_in*>, who is willing to lend a hand with some <*input*> (about <*inputQuantity*> will be required).",
                                             "My studio is looking for <*job_in*> to help with some of our projects! You'll be working on some high quality commercial works. We are only looking for developers with experience and who are able to work on a deadline and meet them. We require <*inputQuantity*> <*input*> for now (more work may be available later if this goes well).",
                                           ],
                                 "non-skill": [
@@ -46,7 +46,7 @@ init python:
                                         
                                         "Great to have you on the team! Please message me again as soon as you have for me <*inputQuantity*> <*input*> and I'll send you <*outputQuantity*> <*output*>.",
                                         
-                                        "Hey!\n\nGood to hear you're interested. You're a real life saver, since my <*input*> looks uh... let's just say I could pass it around kindergarten and parents'd wonder whose kid made it.\n\nAnyway, I sent you an invite for my project storage folder. Add me for easy chatting later, okay? Once you have made <*inputQuantity*> <*input*> PM me again and I'll send you <*outputQuantity*> <*output*> as agreed.",
+                                        "Hey! Good to hear you're interested. You're a real life saver, since my <*input*> looks uh... let's just say I could pass it around kindergarten and parents'd wonder whose kid made it. Anyway, once you have made <*inputQuantity*> <*input*>, PM me again and I'll send you <*outputQuantity*> <*output*> as agreed.",
                                         
                                       ],
                             "non-skill" : {

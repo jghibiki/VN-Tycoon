@@ -101,8 +101,7 @@ init python:
     def pollThreads():
         import random
         if len(threads) < 3:
-            #for i in range(random.randint(5,15)):
-            for i in range(random.randint(105,115)):
+            for i in range(random.randint(5,15)):
                 threads.append(generateThread())
         else:
             threads.pop(0)
@@ -114,7 +113,6 @@ init python:
         if repBonus_tmp>0.39:
             repBonus_tmp = 0.39
         return Thread(repBonus_tmp)
-
 
     #In essence threads will work like missions, completing the "mission" will result in an increased repBonus
     # and the gain of some asset progress for one of your games. The higher your repBonus, the greater the amount of 
@@ -248,6 +246,8 @@ init python:
                     job_out = random.choice(["coder", "a coder", "Coder", "a Coder", "programmer", "a programmer", "Programmer", "a Programmer"])
                 desc = desc.replace("<*job_in*>", job_in)
                 desc = desc.replace("<*job_out*>", job_out)
+                
+                
                 
             return desc
         
