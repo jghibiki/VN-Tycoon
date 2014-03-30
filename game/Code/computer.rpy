@@ -46,6 +46,11 @@ label computer:
         if _return == "web_browser":
             $showDesktop = False
             $showBrowser = True
+            $showSentence = False
+            $showMikie = False
+            $showNotepad = False
+            $showGrunge = False
+            $showHenPie = False
         if _return == "leave":
             return # or maybe jump to sim instead
         if _return == "lsf":
@@ -99,27 +104,36 @@ label computer:
                         $inventory.money -= messages[_return[1]].inputQuantity
                         $turnedIn = True
                     else:
-                        "You don't have enough money yet! (Must have $[messages[_return[1]].inputQuantity])."
+                        $needed = messages[_return[int(1)]].inputQuantity
+                        "You don't have enough money yet! (Must have $[needed])."
                 elif messages[_return[1]].input == "art":
                     if comishWork.art >= messages[_return[1]].inputQuantity:
                         $comishWork.art -= messages[_return[1]].inputQuantity
                         $turnedIn = True
                     else:
-                        "You don't have enough art to turn in! (Must have [messages[_return[1]].inputQuantity])"
+                        $needed = messages[_return[int(1)]].inputQuantity
+                        "You don't have enough art to turn in! (Must have [needed])"
                 elif messages[_return[1]].input == "coding":
                     if comishWork.coding >= messages[_return[1]].inputQuantity:
                         $comishWork.coding -= messages[_return[1]].inputQuantity
                         $turnedIn = True
                     else:
-                        "You don't have enough code written to turn in! (Must have [messages[_return[1]].inputQuantity])"
+                        $needed = messages[_return[int(1)]].inputQuantity
+                        "You don't have enough code written to turn in! (Must have [needed])"
                 elif messages[_return[1]].input == "music":
                     if comishWork.music >= messages[_return[1]].inputQuantity:
                         $comishWork.music -= messages[_return[1]].inputQuantity
                         $turnedIn = True
+                    else:
+                        $needed = messages[_return[int(1)]].inputQuantity
+                        "You don't have enough music written to turn in! (Must have [needed])"
                 elif messages[_return[1]].input == "writing":
                     if comishWork.writing >= messages[_return[1]].inputQuantity:
                         $comishWork.writing -= messages[_return[1]].inputQuantity
                         $turnedIn = True
+                    else:
+                        $needed = messages[_return[int(1)]].inputQuantity
+                        "You don't have enough writing done to turn in! (Must have [needed])"
                 #then provide reward
                 if turnedIn:
                     $messages[_return[1]].stage = "response"
@@ -230,7 +244,7 @@ label computer:
             if _return[0] == "select_time":
                 $selTime = _return[1]
                 
-        if type(_return) == type(''): #string
+        if type(_return) == type(""): #string
             if _return[0] == "a" or _return[0] == "p" or _return[0] == "w":
                 $selTime = None
                 if showMikie:
