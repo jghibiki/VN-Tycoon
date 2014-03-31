@@ -5,7 +5,7 @@ label coder_event6:
     #after Day4
     
     
-    t "I thought I could get by just figuring out the code by myself, but it finally happened. I hit a stumbling block with the ABL code in HemPie. Some form of dark magic is spawning bugs every time I try to make the sprite show up on the side of the screen!"
+    t neutral "I thought I could get by just figuring out the code by myself, but it finally happened. I hit a stumbling block with the ABL code in HenPie. Some form of dark magic is spawning bugs every time I try to make the sprite show up on the side of the screen!"
     t "It is against my personal philosophy to accept my weakness and give up. I am going to have my little guy show up next to the textbox one way or another!"
     t "But I need help... It pains me to admit, but I've been sitting at this one problem since the second day. Today I am gonna have to brave the forums and ask for help."
 
@@ -21,15 +21,20 @@ label coder_event6:
     t "...that just sounds phony."
     t "How do you make those little people images appear at the side of the textbox? I've been trying for days and they just won't appear."
     t "...that's still too blunt. I'm already showing my failings as a writer. I shouldn't even bother trying to ask."
+    $ renpy.music.play ("Assets/sfx/alarm_clock.ogg", channel="sound", loop=True, fadeout=1.0, fadein=1.0)
     t "My alarm rings, reminding me to take my daily cocktail of medication. Looking at the dwindling pile of medication reminds me... I don't have the right to pride anymore. I'm a developer and I have to make sacrifices sometimes."
+    stop sound
     t "That last one. I'll just be honest and hope that people understand."
     t "...and submit."
 
-    
+    $ post = "How do you make those little people images appear at the side of the textbox? I've been trying for days and they just won't appear."
+    call screen autoPost(323, 214, 628, 684, "Assets/gui/lsf_post_test.png", post, moveCursor=True)
+
     
     #play ringing noise
     $ renpy.music.play ("Assets/sfx/phone ring.ogg", channel="sound", loop=True, fadeout=1.0, fadein=1.0)
     t "My phone? Who could be calling at this hour? Then again, I'm not really sure what hour it is."
+    stop sound
     ts "Hello?"
     m "Toby!"
     ts "How did you find out so quickly?!"
