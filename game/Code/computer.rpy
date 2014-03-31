@@ -289,7 +289,7 @@ label computer:
                         if time.dec(dur):
                             $mygame.do_art(dur)
                             $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
-                            call drawingAnimation
+                            #call drawingAnimation
                             "You draw some sprites for your game. [completion]\% Completed"
                         else:
                             "You are too sleepy to draw."
