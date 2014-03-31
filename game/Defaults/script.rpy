@@ -98,6 +98,7 @@ label start:
         playtrough = persistent.playtrough
         
         artist_event2, artist_event3, artist_event4, artist_event5, artist_event6, artist_event7, artist_event8, artist_event9, artist_event10 = False, False, False, False, False, False, False, False, False
+        artist_event11, artist_event12, artist_event13 = False, False, False
 
         writer_event2, writer_event3, writer_event4, writer_event5, writer_event6, writer_event7, writer_event8, writer_event9, writer_event10 = False, False, False, False, False, False, False, False, False
         

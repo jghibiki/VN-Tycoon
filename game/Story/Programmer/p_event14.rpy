@@ -14,5 +14,6 @@ label coder_event14:
     t "I pop the largest of the horse pills into my mouth, taking a swig of water. The real world still sits outside my bubble of happiness. I can't slow down now."
     t "Like that old quote went... Never give up, never surrender!"
 
-    $ coder_event14 = True
+    $ coder_event14 = True    
+    call the_end
     jump sim

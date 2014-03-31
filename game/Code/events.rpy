@@ -53,6 +53,21 @@ init python:
                 event = "story", "artist_event5"
             if day==7 and not artist_event6:
                 event = "story", "artist_event6"
+            if day==8 and not artist_event7:
+                event = "story", "artist_event7"
+            if day==10 and not artist_event8:
+                event = "story", "artist_event8"
+            if day==13 and not artist_event9:
+                event = "story", "artist_event9"
+            if day==15 and not artist_event10:
+                event = "story", "artist_event10"
+            if day==19 and not artist_event11:
+                event = "story", "artist_event11"
+            if day==20 and not artist_event12:
+                event = "story", "artist_event12"
+            if day==22 and not artist_event13:
+                event = "story", "artist_event13"
+              
                 
         if job=="writer": 
             if not writer_event2 and curr_action=="writing" and day>2:
