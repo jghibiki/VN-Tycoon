@@ -112,31 +112,31 @@ init python:
                 ui.textbutton("+", clicked=SetVariable("showBars", True), xpos=.95, ypos=yshift)
             else:
                
-                ui.bar(range=10, value=skills.art, style="stat_bar", right_bar="Assets/gui_mini/stat_drawing_empty.png", left_bar="Assets/gui_mini/stat_drawing_full.png", xpos=xshift, ypos=yshift)
+                ui.bar(range=10, value=skills.art, style="stat_bar", right_bar="Assets/gui_mini/stat_drawing_empty.png", left_bar="Assets/gui_mini/stat_drawing_full.png", xpos=xshift, ypos=yshift, width=150, height=20, xmaximum=150, ymaximum=20)
 
                 yshift += .03
-                ui.bar(range=25, value=comishWork.art, style="stat_bar", right_bar="Assets/gui_mini/stat_drawing_empty_alt.png", left_bar="Assets/gui_mini/stat_drawing_full_alt.png", xpos=xshift, ypos=yshift)
+                ui.bar(range=25, value=comishWork.art, style="stat_bar", right_bar="Assets/gui_mini/stat_drawing_empty_alt.png", left_bar="Assets/gui_mini/stat_drawing_full_alt.png", xpos=xshift, ypos=yshift, width=150, height=20, xmaximum=150, ymaximum=20)
                 
                 yshift += .05
 
-                ui.bar(range=10, value=skills.writing, style="stat_bar", right_bar="Assets/gui_mini/stat_writing_empty.png", left_bar="Assets/gui_mini/stat_writing_full.png", xpos=xshift, ypos=yshift)
+                ui.bar(range=10, value=skills.writing, style="stat_bar", right_bar="Assets/gui_mini/stat_writing_empty.png", left_bar="Assets/gui_mini/stat_writing_full.png", xpos=xshift, ypos=yshift, width=150, height=20, xmaximum=150, ymaximum=20)
 
                 yshift += .03
-                ui.bar(range=25, value=comishWork.writing, style="stat_bar", right_bar="Assets/gui_mini/stat_writing_empty_alt.png", left_bar="Assets/gui_mini/stat_writing_full_alt.png", xpos=xshift, ypos=yshift)
+                ui.bar(range=25, value=comishWork.writing, style="stat_bar", right_bar="Assets/gui_mini/stat_writing_empty_alt.png", left_bar="Assets/gui_mini/stat_writing_full_alt.png", xpos=xshift, ypos=yshift, width=150, height=20, xmaximum=150, ymaximum=20)
                 
                 yshift += .05
 
-                ui.bar(range=10, value=skills.coding, style="stat_bar", right_bar="Assets/gui_mini/stat_programming_empty.png", left_bar="Assets/gui_mini/stat_programming_full.png", xpos=xshift, ypos=yshift)
+                ui.bar(range=10, value=skills.coding, style="stat_bar", right_bar="Assets/gui_mini/stat_programming_empty.png", left_bar="Assets/gui_mini/stat_programming_full.png", xpos=xshift, ypos=yshift, width=150, height=20, xmaximum=150, ymaximum=20)
 
                 yshift += .03
-                ui.bar(range=25, value=comishWork.coding, style="stat_bar", right_bar="Assets/gui_mini/stat_programming_empty_alt.png", left_bar="Assets/gui_mini/stat_programming_full_alt.png", xpos=xshift, ypos=yshift)
+                ui.bar(range=25, value=comishWork.coding, style="stat_bar", right_bar="Assets/gui_mini/stat_programming_empty_alt.png", left_bar="Assets/gui_mini/stat_programming_full_alt.png", xpos=xshift, ypos=yshift, width=150, height=20, xmaximum=150, ymaximum=20)
                 
                 yshift += .05
 
-                ui.bar(range=10, value=skills.music, style="stat_bar", right_bar="Assets/gui_mini/stat_composing_empty.png", left_bar="Assets/gui_mini/stat_composing_full.png", xpos=xshift, ypos=yshift)
+                ui.bar(range=10, value=skills.music, style="stat_bar", right_bar="Assets/gui_mini/stat_composing_empty.png", left_bar="Assets/gui_mini/stat_composing_full.png", xpos=xshift, ypos=yshift, width=150, height=20, xmaximum=150, ymaximum=20)
 
                 yshift += .03
-                ui.bar(range=25, value=comishWork.music, style="stat_bar", right_bar="Assets/gui_mini/stat_composing_empty_alt.png", left_bar="Assets/gui_mini/stat_composing_full_alt.png", xpos=xshift, ypos=yshift)
+                ui.bar(range=25, value=comishWork.music, style="stat_bar", right_bar="Assets/gui_mini/stat_composing_empty_alt.png", left_bar="Assets/gui_mini/stat_composing_full_alt.png", xpos=xshift, ypos=yshift, width=150, height=20, xmaximum=150, ymaximum=20)
                 
                 yshift += .05
                 ui.textbutton("-", clicked=SetVariable("showBars", False), xpos=.95, ypos=yshift)
