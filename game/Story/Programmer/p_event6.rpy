@@ -25,6 +25,8 @@ label coder_event6:
     t "That last one. I'll just be honest and hope that people understand."
     t "...and submit."
 
+    
+    
     #play ringing noise
     $ renpy.music.play ("Assets/sfx/phone ring.ogg", channel="sound", loop=True, fadeout=1.0, fadein=1.0)
     t "My phone? Who could be calling at this hour? Then again, I'm not really sure what hour it is."
