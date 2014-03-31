@@ -105,7 +105,7 @@ init python:
     showBars = False
     def mainGui():
         if showMainGui:
-            ui.imagebutton("Assets/gui/stats_icon.png", "Assets/gui/stats_icon.png", clicked=Show("stats"), xpos=.95, ypos=.2, zindex=200)
+            ui.imagebutton("Assets/gui/stats_icon.png", "Assets/gui/stats_icon.png", clicked=Show("stats", transsition=Dissolve(1)), xpos=.95, ypos=.2, zindex=200)
             xshift = .896
             yshift = .36
             if not showBars:
@@ -263,9 +263,56 @@ screen set_attributes(cclass=''):
 #    zorder 200
 #    imagebutton idle "Assets/gui/stats_icon.png" hover "Assets/gui/stats_icon.png" action Show("stats") align (.93,.03)
 
-            
+init:
+    $statScreenMode = 0
 screen stats:
-    text "TEMP PLACE HOLDER"
+    modal True
+    add "#ddd"
+    if statScreenMode == 0:
+        if job=="artist":
+            add "artist happy" xpos 0  ypos 0
+        elif job =="writer":
+            add "writer neutral hat" xpos 0 ypos 0
+        elif job == "coder":
+            add "coder happy" xpos 0 ypos 0
+        
+        vbox:
+            xpos 0.4
+            ypos 0.3
+            $ stat_menu_items = ["charStats", "workStats", "back"]
+            for item in stat_menu_items:
+                $ button_name = "m_button_" + item
+                $ button_name_hover = button_name + "_hover"
+                $ tip_name = "tooltip_" + item
+                $ my_action = stat_menu_actions[item]
+                button background None focus_mask True action my_action hovered  Play("sound", "Assets/sfx/click.ogg") unhovered [Hide("gui_tooltip")]:
+                    add button_name
+                    hover_child button_name_hover
+
+
+
+init:
+
+
+    $ stat_menu_actions = {"charStats" : Show("playerStats", transition=Dissolve(1)), 
+                           "workStats" : Show("workDone", transition=Dissolve(1)),
+                           "back" : Hide("stats", transition=Dissolve(1)),
+                          }
+
+    $ button_text = "Stats"
+    image m_button_charStats = At(LiveComposite ((312, 80), (0,0), "Assets/gui/main_button.png", (8, 6), Text(button_text, style="main_butt")), main_eff)
+    image m_button_charStats_hover = At(LiveComposite ((312, 80), (0,0), "Assets/gui/main_button.png", (3, 1), Text(button_text, style="main_butt_hover")), main_eff)
+
+    $button_text = "Work"
+    image m_button_workStats = At(LiveComposite ((312, 80), (0,0), "Assets/gui/main_button.png", (8, 6), Text(button_text, style="main_butt")), main_eff)
+    image m_button_workStats_hover = At(LiveComposite ((312, 80), (0,0), "Assets/gui/main_button.png", (3, 1), Text(button_text, style="main_butt_hover")), main_eff)
+
+ 
+    $button_text = "Back"
+    image m_button_back = At(LiveComposite ((312, 80), (0,0), "Assets/gui/main_button.png", (8, 6), Text(button_text, style="main_butt")), main_eff)
+    image m_button_back_hover = At(LiveComposite ((312, 80), (0,0), "Assets/gui/main_button.png", (3, 1), Text(button_text, style="main_butt_hover")), main_eff) 
+
+
 
 
 screen playerStats:
@@ -273,10 +320,12 @@ screen playerStats:
     
     add "#FFF"
     if job=="artist":
-        add "artist happy"
-    if job=="writer":
-        add "writer neutral hat"
-
+            add "artist happy" xpos 0  ypos 0
+    elif job =="writer":
+        add "writer neutral hat" xpos 0 ypos 0
+    elif job == "coder":
+        add "coder happy" xpos 0 ypos 0
+        
     $ y=195
     text "Writing" xpos 488 ypos y style "my_text"
     bar value skills.writing range 10.0 style "stat_bar" xpos 854 ypos y right_bar "Assets/gui/stat_writing_empty.png" left_bar "Assets/gui/stat_writing_full.png"
@@ -302,7 +351,7 @@ screen playerStats:
     text str(day) xpos 854 ypos y style "my_text"
    
     #textbutton "OK" action Return() xalign 0.1 yalign 0.9
-    textbutton "OK" action Hide("stats") xalign 0.1 yalign 0.9
+    textbutton "OK" action Hide("playerStats", transition=Dissolve(1)) xalign 0.7 yalign 0.9 style "tbutton"
     
 screen workDone:
     
@@ -310,10 +359,13 @@ screen workDone:
 
     add "#FFF"
     if job=="artist":
-        add "artist happy"
-    if job=="writer":
-        add "writer neutral hat"
-    
+            add "artist happy" xpos 0  ypos 0
+    elif job =="writer":
+        add "writer neutral hat" xpos 0 ypos 0
+    elif job == "coder":
+        add "coder happy" xpos 0 ypos 0
+        
+    $ y=195
     text "Comission Work" style "my_text"
 
     $ y=195
@@ -332,7 +384,7 @@ screen workDone:
     text "Composing" xpos 488 ypos y style "my_text"
     bar value comishWork.music range 10.0 style "stat_bar" xpos 854 ypos y right_bar "Assets/gui/stat_composing_empty.png" left_bar "Assets/gui/stat_composing_full.png"
     
-    textbutton "OK" action Return() xalign 0.1 yalign 0.9
+    textbutton "OK" action Hide("workDone", transition=Dissolve(1)) xalign 0.7 yalign 0.9 style "tbutton"
 
 init:
     style my_text:
@@ -347,4 +399,4 @@ init:
         right_bar "Assets/gui/stat_empty.png"
         left_bar "Assets/gui/stat_full.png"
         
-        
+    $style.tbutton = Style(style.button)
