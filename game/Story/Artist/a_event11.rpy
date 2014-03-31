@@ -4,7 +4,7 @@ label artist_event11:
     scene black
     
     #Event 11: Conditions: Day 19
-    Martha happy "It became a daily thing. I'd talk to my Lemming Soft buddy over instant message and tell him my troubles."
+    Martha happy "It became a daily thing. I'd talk to my Lemming Soft buddy over FingerHurt and tell him my troubles."
     Martha "It honestly began so necessary and routine that I don't know if I could live without him."
     Martha "He meant that much to me."
     Marthas "I'd like to see your art sometime."

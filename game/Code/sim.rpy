@@ -383,8 +383,20 @@ screen sim:
         imagebutton auto "Assets/bg/room/book4_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("read4")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_read4") ] unhovered [Hide("gui_tooltip")]
     
     $ AClocks2(715, 203)
+    
+    
+    if minutes > 60*20:
+        add "#00000030"
+    if minutes > 60*19:
+        add "#00000035"
+    if minutes > 60*18:
+        add "#00000020"        
     if minutes > 60*17:
-        add "Assets/bg/room/room_light1.png"
+        add "#00000015"
+    if minutes > 60*16:
+        add "#00000010"
+    if minutes > 60*15:
+        add "#00000005"
     
     
 #    imagebutton auto "Assets/gui/bedroom_%s.png" focus_mask True action [Return("sleep")] 

@@ -4,7 +4,7 @@ label artist_event10:
     scene black
     
     #Event 10: Conditions: Day 15
-    Martha happy "This time when my mom called I was excited. I could tell her all about the fablous person I had made friends with."
+    Martha happy "This time when my mom called I was excited. I could tell her all about the fabulous person I had made friends with."
     Mom "But they aren't real."
     Martha upset "That was her response."
     Martha annoyed "I was so furious."
