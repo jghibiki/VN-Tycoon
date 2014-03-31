@@ -30,7 +30,7 @@ label sim:
             if _return[0] == "p":
                 if time.dec(dur):
                     if skills.increase("art", dur):
-                        call drawingAnimation
+                        #call drawingAnimation
                         "You spend some time practing drawing."
                     else:
                         "You are the very best. Like no one ever was."
@@ -39,7 +39,7 @@ label sim:
             elif _return[0] == "w":
                 if time.dec(dur):
                     if comishWork.increase("art", dur):
-                        call drawingAnimation
+                        #call drawingAnimation
                         "You spend some time working on comissions."
                     else:
                         "You should really turn in your work already."
@@ -49,7 +49,7 @@ label sim:
                 if time.dec(dur):
                     $mygame.do_art(dur)
                     $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
-                    call drawingAnimation
+                    #call drawingAnimation
                     "You draw some sprites for your game. [completion]\% Completed"
                 else:
                     "You are too sleepy to draw."
