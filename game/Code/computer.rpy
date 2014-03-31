@@ -100,7 +100,10 @@ label computer:
                 if threads[_return[1]].output == "art":
                     $ event = eventcheck("hire_artist")
                 if threads[_return[1]].output == "coding":
-                    $ event = eventcheck("hire_coding")
+                    if threads[_return[1]].input == "money":
+                        $ event = eventcheck("hire_coder_money")
+                    else:
+                        $ event = eventcheck("hire_coder")
                 if threads[_return[1]].output == "writing":
                     $ event = eventcheck("hire_writer")
                 if threads[_return[1]].output == "music":

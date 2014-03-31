@@ -11,7 +11,8 @@ label coder_event6:
     show screen window_frame("Notepad--", "icon16_sentence", None)
     show screen autoPostFixed(82, 122, "Assets/gui/notepad.png", post, textSize=15)
     $ post = "image eileen happy = \"eileen_happy.png\"\nimage side elaine happy = \"side_eileen_happy.png\"\nlabel start:\n\n    e happy \"Oh, I'm so happy!\"\n\n    return"
-    call screen autoPost(82, 300, 0, 0, "#00000000", post, typeSpeed=speed, moveCursor=False, textSize=15)   
+    show screen autoPost(82, 300, 0, 0, "#00000000", post, typeSpeed=speed, moveCursor=False, textSize=15, wait=True)
+    $ renpy.pause()
     
     
     t tense "I thought I could get by just figuring out the code by myself, but it finally happened. I hit a stumbling block with the ABL code in HenPie. Some form of dark magic is spawning bugs every time I try to make the sprite show up on the side of the screen!"

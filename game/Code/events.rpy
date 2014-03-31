@@ -76,8 +76,8 @@ init python:
                 event = "story", "writer_event3"
             if not writer_event4 and curr_action=="new_game" and mygame.genre == "horror":
                 event = "story", "writer_event4"
-#            if not writer_event5 and ... : # Joan recruits help for her Visual Novel. Happens if progress on other assets isn't working too well.
-#                event = "story", "writer_event5"
+            if not writer_event5 and mygame and (curr_action=="hire_artist" or curr_action=="hire_writer" or curr_action=="hire_composer" or curr_action=="hire_coder") : # Joan recruits help for her Visual Novel. Happens if progress on other assets isn't working too well.
+                event = "story", "writer_event5"
             if not writer_event6  and day>10:# Joan finally interacts with someone. Happens after some time has passed automatically irrespective of choices.
                 event = "story", "writer_event6"
             if not writer_event7 and len(inventory.items)>2 and curr_action=="purchase":# Joan thinks about the economy while making another purchase from the story. You need to have bought at least two items before.
@@ -86,8 +86,8 @@ init python:
                 event = "story", "writer_event8"
             if not writer_event9 and curr_action=="job":# Joan goes out to work, but she hasn't had stable employment in a while. She earns money in a different way instead: Odd jobs.
                 event = "story", "writer_event9"
-#            if not writer_event10:# Joan's managed to snag the programmer for her project, and considers him for a bit. Must have attempted to recruit and gotten a programmer, must be paying him.
-#                event = "story", "writer_event10"
+            if not writer_event10 and curr_action=="hire_coder_money":# Joan's managed to snag the programmer for her project, and considers him for a bit. Must have attempted to recruit and gotten a programmer, must be paying him.
+                event = "story", "writer_event10"
 
     
         if job=="coder":

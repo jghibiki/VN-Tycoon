@@ -75,7 +75,9 @@ label sim:
         $ day += 1
         $ time = Time(24)
         $ eventcheck()
-        
+        if event[0]=="story":
+            $ renpy.jump(event[1])
+
     if action == "read1":
             if time.dec(1):
                 if skills.increase("art", 2):
