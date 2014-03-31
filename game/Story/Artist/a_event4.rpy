@@ -2,6 +2,7 @@
 label artist_event4:
     $ config.rollback_enabled = True
     $ renpy.block_rollback()
+    scene  black
     Martha annoyed "I awoke to yet another frustrating stalkmepls notification from my mother. She just didn't seem to want to stop."    
     Martha surprise "And if that wasn't enough I check my phone and an actual message from her."
     Martha upset "I couldn't stand it anymore."

@@ -210,7 +210,8 @@ init python:
 # http://www.renpy.org/doc/html/screen_special.html#main-menu
 
 init:
-    $ menu_actions = {"return": Return(), "config": ShowMenu("preferences"), "save": ShowMenu("save"), "load": ShowMenu("load"), "main": MainMenu(), "help": ShowMenu("help_screen"), "quit": Quit(), "start": Start(), "extras": ShowMenu("extras_blank"), "cg_gallery": ShowMenu("cg_gallery"), "ch_gallery": ShowMenu("ch_gallery"), "bg_gallery": ShowMenu("bg_gallery"), "music_room": ShowMenu("music_room"), "dev_gallery": ShowMenu("dev_gallery"), "update": ShowMenu("update")}
+    $ updateUrl = "http://vntycoon.vnovel.com/updates/updates.json"
+    $ menu_actions = {"return": Return(), "config": ShowMenu("preferences"), "save": ShowMenu("save"), "load": ShowMenu("load"), "main": MainMenu(), "help": ShowMenu("help_screen"), "quit": Quit(), "start": Start(), "extras": ShowMenu("extras_blank"), "cg_gallery": ShowMenu("cg_gallery"), "ch_gallery": ShowMenu("ch_gallery"), "bg_gallery": ShowMenu("bg_gallery"), "music_room": ShowMenu("music_room"), "dev_gallery": ShowMenu("dev_gallery"), "update": updater.Update(url=updateUrl)}
     
     $ button_text = "Start"
     image m_button_start = At(LiveComposite ((312, 80), (0,0), "Assets/gui/main_button.png", (8, 6), Text(button_text, style="main_butt")), main_eff)

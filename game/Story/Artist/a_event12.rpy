@@ -4,13 +4,13 @@ label artist_event12:
     scene black
     
     #Event 12: Conditions: Day 20
-    Martha "I sat on my bed hugging my knees."
+    Martha sad "I sat on my bed hugging my knees."
     Martha "He was pushing me just like my mother now."
     Martha "Like everyone around me."
-    Martha "A tear streamed down my face."
+    Martha crying_less "A tear streamed down my face."
     Martha "Why was everyone pushing me so hard? Why were they forcing me to do something?"
     Martha "I shuffed around on my bed."
-    Martha "It isn't fair... why does life have to be so difficult."
+    Martha crying "It isn't fair... why does life have to be so difficult."
     Martha "I don't want to show my work to anyone..."
     Martha "I don't want to be hurt..."
     Martha "But.... I want people to look at it too...."

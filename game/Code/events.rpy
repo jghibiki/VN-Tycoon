@@ -67,7 +67,7 @@ init python:
                 event = "story", "artist_event12"
             if day==22 and not artist_event13:
                 event = "story", "artist_event13"
-              
+
                 
         if job=="writer": 
             if not writer_event2 and curr_action=="writing" and day>2:
