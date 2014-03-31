@@ -5,7 +5,8 @@
 # Scene:
 label writer_event2:
     $ config.rollback_enabled = True
-    
+    $ renpy.block_rollback()
+    scene black
     $ post = "Close to the village street stood the one-story house in which Luella Miller, who had an evil\nname in the village, had dwelt. She had been dead for years, yet there were those in the village\nwho, in spite of the clearer light which comes on a vantage-point from a long-past danger, half\nbelieved in the tale which they had heard from their childhood. In their hearts, although they\nscarcely would have owned it, was a survival of the wild horror and frenzied fear of their\nancestors who had dwelt in the same age with Luella Miller. Young people even would stare with\na shudder at the old house as they passed, and children never played around it as was their wont\naround an untenanted building. Not a window in the old Miller house was broken: the panes\nreflected the morning sunlight in patches of emerald and blue, and the latch of the sagging front\ndoor was never lifted, although no bolt secured it. Since Luella Miller had been carried out of it,\nthe house had had no tenant except one friendless old soul who had no choice between that and\nthe far-off shelter of the open sky."
     
     show screen sentence (showOptions=False)
@@ -17,15 +18,15 @@ label writer_event2:
     $ words = mygame.writing_done
     $ words = str(int(words)) + ",000"
 
-    Joan neutral "Ugh. Just staring at this .doc makes me suicidal. How did I not get past [words] words after [days_word] days? I said I was a writer, dammit, so why am I not writing? This is a cardinal rule of the damn universe: An artist makes art, a programmer programs, composers compose and writers... write, dammit!"
-    Joan despair "Bah, it's just not coming to me. Screw it, I give up. This isn't working out. They say to 'just write', but how the hell am I supposed to 'just write' if I can't figure out where to even start? Like, whoever thought of the entire 'just write': I want to punch you in the balls."
-    Joan neutral "I'm not even joking. I will find out where you live. I will come down to your house and punch you in the friggin' balls. And then punch your wife in the tits. And your dog on the snout."
-    Joan scowl_closed "Wait, scratch that, the poor dog's done nothing wrong. I can't punch an innocent bystander, that'd be inhumane."
-    Joan scowl_open "But I'll still punch YOU, your wife, and probably your children too; they deserve it. Or will deserve it. I'm pretty sure there's not a kid in the world that hasn't deserved a beating at some point. Multiple points."
-    Joan laugh_big "Wait, that's it! Brilliant! Way to go, Joan. That's how we'll proceed from here. Hahaha! I'm a genius. God, quick, I have to write this down."
+    Joan hat neutral "Ugh. Just staring at this .doc makes me suicidal. How did I not get past [words] words after [days_word] days? I said I was a writer, dammit, so why am I not writing? This is a cardinal rule of the damn universe: An artist makes art, a programmer programs, composers compose and writers... write, dammit!"
+    Joan hat despair "Bah, it's just not coming to me. Screw it, I give up. This isn't working out. They say to 'just write', but how the hell am I supposed to 'just write' if I can't figure out where to even start? Like, whoever thought of the entire 'just write': I want to punch you in the balls."
+    Joan hat neutral "I'm not even joking. I will find out where you live. I will come down to your house and punch you in the friggin' balls. And then punch your wife in the tits. And your dog on the snout."
+    Joan hat scowl_closed "Wait, scratch that, the poor dog's done nothing wrong. I can't punch an innocent bystander, that'd be inhumane."
+    Joan hat scowl_open "But I'll still punch YOU, your wife, and probably your children too; they deserve it. Or will deserve it. I'm pretty sure there's not a kid in the world that hasn't deserved a beating at some point. Multiple points."
+    Joan hat laugh_big "Wait, that's it! Brilliant! Way to go, Joan. That's how we'll proceed from here. Hahaha! I'm a genius. God, quick, I have to write this down."
     
-    Joan scowl_closed "... And it's gone."
-    Joan scowl_open "GOD. DAMMIT."
+    Joan hat scowl_closed "... And it's gone."
+    Joan hat scowl_open "GOD. DAMMIT."
     
     #hide screen computer
     #hide screen window_frame
