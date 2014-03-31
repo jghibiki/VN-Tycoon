@@ -5,11 +5,6 @@ label artist_event1:
     $ config.rollback_enabled = True
     $ renpy.block_rollback()
     
-    stop music
-    python:
-        for song in song_list:
-            renpy.music.queue(song['file'], channel='music', loop=True, clear_queue=False, fadein=2.0, tight=True)
-    
     scene bg bedroom
     $ renpy.music.play ("Assets/sfx/phone ring.ogg", channel="sound", loop=True, fadeout=1.0, fadein=1.0)
     Phone "Ring ring ring ring ring ring phone call phone call! Ring ring ring ring ring ring phone call!"

@@ -102,7 +102,7 @@ label start:
         writer_event2, writer_event3, writer_event4, writer_event5, writer_event6, writer_event7, writer_event8, writer_event9, writer_event10 = False, False, False, False, False, False, False, False, False
         
         coder_event2, coder_event3, coder_event4, coder_event5, coder_event6, coder_event7, coder_event8, coder_event9, coder_event10 = False, False, False, False, False, False, False, False, False
-        
+        coder_event11, coder_event12, coder_event13, coder_event14 = False, False, False, False
         
     scene black
     
@@ -121,6 +121,12 @@ label start:
     
     
     $ posts_list = make_posts_list()
+    
+    stop music
+    python:
+        for song in song_list:
+            renpy.music.queue(song['file'], channel='music', loop=True, clear_queue=False, fadein=2.0, tight=True)
+
     
     
     if cclass=="artist":
