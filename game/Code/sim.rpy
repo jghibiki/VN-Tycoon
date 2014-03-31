@@ -74,7 +74,7 @@ label sim:
         $ time.dec(0)
         $ day += 1
         $ time = Time(24)
-        $ eventcheck()
+        $ event = eventcheck()
         if event[0]=="story":
             $ renpy.jump(event[1])
 
