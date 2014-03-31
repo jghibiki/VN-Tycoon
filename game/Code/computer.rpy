@@ -95,16 +95,19 @@ label computer:
             if _return[0] == "tarzanRemove":
                 $tarzanStore.append(tarzanCart.pop(_return[1]))
             if _return[0] == "replyThread":
-                $messages.append(threads.pop(_return[1]))
                 
-                if messages[_return[1]].output == "art":
+                
+                if threads[_return[1]].output == "art":
                     $ event = eventcheck("hire_artist")
-                if messages[_return[1]].output == "coding":
+                if threads[_return[1]].output == "coding":
                     $ event = eventcheck("hire_coding")
-                if messages[_return[1]].output == "writing":
+                if threads[_return[1]].output == "writing":
                     $ event = eventcheck("hire_writer")
-                if messages[_return[1]].output == "music":
+                if threads[_return[1]].output == "music":
                     $ event = eventcheck("hire_composer")
+                
+                $ messages.append(threads.pop(_return[1]))
+                
                 if event[0]=="story":
                     $ renpy.jump(event[1])
                     
