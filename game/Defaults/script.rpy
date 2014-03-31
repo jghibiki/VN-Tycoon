@@ -111,7 +111,7 @@ label start:
     
     
     show screen phone_button
-    show screen stats_button
+#    show screen stats_button
 #    show screen inventory_button
 
     

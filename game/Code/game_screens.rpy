@@ -98,7 +98,58 @@ init -1 python:
     inventory = Inventory()
     time=Time(24)
     day=0
-    
+
+
+init python:
+    showMainGui = False
+    showBars = False
+    def mainGui():
+        if showMainGui:
+            ui.imagebutton("Assets/gui/stats_icon.png", "Assets/gui/stats_icon.png", clicked=Show("stats"), xpos=.95, ypos=.2, zindex=200)
+            xshift = .896
+            yshift = .36
+            if not showBars:
+                ui.textbutton("+", clicked=SetVariable("showBars", True), xpos=.95, ypos=yshift)
+            else:
+               
+                ui.bar(range=10, value=skills.art, style="stat_bar", right_bar="Assets/gui_mini/stat_drawing_empty.png", left_bar="Assets/gui_mini/stat_drawing_full.png", xpos=xshift, ypos=yshift)
+
+                yshift += .03
+                ui.bar(range=25, value=comishWork.art, style="stat_bar", right_bar="Assets/gui_mini/stat_drawing_empty_alt.png", left_bar="Assets/gui_mini/stat_drawing_full_alt.png", xpos=xshift, ypos=yshift)
+                
+                yshift += .05
+
+                ui.bar(range=10, value=skills.writing, style="stat_bar", right_bar="Assets/gui_mini/stat_writing_empty.png", left_bar="Assets/gui_mini/stat_writing_full.png", xpos=xshift, ypos=yshift)
+
+                yshift += .03
+                ui.bar(range=25, value=comishWork.writing, style="stat_bar", right_bar="Assets/gui_mini/stat_writing_empty_alt.png", left_bar="Assets/gui_mini/stat_writing_full_alt.png", xpos=xshift, ypos=yshift)
+                
+                yshift += .05
+
+                ui.bar(range=10, value=skills.coding, style="stat_bar", right_bar="Assets/gui_mini/stat_programming_empty.png", left_bar="Assets/gui_mini/stat_programming_full.png", xpos=xshift, ypos=yshift)
+
+                yshift += .03
+                ui.bar(range=25, value=comishWork.coding, style="stat_bar", right_bar="Assets/gui_mini/stat_programming_empty_alt.png", left_bar="Assets/gui_mini/stat_programming_full_alt.png", xpos=xshift, ypos=yshift)
+                
+                yshift += .05
+
+                ui.bar(range=10, value=skills.music, style="stat_bar", right_bar="Assets/gui_mini/stat_composing_empty.png", left_bar="Assets/gui_mini/stat_composing_full.png", xpos=xshift, ypos=yshift)
+
+                yshift += .03
+                ui.bar(range=25, value=comishWork.music, style="stat_bar", right_bar="Assets/gui_mini/stat_composing_empty_alt.png", left_bar="Assets/gui_mini/stat_composing_full_alt.png", xpos=xshift, ypos=yshift)
+                
+                yshift += .05
+                ui.textbutton("-", clicked=SetVariable("showBars", False), xpos=.95, ypos=yshift)
+
+#                ui.bar(range=100, value=skills.writing, right_bar="Assets/gui_mini/stat_drawing
+
+    config.overlay_functions.append(mainGui)
+
+
+
+
+#bar value skills.art range 10.0 style "stat_bar" xpos 854 ypos y right_bar "Assets/gui/stat_drawing_empty.png" left_bar "Assets/gui/stat_drawing_full.png"
+
 init python:
     writing = 0
     debug = False
@@ -208,12 +259,16 @@ screen set_attributes(cclass=''):
 
         textbutton "Continue" action Return()
             
-screen stats_button:
-    zorder 200
-    imagebutton idle "Assets/gui/stats_icon.png" hover "Assets/gui/stats_icon.png" action Show("stats") align (.93,.03)
+#screen stats_button:
+#    zorder 200
+#    imagebutton idle "Assets/gui/stats_icon.png" hover "Assets/gui/stats_icon.png" action Show("stats") align (.93,.03)
 
             
 screen stats:
+    text "TEMP PLACE HOLDER"
+
+
+screen playerStats:
     modal True
     
     add "#FFF"
@@ -252,7 +307,12 @@ screen stats:
 screen workDone:
     
     add "#FFF"
-    add "artist pose1 happy"
+
+    add "#FFF"
+    if job=="artist":
+        add "artist happy"
+    if job=="writer":
+        add "writer neutral hat"
     
     text "Comission Work" style "my_text"
 
@@ -280,7 +340,7 @@ init:
         font "Assets/gui/animeace.ttf"
         color "000"
                 
-    style stat_bar:
+    style stat_bar is bar:
         thumb None
         ymaximum 50        
         xmaximum 350

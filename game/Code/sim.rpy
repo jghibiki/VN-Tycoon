@@ -1,5 +1,7 @@
 label sim:
     $ config.rollback_enabled = False
+    $showMainGui = True
+    $showFarOff = False
     call screen sim
     scene black
     show room_closed
@@ -17,6 +19,7 @@ label sim:
             "You are too sleepy to work."
     if action == "computer":
         call computer
+
         
     if action == "draw":
         call screen select_time
