@@ -4,9 +4,10 @@
     $ renpy.block_rollback()
 
     scene bg bedroom
-    #$ renpy.music.play ("Assets/sfx/phone ring.ogg", channel="sound", loop=True, fadeout=1.0, fadein=1.0)
+    $ renpy.music.play ("Assets/sfx/alarm_clock.ogg", channel="sound", loop=True, fadeout=1.0, fadein=1.0)
 
     t neutral "The alarm clock has been going off for the last twenty minutes. It was the last thing from my old job I forgot to take care of."
+    stop sound
     t "I should get up out of bed. Sleeping in on my first day of being an independent developer isn't promising me a sound future. It might be self-employment, but I don't want to have to fire myself."
     t "Sitting beside my bed is my daily breakfast of bottled water and cornucopia of medication. It's Monday, so that means my friends are Acebutolol, Furosemide, and Hydrochlorothiazide."
     t "As much as I hate swallowing these horse pills, I'd rather not follow my father's footsteps and die from hypertension before my time."
