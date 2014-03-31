@@ -108,6 +108,7 @@ screen mainphonescreen:
         xsize 307
         
         add phone_screen_bg
+        add "#00000080"
         add "Assets/phone/phone_bg.png"
         add "Assets/phone/phone_icons_bg.png"
         $ Clocks(130, 113)

@@ -78,13 +78,30 @@ init python:
         if job=="coder":
             if not coder_event2 and curr_action=="coding":#first coding attempt
                 event = "story", "coder_event2"
-                
-            if not writer_event3 and curr_action=="new_game" and mygame.genre == "romance":
+            if not coder_event3 and curr_action=="new_game" and mygame.genre == "romance":
                 event = "story", "coder_event3"
-            if not writer_event4 and curr_action=="new_game" and mygame.genre == "horror":
+            if not coder_event4 and curr_action=="new_game" and mygame.genre == "horror":
                 event = "story", "coder_event4"
-                
-                
+            if not coder_event5 and curr_action=="new_game" and mygame.genre == "sci-fi":
+                event = "story", "coder_event5"
+            if not coder_event6 and day > 4:
+                event = "story", "coder_event6"
+            if not coder_event7 and curr_action=="hire_artist":
+                event = "story", "coder_event7"
+            if not coder_event8 and curr_action=="hire_writer":
+                event = "story", "coder_event8"
+            if not coder_event9 and curr_action=="music":
+                event = "story", "coder_event9"
+            if not coder_event10 and curr_action=="hire_composer":
+                event = "story", "coder_event10"                
+            if not coder_event11 and curr_action=="coding" and day > 8:#coding, day 9
+                event = "story", "coder_event11"
+            if not coder_event12 and curr_action=="coding" and day > 9:#coding, next day
+                event = "story", "coder_event12"
+            if not coder_event13 and curr_action=="coding" and day > 13:#Coding, day 14 or later
+                event = "story", "coder_event13"
+            if not coder_event14 and curr_action=="release" and day > 14:#on release of the first vn, after day 14
+                event = "story", "coder_event14"
                 
         last_time = curr_time
         return event

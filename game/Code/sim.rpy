@@ -74,7 +74,8 @@ label sim:
         $ time.dec(0)
         $ day += 1
         $ time = Time(24)
-    
+        $ eventcheck()
+        
     if action == "read1":
             if time.dec(1):
                 if skills.increase("art", 2):

@@ -226,7 +226,15 @@ label publish:
             $ repBonus += 0.1
         else:
             $ repBonus += 1.0
+        #$ oldgame = mygame
         $ mygame = Game()
+        # show screen show_cover(game=oldgame)
+        
+        $ event = eventcheck("release")
+        if event[0]=="story":
+            $ renpy.jump(event[1])
+        
+        
     else:
         "It's not finished!"
         
