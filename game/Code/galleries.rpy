@@ -57,15 +57,20 @@ screen music_room_phone:
         xsize 307
         use blank_phone_screen
         side "c b r":
-            area (28, 107, 284, 442)
+            area (22, 137, 284, 442)
             viewport id "vp":
-                frame background None xpos 250 ypos 150:
-                    has vbox spacing 15
-                    for song in song_list:
-                        textbutton song["title"] action mr.Play(song["name"]) style "henpie"
+                vbox:
+                    textbutton "Shuffle" action ToggleField(mr, "shuffle", true_value=True, false_value=False) xalign 0.5
+                    #mr.ToggleShuffle()
+                    frame background None: #xpos 250 ypos 150:
+                        has vbox spacing 15
+                        for song in song_list:
+                            textbutton song["title"] action mr.Play(song["name"]) style "henpie" text_color "000" text_outlines [(1, "FAFAFA", 0, 0)] text_hover_color "FFF" text_selected_color "4abff2" text_size 22 text_selected_outlines [(1, "000", 0, 0)]
+        
         on "replace" action mr.Play()
         on "replaced" action Play("music", config.main_menu_music)
 
+    
     
 screen music_room:
     tag menu
