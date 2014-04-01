@@ -325,8 +325,7 @@ label computer:
                     if _return[0] == "p":
                         if time.dec(dur):
                             if skills.increase("art", dur):
-                                show drawingAnimation
-                                #"You spend some time practing drawing."
+                                call drawingAnimation
                             else:
                                 "You are the very best. Like no one ever was."
                         else:
@@ -334,8 +333,7 @@ label computer:
                     elif _return[0] == "w":
                         if time.dec(dur):
                             if comishWork.increase("art", dur):
-                                show drawingAnimation
-                                #"You spend some time working on comissions."
+                                call drawingAnimation
                             else:
                                 "You should really turn in your work already."
                         else:
@@ -343,9 +341,7 @@ label computer:
                     else:
                         if time.dec(dur):
                             $mygame.do_art(dur)
-                            $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
-                            show drawingAnimation
-                            #"You draw some sprites for your game. [completion]\% Completed"
+                            call drawingAnimation
                         else:
                             "You are too sleepy to draw."
                 elif showSentence:
@@ -353,9 +349,7 @@ label computer:
                     if _return[0] == "p":
                         if time.dec(dur):
                             if skills.increase("writing", dur):
-                                show screen writingAnimation
-                                #call screen writingAnimation
-                                #"You spend some time practing writing."
+                                call  writingAnimation
                             else:
                                 "You are the very best. Like no one ever was."
                         else:
@@ -364,9 +358,7 @@ label computer:
                     elif _return[0] == "w":
                         if time.dec(dur):
                             if comishWork.increase("writing", dur):
-                                show screen writingAnimation
-                                #call screen writingAnimation
-                                #"You spend some time working on comissions."
+                                call  writingAnimation
                             else:
                                 "You should really turn in your work already."
                         else:
@@ -374,10 +366,7 @@ label computer:
                     else: 
                         if time.dec(dur):
                             $mygame.do_writing(dur)
-                            $completion = round(((mygame.writing_done/mygame.writing_needed)*100),2) 
-                            #call screen writingAnimation
-                            show screen writingAnimation
-                            #"You write a few scenes for your game. [completion]\% Completed"
+                            call  writingAnimation
                         else:
                             "You are too sleepy to write."
 
@@ -386,21 +375,7 @@ label computer:
                     if _return[0] == "p":
                         if time.dec(dur):
                             if skills.increase("coding", dur):
-                            
-                                #show screen computer
-                                #$ speed = 40 + skills.coding * 2
-                                #$ post = random.choice(code_snippets_fixed1)
-                                #show screen window_frame("Notepad--", "icon16_notepad", None)
-                                #show screen autoPostFixed(82, 122, "Assets/gui/notepad.png", post, textSize=15)
-                                #$ post = random.choice(code_snippets_typed1)
-                                #call screen autoPost(82, 300, 0, 0, "#00000000", post, typeSpeed=speed, moveCursor=False, textSize=15)
-                                #hide screen autoPostFixed
-                                #hide screen window_frame
-                                #hide screen computer
-
-                                show screen codingAnimation
-                                
-                                #"You spend some time practing coding."
+                                 call codingAnimation
                             else:
                                 "You are the very best. Like no one ever was."
                         else:
@@ -408,19 +383,7 @@ label computer:
                     elif _return[0] == "w":
                         if time.dec(dur):
                             if comishWork.increase("coding", dur):
-
-                                #show screen computer
-                                #$ speed = 40 + skills.coding * 2
-                                #$ post = random.choice(code_snippets_fixed1)
-                                #show screen window_frame("Notepad--", "icon16_notepad", None)
-                                #show screen autoPostFixed(82, 122, "Assets/gui/notepad.png", post, textSize=15)
-                                #$ post = random.choice(code_snippets_typed1)
-                                #call screen autoPost(82, 300, 0, 0, "#00000000", post, typeSpeed=speed, moveCursor=False, textSize=15)
-                                #hide screen autoPostFixed
-                                #hide screen window_frame
-                                #hide screen computer
-                                show screen codingAnimation
-                                #"You spend some time working on comissions."
+                                call codingAnimation
                             else:
                                 "You should really turn in your work already."
                         else:
@@ -428,22 +391,7 @@ label computer:
                     else:
                         if time.dec(dur):
                             $mygame.do_coding(dur)
-                            $completion = round(((mygame.coding_done/mygame.coding_needed)*100),2) 
-                            
-                            #show screen computer
-                            #$ speed = 40 + skills.coding * 2
-                            #$ post = random.choice(code_snippets_fixed1)
-                            #show screen window_frame("Notepad--", "icon16_notepad", None)
-                            #show screen autoPostFixed(82, 122, "Assets/gui/notepad.png", post, textSize=15)
-                            #$ post = random.choice(code_snippets_typed1)
-                            #call screen autoPost(82, 300, 0, 0, "#00000000", post, typeSpeed=speed, moveCursor=False, textSize=15)
-                            #hide screen autoPostFixed
-                            #hide screen window_frame
-                            #hide screen computer
-
-
-                            show screen codingAnimation
-                            #"You code a few scenes for your game. [completion]\% Completed"
+                            call codingAnimation
                         else:
                             "You are too sleepy to code."
                 elif showGrunge:
@@ -451,8 +399,7 @@ label computer:
                     if _return[0] == "p":
                         if time.dec(dur):
                             if skills.increase("music", dur):
-                                show screen composingAnimation
-                                #"You spend some time practing composing music."
+                                call  composingAnimation
                             else:
                                 "You are the very best. Like no one ever was."
                         else:
@@ -460,8 +407,7 @@ label computer:
                     elif _return[0] == "w":
                         if time.dec(dur):
                             if comishWork.increase("music", dur):
-                                show composingAnimation
-                                #"You spend some time working on comissions."
+                                call composingAnimation
                             else:
                                 "You should really turn in your work already."
                         else:
@@ -469,10 +415,7 @@ label computer:
                     else:
                         if time.dec(dur):
                             $mygame.do_music(dur)
-                            $completion = round(((mygame.music_done/mygame.music_needed)*100),2) 
-                            show screen composingAnimation
-                            #"You make some music for your game.
-                            #[completion]\% Completed"
+                            call composingAnimation
                         else:
                             "You are too sleepy to compose."           
                             
@@ -944,12 +887,6 @@ screen lsf_messages:
                                         # null height 3
                         # vbar value YScrollValue("lsfMessages")
                     # textbutton "Back" action Return("lsf")
-
-################################
-## Computer screen animations
-label drawingAnimation:
-    "drawing animation"
-    return
 
 
 ############################

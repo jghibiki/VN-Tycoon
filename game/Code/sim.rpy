@@ -30,8 +30,7 @@ label sim:
             if _return[0] == "p":
                 if time.dec(dur):
                     if skills.increase("art", dur):
-                        #call drawingAnimation
-                        "You spend some time practing drawing."
+                        call drawingAnimation
                     else:
                         "You are the very best. Like no one ever was."
                 else:
