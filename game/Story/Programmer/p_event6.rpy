@@ -19,7 +19,7 @@ label coder_event6:
     t neutral_2 "It is against my personal philosophy to accept my weakness and give up. I am going to have my little guy show up next to the textbox one way or another!"
     t scared "But I need help... It pains me to admit, but I've been sitting at this one problem since the second day. Today I am gonna have to brave the forums and ask for help."
 
-    hide screen autoPostFixed
+    hide screen autoPost
     hide screen autoPostFixed
     hide screen window_frame
     hide screen computer
