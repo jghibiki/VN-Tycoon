@@ -211,7 +211,7 @@ init python:
 
 init:
     $ updateUrl = "http://vntycoon.vnovel.com/updates/updates.json"
-    $ menu_actions = {"return": Return(), "config": ShowMenu("preferences"), "save": ShowMenu("save"), "load": ShowMenu("load"), "main": MainMenu(), "help": ShowMenu("help_screen"), "quit": Quit(), "start": Start(), "extras": ShowMenu("extras_blank"), "cg_gallery": ShowMenu("cg_gallery"), "ch_gallery": ShowMenu("ch_gallery"), "bg_gallery": ShowMenu("bg_gallery"), "music_room": ShowMenu("music_room"), "dev_gallery": ShowMenu("dev_gallery"), "update": updater.Update(url=updateUrl)}
+    $ menu_actions = {"return": Return(), "config": ShowMenu("preferences"), "save": ShowMenu("save"), "load": ShowMenu("load"), "main": MainMenu(), "help": ShowMenu("help_screen"), "quit": Quit(), "start": Start(), "extras": ShowMenu("extras_blank"), "cg_gallery": ShowMenu("cg_gallery"), "ch_gallery": ShowMenu("ch_gallery"), "bg_gallery": ShowMenu("bg_gallery"), "music_room": ShowMenu("music_room"), "dev_gallery": ShowMenu("dev_gallery"), "update": updater.Update(url=updateUrl), "credits": ui.callsinnewcontext("credits")}
     
     $ button_text = "Start"
     image m_button_start = At(LiveComposite ((312, 80), (0,0), "Assets/gui/main_button.png", (8, 6), Text(button_text, style="main_butt")), main_eff)
@@ -465,6 +465,8 @@ init:
     image tooltip_bg_gallery=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("View the backgrounds Gallery", style="tips_bottom"))
     image tooltip_music_room=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("Listen to the music", style="tips_bottom"))
     image tooltip_dev_gallery=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("View the concepts and sketches", style="tips_bottom"))    
+    image tooltip_credits=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("Check out who made this game", style="tips_bottom"))    
+    
     # tooltip_return already defined above
     
     #Tooltips - options:
@@ -508,12 +510,18 @@ init:
     image button_dev_gallery_selected_idle = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button_selected.png", (x, 18), Text(button_text, style="side_butt")), side_eff_selected_idle)
     image button_dev_gallery_selected_hover = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button_selected.png", (x, 18), Text(button_text, style="side_butt")), side_eff_selected_hover)
     
+    $ button_text = "Credits"
+    image button_credits = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button.png", (x, 18), Text(button_text, style="side_butt")), side_eff)
+    image button_credits_selected_idle = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button_selected.png", (x, 18), Text(button_text, style="side_butt")), side_eff_selected_idle)
+    image button_credits_selected_hover = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button_selected.png", (x, 18), Text(button_text, style="side_butt")), side_eff_selected_hover)
+
+    
 screen extras:
     add "main_menu_cg_foggy"
     add "Assets/gui/main_menu_ground.png"
     add "Assets/gui/game_menu_ground.png"
     #$ extras_items = ["cg_gallery", "ch_gallery", "bg_gallery", "music_room", "dev_gallery", "return"]
-    $ extras_items = ["music_room", "return"]
+    $ extras_items = ["music_room", "credits", "return"]
     $ y = 129
     vbox xpos 1060 ypos 129 spacing 9:
         for item in extras_items:
