@@ -1,5 +1,4 @@
 init -1 python:
-    writer_win = False #finished a game that has 100,000 words and over 50,000 downloads
     last_time = None
 
 init python:
@@ -11,6 +10,8 @@ init python:
         curr_time = minutes + day * 24 * 60
         time_passed = curr_time - last_time
 
+        writer_win = False #finished a game that has 100,000 words and over 50,000 downloads
+        
         #sales and downloads
         if time_passed>59: #check every hour; also make sure events aren't checked twice in a row if no time has passed
             x = time_passed/(60)#how many hours have passed?
