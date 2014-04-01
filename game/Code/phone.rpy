@@ -89,7 +89,7 @@ screen phone_button:
         focus_mask True
         idle "Assets/phone/phone_icon.png"
         hover "Assets/phone/phone_icon.png"
-        action [Hide("phone_button"), Show ("mainphonescreen")]
+        action [Hide("phone_button"), SetVariable("showMainGui", False), Show ("mainphonescreen")]
     #$ Clocks (55, 45, 11)
     $ Clocks (1292, 30, 11)
     
@@ -173,7 +173,7 @@ screen mainphonescreen:
                     imagebutton idle "Assets/phone/icons/calendar.png" hover "Assets/phone/icons/calendar.png" focus_mask True xalign .5
                     text "Calendar" outlines [(2, "50626b", 0, 0)]
 
-        imagebutton idle "Assets/phone/phone_button_idle.png" hover "Assets/phone/phone_button_hover.png" focus_mask True action [Play ("sound", "Assets/sfx/click.wav"), Hide("mainphonescreen"), Show("phone_button")]
+        imagebutton idle "Assets/phone/phone_button_idle.png" hover "Assets/phone/phone_button_hover.png" focus_mask True action [Play ("sound", "Assets/sfx/click.wav"), Hide("mainphonescreen"), Show("phone_button"), SetVariable("showMainGui", True)]
         add "Assets/phone/phone_reflection.png"
 
 init -1 python:
