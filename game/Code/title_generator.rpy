@@ -1,7 +1,7 @@
 
 
-label name_gen:
-    python:
+init python:
+    def nameGen():
         first_title_type = random.choice(["noun", "adjective"])
         if first_title_type == "noun":
             #nouns:
@@ -68,4 +68,4 @@ label name_gen:
             # title3 = random.choice(["", "", "", "", ""])
             
         mygame.title = title1 + " " + title2
-    return
+        return

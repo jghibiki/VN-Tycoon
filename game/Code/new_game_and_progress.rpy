@@ -1,4 +1,6 @@
 init python:
+    showGameMaker = False # a flag that toggles visibility of the henpie game maker
+
     class Game:
         def __init__(self):
             self.started = False
@@ -155,69 +157,12 @@ screen new_game:
             textbutton "No" action SetField(mygame, "commercial", False)
         null height 30
         hbox xalign 0.5:
-            textbutton "Cancel" action Hide("new_game")
+            textbutton "Cancel" action SetVariable("showGameMaker", False)
             if mygame.gameplay and mygame.relationship and mygame.genre and mygame.scope:
-                textbutton "OK" action [SetField(mygame, "started", True), Hide("new_game"), Jump("new_game")]
+                textbutton "OK" action [SetField(mygame, "started", True), SetVariable("showGameMaker", False), Return("henpieNewGame")]
             else:
                 textbutton "OK" action [[]]
 
-label new_game:
-    call name_gen
-            
-    python:
-        mygame.price = 0.0
-        coding_needed = random.randint(1, 3)
-        coding_needed += int(mygame.scope/10000) * 4
-        if mygame.gameplay=="sim":
-            coding_needed += 16
-            mygame.price = 5.0
-        if mygame.gameplay=="rpg":
-            coding_needed += 24
-            mygame.price = 10.0
-        #coding_needed = coding_needed * (11-coding)
-        mygame.coding_needed = coding_needed
-
-        sprites_needed = random.randint(2, 4) + int(mygame.scope/20000)
-        bgs_needed = random.randint(2, 4) + int(mygame.scope/20000)
-        if mygame.gameplay=="rpg":
-            sprites_needed += 4 + int(mygame.scope/20000)*2
-            bgs_needed += 4 + int(mygame.scope/20000)*2
-        cgs_needed = int(mygame.scope/10000)
-        art_needed = 2*sprites_needed + 4*bgs_needed + 4*cgs_needed
-        #art_needed = art_needed * (11-art)
-        mygame.art_needed = art_needed / 2
-        
-        music_needed = random.randint(4, 8) + int(mygame.scope/20000)
-        mygame.music_needed = music_needed
-        
-        writing_needed = int(mygame.scope/1000)
-        mygame.writing_needed = writing_needed
-
-        mygame.price += int(mygame.scope/10000)
-        mygame.recommended_price = mygame.price
-        mygame.price += random.uniform(-1*(mygame.price/3), mygame.price/3)
-        
-        event = eventcheck("new_game")
-        if event[0]=="story":
-            renpy.jump(event[1])
-        
-# -->Resources are determined by your selections (scope and gameplay)
-    
-# Coding: with max coding skill(10): 4 hours + 4h for every 10,000 words; add 16h for sim and 24h for RPG. With coding skill 1: everything takes 10 times longer.
-
-# Art: 2-4 sprites (random) + another one for every 20,000 words; if it's an RPG: add 4 more and add 2 for every 20,000 words
-# 2-4 BGs (random) + another one for every 20,000 words; if it's an RPG: add 4 more and add 2 for every 20,000 words
-# 1 CG for every 10,000 words
-# With max art skill(10): sprite takes 2h, BG/CG takes 4h. With art skill 1: everything takes 10 times longer.
-
-# Music: 2-4 songs (random) + another one for every 20,000 words
-# With max music skill(10): track takes 1h. With music skill 1: everything takes 10 times longer.
-
-# Writing: With max writing skill(10): 1,000 words/h. With writing skill 1: everything takes 10 times longer.
-
-
-    jump sim
-    
 label publish:
     if mygame.publish():
         $ make_cover(mygame)
@@ -283,201 +228,205 @@ screen edit_name(game_name=""):
 screen game_progress(curr_game = mygame):
     tag app
     modal True
-    use computer
-    use window_frame("HenPie", "icon16_henpie", Return("desktop"), width=800, height=600)
-    $ win_x=27
-    $ win_y=47
-    #add "Assets/gui/henpie.png" xpos win_x ypos win_y
-    
-    window background "Assets/gui/henpie.png" xmaximum 800 xminimum 800 ymaximum 600 yminimum 600 anchor(0.0, 0.0) xpos 27 ypos 47:
-        hbox:
-            text curr_game.title style "henpie" size 22 color "#565656" xpos 318 ypos 65
-            if mygame.started and curr_game == mygame:
-                textbutton "- change" action ui.callsinnewcontext("edit_name") style "henpy_button" xpos 330 ypos 65
+    if not showGameMaker:
+        use computer
+        use window_frame("HenPie", "icon16_henpie", Return("desktop"), width=800, height=600)
+        $ win_x=27
+        $ win_y=47
+        #add "Assets/gui/henpie.png" xpos win_x ypos win_y
         
-        window background None xmaximum 290 xminimum 290 ymaximum 250 yminimum 250 anchor(0.0, 0.0) xpos 10 ypos 156:
-            viewport id "vp_games":
-                mousewheel True             
-                vbox:
-                    spacing 0
-                    if mygame.started:
-                        textbutton mygame.title action Show("game_progress") style "henpy_button" size_group "games_list" left_margin 20
-                    for g in games:
-                        textbutton g.title action Show("game_progress", curr_game = g) style "henpy_button" size_group "games_list" left_margin 20
-            vbar value YScrollValue("vp_games")
-
-        if not mygame.started:
-            textbutton "+ Create New Project" action Show("new_game") style "henpy_button" xpos 5 ypos 415
-        
-        if 1==1:
-            window background None xmaximum 215 xminimum 215 ymaximum 100 yminimum 100 anchor(0.0, 0.0) xpos 323 ypos 148:
-                vbox:
-                    hbox:
-                        $ my_text = "{:8,d}".format(mygame.scope)
-                        text "word count: [my_text]" style "henpie"
-                    hbox:
-                        text "gameplay: " style "henpie"
-                        $ my_text = curr_game.gameplay
-                        if my_text == "sim":
-                            $ my_text = my_text.title()
-                        else:
-                            if my_text:
-                                $ my_text = my_text.upper()
-                        text str(my_text) style "henpie"
-                    hbox:
-                        text "relationship: " style "henpie"
-                        $ my_text = curr_game.relationship
-                        if my_text:
-                            $ my_text = my_text[0].upper() + my_text[1] + my_text[2].upper()
-                        
-                        text str(my_text) style "henpie"
-                    hbox:
-                        text "genre: " style "henpie"
-                        
-                        text str(curr_game.genre) style "henpie"
-                    hbox:
-                        text "commercial: " style "henpie"
-                        if curr_game.commercial:
-                            text "yes" style "henpie"
-                        else:
-                            text "no" style "henpie"
-
-                    
-                    
-            window background None xmaximum 215 xminimum 215 ymaximum 100 yminimum 100 anchor(0.0, 0.0) xpos 568 ypos 148:
-                if curr_game==mygame and mygame.started:
-                    grid 3 4:
-                        text "writing:" style "henpie"
-                        #bar value mygame.writing_done range mygame.writing_needed style "stat_bar" xpos -100
-                        hbox:
-                            text str(round(mygame.writing_done, 2)) style "henpie"
-                            text "/" style "henpie"
-                            text str(mygame.writing_needed) style "henpie"
-                        $completion = round(((mygame.writing_done/mygame.writing_needed)*100),2) 
-                        text " ([completion] %)" style "henpie"
-                        
-                        text "art:" style "henpie"
-                        #bar value mygame.art_done range mygame.art_needed style "stat_bar" xpos -100
-                        hbox:
-                            text str(round(mygame.art_done, 2)) style "henpie"
-                            text "/" style "henpie"
-                            text str(mygame.art_needed) style "henpie"
-                        $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
-                        text " ([completion] %)" style "henpie"
-                        
-                    
-                        text "music:" style "henpie"
-                        #bar value mygame.music_done range mygame.music_needed style "stat_bar" xpos -100
-                        hbox:
-                            text str(round(mygame.music_done, 2)) style "henpie"
-                            text "/" style "henpie"
-                            text str(mygame.music_needed) style "henpie"
-                        $completion = round(((mygame.music_done/mygame.music_needed)*100),2) 
-                        text " ([completion] %)" style "henpie"  
-                    
-                        text "coding:" style "henpie"
-                        #bar value mygame.coding_done range mygame.coding_needed style "stat_bar" xpos -100
-                        hbox:
-                            text str(round(mygame.coding_done, 2)) style "henpie"
-                            text "/" style "henpie"
-                            text str(mygame.coding_needed) style "henpie"
-                        $completion = round(((mygame.coding_done/mygame.coding_needed)*100),2) 
-                        text " ([completion] %)" style "henpie"  
-                else:
-                    hbox:
-                        text "Quality:" style "henpie"
-                        $ quality = round(curr_game.quality,2)
-                        text str(quality) style "henpie"
-                        
-                        
+        window background "Assets/gui/henpie.png" xmaximum 800 xminimum 800 ymaximum 600 yminimum 600 anchor(0.0, 0.0) xpos 27 ypos 47:
+            hbox:
+                text curr_game.title style "henpie" size 22 color "#565656" xpos 318 ypos 65
+                if mygame.started and curr_game == mygame:
+                    textbutton "- change" action ui.callsinnewcontext("edit_name") style "henpy_button" xpos 330 ypos 65
             
+            window background None xmaximum 290 xminimum 290 ymaximum 250 yminimum 250 anchor(0.0, 0.0) xpos 10 ypos 156:
+                viewport id "vp_games":
+                    mousewheel True             
+                    vbox:
+                        spacing 0
+                        if mygame.started:
+                            textbutton mygame.title action Show("game_progress") style "henpy_button" size_group "games_list" left_margin 20
+                        for g in games:
+                            textbutton g.title action Show("game_progress", curr_game = g) style "henpy_button" size_group "games_list" left_margin 20
+                vbar value YScrollValue("vp_games")
+
+            if not mygame.started:
+                textbutton "+ Create New Project" action SetVariable("showGameMaker", True) style "henpy_button" xpos 5 ypos 415
+            
+            if 1==1:
+                window background None xmaximum 215 xminimum 215 ymaximum 100 yminimum 100 anchor(0.0, 0.0) xpos 323 ypos 148:
+                    vbox:
+                        hbox:
+                            $ my_text = "{:8,d}".format(mygame.scope)
+                            text "word count: [my_text]" style "henpie"
+                        hbox:
+                            text "gameplay: " style "henpie"
+                            $ my_text = curr_game.gameplay
+                            if my_text == "sim":
+                                $ my_text = my_text.title()
+                            else:
+                                if my_text:
+                                    $ my_text = my_text.upper()
+                            text str(my_text) style "henpie"
+                        hbox:
+                            text "relationship: " style "henpie"
+                            $ my_text = curr_game.relationship
+                            if my_text:
+                                $ my_text = my_text[0].upper() + my_text[1] + my_text[2].upper()
+                            
+                            text str(my_text) style "henpie"
+                        hbox:
+                            text "genre: " style "henpie"
+                            
+                            text str(curr_game.genre) style "henpie"
+                        hbox:
+                            text "commercial: " style "henpie"
+                            if curr_game.commercial:
+                                text "yes" style "henpie"
+                            else:
+                                text "no" style "henpie"
+
                         
-            if mygame.started:
-                textbutton "Release the Game" action [Hide("game_progress"), Jump("publish")] xpos 550 ypos 490 style "henpy_button" text_size 24
-                
-            textbutton "quit" action Return("desktop") xpos 725 ypos 530 style "henpy_button" text_size 12
-
-
-
-
-
-
                         
-    if 1==2:
-        vbox:
-            hbox:
-                for g in games:
-                    textbutton g.title action Show("game_progress", curr_game = g)
-        
-            hbox:
-                text "Title: " style "my_text"
-                text curr_game.title style "my_text"
-                ##Title could be automatically generated based on your choices and maybe editable. Just for flavor.
-                ##textbutton "Change" action Show("change_game_name")
-            hbox:
-                $ my_text = "{:8,d}".format(mygame.scope)
-                text "Word count: [my_text]" style "my_text"
-            hbox:
-                text "gameplay: " style "my_text"
-                text str(curr_game.gameplay) style "my_text"
-            hbox:
-                text "relationship: " style "my_text"
-                text str(curr_game.relationship) style "my_text"
-            hbox:
-                text "genre: " style "my_text"
-                text str(curr_game.genre) style "my_text"
+                window background None xmaximum 215 xminimum 215 ymaximum 100 yminimum 100 anchor(0.0, 0.0) xpos 568 ypos 148:
+                    if curr_game==mygame and mygame.started:
+                        grid 3 4:
+                            text "writing:" style "henpie"
+                            #bar value mygame.writing_done range mygame.writing_needed style "stat_bar" xpos -100
+                            hbox:
+                                text str(round(mygame.writing_done, 2)) style "henpie"
+                                text "/" style "henpie"
+                                text str(mygame.writing_needed) style "henpie"
+                            $completion = round(((mygame.writing_done/mygame.writing_needed)*100),2) 
+                            text " ([completion] %)" style "henpie"
+                            
+                            text "art:" style "henpie"
+                            #bar value mygame.art_done range mygame.art_needed style "stat_bar" xpos -100
+                            hbox:
+                                text str(round(mygame.art_done, 2)) style "henpie"
+                                text "/" style "henpie"
+                                text str(mygame.art_needed) style "henpie"
+                            $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
+                            text " ([completion] %)" style "henpie"
+                            
+                        
+                            text "music:" style "henpie"
+                            #bar value mygame.music_done range mygame.music_needed style "stat_bar" xpos -100
+                            hbox:
+                                text str(round(mygame.music_done, 2)) style "henpie"
+                                text "/" style "henpie"
+                                text str(mygame.music_needed) style "henpie"
+                            $completion = round(((mygame.music_done/mygame.music_needed)*100),2) 
+                            text " ([completion] %)" style "henpie"  
+                        
+                            text "coding:" style "henpie"
+                            #bar value mygame.coding_done range mygame.coding_needed style "stat_bar" xpos -100
+                            hbox:
+                                text str(round(mygame.coding_done, 2)) style "henpie"
+                                text "/" style "henpie"
+                                text str(mygame.coding_needed) style "henpie"
+                            $completion = round(((mygame.coding_done/mygame.coding_needed)*100),2) 
+                            text " ([completion] %)" style "henpie"  
+                    else:
+                        hbox:
+                            text "Quality:" style "henpie"
+                            $ quality = round(curr_game.quality,2)
+                            text str(quality) style "henpie"
+                            
+                            
                 
-            hbox:
-                text "Commercial: " style "my_text"
-                if curr_game.commercial:
-                    text "Yes" style "my_text"
-                else:
-                    text "No" style "my_text"
-            if curr_game==mygame:
-                #hbox:
-                grid 4 4:
-                    text "Writing:" style "my_text"
-                    bar value mygame.writing_done range mygame.writing_needed style "stat_bar" xpos -100
-                    hbox:
-                        text str(round(mygame.writing_done, 2)) style "my_text"
-                        text "/" style "my_text"
-                        text str(mygame.writing_needed) style "my_text"
-                    $completion = round(((mygame.writing_done/mygame.writing_needed)*100),2) 
-                    text " ([completion] %)" style "my_text"
+                            
+                if mygame.started:
+                    textbutton "Release the Game" action [Hide("game_progress"), Jump("publish")] xpos 550 ypos 490 style "henpy_button" text_size 24
                     
-                    
-                    #bar value mygame.writing_done range mygame.writing_needed
-                
-                    text "Art:" style "my_text"
-                    bar value mygame.art_done range mygame.art_needed style "stat_bar" xpos -100
-                    hbox:
-                        text str(round(mygame.art_done, 2)) style "my_text"
-                        text "/" style "my_text"
-                        text str(mygame.art_needed) style "my_text"
-                    $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
-                    text " ([completion] %)" style "my_text"
-                    
-                
-                    text "Music:" style "my_text"
-                    bar value mygame.music_done range mygame.music_needed style "stat_bar" xpos -100
-                    hbox:
-                        text str(round(mygame.music_done, 2)) style "my_text"
-                        text "/" style "my_text"
-                        text str(mygame.music_needed) style "my_text"
-                    $completion = round(((mygame.music_done/mygame.music_needed)*100),2) 
-                    text " ([completion] %)" style "my_text"  
-                
-                    text "Coding:" style "my_text"
-                    bar value mygame.coding_done range mygame.coding_needed style "stat_bar" xpos -100
-                    hbox:
-                        text str(round(mygame.coding_done, 2)) style "my_text"
-                        text "/" style "my_text"
-                        text str(mygame.coding_needed) style "my_text"
-                    $completion = round(((mygame.coding_done/mygame.coding_needed)*100),2) 
-                    text " ([completion] %)" style "my_text"  
-            else:
+                textbutton "quit" action Return("desktop") xpos 725 ypos 530 style "henpy_button" text_size 12
+
+
+
+
+
+
+                            
+        if 1==2:
+            vbox:
                 hbox:
-                    text "Quality:"
-                    text str(curr_game.quality)
-            hbox:
-                textbutton "Back" action Hide("game_progress")
+                    for g in games:
+                        textbutton g.title action Show("game_progress", curr_game = g)
+            
+                hbox:
+                    text "Title: " style "my_text"
+                    text curr_game.title style "my_text"
+                    ##Title could be automatically generated based on your choices and maybe editable. Just for flavor.
+                    ##textbutton "Change" action Show("change_game_name")
+                hbox:
+                    $ my_text = "{:8,d}".format(mygame.scope)
+                    text "Word count: [my_text]" style "my_text"
+                hbox:
+                    text "gameplay: " style "my_text"
+                    text str(curr_game.gameplay) style "my_text"
+                hbox:
+                    text "relationship: " style "my_text"
+                    text str(curr_game.relationship) style "my_text"
+                hbox:
+                    text "genre: " style "my_text"
+                    text str(curr_game.genre) style "my_text"
+                    
+                hbox:
+                    text "Commercial: " style "my_text"
+                    if curr_game.commercial:
+                        text "Yes" style "my_text"
+                    else:
+                        text "No" style "my_text"
+                if curr_game==mygame:
+                    #hbox:
+                    grid 4 4:
+                        text "Writing:" style "my_text"
+                        bar value mygame.writing_done range mygame.writing_needed style "stat_bar" xpos -100
+                        hbox:
+                            text str(round(mygame.writing_done, 2)) style "my_text"
+                            text "/" style "my_text"
+                            text str(mygame.writing_needed) style "my_text"
+                        $completion = round(((mygame.writing_done/mygame.writing_needed)*100),2) 
+                        text " ([completion] %)" style "my_text"
+                        
+                        
+                        #bar value mygame.writing_done range mygame.writing_needed
+                    
+                        text "Art:" style "my_text"
+                        bar value mygame.art_done range mygame.art_needed style "stat_bar" xpos -100
+                        hbox:
+                            text str(round(mygame.art_done, 2)) style "my_text"
+                            text "/" style "my_text"
+                            text str(mygame.art_needed) style "my_text"
+                        $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
+                        text " ([completion] %)" style "my_text"
+                        
+                    
+                        text "Music:" style "my_text"
+                        bar value mygame.music_done range mygame.music_needed style "stat_bar" xpos -100
+                        hbox:
+                            text str(round(mygame.music_done, 2)) style "my_text"
+                            text "/" style "my_text"
+                            text str(mygame.music_needed) style "my_text"
+                        $completion = round(((mygame.music_done/mygame.music_needed)*100),2) 
+                        text " ([completion] %)" style "my_text"  
+                    
+                        text "Coding:" style "my_text"
+                        bar value mygame.coding_done range mygame.coding_needed style "stat_bar" xpos -100
+                        hbox:
+                            text str(round(mygame.coding_done, 2)) style "my_text"
+                            text "/" style "my_text"
+                            text str(mygame.coding_needed) style "my_text"
+                        $completion = round(((mygame.coding_done/mygame.coding_needed)*100),2) 
+                        text " ([completion] %)" style "my_text"  
+                else:
+                    hbox:
+                        text "Quality:"
+                        text str(curr_game.quality)
+                hbox:
+                    textbutton "Back" action Hide("game_progress")
+
+    else:
+        use new_game

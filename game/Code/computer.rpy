@@ -89,6 +89,61 @@ label computer:
             $showHenPie = True
             $showDesktop = False
             
+        if _return == "henpieNewGame":
+            python:
+                nameGen()
+                mygame.price = 0.0
+                coding_needed = random.randint(1, 3)
+                coding_needed += int(mygame.scope/10000) * 4
+                if mygame.gameplay=="sim":
+                    coding_needed += 16
+                    mygame.price = 5.0
+                if mygame.gameplay=="rpg":
+                    coding_needed += 24
+                    mygame.price = 10.0
+                #coding_needed = coding_needed * (11-coding)
+                mygame.coding_needed = coding_needed
+
+                sprites_needed = random.randint(2, 4) + int(mygame.scope/20000)
+                bgs_needed = random.randint(2, 4) + int(mygame.scope/20000)
+                if mygame.gameplay=="rpg":
+                    sprites_needed += 4 + int(mygame.scope/20000)*2
+                    bgs_needed += 4 + int(mygame.scope/20000)*2
+                cgs_needed = int(mygame.scope/10000)
+                art_needed = 2*sprites_needed + 4*bgs_needed + 4*cgs_needed
+                #art_needed = art_needed * (11-art)
+                mygame.art_needed = art_needed / 2
+                
+                music_needed = random.randint(4, 8) + int(mygame.scope/20000)
+                mygame.music_needed = music_needed
+                
+                writing_needed = int(mygame.scope/1000)
+                mygame.writing_needed = writing_needed
+
+                mygame.price += int(mygame.scope/10000)
+                mygame.recommended_price = mygame.price
+                mygame.price += random.uniform(-1*(mygame.price/3), mygame.price/3)
+                
+                event = eventcheck("new_game")
+                if event[0]=="story":
+                    renpy.jump(event[1])
+
+                showGameMake = False
+                # -->Resources are determined by your selections (scope and gameplay)
+                    
+                # Coding: with max coding skill(10): 4 hours + 4h for every 10,000 words; add 16h for sim and 24h for RPG. With coding skill 1: everything takes 10 times longer.
+
+                # Art: 2-4 sprites (random) + another one for every 20,000 words; if it's an RPG: add 4 more and add 2 for every 20,000 words
+                # 2-4 BGs (random) + another one for every 20,000 words; if it's an RPG: add 4 more and add 2 for every 20,000 words
+                # 1 CG for every 10,000 words
+                # With max art skill(10): sprite takes 2h, BG/CG takes 4h. With art skill 1: everything takes 10 times longer.
+
+                # Music: 2-4 songs (random) + another one for every 20,000 words
+                # With max music skill(10): track takes 1h. With music skill 1: everything takes 10 times longer.
+
+                # Writing: With max writing skill(10): 1,000 words/h. With writing skill 1: everything takes 10 times longer.
+
+            
         if type(_return) == tuple:
             if _return[0] == "tarzanAdd":
                 $tarzanCart.append(tarzanStore.pop(_return[1]))
