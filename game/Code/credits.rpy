@@ -3,14 +3,9 @@
     
     scene black with fade
 
-    show cred at Move((0.5, 3.0), (0.5, 0.0), credits_speed, repeat=False, bounce=False, xanchor="center", yanchor="bottom")
+    show cred at Move((0.5, 3.8), (0.5, 0.0), credits_speed, repeat=False, bounce=False, xanchor="center", yanchor="bottom")
     with Pause(credits_speed)
-    show thanks:
-        yanchor 0.5 ypos 0.5
-        xanchor 0.5 xpos 0.5
-    with dissolve
-    with Pause(3)
-    hide thanks
+    with fade
     return
     
 label the_end:
@@ -23,10 +18,17 @@ label the_end:
     with dissolve
     
     call credits
+    show thanks:
+        yanchor 0.5 ypos 0.5
+        xanchor 0.5 xpos 0.5
+    with dissolve
+    with Pause(3)
+    hide thanks
+
     return
     
 init python:
-    credits = ('Writing (the artist path)', 'Maelstrom-Fenrir'), ('Writing (the writer path)', 'Applegate'), ('Writing (the programmer path)', 'KomiTsuku'), ('Character Art & Animations', 'chocojax'), ('Programming, Background & GUI Art', 'Leon Zavšek'), ('Programming & GUI art', 'jghibiki'), ('Programming', 'DragoonHP'), ('Composer & stunt double', 'Marc Straight'), ('Special thanks', 'Omnificent'), ('Special thanks', 'The Zerglinator'), ('Special thanks', '15385bic (free character art)'),  ('Special thanks ', 'mugenjohncel (free character art and backgrounds)'), ('Special thanks', 'TrickWithAKnife (smartphone code)')
+    credits = ('Writing (the artist path)', 'Maelstrom-Fenrir'), ('Writing (the writer path)', 'Applegate'), ('Writing (the programmer path)', 'KomiTsuku'), ('Character Art & Animations', 'chocojax'), ('Programming, Background & GUI Art', 'Leon Zavsek'), ('Programming & GUI art', 'jghibiki'), ('Programming', 'DragoonHP'), ('Composer & stunt double', 'Marc Straight'), ('Special thanks', 'Omnificent'), ('Special thanks', 'The Zerglinator'), ('Special thanks', '15385bic (free character art)'),  ('Special thanks ', 'mugenjohncel (free character art and backgrounds)'), ('Special thanks', 'TrickWithAKnife (smartphone code)')
 
 
     
