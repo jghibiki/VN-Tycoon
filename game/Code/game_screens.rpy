@@ -258,6 +258,8 @@ screen set_attributes(cclass=''):
         add "artist happy"
     if cclass=="writer":
         add "writer neutral hat"
+    if cclass == "coder":
+        add "coder happy"
 
     vbox xpos 488 ypos 195:
         #$ my_text = "Selected class: " + str(cclass)
