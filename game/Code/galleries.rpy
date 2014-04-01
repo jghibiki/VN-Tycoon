@@ -57,15 +57,20 @@ screen music_room_phone:
         xsize 307
         use blank_phone_screen
         side "c b r":
-            area (28, 107, 284, 442)
+            area (22, 137, 284, 442)
             viewport id "vp":
-                frame background None xpos 250 ypos 150:
-                    has vbox spacing 15
-                    for song in song_list:
-                        textbutton song["title"] action mr.Play(song["name"]) style "henpie"
+                vbox:
+                    textbutton "Shuffle" action ToggleField(mr, "shuffle", true_value=True, false_value=False) xalign 0.5
+                    #mr.ToggleShuffle()
+                    frame background None: #xpos 250 ypos 150:
+                        has vbox spacing 15
+                        for song in song_list:
+                            textbutton song["title"] action mr.Play(song["name"]) style "henpie" text_color "000" text_outlines [(1, "FAFAFA", 0, 0)] text_hover_color "FFF" text_selected_color "4abff2" text_size 22 text_selected_outlines [(1, "000", 0, 0)]
+        
         on "replace" action mr.Play()
         on "replaced" action Play("music", config.main_menu_music)
 
+    
     
 screen music_room:
     tag menu
@@ -91,12 +96,12 @@ init python:
     #gallery_bg_items = ["work", "library"]
     
     # list one image for each sprite (neutral) here:
-    gallery_ch_items = []
-    #gallery_ch_items = ["woman neutral"]
-    
-    
+    #gallery_ch_items = []
+    gallery_ch_items = ["artist happy", "writer neutral hat", "coder neutral"]
     #list the images for the rest of expressions for each sprite here:
-    gallery_woman = ["woman happy blush", "woman happy talk blush", "woman happy talk", "woman happy", "woman huff blush", "woman huff", "woman serious blush", "woman serious", "woman shock", ]
+    gallery_artist = ["artist annoyed", "artist crying", "artist crying_less", "artist crying_happy", "artist happy_blush", "artist sad", "artist surprise", "artist upset"]
+    gallery_writer = ["writer despair", "writer despair hat", "writer laugh_big", "writer laugh_big hat", "writer laugh_med", "writer laugh_med hat", "writer neutral", "writer scowl_closed", "writer scowl_closed hat", "writer scowl_open", "writer scowl_open hat"]
+    gallery_coder = ["coder confused", "coder confused_glasses", "coder excited", "coder happy", "coder neutral_2", "coder sad", "coder scared", "coder tense", "coder tense_glasses", "coder tense_hardcore"]
     
 
     gallery_dev_items = []
@@ -146,20 +151,26 @@ init python:
     g_ch = Gallery()
     for gal_item in gallery_ch_items:
         g_ch.button(gal_item + " butt")
-        if gal_item=="woman neutral":
+        
+        if gal_item=="artist happy":
             g_ch.image("#000", gal_item)
-            g_ch.unlock(gal_item)
-            for item in gallery_woman:
+            #g_ch.unlock(gal_item)
+            for item in gallery_artist:
                 g_ch.image("#000", item)
-                g_ch.unlock(item)
+                #g_ch.unlock(item)
+        if gal_item=="writer neutral hat":
+            g_ch.image("#000", gal_item)
+            #g_ch.unlock(gal_item)
+            for item in gallery_writer:
+                g_ch.image("#000", item)
+            #    g_ch.unlock(item)
+        if gal_item=="coder neutral":
+            g_ch.image("#000", gal_item)
+            #g_ch.unlock(gal_item)
+            for item in gallery_coder:
+                g_ch.image("#000", item)
+            #    g_ch.unlock(item)
 
-        # if gal_item=="angel laughing":
-            # g_ch.image("#000", gal_item)
-            # g_ch.unlock(gal_item)
-            # for item in gallery_angel:
-                # g_ch.image("#000", item)
-                # g_ch.unlock(item)
-                
     g_ch.transition = fade
     ch_page=0
 

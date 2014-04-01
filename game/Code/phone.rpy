@@ -186,6 +186,7 @@ screen blank_phone_screen:
     tag phone
     modal True
     add phone_screen_bg
+    add "#00000080"
     add "Assets/phone/phone_bg.png"
     
     imagebutton idle "Assets/phone/phone_button_idle.png" hover "Assets/phone/phone_button_hover.png" focus_mask True action [Play ("sound", "Assets/sfx/click.wav"), Hide("music_room_phone"),Hide("calendar"),Hide("clock"),SetVariable("clock", False),Show("mainphonescreen")]    
