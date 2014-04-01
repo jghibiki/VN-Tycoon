@@ -211,7 +211,7 @@ init python:
 
 init:
     $ updateUrl = "http://vntycoon.vnovel.com/updates/updates.json"
-    $ menu_actions = {"return": Return(), "config": ShowMenu("preferences"), "save": ShowMenu("save"), "load": ShowMenu("load"), "main": MainMenu(), "help": ShowMenu("help_screen"), "quit": Quit(), "start": Start(), "extras": ShowMenu("extras_blank"), "cg_gallery": ShowMenu("cg_gallery"), "ch_gallery": ShowMenu("ch_gallery"), "bg_gallery": ShowMenu("bg_gallery"), "music_room": ShowMenu("music_room"), "dev_gallery": ShowMenu("dev_gallery"), "update": updater.Update(url=updateUrl)}
+    $ menu_actions = {"return": Return(), "config": ShowMenu("preferences"), "save": ShowMenu("save"), "load": ShowMenu("load"), "main": MainMenu(), "help": ShowMenu("help_screen"), "quit": Quit(), "start": Start(), "extras": ShowMenu("extras_blank"), "cg_gallery": ShowMenu("cg_gallery"), "ch_gallery": ShowMenu("ch_gallery"), "bg_gallery": ShowMenu("bg_gallery"), "music_room": ShowMenu("music_room"), "dev_gallery": ShowMenu("dev_gallery"), "update": updater.Update(url=updateUrl), "soon" : ShowMenu("coming_soon")}
     
     $ button_text = "Start"
     image m_button_start = At(LiveComposite ((312, 80), (0,0), "Assets/gui/main_button.png", (8, 6), Text(button_text, style="main_butt")), main_eff)
@@ -465,6 +465,7 @@ init:
     image tooltip_bg_gallery=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("View the backgrounds Gallery", style="tips_bottom"))
     image tooltip_music_room=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("Listen to the music", style="tips_bottom"))
     image tooltip_dev_gallery=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("View the concepts and sketches", style="tips_bottom"))    
+    image tooltip_soon=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("See a list of features that will be in future releases", style="tips_bottom"))
     # tooltip_return already defined above
     
     #Tooltips - options:
@@ -508,12 +509,18 @@ init:
     image button_dev_gallery_selected_idle = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button_selected.png", (x, 18), Text(button_text, style="side_butt")), side_eff_selected_idle)
     image button_dev_gallery_selected_hover = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button_selected.png", (x, 18), Text(button_text, style="side_butt")), side_eff_selected_hover)
     
+    $ button_text = "To Come!"
+    image button_soon = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button.png", (x, 18), Text(button_text, style="side_butt")), side_eff)
+    image button_soon_selected_idle = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button_selected.png", (x, 18), Text(button_text, style="side_butt")), side_eff_selected_idle)
+    image button_dev_gallery_selected_hover = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button_selected.png", (x, 18), Text(button_text, style="side_butt")), side_eff_selected_hover)
+
+
 screen extras:
     add "main_menu_cg_foggy"
     add "Assets/gui/main_menu_ground.png"
     add "Assets/gui/game_menu_ground.png"
     #$ extras_items = ["cg_gallery", "ch_gallery", "bg_gallery", "music_room", "dev_gallery", "return"]
-    $ extras_items = ["music_room", "return"]
+    $ extras_items = ["music_room", "soon", "return"]
     $ y = 129
     vbox xpos 1060 ypos 129 spacing 9:
         for item in extras_items:
@@ -533,6 +540,42 @@ screen extras_blank:
     tag menu # This ensures that any other menu screen is replaced.
     use extras # We include the extras navigation screen
     add "extras_title" xpos 152 ypos 20
+
+init python:
+    #load the coming soon/release notes file in as a string
+    f = open(renpy.loader.transfn("releaseNotes.txt"), "r")
+    notesString = ""
+    for line in f:
+        notesString += line
+screen coming_soon:
+    tag menu
+    use extras
+    add "extras_title" xpos 152 ypos 20
+    vbox ypos .026 xmaximum 1020:
+        add "help_title" xpos .02
+        hbox:
+            frame:
+                xmaximum 940
+                ymaximum 555
+                left_padding 20
+                right_padding 20
+                ypadding 20
+                #xmargin 60
+                left_margin 60
+                right_margin 20
+                top_margin 80
+                #bottom_margin 165
+                viewport id "soon_vp":
+                    style_group "help_bar"
+                    draggable True
+                    mousewheel True
+                    vbox:
+                        style_group "help"
+                        text notesString
+            vbar value YScrollValue("soon_vp") ymaximum 480 ypos 80 # top_margin 80 bottom_margin 165# yalign 1.0
+
+
+    
 
 ##############################################################################
 # Save, Load

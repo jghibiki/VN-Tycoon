@@ -1,0 +1,3 @@
+{b}Features to expect:{/b}
+- Cost of living
+- Tons of bug fixes
