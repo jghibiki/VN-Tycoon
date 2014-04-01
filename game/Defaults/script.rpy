@@ -62,12 +62,12 @@ label start:
     #$ renpy.block_rollback()
     python:
         inventory = Inventory()
-        tablet = Item("Drawing Tablet", 1199.99, "Assets/gui/shop_tablet.png", "art", 56)
-        keyboard = Item("Keyboard", 999.99, "Assets/gui/shop_keyboard.png", "music", 56)
-        book_c = Item("Composing for Morons", 239.99, "Assets/gui/shop_book.png", "music", 40)
-        book_w = Item("Writing for the Asinine", 239.99, "Assets/gui/shop_book.png", "writing", 40)
-        book_p = Item("Programming for Idiots",239.99, "Assets/gui/shop_book.png", "coding", 40)
-        book_d = Item("Drawing for Losers", 239.99, "Assets/gui/shop_book.png", "art", 40)
+        tablet = Item("Drawing Tablet", 1200, "Assets/gui/shop_tablet.png", "art", 56)
+        keyboard = Item("Keyboard", 1000, "Assets/gui/shop_keyboard.png", "music", 56)
+        book_c = Item("Composing for Morons", 240, "Assets/gui/shop_book.png", "music", 40)
+        book_w = Item("Writing for the Asinine", 240, "Assets/gui/shop_book.png", "writing", 40)
+        book_p = Item("Programming for Idiots",240, "Assets/gui/shop_book.png", "coding", 40)
+        book_d = Item("Drawing for Losers", 240, "Assets/gui/shop_book.png", "art", 40)
         
         #variables for tarzan
         showCart = False
