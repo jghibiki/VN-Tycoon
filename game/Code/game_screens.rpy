@@ -18,6 +18,7 @@ init -2 python:
                 return False
 
     class ComishWork:
+        import random
         def __init__(self):
             self.art = 0.0
             self.writing = 0.0
@@ -25,30 +26,31 @@ init -2 python:
             self.music = 0.0
 
         def increase(self, skill, hours):
-            inc_by=hours
+            inc_by=0
             if skill == "art":
-                inc_by = inc_by * ((25.00-skills.art)/10)/10
+                for hour in xrange(hours):
+                    inc_by += (random.randint(1,round(skills.art)))/3
                 if self.art + inc_by < 25.0:
                     self.art += inc_by
                 else:
                     self.art = 25.0
                     return False
             elif skill == "writing":
-                inc_by = inc_by *((25.00-skills.writing)/10)/10
+                inc_by = inc_by *(random.randint(1,round(skills.writing)))/3
                 if self.writing + inc_by < 25.0:
                     self.writing += inc_by
                 else:
                     self.writing = 25.0
                     return False
             elif skill=="coding":
-                inc_by = inc_by *((25.00-skills.coding)/10)/10
+                inc_by = inc_by *(random.randint(1,round(skills.coding)))/3
                 if self.coding + inc_by < 25.0:
                     self.coding += inc_by
                 else:
                     self.coding = 25.0
                     return False
             elif skill=="music":
-                inc_by = inc_by *((25.00-skills.music)/10)/10
+                inc_by = inc_by *(random.randint(1,round(skills.music)))/3
                 if self.music + inc_by < 25.0:
                     self.music += inc_by
                 else:
