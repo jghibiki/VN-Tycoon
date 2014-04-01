@@ -121,6 +121,12 @@ init python:
                 yshift += .03
                 ui.bar(range=25, value=comishWork.art, style="stat_bar", right_bar="Assets/gui_mini/stat_drawing_empty_alt.png", left_bar="Assets/gui_mini/stat_drawing_full_alt.png", xpos=xshift, ypos=yshift, width=150, height=20, xmaximum=150, ymaximum=20)
                 
+                if mygame.art_needed != 1:
+
+                    yshift += .03
+                    ui.bar(range=mygame.art_needed, value=mygame.art_done, style="stat_bar", right_bar="Assets/gui_mini/stat_drawing_empty_alt2.png", left_bar="Assets/gui_mini/stat_drawing_full_alt2.png", xpos=xshift, ypos=yshift, width=150, height=20, xmaximum=150, ymaximum=20)
+
+
                 yshift += .05
 
                 ui.bar(range=10, value=skills.writing, style="stat_bar", right_bar="Assets/gui_mini/stat_writing_empty.png", left_bar="Assets/gui_mini/stat_writing_full.png", xpos=xshift, ypos=yshift, width=150, height=20, xmaximum=150, ymaximum=20)
@@ -128,6 +134,14 @@ init python:
                 yshift += .03
                 ui.bar(range=25, value=comishWork.writing, style="stat_bar", right_bar="Assets/gui_mini/stat_writing_empty_alt.png", left_bar="Assets/gui_mini/stat_writing_full_alt.png", xpos=xshift, ypos=yshift, width=150, height=20, xmaximum=150, ymaximum=20)
                 
+
+
+                if mygame.writing_needed != 1:
+
+                    yshift += .03
+
+                    ui.bar(range=mygame.writing_needed, value=mygame.writing_done, style="stat_bar", right_bar="Assets/gui_mini/stat_writing_empty_alt2.png", left_bar="Assets/gui_mini/stat_writing_full_alt2.png", xpos=xshift, ypos=yshift, width=150, height=20, xmaximum=150, ymaximum=20)
+
                 yshift += .05
 
                 ui.bar(range=10, value=skills.coding, style="stat_bar", right_bar="Assets/gui_mini/stat_programming_empty.png", left_bar="Assets/gui_mini/stat_programming_full.png", xpos=xshift, ypos=yshift, width=150, height=20, xmaximum=150, ymaximum=20)
@@ -135,15 +149,38 @@ init python:
                 yshift += .03
                 ui.bar(range=25, value=comishWork.coding, style="stat_bar", right_bar="Assets/gui_mini/stat_programming_empty_alt.png", left_bar="Assets/gui_mini/stat_programming_full_alt.png", xpos=xshift, ypos=yshift, width=150, height=20, xmaximum=150, ymaximum=20)
                 
+                if mygame.coding_needed != 1:
+
+                    yshift += .03
+
+                    ui.bar(range=mygame.coding_needed, value=mygame.coding_done, style="stat_bar", right_bar="Assets/gui_mini/stat_programming_empty_alt2.png", left_bar="Assets/gui_mini/stat_programming_full_alt2.png", xpos=xshift, ypos=yshift, width=150, height=20, xmaximum=150, ymaximum=20)
+
                 yshift += .05
 
                 ui.bar(range=10, value=skills.music, style="stat_bar", right_bar="Assets/gui_mini/stat_composing_empty.png", left_bar="Assets/gui_mini/stat_composing_full.png", xpos=xshift, ypos=yshift, width=150, height=20, xmaximum=150, ymaximum=20)
 
                 yshift += .03
+
                 ui.bar(range=25, value=comishWork.music, style="stat_bar", right_bar="Assets/gui_mini/stat_composing_empty_alt.png", left_bar="Assets/gui_mini/stat_composing_full_alt.png", xpos=xshift, ypos=yshift, width=150, height=20, xmaximum=150, ymaximum=20)
                 
+                if mygame.music_needed != 1:
+
+                    yshift += .03
+
+                    ui.bar(range=mygame.music_needed, value=mygame.music_done, style="stat_bar", right_bar="Assets/gui_mini/stat_composing_empty_alt2.png", left_bar="Assets/gui_mini/stat_composing_full_alt2.png", xpos=xshift, ypos=yshift, width=150, height=20, xmaximum=150, ymaximum=20)
+
                 yshift += .05
-                ui.textbutton("-", clicked=SetVariable("showBars", False), xpos=.95, ypos=yshift)
+                if inventory.money < 10:
+                    ui.text("$"+str(inventory.money), xpos=.95, ypos=yshift, color="#000", size=40)
+                elif inventory.money < 100:
+                    ui.text("$"+str(inventory.money), xpos=.94, ypos=yshift, color="#000", size=40) 
+                elif inventory.money < 1000:
+                    ui.text("$"+str(inventory.money), xpos=.92, ypos=yshift, color="#000", size=40) 
+                elif inventory.money >= 1000:
+                    ui.text("$"+str(inventory.money), xpos=.90, ypos=yshift, color="#000", size=40)
+
+                yshift += .08
+                ui.textbutton("-", clicked=SetVariable("showBars", False), xpos=.95, ypos=yshift) 
 
 #                ui.bar(range=100, value=skills.writing, right_bar="Assets/gui_mini/stat_drawing
 
