@@ -7,6 +7,7 @@ label sim:
     show room_closed
     $ action = _return
     if action == "work":
+        call workingAnimation
         $ salary = max(skills.art, skills.writing, skills.coding, skills.music) * 4
         if time.dec(4):
             $ event = eventcheck("job")            
@@ -14,7 +15,7 @@ label sim:
                 $ renpy.jump(event[1])
             else:
                 $ inventory.earn(salary)
-                "Work, work, work... You earned $[salary]."
+                #"Work, work, work... You earned $[salary]."
         else:
             "You are too sleepy to work."
     if action == "computer":
@@ -38,8 +39,8 @@ label sim:
             elif _return[0] == "w":
                 if time.dec(dur):
                     if comishWork.increase("art", dur):
-                        #call drawingAnimation
-                        "You spend some time working on comissions."
+                        call drawingAnimation
+                        #"You spend some time working on comissions."
                     else:
                         "You should really turn in your work already."
                 else:
@@ -48,8 +49,8 @@ label sim:
                 if time.dec(dur):
                     $mygame.do_art(dur)
                     $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
-                    #call drawingAnimation
-                    "You draw some sprites for your game. [completion]\% Completed"
+                    call drawingAnimation
+                    #"You draw some sprites for your game. [completion]\% Completed"
                 else:
                     "You are too sleepy to draw."
             
@@ -70,6 +71,7 @@ label sim:
                     # "You are too sleepy to draw."
                 
     if action == "sleep":
+        call sleepingAnimation
         $ time.dec(0)
         $ day += 1
         $ time = Time(24)
@@ -80,7 +82,8 @@ label sim:
     if action == "read1":
             if time.dec(1):
                 if skills.increase("art", 2):
-                    "You spend some time reading about drawing."
+                    call readingAnimation
+                    #"You spend some time reading about drawing."
                 else:
                     "You are the very best. Like no one ever was."
             else:
@@ -88,7 +91,8 @@ label sim:
     if action == "read2":
             if time.dec(1):
                 if skills.increase("coding", 2):
-                    "You spend some time reading about programming."
+                    call readingAnimation
+                    #"You spend some time reading about programming."
                 else:
                     "You are the very best. Like no one ever was."
             else:
@@ -96,7 +100,8 @@ label sim:
     if action == "read3":
             if time.dec(1):
                 if skills.increase("writing", 2):
-                    "You spend some time reading about writing."
+                    call readingAnimation
+                    #"You spend some time reading about writing."
                 else:
                     "You are the very best. Like no one ever was."
             else:
@@ -104,7 +109,8 @@ label sim:
     if action == "read4":
             if time.dec(1):
                 if skills.increase("music", 2):
-                    "You spend some time reading about music."
+                    call readingAnimation
+                    #"You spend some time reading about music."
                 else:
                     "You are the very best. Like no one ever was."
             else:
@@ -163,8 +169,8 @@ label sim:
             if _return[0] == "p":
                 if time.dec(dur):
                     if skills.increase("music", dur):
-                        #call screen composingAnimation
-                        "You spend some time practing composing music."
+                        call composingAnimation
+                        #"You spend some time practing composing music."
                     else:
                         "You are the very best. Like no one ever was."
                 else:
@@ -172,8 +178,8 @@ label sim:
             elif _return[0] == "w":
                 if time.dec(dur):
                     if comishWork.increase("music", dur):
-                        #call composingAnimation
-                        "You spend some time working on comissions."
+                        call composingAnimation
+                        #"You spend some time working on comissions."
                     else:
                         "You should really turn in your work already."
                 else:
@@ -182,9 +188,9 @@ label sim:
                 if time.dec(dur):
                     $mygame.do_music(dur)
                     $completion = round(((mygame.music_done/mygame.music_needed)*100),2) 
-                    #call screen composingAnimation
-                    "You make some music for your game.
-                    [completion]\% Completed"
+                    call composingAnimation
+                    #"You make some music for your game.
+                    #[completion]\% Completed"
                 else:
                     "You are too sleepy to compose."           
 
@@ -406,30 +412,31 @@ screen sim:
     #use phone_button
     #use game_button
     
-    frame:
-        top_margin 150
-        hbox:
-            textbutton "debug" action ToggleVariable("debug", true_value=True, false_value=False)
-            if debug:
-                textbutton "cheat" action Return("cheat")            
-                #textbutton "Write" action Return("write")
-                #textbutton "Compose" action Return("compose")
-                #textbutton "Code" action Return("code")
-                
-                #textbutton "Sales" action Return("sales")
-                #textbutton "List" action Return("list")
-                #textbutton "Event" action Return("event")
-                #textbutton "Pic" action Return("pic")
-                #textbutton "Post" action Return("post")
-                textbutton "stats" action Return("stats")
-                textbutton "Comish" action Return("showWorkDone")
-                #textbutton "Code ani" action Return("code_ani")
+    if config.developer:
+        frame:
+            top_margin 150
+            hbox:
+                textbutton "debug" action ToggleVariable("debug", true_value=True, false_value=False)
+                if debug:
+                    textbutton "cheat" action Return("cheat")            
+                    #textbutton "Write" action Return("write")
+                    #textbutton "Compose" action Return("compose")
+                    #textbutton "Code" action Return("code")
+                    
+                    #textbutton "Sales" action Return("sales")
+                    #textbutton "List" action Return("list")
+                    #textbutton "Event" action Return("event")
+                    #textbutton "Pic" action Return("pic")
+                    #textbutton "Post" action Return("post")
+                    textbutton "stats" action Return("stats")
+                    textbutton "Comish" action Return("showWorkDone")
+                    #textbutton "Code ani" action Return("code_ani")
 
-                #textbutton "G. stats" action Show("game_progress")
-                #textbutton "New game!" action Show("new_game")
-            
-                #if mygame.started:
-                #    textbutton "Release" action Jump("publish")
+                    #textbutton "G. stats" action Show("game_progress")
+                    #textbutton "New game!" action Show("new_game")
+                
+                    #if mygame.started:
+                    #    textbutton "Release" action Jump("publish")
             
             
 init:

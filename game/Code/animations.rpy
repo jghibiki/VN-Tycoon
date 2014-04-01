@@ -1,5 +1,8 @@
 init -1:
 
+    image baseAni:
+        "Assets/animations/base.png"
+
     image chibiWriter:
         "Assets/animations/04.png"
         pause 0.5
@@ -54,80 +57,119 @@ init -1:
         "Assets/animations/16.png"
         pause 0.2
 
-label writingAnimation:
-    show writingAni
-    pause 0.6
-    hide writingAni
-    call chibiAni
+    image sleepingAni:
+        "Assets/animations/17.png"
+        pause 0.4
+        "Assets/animations/18.png"
+        pause 0.4
+        "Assets/animations/19.png"
+        pause 0.4
+        "Assets/animations/17.png"
+        pause 0.4
+        "Assets/animations/18.png"
+        pause 0.4
+        "Assets/animations/19.png"
+        pause 0.4
+        
+    image workingAni:
+        "Assets/animations/20.png"
+        pause 0.4
+        "Assets/animations/21.png"
+        pause 0.4
+        "Assets/animations/22.png"
+        pause 0.4
     
+    image readingAni:
+        "Assets/animations/23.png"
+        pause 0.2
+        "Assets/animations/24.png"
+        pause 0.2
+        "Assets/animations/25.png"
+        pause 0.2
+        "Assets/animations/23.png"
+        pause 0.2
+        "Assets/animations/24.png"
+        pause 0.2
+        "Assets/animations/25.png"
+        pause 0.2
+        
+label sleepingAnimation:
+    show baseAni onlayer overlay
+    show sleepingAni onlayer overlay
+    pause 2.4
+    hide sleepingAni onlayer overlay
+    hide baseAni onlayer overlay
+    return
+    
+label workingAnimation:
+    show baseAni onlayer overlay
+    show workingAni onlayer overlay
+    pause 1.2
+    hide workingAni onlayer overlay
+    hide baseAni onlayer overlay
+    return
+
+label readingAnimation:
+    show baseAni onlayer overlay
+    show readingAni onlayer overlay
+    pause 1.2
+    hide readingAni onlayer overlay
+    hide baseAni onlayer overlay
+    return
+    
+label writingAnimation:
+    show baseAni onlayer overlay
+    show writingAni onlayer overlay
+    pause 0.6
+    hide writingAni onlayer overlay
+    call chibiAni
+    hide baseAni onlayer overlay
     return
 
 label drawingAnimation:
+    show baseAni onlayer overlay
     if inventory.has_item(tablet):
-        show tabletAni
+        show tabletAni onlayer overlay
         pause 0.4
-        hide tabletAni
+        hide tabletAni onlayer overlay
     else:
-        show sketchAni
+        show sketchAni onlayer overlay
         pause 0.4
-        hide sketchAni
+        hide sketchAni onlayer overlay
     call chibiAni
+    hide baseAni onlayer overlay
     return
 
 label composingAnimation:
-    show composingAni
+    show baseAni onlayer overlay
+    show composingAni onlayer overlay
     pause 0.6
-    show composingAni
+    hide composingAni onlayer overlay
     call chibiAni
+    hide baseAni onlayer overlay
     return
 
 label codingAnimation:
-    show codingAni
+    show baseAni onlayer overlay
+    show codingAni onlayer overlay
     pause 0.6
-    hide codingAni
+    hide codingAni onlayer overlay
     call chibiAni
+    hide baseAni onlayer overlay
     return
 
 label chibiAni:
     if job == "writer":
-        show chibiWriter
+        show chibiWriter onlayer overlay
         pause 1.2
-        hide chibiWriter
+        hide chibiWriter onlayer overlay
     elif job == "artist":
-        show chibiArtist
+        show chibiArtist onlayer overlay
         pause 1.2
-        hide chiviArtist
+        hide chibiArtist onlayer overlay
     elif job == "coder" or job == "programmer":
-        show chibiCoder
+        show chibiCoder onlayer overlay
         pause 1.2
-        hide chibiCoder
+        hide chibiCoder onlayer overlay
     return
 
-
-
-#screen writingAnimation:
-#    zorder 1000
-#    add "writingAni"
-#    $ wait_to_hide = 2.2 # number of seconds to wait
-#    timer wait_to_hide action [Hide("writingAnimation"), Return()]
-
-#screen drawingAnimation:
-#    zorder 1000
-#    add "writingAni"
-#    text "You spend some time drawing."
-#    $ wait_to_hide = 1.0 # number of seconds to wait
-#    timer wait_to_hide action [Hide("drawingAnimation"), Return()]
-
-#screen codingAnimation:
-#    zorder 1000
-#    add "codingAni"
-#    $ wait_to_hide = 2.2 # number of seconds to wait
-#    timer wait_to_hide action [Hide("codingAnimation"), Return()]
-
-#screen composingAnimation:    
-#    zorder 1000
-#    add "composingAni"
-#    text "You spend some time composing."
-#    $ wait_to_hide = 1.0 # number of seconds to wait
-#    timer wait_to_hide action [Hide("composingAnimation"), Return()]
-    

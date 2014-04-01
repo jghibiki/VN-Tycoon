@@ -256,7 +256,8 @@ screen main_menu:
     text "Version " + _config.version xpos .90 ypos .94 style "stdTxt"
     $ main_menu_items = ["start", "load", "config", "extras", "help", "update", "quit"]
     $ y = 129
-    vbox xalign .5 yalign .5:
+    #vbox xalign .5 yalign .5:
+    vbox xalign 1.0 yalign .5:
         for item in main_menu_items:
             $ button_name = "m_button_" + item
             $ button_name_hover = button_name + "_hover"
@@ -342,7 +343,7 @@ init -1:
 init:
     transform trans30:
         alpha 0.3
-    image main_menu_cg="Assets/bg/bedroom.jpg"
+    image main_menu_cg="Assets/gui/title_screen.jpg"
     image main_menu_cg_foggy=LiveComposite((1366,768), (0,0), Solid("#fff"), (0,0), At(ImageReference("main_menu_cg"), trans30))
 
 screen navigation:
