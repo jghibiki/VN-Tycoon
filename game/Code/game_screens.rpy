@@ -40,7 +40,9 @@ init -2 python:
                     return "fail"
             elif skill == "writing":
                 if skills.writing > 3:
-                    inc_by = inc_by *(random.randint(1,round(skills.writing)))/3
+                    #inc_by = inc_by *(random.randint(1,round(skills.writing)))/3
+                    for hour in xrange(hours):
+                        inc_by += (random.randint(1,round(skills.writing)))/3
                     if self.writing + inc_by < 25.0:
                         self.writing += inc_by
                     else:
@@ -50,7 +52,8 @@ init -2 python:
                     return "fail"
             elif skill=="coding":
                 if skills.coding > 3:
-                    inc_by = inc_by *(random.randint(1,round(skills.coding)))/3
+                    for hour in xrange(hours):
+                        inc_by += (random.randint(1,round(skills.coding)))/3
                     if self.coding + inc_by < 25.0:
                         self.coding += inc_by
                     else:
@@ -60,7 +63,8 @@ init -2 python:
                     return "fail"
             elif skill=="music":
                 if skills.music > 3:
-                    inc_by = inc_by *(random.randint(1,round(skills.music)))/3
+                    for hour in xrange(hours):
+                        inc_by += (random.randint(1,round(skills.music)))/3
                     if self.music + inc_by < 25.0:
                         self.music += inc_by
                     else:

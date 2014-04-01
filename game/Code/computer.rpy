@@ -151,7 +151,7 @@ label computer:
                 $tarzanStore.append(tarzanCart.pop(_return[1]))
             if _return[0] == "replyThread":
                 
-                
+                $ event = eventcheck()
                 if threads[_return[1]].output == "art":
                     $ event = eventcheck("hire_artist")
                 if threads[_return[1]].output == "coding":
