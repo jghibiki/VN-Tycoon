@@ -512,7 +512,8 @@ screen extras:
     add "main_menu_cg_foggy"
     add "Assets/gui/main_menu_ground.png"
     add "Assets/gui/game_menu_ground.png"
-    $ extras_items = ["cg_gallery", "ch_gallery", "bg_gallery", "music_room", "dev_gallery", "return"]
+    #$ extras_items = ["cg_gallery", "ch_gallery", "bg_gallery", "music_room", "dev_gallery", "return"]
+    $ extras_items = ["music_room", "return"]
     $ y = 129
     vbox xpos 1060 ypos 129 spacing 9:
         for item in extras_items:
@@ -849,4 +850,22 @@ init -2 python:
     config.default_afm_time = 10
     config.default_afm_enable = False
     
+    
+
+    
+    
+screen help:
+    text "To advance through the game, {b}left-click{/b} or press the {b}space{/b} or {b}enter{/b} keys. When at a menu, {b}left-click{/b} to make a choice, or use the arrow keys to select a choice and {b}enter{/b} to activate it."
+    text "\n{b}Left-click, Enter{/b}: Advances through the game, activates menu choices, buttons, and sliders."
+    text "{b}Space{/b}: Advances through the game, but does not activate choices."
+    text "{b}Arrow Keys{/b}: Selects menu choices, buttons, and sliders."
+    text "{b}Ctrl{/b}: Causes skipping to occur while the ctrl key is held down."
+    text "{b}Tab{/b}: Toggles skipping, causing it to occur until tab is pressed again."
+    text "{b}Mousewheel-Up, PageUp{/b}: Causes rollback to occur. Rollback reverses the game back in time, showing prior text and even allowing menu choices to be changed."
+    text "{b}Mousewheel-Down, PageDown{/b}: Causes rollforward to occur, cancelling out a previous rollback."
+    text "{b}Right-click, Escape{/b}: Enters the game menu. When in the game menu, returns to the game."
+    text "{b}Middle-click, H{/b}: Hides the text window and other transient displays."
+    text "{b}F{/b}: Toggles fullscreen mode"
+    text "{b}S{/b}: Takes a screenshot, saving it in a file named screenshotxxxx.png, where xxxx is a serial number."
+
     

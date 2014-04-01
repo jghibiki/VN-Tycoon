@@ -148,3 +148,20 @@ label start:
     "Something went wrong. :("
 
     return
+
+    
+label after_load:
+    python:
+        if job=="artist":
+            style.say_who_window.background = Frame("Assets/gui/namebox4.png", 15, 15)
+            style.say_window.background = Frame("Assets/gui/textbox4.png", 25, 25)
+        if job=="writer":
+            style.say_who_window.background = Frame("Assets/gui/namebox1.png", 15, 15)
+            style.say_window.background = Frame("Assets/gui/textbox1.png", 25, 25)
+        if job=="coder":
+            style.say_who_window.background = Frame("Assets/gui/namebox3.png", 15, 15)
+            style.say_window.background = Frame("Assets/gui/textbox3.png", 25, 25)
+        if job=="composer":
+            style.say_who_window.background = Frame("Assets/gui/namebox2.png", 15, 15)
+            style.say_window.background = Frame("Assets/gui/textbox2.png", 25, 25)
+    return

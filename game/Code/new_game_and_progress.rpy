@@ -28,6 +28,7 @@ init python:
             self.quality = 0.0
             
             self.downloads = 0
+            self.sales = 0
             self.price = 0.0
             self.recommended_price = 0.0
             self.profits = 0.0

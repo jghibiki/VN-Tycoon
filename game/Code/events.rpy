@@ -1,4 +1,5 @@
 init -1 python:
+    writer_win = False #finished a game that has 100,000 words and over 50,000 downloads
     last_time = None
 
 init python:
@@ -31,8 +32,11 @@ init python:
                             if g.commercial:
                                 sales.sell(g, day=day+i/24,minutes=i%24*60)###
                                 event = "sales", str(x)
+                                g.sales += 1
                             else:
                                 g.downloads += random.randint(30,50)
+                                if g.downloads >= 50000 and g.scope >= 100000:
+                                    writer_win = True
 #                    else: #downloads
 #                        pass
         if time_passed>45:
@@ -88,7 +92,8 @@ init python:
                 event = "story", "writer_event9"
             if not writer_event10 and curr_action=="hire_coder_money":# Joan's managed to snag the programmer for her project, and considers him for a bit. Must have attempted to recruit and gotten a programmer, must be paying him.
                 event = "story", "writer_event10"
-
+            if not writer_event11 and day<61 and writer_win:
+                event = "story", "writer_event11" # You finished a game that has 100,000 words and over 50,000 downloads within 60 days.                 
     
         if job=="coder":
             if not coder_event2 and curr_action=="coding":#first coding attempt
@@ -115,7 +120,7 @@ init python:
                 event = "story", "coder_event12"
             if not coder_event13 and curr_action=="coding" and day > 13:#Coding, day 14 or later
                 event = "story", "coder_event13"
-            if not coder_event14 and curr_action=="release" and day > 14:#on release of the first vn, after day 14
+            if not coder_event14 and curr_action=="release":#on release of the first vn, after day 14
                 event = "story", "coder_event14"
                 
         last_time = curr_time
