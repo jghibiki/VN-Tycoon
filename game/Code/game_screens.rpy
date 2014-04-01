@@ -28,34 +28,46 @@ init -2 python:
         def increase(self, skill, hours):
             inc_by=0
             if skill == "art":
-                for hour in xrange(hours):
-                    inc_by += (random.randint(1,round(skills.art)))/3
-                if self.art + inc_by < 25.0:
-                    self.art += inc_by
+                if skills.art > 3:
+                    for hour in xrange(hours):
+                        inc_by += (random.randint(1,round(skills.art)))/3
+                    if self.art + inc_by < 25.0:
+                        self.art += inc_by
+                    else:
+                        self.art = 25.0
+                        return False
                 else:
-                    self.art = 25.0
-                    return False
+                    return "fail"
             elif skill == "writing":
-                inc_by = inc_by *(random.randint(1,round(skills.writing)))/3
-                if self.writing + inc_by < 25.0:
-                    self.writing += inc_by
+                if skills.writing > 3:
+                    inc_by = inc_by *(random.randint(1,round(skills.writing)))/3
+                    if self.writing + inc_by < 25.0:
+                        self.writing += inc_by
+                    else:
+                        self.writing = 25.0
+                        return False
                 else:
-                    self.writing = 25.0
-                    return False
+                    return "fail"
             elif skill=="coding":
-                inc_by = inc_by *(random.randint(1,round(skills.coding)))/3
-                if self.coding + inc_by < 25.0:
-                    self.coding += inc_by
+                if skills.coding > 3:
+                    inc_by = inc_by *(random.randint(1,round(skills.coding)))/3
+                    if self.coding + inc_by < 25.0:
+                        self.coding += inc_by
+                    else:
+                        self.coding = 25.0
+                        return False
                 else:
-                    self.coding = 25.0
-                    return False
+                    return "fail"
             elif skill=="music":
-                inc_by = inc_by *(random.randint(1,round(skills.music)))/3
-                if self.music + inc_by < 25.0:
-                    self.music += inc_by
+                if skills.music > 3:
+                    inc_by = inc_by *(random.randint(1,round(skills.music)))/3
+                    if self.music + inc_by < 25.0:
+                        self.music += inc_by
+                    else:
+                        self.music = 25.0
+                        return False
                 else:
-                    self.music = 25.0
-                    return False
+                    return "fail"
             return True
 
 

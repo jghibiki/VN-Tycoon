@@ -332,8 +332,11 @@ label computer:
                             "You are too sleepy to draw."
                     elif _return[0] == "w":
                         if time.dec(dur):
-                            if comishWork.increase("art", dur):
+                            $result = comishWork.increase("art", dur)
+                            if type(result) == bool and result:                               
                                 call drawingAnimation
+                            elif result == "fail":
+                                "You should try practicing before joining the big boys."
                             else:
                                 "You should really turn in your work already."
                         else:
@@ -357,8 +360,11 @@ label computer:
 
                     elif _return[0] == "w":
                         if time.dec(dur):
-                            if comishWork.increase("writing", dur):
+                            $result = comishWork.increase("writing", dur)
+                            if type(result) == bool and result:                               
                                 call  writingAnimation
+                            elif result == "fail":
+                                "You should try practicing before joining the big boys."
                             else:
                                 "You should really turn in your work already."
                         else:
@@ -382,8 +388,11 @@ label computer:
                             "You are too sleepy to code."
                     elif _return[0] == "w":
                         if time.dec(dur):
-                            if comishWork.increase("coding", dur):
+                            $result = comishWork.increase("coding", dur)
+                            if type(result) == bool and result: 
                                 call codingAnimation
+                            elif result == "fail":
+                                "You should practice more before trying to join the big boys."
                             else:
                                 "You should really turn in your work already."
                         else:
@@ -406,8 +415,11 @@ label computer:
                             "You are too sleepy to compose."
                     elif _return[0] == "w":
                         if time.dec(dur):
-                            if comishWork.increase("music", dur):
+                            $result = comishWork.increase("music", dur)
+                            if type(result) == bool and result:
                                 call composingAnimation
+                            elif result == "fail":
+                                "You should try practicing first before joining the big boys."
                             else:
                                 "You should really turn in your work already."
                         else:
