@@ -241,9 +241,9 @@ screen char_select:
     add "Assets/gui/char_select_fore.png"
     
 init:
-    image tooltip_writer=LiveComposite((1300, 73), (3,0), ImageReference("information"), (3,30), Text("Select the writer class.", style="tips_bottom"))
-    image tooltip_artist=LiveComposite((1300, 73), (3,0), ImageReference("information"), (3,30), Text("Select the artist class.", style="tips_bottom"))
-    image tooltip_coder=LiveComposite((1300, 73), (3,0), ImageReference("information"), (3,30), Text("The coder. Congratulations! You have succeeded at developing the three great virtues of a programmer: laziness, impatience, and hubris.", style="tips_bottom"))
+    image tooltip_writer=LiveComposite((1300, 73), (3,0), ImageReference("information"), (3,30), Text("The writer. You have mastered the art of procrastination and blocks, and being nitpicky. You'll finish your works someday...", style="tips_bottom"))
+    image tooltip_artist=LiveComposite((1300, 73), (3,0), ImageReference("information"), (3,30), Text("The artist. You've found a way to hide your wonky anatomy with style. When you've got flair who needs to be accurate all the time. You've learned the ancient art of redrawing a single line thousands of times.", style="tips_bottom"))
+    image tooltip_coder=LiveComposite((1300, 73), (3,0), ImageReference("information"), (3,30), Text("The coder. You have succeeded at developing the three great virtues of a programmer: laziness, impatience, and hubris.", style="tips_bottom"))
     image tooltip_composer=LiveComposite((1300, 73), (3,0), ImageReference("information"), (3,30), Text("Select the composer class.", style="tips_bottom"))
     
     
