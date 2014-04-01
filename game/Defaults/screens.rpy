@@ -466,7 +466,7 @@ init:
     image tooltip_music_room=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("Listen to the music", style="tips_bottom"))
     image tooltip_dev_gallery=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("View the concepts and sketches", style="tips_bottom"))    
     image tooltip_soon=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("See a list of features that will be in future releases", style="tips_bottom"))
-	image tooltip_credits=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("Check out who made this game", style="tips_bottom"))    
+    image tooltip_credits=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("Check out who made this game", style="tips_bottom"))    
     # tooltip_return already defined above
     
     #Tooltips - options:
@@ -515,7 +515,7 @@ init:
     image button_credits_selected_idle = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button_selected.png", (x, 18), Text(button_text, style="side_butt")), side_eff_selected_idle)
     image button_credits_selected_hover = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button_selected.png", (x, 18), Text(button_text, style="side_butt")), side_eff_selected_hover)
 
-	$ button_text = "To Come!"
+    $ button_text = "To Come!"
     image button_soon = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button.png", (x, 18), Text(button_text, style="side_butt")), side_eff)
     image button_soon_selected_idle = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button_selected.png", (x, 18), Text(button_text, style="side_butt")), side_eff_selected_idle)
     image button_dev_gallery_selected_hover = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button_selected.png", (x, 18), Text(button_text, style="side_butt")), side_eff_selected_hover)
