@@ -210,7 +210,7 @@ init python:
 # http://www.renpy.org/doc/html/screen_special.html#main-menu
 
 init:
-    $ updateUrl = "http://jghibiki.vnovel.com/projects/vntycoon/updates.json"
+    $ updateUrl = "http://melt.ndacm.org/jgoetze/projects/vntycoon/updates.json"
     $ menu_actions = {"return": Return(), "config": ShowMenu("preferences"), "save": ShowMenu("save"), "load": ShowMenu("load"), "main": MainMenu(), "help": ShowMenu("help_screen"), "quit": Quit(), "start": Start(), "extras": ShowMenu("extras_blank"), "cg_gallery": ShowMenu("cg_gallery"), "ch_gallery": ShowMenu("ch_gallery"), "bg_gallery": ShowMenu("bg_gallery"), "music_room": ShowMenu("music_room"), "dev_gallery": ShowMenu("dev_gallery"), "update": updater.Update(url=updateUrl), "credits": ui.callsinnewcontext("credits"), "soon" : ShowMenu("coming_soon")}
     
     $ button_text = "Start"
