@@ -705,12 +705,16 @@ screen tarzan:
                             null width 50
                             textbutton "Check Out" action Return("tarzanBuy")
             else:
-                vbox:
-                    text "Official Notice" style "stdTxt"
-                    null height 10
-                    text "This website has been taken down as part of an investigation into several claims of credit card fraud against the owners. If you feel you may have fallen victim to this scheme, please contact us right away." style "stdTxt"
-                    null height 30
-                    textbutton "Return" action Return("web_browser")
+                frame:
+                    xmaximum 1200
+                    xminimum 1200
+                    ymaximum 450
+                    vbox:
+                        text "Official Notice" style "stdTxt"
+                        null height 10
+                        text "This website has been taken down as part of an investigation into several claims of credit card fraud against the owners. If you feel you may have fallen victim to this scheme, please contact us right away." style "stdTxt"
+                        null height 30
+                        textbutton "Return" action Return("web_browser")
 
 #################
 ###    StalkMePlz
