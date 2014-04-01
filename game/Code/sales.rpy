@@ -162,7 +162,16 @@ screen game_list:
                         $ price1 = " $" + price
                         if not g.commercial:
                             $ price1 = "Free"
+                            $ price1 += " / " + str(g.downloads) + " downloads"
+                        else:
+                            $ price1 += " / " + str(g.sales) + " sales"
+#                        vbox:
                         text price1 xalign 0.5 size 14 color "000" yalign 0.5 
+#                            if not g.commercial:
+#                                text "[g.downloads] downloads"
+                            #else:
+                                #text g.sales
+                                
                         #text g.genre
                         if g.commercial:
                             textbutton "Change Price" action [SetVariable("game_tmp", g), ui.callsinnewcontext("edit_price")] style "link_button" yalign 0.5 
@@ -170,9 +179,9 @@ screen game_list:
                             null
                         textbutton "View Cover" action Show("show_cover", game=g) style "link_button" yalign 0.5 
                         #text g.relationship
-                        
 
-            
+                        
+                        
         vbar value YScrollValue("vp") style "v_bar" xalign 1.0
         textbutton "Return" ypos 700 action Return("web_browser")
     

@@ -298,8 +298,9 @@ label computer:
                     if _return[0] == "p":
                         if time.dec(dur):
                             if skills.increase("writing", dur):
+                                show screen writingAnimation
                                 #call screen writingAnimation
-                                "You spend some time practing writing."
+                                #"You spend some time practing writing."
                             else:
                                 "You are the very best. Like no one ever was."
                         else:
@@ -308,8 +309,9 @@ label computer:
                     elif _return[0] == "w":
                         if time.dec(dur):
                             if comishWork.increase("writing", dur):
+                                show writingAni
                                 #call screen writingAnimation
-                                "You spend some time working on comissions."
+                                #"You spend some time working on comissions."
                             else:
                                 "You should really turn in your work already."
                         else:
@@ -319,7 +321,8 @@ label computer:
                             $mygame.do_writing(dur)
                             $completion = round(((mygame.writing_done/mygame.writing_needed)*100),2) 
                             #call screen writingAnimation
-                            "You write a few scenes for your game. [completion]\% Completed"
+                            show writingAni
+                            #"You write a few scenes for your game. [completion]\% Completed"
                         else:
                             "You are too sleepy to write."
 
@@ -893,9 +896,23 @@ label drawingAnimation:
     "drawing animation"
     return
 
+init -1:
+    image writingAni:
+        "Assets/animations/writing/01.png"
+        pause 0.2
+        "Assets/animations/writing/02.png"
+        pause 0.2
+        "Assets/animations/writing/03.png"
+        pause 0.2
+        "Assets/animations/writing/04.png"
+        pause 0.2
+        "Assets/animations/writing/05.png"
+
 screen writingAnimation:
-    text "writing animation"
-    $ wait_to_hide = 1
+    zorder 1000
+    add "writingAni"
+    #text "writing animation"
+    $ wait_to_hide = 1.0
     
     # $ mytext = random.choice(writing_snippets)
     # $ typeSpeed = 20 + int(skills.writing*6)

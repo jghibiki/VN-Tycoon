@@ -164,5 +164,4 @@ label after_load:
         if job=="composer":
             style.say_who_window.background = Frame("Assets/gui/namebox2.png", 15, 15)
             style.say_window.background = Frame("Assets/gui/textbox2.png", 25, 25)
-
-
+    return
