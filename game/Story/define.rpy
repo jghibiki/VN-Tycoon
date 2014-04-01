@@ -145,7 +145,7 @@ image phone_mom:
     "Assets/sprites/phone_mom.png"
     yalign 0.0
 
-image bg computer = "Assets/gui/computer_bg.jpg"
+#image bg computer = "Assets/gui/computer_bg.jpg"
 
 image bg bedroom:
     "Assets/bg/bedroom.jpg"
