@@ -163,7 +163,7 @@ init python:
     class Thread:
         #import random
         categories = ["art", "music", "writing", "coding", "money"]
-        scalar = 20 #the base number of hours to be input
+        scalar = 25 #the base number of hours to be input
         returnScalar = 2 #the difference between the return and the input
         
         def __init__(self, repBonus):
@@ -173,7 +173,7 @@ init python:
                 self.output = Thread.categories[random.randint(0,4)]
             
             #self.inputQuantity = round(Thread.scalar - (store.repBonus + randrangef(0.2,0.6, 0.01)) * Thread.scalar) 
-            self.inputQuantity = round(Thread.scalar - (repBonus + randrangef(0.2,0.6, 0.01)) * Thread.scalar) 
+            self.inputQuantity = round(Thread.scalar - (repBonus + (randrangef(0.2,0.6, 0.01)) * Thread.scalar/3)) 
             
             #self.outputQuantity =  self.inputQuantity > Thread.returnScalar+1 if  self.inputQuantity - Thread.returnScalar else Thread.returnScalar
             
