@@ -270,8 +270,8 @@ label computer:
                     if _return[0] == "p":
                         if time.dec(dur):
                             if skills.increase("art", dur):
-                                #call drawingAnimation
-                                "You spend some time practing drawing."
+                                show drawingAnimation
+                                #"You spend some time practing drawing."
                             else:
                                 "You are the very best. Like no one ever was."
                         else:
@@ -279,8 +279,8 @@ label computer:
                     elif _return[0] == "w":
                         if time.dec(dur):
                             if comishWork.increase("art", dur):
-                                #call drawingAnimation
-                                "You spend some time working on comissions."
+                                show drawingAnimation
+                                #"You spend some time working on comissions."
                             else:
                                 "You should really turn in your work already."
                         else:
@@ -289,8 +289,8 @@ label computer:
                         if time.dec(dur):
                             $mygame.do_art(dur)
                             $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
-                            #call drawingAnimation
-                            "You draw some sprites for your game. [completion]\% Completed"
+                            show drawingAnimation
+                            #"You draw some sprites for your game. [completion]\% Completed"
                         else:
                             "You are too sleepy to draw."
                 elif showSentence:
@@ -309,7 +309,7 @@ label computer:
                     elif _return[0] == "w":
                         if time.dec(dur):
                             if comishWork.increase("writing", dur):
-                                show writingAni
+                                show screen writingAnimation
                                 #call screen writingAnimation
                                 #"You spend some time working on comissions."
                             else:
@@ -321,7 +321,7 @@ label computer:
                             $mygame.do_writing(dur)
                             $completion = round(((mygame.writing_done/mygame.writing_needed)*100),2) 
                             #call screen writingAnimation
-                            show writingAni
+                            show screen writingAnimation
                             #"You write a few scenes for your game. [completion]\% Completed"
                         else:
                             "You are too sleepy to write."
@@ -343,9 +343,9 @@ label computer:
                                 #hide screen window_frame
                                 #hide screen computer
 
-
+                                show screen codingAnimation
                                 
-                                "You spend some time practing coding."
+                                #"You spend some time practing coding."
                             else:
                                 "You are the very best. Like no one ever was."
                         else:
@@ -364,8 +364,8 @@ label computer:
                                 #hide screen autoPostFixed
                                 #hide screen window_frame
                                 #hide screen computer
-
-                                "You spend some time working on comissions."
+                                show screen codingAnimation
+                                #"You spend some time working on comissions."
                             else:
                                 "You should really turn in your work already."
                         else:
@@ -387,8 +387,8 @@ label computer:
                             #hide screen computer
 
 
-                                                          
-                            "You code a few scenes for your game. [completion]\% Completed"
+                            show screen codingAnimation
+                            #"You code a few scenes for your game. [completion]\% Completed"
                         else:
                             "You are too sleepy to code."
                 elif showGrunge:
@@ -396,8 +396,8 @@ label computer:
                     if _return[0] == "p":
                         if time.dec(dur):
                             if skills.increase("music", dur):
-                                #call screen composingAnimation
-                                "You spend some time practing composing music."
+                                show screen composingAnimation
+                                #"You spend some time practing composing music."
                             else:
                                 "You are the very best. Like no one ever was."
                         else:
@@ -405,8 +405,8 @@ label computer:
                     elif _return[0] == "w":
                         if time.dec(dur):
                             if comishWork.increase("music", dur):
-                                #call composingAnimation
-                                "You spend some time working on comissions."
+                                show composingAnimation
+                                #"You spend some time working on comissions."
                             else:
                                 "You should really turn in your work already."
                         else:
@@ -415,9 +415,9 @@ label computer:
                         if time.dec(dur):
                             $mygame.do_music(dur)
                             $completion = round(((mygame.music_done/mygame.music_needed)*100),2) 
-                            #call screen composingAnimation
-                            "You make some music for your game.
-                            [completion]\% Completed"
+                            show screen composingAnimation
+                            #"You make some music for your game.
+                            #[completion]\% Completed"
                         else:
                             "You are too sleepy to compose."           
                             
@@ -896,37 +896,12 @@ label drawingAnimation:
     "drawing animation"
     return
 
-init -1:
-    image writingAni:
-        "Assets/animations/writing/01.png"
-        pause 0.2
-        "Assets/animations/writing/02.png"
-        pause 0.2
-        "Assets/animations/writing/03.png"
-        pause 0.2
-        "Assets/animations/writing/04.png"
-        pause 0.2
-        "Assets/animations/writing/05.png"
-
-screen writingAnimation:
-    zorder 1000
-    add "writingAni"
-    #text "writing animation"
-    $ wait_to_hide = 1.0
-    
-    # $ mytext = random.choice(writing_snippets)
-    # $ typeSpeed = 20 + int(skills.writing*6)
-    # $ wait_to_hide = 1 + len(mytext) / typeSpeed
-    # use window_frame("Sentence", "icon16_sentence", Return("desktop"))
-    # use autoPost(28, 84, 0, 0, "#00000000", mytext, typeSpeed = typeSpeed, moveCursor=False, textSize=24)
-    timer wait_to_hide action [Hide("writingAnimation"), Return()]
 
 ############################
 ## Computer Images 
 init:
     image computer = "Assets/gui/desk_bg1.jpg"
 
-    
 ############################
 # Window Frame - Used to show a winodows/mac style window manager simulation
 
