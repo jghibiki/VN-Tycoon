@@ -1,3 +1,5 @@
 {b}Features to expect:{/b}
+- Achievments
+- Composer character
 - Cost of living
 - Tons of bug fixes

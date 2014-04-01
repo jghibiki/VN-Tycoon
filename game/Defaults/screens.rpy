@@ -443,7 +443,8 @@ init:
     image title_save_game=Text("Save Game", style="title")
     image title_load_game=Text("Load Game", style="title")
     image help_title=Text("Help", style="title")
-
+    image coming_soon_title=Text("Coming Soon", style="title")
+    
     image information = Text("INFORMATION", style="tips_top")
     #Tooltips - game menu:    
     image tooltip_save=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("Save a game in progress", style="tips_bottom"))
@@ -524,8 +525,8 @@ screen extras:
     add "main_menu_cg_foggy"
     add "Assets/gui/main_menu_ground.png"
     add "Assets/gui/game_menu_ground.png"
-    #$ extras_items = ["cg_gallery", "ch_gallery", "bg_gallery", "music_room", "dev_gallery", "return"]
-    $ extras_items = ["music_room", "soon", "credits", "return"]
+    #$ extras_items = ["cg_gallery", , "bg_gallery", "music_room", "dev_gallery", "return"]
+    $ extras_items = ["music_room", "ch_gallery", "soon", "credits", "return"]
     $ y = 129
     vbox xpos 1060 ypos 129 spacing 9:
         for item in extras_items:
@@ -555,9 +556,8 @@ init python:
 screen coming_soon:
     tag menu
     use extras
-    add "extras_title" xpos 152 ypos 20
+    add "coming_soon_title" xpos 152 ypos 20
     vbox ypos .026 xmaximum 1020:
-        add "help_title" xpos .02
         hbox:
             frame:
                 xmaximum 940
