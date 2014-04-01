@@ -253,6 +253,7 @@ screen main_menu:
     add "main_menu_cg"
     add "Assets/gui/main_menu_ground.png"
     add "Assets/gui/main_menu_title.png"
+    text "Version " + _config.version xpos .90 ypos .94 style "stdTxt"
     $ main_menu_items = ["start", "load", "config", "extras", "help", "update", "quit"]
     $ y = 129
     vbox xalign .5 yalign .5:
