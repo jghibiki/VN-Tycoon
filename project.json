@@ -1,1 +1,1 @@
-{"build_update": false, "packages": ["linux", "mac", "win"]}
+{"build_update": true, "packages": ["win"]}

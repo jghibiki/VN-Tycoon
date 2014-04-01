@@ -183,13 +183,12 @@ label publish:
         
     else:
         "It's not finished!"
-        
-        #"But let's go ahead and cheat."
-        
-        #$ mygame.publish()
-        #$ make_cover(mygame)
-        #$ games.append(mygame)
-        #$ mygame = Game()
+        if debug:
+            "But let's go ahead and cheat."
+            $ mygame.publish()
+            $ make_cover(mygame)
+            $ games.append(mygame)
+            $ mygame = Game()
     jump sim
     
 init:
