@@ -188,7 +188,13 @@ init python:
                 if self.output=="money":
                     self.outputQuantity *= 50
 
-                
+            #gets rid of the decimals in input and ouput
+            if self.input == "money":
+                self.inputQuantity = int(round(self.inputQuantity))
+            if self.output == "money":
+                self.outputQuantity = int(round(self.outputQuantity))
+
+
             self.stage = "reminder" #or response
             self.user = make_user()
             self.description  = ""
