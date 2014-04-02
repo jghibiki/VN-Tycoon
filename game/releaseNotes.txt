@@ -3,3 +3,7 @@
 - Composer character
 - Cost of living
 - Tons of bug fixes
+
+{b}Version 1.05 Changes {/b}
+- Fixes scrolling bug with the LSF menus that made it impossible to click and drag the elivator, making it difficult or impossible to scroll without a mouse
+- Optimized LSF screens so that the back button doesn't cover up the pm buttons.
