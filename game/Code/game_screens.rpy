@@ -29,7 +29,7 @@ init -2 python:
             inc_by=0
             if skill == "art":
                 if skills.art > 3:
-                    inc_by += hours / (11.0-skills.writing+random.randint(-1,1))
+                    inc_by += (hours / (12.0-skills.writing) + random.randint(-1,1)) / 2
                     #for hour in xrange(hours):
                         #inc_by += (random.randint(1,round(skills.art)))/3
                         #inc_by += (random.randint(1,round(skills.art)))/10
@@ -46,7 +46,7 @@ init -2 python:
                     #for hour in xrange(hours):
                     #    inc_by += (random.randint(1,round(skills.writing)))
                         
-                    inc_by += hours / (11.0-skills.writing+random.randint(-1,1))
+                    inc_by += (hours / (12.0-skills.writing) +random.randint(-1,1)) / 2
                         
                         
                     if self.writing + inc_by < 25.0:
@@ -60,7 +60,7 @@ init -2 python:
                 if skills.coding > 3:
                     #for hour in xrange(hours):
                         #inc_by += (random.randint(1,round(skills.coding)))/10
-                    inc_by += hours / (11.0-skills.coding+random.randint(-1,1))
+                    inc_by += (hours / (12.0-skills.coding) +random.randint(-1,1)) / 2
                     if self.coding + inc_by < 25.0:
                         self.coding += inc_by
                     else:
@@ -72,7 +72,7 @@ init -2 python:
                 if skills.music > 3:
                     #for hour in xrange(hours):
                         #inc_by += (random.randint(1,round(skills.music)))/10
-                    inc_by += hours / (11.0-skills.music+random.randint(-1,1))
+                    inc_by += (hours / (12.0-skills.music) +random.randint(-1,1)) / 2
                     if self.music + inc_by < 25.0:
                         self.music += inc_by
                     else:
