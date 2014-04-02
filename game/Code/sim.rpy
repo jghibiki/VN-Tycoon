@@ -49,9 +49,9 @@ label sim:
                     $mygame.do_art(dur)
                     $completion = round(((mygame.art_done/mygame.art_needed)*100),2) 
                     call drawingAnimation
-                    event = eventcheck("art")
+                    $ event = eventcheck("art")
                     if event[0]=="story":
-                        renpy.jump(event[1])
+                        $ renpy.jump(event[1])
                 else:
                     "You are too sleepy to draw."
                 
@@ -128,9 +128,9 @@ label sim:
                     $mygame.do_music(dur)
                     $completion = round(((mygame.music_done/mygame.music_needed)*100),2) 
                     call composingAnimation
-                    event = eventcheck("music")
+                    $ event = eventcheck("music")
                     if event[0]=="story":
-                        renpy.jump(event[1])
+                        $ renpy.jump(event[1])
                 else:
                     "You are too sleepy to compose."           
 
