@@ -30,7 +30,8 @@ init -2 python:
             if skill == "art":
                 if skills.art > 3:
                     for hour in xrange(hours):
-                        inc_by += (random.randint(1,round(skills.art)))/3
+                        #inc_by += (random.randint(1,round(skills.art)))/3
+                        inc_by += (random.randint(1,round(skills.art)))/20
                     if self.art + inc_by < 25.0:
                         self.art += inc_by
                     else:
@@ -42,7 +43,7 @@ init -2 python:
                 if skills.writing > 3:
                     #inc_by = inc_by *(random.randint(1,round(skills.writing)))/3
                     for hour in xrange(hours):
-                        inc_by += (random.randint(1,round(skills.writing)))/3
+                        inc_by += (random.randint(1,round(skills.writing)))/20
                     if self.writing + inc_by < 25.0:
                         self.writing += inc_by
                     else:
@@ -53,7 +54,7 @@ init -2 python:
             elif skill=="coding":
                 if skills.coding > 3:
                     for hour in xrange(hours):
-                        inc_by += (random.randint(1,round(skills.coding)))/3
+                        inc_by += (random.randint(1,round(skills.coding)))/20
                     if self.coding + inc_by < 25.0:
                         self.coding += inc_by
                     else:
@@ -64,7 +65,7 @@ init -2 python:
             elif skill=="music":
                 if skills.music > 3:
                     for hour in xrange(hours):
-                        inc_by += (random.randint(1,round(skills.music)))/3
+                        inc_by += (random.randint(1,round(skills.music)))/20
                     if self.music + inc_by < 25.0:
                         self.music += inc_by
                     else:
@@ -345,7 +346,7 @@ screen stats:
                 $ button_name = "m_button_" + item
                 $ button_name_hover = button_name + "_hover"
                 $ tip_name = "tooltip_" + item
-                $ my_action = stat_menu_actions[item]
+                $ my_action = menu_actions[item]
                 button background None focus_mask True action my_action hovered  Play("sound", "Assets/sfx/click.ogg") unhovered [Hide("gui_tooltip")]:
                     add button_name
                     hover_child button_name_hover
@@ -355,10 +356,11 @@ screen stats:
 init:
 
 
-    $ stat_menu_actions = {"charStats" : Show("playerStats", transition=Dissolve(1)), 
-                           "workStats" : Show("workDone", transition=Dissolve(1)),
-                           "back" : Hide("stats", transition=Dissolve(1)),
-                          }
+    $ menu_actions = {"charStats" : Show("playerStats", transition=Dissolve(1)), 
+                      "workStats" : Show("workDone", transition=Dissolve(1)),
+                      #"gameStats" : Show("", transition=Dissolve(1)), <- show henpie
+                      "back" : Hide("stats", transition=Dissolve(1)),
+                     }
 
     $ button_text = "Stats"
     image m_button_charStats = At(LiveComposite ((312, 80), (0,0), "Assets/gui/main_button.png", (8, 6), Text(button_text, style="main_butt")), main_eff)
@@ -389,27 +391,41 @@ screen playerStats:
         
     $ y=195
     text "Writing" xpos 488 ypos y style "my_text"
-    bar value skills.writing range 10.0 style "stat_bar" xpos 854 ypos y right_bar "Assets/gui/stat_writing_empty.png" left_bar "Assets/gui/stat_writing_full.png"
+    $ mytext = str(round(skills.writing,2))
+    bar value skills.writing range 10.0 style "stat_bar" right_bar "Assets/gui/stat_writing_empty.png" left_bar "Assets/gui/stat_writing_full.png" xpos 854 ypos y
+    text mytext style "my_text" xpos 910 ypos y color "CECECE"
+    
     
     $ y+=58
     text "Drawing" xpos 488 ypos y style "my_text"
-    bar value skills.art range 10.0 style "stat_bar" xpos 854 ypos y right_bar "Assets/gui/stat_drawing_empty.png" left_bar "Assets/gui/stat_drawing_full.png"
+    $ mytext = str(round(skills.art,2))
+    bar value skills.art range 10.0 style "stat_bar" right_bar "Assets/gui/stat_drawing_empty.png" left_bar "Assets/gui/stat_drawing_full.png"  xpos 854 ypos y
+    text mytext style "my_text" xpos 910 ypos y color "CECECE"
     
     $ y+=58
     text "Programming" xpos 488 ypos y style "my_text"
-    bar value skills.coding range 10.0 style "stat_bar" xpos 854 ypos y right_bar "Assets/gui/stat_programming_empty.png" left_bar "Assets/gui/stat_programming_full.png"
+    $ mytext = str(round(skills.coding,2))
+    bar value skills.coding range 10.0 style "stat_bar" right_bar "Assets/gui/stat_programming_empty.png" left_bar "Assets/gui/stat_programming_full.png" xpos 854 ypos y
+    text mytext style "my_text" xpos 910 ypos y color "CECECE"
     
     $ y+=58
     text "Composing" xpos 488 ypos y style "my_text"
-    bar value skills.music range 10.0 style "stat_bar" xpos 854 ypos y right_bar "Assets/gui/stat_composing_empty.png" left_bar "Assets/gui/stat_composing_full.png"
+    $ mytext = str(round(skills.music,2))
+    bar value skills.music range 10.0 style "stat_bar" right_bar "Assets/gui/stat_composing_empty.png" left_bar "Assets/gui/stat_composing_full.png" xpos 854 ypos y
+    text mytext style "my_text" xpos 910 ypos y color "CECECE"
     
     $ y+=58*2
+
     text "Money" xpos 488 ypos y style "my_text"
-    $ money = "$" + str(inventory.money)
-    text money xpos 854 ypos y style "my_text"
+    hbox xpos 760 ypos y:
+        $ money = "$" + str(inventory.money)
+        text money style "my_text"
+        
     $ y+=58
+    
     text "Day" xpos 488 ypos y style "my_text"
-    text str(day) xpos 854 ypos y style "my_text"
+    hbox xpos 760 ypos y:
+        text str(day) style "my_text"
    
     #textbutton "OK" action Return() xalign 0.1 yalign 0.9
     textbutton "OK" action Hide("playerStats", transition=Dissolve(1)) xalign 0.7 yalign 0.9 style "tbutton"
@@ -432,18 +448,26 @@ screen workDone:
     $ y=195
     text "Writing" xpos 488 ypos y style "my_text"
     bar value comishWork.writing range 10.0 style "stat_bar" xpos 854 ypos y right_bar "Assets/gui/stat_writing_empty.png" left_bar "Assets/gui/stat_writing_full.png"
+    $ mytext = str (round(comishWork.writing ,2))
+    text mytext style "my_text" xpos 910 ypos y color "CECECE"
     
     $ y+=58
     text "Drawing" xpos 488 ypos y style "my_text"
     bar value comishWork.art range 10.0 style "stat_bar" xpos 854 ypos y right_bar "Assets/gui/stat_drawing_empty.png" left_bar "Assets/gui/stat_drawing_full.png"
+    $ mytext = str (round(comishWork.art ,2))
+    text mytext style "my_text" xpos 910 ypos y color "CECECE"
     
     $ y+=58
     text "Programming" xpos 488 ypos y style "my_text"
     bar value comishWork.coding range 10.0 style "stat_bar" xpos 854 ypos y right_bar "Assets/gui/stat_programming_empty.png" left_bar "Assets/gui/stat_programming_full.png"
+    $ mytext = str (round(comishWork.coding ,2))
+    text mytext style "my_text" xpos 910 ypos y color "CECECE"
     
     $ y+=58
     text "Composing" xpos 488 ypos y style "my_text"
     bar value comishWork.music range 10.0 style "stat_bar" xpos 854 ypos y right_bar "Assets/gui/stat_composing_empty.png" left_bar "Assets/gui/stat_composing_full.png"
+    $ mytext = str (round(comishWork.music ,2))
+    text mytext style "my_text" xpos 910 ypos y color "CECECE"
     
     textbutton "OK" action Hide("workDone", transition=Dissolve(1)) xalign 0.7 yalign 0.9 style "tbutton"
 

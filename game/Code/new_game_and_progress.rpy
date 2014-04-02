@@ -44,6 +44,10 @@ init python:
                 # renpy.jump(event[1])
             if self.art_done<self.art_needed:
                 self.art_done += hours / (11.0-skills.art) / 2
+                super_power_bonus = 0
+                if skills.art>9:
+                    super_power_bonus = int((skills.art-9)*10)
+                self.art_done += super_power_bonus * hours / 8
                 self.art_quality += skills.art * (hours / 2)
                 return True
             else:
@@ -54,6 +58,10 @@ init python:
                 # renpy.jump(event[1])
             if self.writing_done<self.writing_needed:
                 self.writing_done += hours / (11.0-skills.writing) / 2
+                super_power_bonus = 0
+                if skills.writing>9:
+                    super_power_bonus = int((skills.writing-9)*10)
+                self.art_done += super_power_bonus * hours / 8
                 self.writing_quality += skills.writing * (hours / 2)
                 return True
             else:
@@ -64,6 +72,12 @@ init python:
                 # renpy.jump(event[1])
             if self.coding_done<self.coding_needed:
                 self.coding_done += hours / (11.0-skills.coding) / 2
+                
+                super_power_bonus = 0
+                if skills.coding>9:
+                    super_power_bonus = int((skills.coding-9)*10)
+                self.art_done += super_power_bonus * hours / 8
+                
                 self.coding_quality += skills.coding * (hours / 2)
                 return True
             else:
@@ -74,6 +88,10 @@ init python:
                 # renpy.jump(event[1])
             if self.music_done<self.music_needed:
                 self.music_done += hours / (11.0-skills.music) / 2
+                super_power_bonus = 0
+                if skills.music>9:
+                    super_power_bonus = int((skills.music-9)*10)
+                self.art_done += super_power_bonus * hours / 8
                 self.music_quality += skills.music * (hours / 2)
                 return True
             else:
