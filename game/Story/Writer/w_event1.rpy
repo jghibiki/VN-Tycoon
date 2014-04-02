@@ -6,7 +6,6 @@ label writer_event1:
 # Scene:
 
 #    In a world filled with endless water... where humanity has made an effort to eke out a living on flying islands...
-    #show screen computer
     
     $ config.rollback_enabled = True
     $ renpy.block_rollback()
@@ -34,7 +33,6 @@ label writer_event1:
     Joan hat neutral "H'ooookay, enough despair. Joan Gold, you're going to write a Visual Novel. Like, starting right the hell now! Show that pompous bastard just what effort can produce!"
     Joan hat laugh_med "I can't wait to wipe that arrogant smirk off of his damn face!"
     hide screen autoPost
-    hide screen window_frame
-    hide screen computer
+    hide screen sentence
     with dissolve
     jump sim
