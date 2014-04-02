@@ -365,7 +365,7 @@ label computer:
                         if time.dec(dur):
                             $result = comishWork.increase("writing", dur)
                             if type(result) == bool and result:                               
-                                call  writingAnimation
+                                call writingAnimation
                             elif result == "fail":
                                 "You should try practicing before joining the big boys."
                             else:

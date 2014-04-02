@@ -43,7 +43,7 @@ init python:
             # if event[0]=="story":
                 # renpy.jump(event[1])
             if self.art_done<self.art_needed:
-                self.art_done += hours / (11.0-skills.art) / 2
+                self.art_done += hours / (11.0-skills.art+random.randint(-1,1))
                 super_power_bonus = 0
                 if skills.art>9:
                     super_power_bonus = int((skills.art-9)*10)
@@ -57,7 +57,7 @@ init python:
             # if event[0]=="story":
                 # renpy.jump(event[1])
             if self.writing_done<self.writing_needed:
-                self.writing_done += hours / (11.0-skills.writing) / 2
+                self.writing_done += hours / (11.0-skills.writing+random.randint(-1,1))
                 super_power_bonus = 0
                 if skills.writing>9:
                     super_power_bonus = int((skills.writing-9)*10)
@@ -71,7 +71,7 @@ init python:
             # if event[0]=="story":
                 # renpy.jump(event[1])
             if self.coding_done<self.coding_needed:
-                self.coding_done += hours / (11.0-skills.coding) / 2
+                self.coding_done += hours / (11.0-skills.coding+random.randint(-1,1))
                 
                 super_power_bonus = 0
                 if skills.coding>9:
@@ -87,7 +87,7 @@ init python:
             # if event[0]=="story":
                 # renpy.jump(event[1])
             if self.music_done<self.music_needed:
-                self.music_done += hours / (11.0-skills.music) / 2
+                self.music_done += hours / (11.0-skills.music+random.randint(-1,1))
                 super_power_bonus = 0
                 if skills.music>9:
                     super_power_bonus = int((skills.music-9)*10)

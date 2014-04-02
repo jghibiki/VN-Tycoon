@@ -29,9 +29,10 @@ init -2 python:
             inc_by=0
             if skill == "art":
                 if skills.art > 3:
-                    for hour in xrange(hours):
+                    inc_by += hours / (11.0-skills.writing+random.randint(-1,1))
+                    #for hour in xrange(hours):
                         #inc_by += (random.randint(1,round(skills.art)))/3
-                        inc_by += (random.randint(1,round(skills.art)))/20
+                        #inc_by += (random.randint(1,round(skills.art)))/10
                     if self.art + inc_by < 25.0:
                         self.art += inc_by
                     else:
@@ -42,8 +43,12 @@ init -2 python:
             elif skill == "writing":
                 if skills.writing > 3:
                     #inc_by = inc_by *(random.randint(1,round(skills.writing)))/3
-                    for hour in xrange(hours):
-                        inc_by += (random.randint(1,round(skills.writing)))/20
+                    #for hour in xrange(hours):
+                    #    inc_by += (random.randint(1,round(skills.writing)))
+                        
+                    inc_by += hours / (11.0-skills.writing+random.randint(-1,1))
+                        
+                        
                     if self.writing + inc_by < 25.0:
                         self.writing += inc_by
                     else:
@@ -53,8 +58,9 @@ init -2 python:
                     return "fail"
             elif skill=="coding":
                 if skills.coding > 3:
-                    for hour in xrange(hours):
-                        inc_by += (random.randint(1,round(skills.coding)))/20
+                    #for hour in xrange(hours):
+                        #inc_by += (random.randint(1,round(skills.coding)))/10
+                    inc_by += hours / (11.0-skills.coding+random.randint(-1,1))
                     if self.coding + inc_by < 25.0:
                         self.coding += inc_by
                     else:
@@ -64,8 +70,9 @@ init -2 python:
                     return "fail"
             elif skill=="music":
                 if skills.music > 3:
-                    for hour in xrange(hours):
-                        inc_by += (random.randint(1,round(skills.music)))/20
+                    #for hour in xrange(hours):
+                        #inc_by += (random.randint(1,round(skills.music)))/10
+                    inc_by += hours / (11.0-skills.music+random.randint(-1,1))
                     if self.music + inc_by < 25.0:
                         self.music += inc_by
                     else:
@@ -346,7 +353,7 @@ screen stats:
                 $ button_name = "m_button_" + item
                 $ button_name_hover = button_name + "_hover"
                 $ tip_name = "tooltip_" + item
-                $ my_action = menu_actions[item]
+                $ my_action = stat_menu_actions[item]
                 button background None focus_mask True action my_action hovered  Play("sound", "Assets/sfx/click.ogg") unhovered [Hide("gui_tooltip")]:
                     add button_name
                     hover_child button_name_hover
@@ -356,10 +363,9 @@ screen stats:
 init:
 
 
-    $ menu_actions = {"charStats" : Show("playerStats", transition=Dissolve(1)), 
-                      "workStats" : Show("workDone", transition=Dissolve(1)),
-                      #"gameStats" : Show("", transition=Dissolve(1)), <- show henpie
-                      "back" : Hide("stats", transition=Dissolve(1)),
+    $ stat_menu_actions = {"charStats" : Show("playerStats", transition=Dissolve(1)),
+                        "workStats" : Show("workDone", transition=Dissolve(1)),
+                        "back" : Hide("stats", transition=Dissolve(1)),
                      }
 
     $ button_text = "Stats"
