@@ -10,11 +10,10 @@ label sim:
         call workingAnimation
         $ salary = max(skills.art, skills.writing, skills.coding, skills.music) * 4
         if time.dec(4):
-            $ event = eventcheck("job")            
-            if event[0]=="story":
-                $ renpy.jump(event[1])
-            else:
                 $ inventory.earn(salary)
+                $ event = eventcheck("job")            
+                if event[0]=="story":
+                    $ renpy.jump(event[1])
                 #"Work, work, work... You earned $[salary]."
         else:
             "You are too sleepy to work."
