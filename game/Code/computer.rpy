@@ -768,43 +768,47 @@ screen lsf(showOptions=True):
 screen lsf_recruitment:
     use webBrowser
                                         #Working Back button ???
-    window:
-        xpos 0#28 #75
+    frame:
+        xpos 28#28 #75
         ypos 110 #125
-        xanchor 0.0
-        yanchor 0.0
-        xsize 1266
+#        xanchor 0.0
+#        yanchor 0.0
+#        xsize 1150
         ymaximum 580
         background None
         hbox:
-            viewport id "lsfThreads":
-                    mousewheel True
-                    vbox:
-                        $threadCount = 0
-                        add "Assets/gui/LSF_threads_head.png"
-                        for item in threads:
-                            frame:
-                                xpos 47
-                                background "#FFF"
-                                xsize 1200
-                                vbox:
-                                    hbox:
-                                        add "Assets/gui/lsf_unread.png"
-                                        
-                                        window:
-                                            ysize 39
-                                            background Frame("Assets/gui/lsf_title_frame.png", 2, 2, 2, 2)
-                                    text "[item.title]" style "stdTxt" color "006597" size 18 xpos 61 ypos -30
-                                    text "[item.user]" style "stdTxt" xpos 961 size 14 ypos -40
-                                    text "[item.description]" style "stdTxt" ypos -30
+            frame:
+                xmaximum 1150
+                xminimum 1150
+                ymaximum 580
+                background None
+                viewport id "lsfThreads":
+                        mousewheel True
+                        vbox:
+                            $threadCount = 0
+                            add "Assets/gui/LSF_threads_head.png"
+                            for item in threads:
+                                frame:
+                                    background "#fff"
+                                    xsize 1150
+                                    vbox:
+                                        hbox:
+                                            add "Assets/gui/lsf_unread.png"
+                                            
+                                            window:
+                                                ysize 39
+                                                background Frame("Assets/gui/lsf_title_frame.png", 2, 2, 2, 2)
+                                        text "[item.title]" style "stdTxt" color "006597" size 18 xpos 61 ypos -30
+                                        text "[item.user]" style "stdTxt" xpos 961 size 14 ypos -40
+                                        text "[item.description]" style "stdTxt" ypos -30
 
-                                    imagebutton auto "Assets/gui/lsf_pm_%s.png" focus_mask True action Return(("replyThread", threadCount))
-                                        #textbutton "PM" action Return(("replyThread", threadCount))
-                                    $threadCount += 1
-                            null height 3
+                                        imagebutton auto "Assets/gui/lsf_pm_%s.png" focus_mask True action Return(("replyThread", threadCount))
+                                            #textbutton "PM" action Return(("replyThread", threadCount))
+                                        $threadCount += 1
+                                null height 3
             null width 10
             vbar value YScrollValue("lsfThreads")
-    textbutton "Back" action Return("lsf") ypos 640 xpos 40
+    textbutton "Back" action Return("lsf") ypos 640 xpos 1100
     
 #################################
 ###    LemmingSofe Messages Page
@@ -815,11 +819,12 @@ screen lsf_messages:
     add "Assets/gui/lsf_messages_top.png"
     window:
         background Frame("Assets/gui/lsf_messages_bg.png", 2, 1, 2, 1)
-        ysize 560
         xpos 0#
         ypos 135
         xanchor 0.0
         yanchor 0.0
+        ymaximum 500
+        yminimum 500
         viewport id "lsfMessages":
             mousewheel True
             vbox:
@@ -843,7 +848,7 @@ screen lsf_messages:
         vbar value YScrollValue("lsfMessages") xpos 1250
     
     add "Assets/gui/lsf_messages_bottom.png" ypos 640
-    textbutton "Back" action Return("lsf") ypos 640 xpos 40
+    textbutton "Back" action Return("lsf") ypos 640 xpos 1100
                         
                         
     #lsf_messages_post
