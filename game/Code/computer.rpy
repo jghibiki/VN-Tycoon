@@ -345,6 +345,9 @@ label computer:
                         if time.dec(dur):
                             $mygame.do_art(dur)
                             call drawingAnimation
+                            event = eventcheck("art")
+                            if event[0]=="story":
+                                renpy.jump(event[1])
                         else:
                             "You are too sleepy to draw."
                 elif showSentence:
@@ -373,6 +376,9 @@ label computer:
                         if time.dec(dur):
                             $mygame.do_writing(dur)
                             call  writingAnimation
+                            event = eventcheck("writing")
+                            if event[0]=="story":
+                                renpy.jump(event[1])
                         else:
                             "You are too sleepy to write."
 
@@ -401,6 +407,9 @@ label computer:
                         if time.dec(dur):
                             $mygame.do_coding(dur)
                             call codingAnimation
+                            event = eventcheck("coding")
+                            if event[0]=="story":
+                                renpy.jump(event[1])
                         else:
                             "You are too sleepy to code."
                 elif showGrunge:
@@ -428,6 +437,9 @@ label computer:
                         if time.dec(dur):
                             $mygame.do_music(dur)
                             call composingAnimation
+                            event = eventcheck("music")
+                            if event[0]=="story":
+                                renpy.jump(event[1])
                         else:
                             "You are too sleepy to compose."           
                             

@@ -39,9 +39,9 @@ init python:
             
             
         def do_art(self, hours):
-            event = eventcheck("art")
-            if event[0]=="story":
-                renpy.jump(event[1])
+            # event = eventcheck("art")
+            # if event[0]=="story":
+                # renpy.jump(event[1])
             if self.art_done<self.art_needed:
                 self.art_done += hours / (11.0-skills.art) / 2
                 self.art_quality += skills.art * (hours / 2)
@@ -49,9 +49,9 @@ init python:
             else:
                 return False
         def do_writing(self, hours):
-            event = eventcheck("writing")
-            if event[0]=="story":
-                renpy.jump(event[1])
+            # event = eventcheck("writing")
+            # if event[0]=="story":
+                # renpy.jump(event[1])
             if self.writing_done<self.writing_needed:
                 self.writing_done += hours / (11.0-skills.writing) / 2
                 self.writing_quality += skills.writing * (hours / 2)
@@ -59,9 +59,9 @@ init python:
             else:
                 return False
         def do_coding(self, hours):
-            event = eventcheck("coding")
-            if event[0]=="story":
-                renpy.jump(event[1])
+            # event = eventcheck("coding")
+            # if event[0]=="story":
+                # renpy.jump(event[1])
             if self.coding_done<self.coding_needed:
                 self.coding_done += hours / (11.0-skills.coding) / 2
                 self.coding_quality += skills.coding * (hours / 2)
@@ -69,9 +69,9 @@ init python:
             else:
                 return False
         def do_music(self, hours):
-            event = eventcheck("music")
-            if event[0]=="story":
-                renpy.jump(event[1])
+            # event = eventcheck("music")
+            # if event[0]=="story":
+                # renpy.jump(event[1])
             if self.music_done<self.music_needed:
                 self.music_done += hours / (11.0-skills.music) / 2
                 self.music_quality += skills.music * (hours / 2)
