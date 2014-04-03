@@ -23,8 +23,8 @@ label artist_event13:
 
     "It seems this story is not yet finished..."
     "Well this is embarsassing..."
-    "A highly trained team of robotic monkeys is working to resolve this situation, if you see one give them this ticket number ASDHasdgghtq9g-0skot\q573n;[fs4th]ortjpka;sg,"
+    "A highly trained team of robotic monkeys is working to resolve this situation, if you see one give them this ticket number ASDHasdgghtq9g-0skot-q573n-fs4th-ortjpka-sg."
     "Or you can just check the updates in the coming days."
-        
+
     $ artist_event13 = True    
     jump sim
