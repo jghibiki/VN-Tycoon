@@ -1,2 +1,2 @@
 init -1 python hide:
-    config.version = "1.06"
+    config.version = "1.07"

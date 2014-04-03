@@ -4,6 +4,11 @@
 - Cost of living
 - Tons of bug fixes
 
+{b}Version 1.07{/b}
+- Added new save game screen
+- Fixes a bug that would allow commission work to be negative
+- Fixes a crash in the artist path
+
 {b}Version 1.06 Changes{/b}
 - Balancing of stat gain and comission progress
 - Fixes a floating point bug in the money values for comissions
