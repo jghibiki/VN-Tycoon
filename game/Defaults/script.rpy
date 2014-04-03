@@ -129,7 +129,7 @@ label start:
         for song in song_list:
             renpy.music.queue(song['file'], channel='music', loop=True, clear_queue=False, fadein=2.0, tight=True)
 
-    
+    $ save_name = job.title() + ", day " + str(day)# + " " + str (int(minutes/60) + ":" + str(minutes - int(minutes/60))    
     
     if cclass=="artist":
         jump artist_event1

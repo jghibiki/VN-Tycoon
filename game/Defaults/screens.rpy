@@ -595,16 +595,71 @@ screen coming_soon:
 # a single screen, file_picker. We then use the file_picker screen
 # from simple load and save screens.
     
+init -1 python:
+    # config.thumbnail_width = 302
+    # config.thumbnail_height = 170
+#    config.thumbnail_width = 280
+#    config.thumbnail_height = 158
+    config.thumbnail_width = 279
+    config.thumbnail_height = 157
+
+    
 screen file_picker:
 
-    frame:
-        style "file_picker_frame"
+    frame background None:
+        #style "file_picker_frame"
 
         has vbox
 
-        # The buttons at the top allow the user to pick a
-        # page of files.
-        hbox:
+        $ columns = 3
+        $ rows = 2
+                
+        # Display a grid of file slots.
+        grid columns rows:
+            xpos 15
+            
+            ypos 65
+            # transpose True
+            # xfill True
+            #style_group "file_picker"
+            # Display ten file slots, numbered 1 - 10.
+        
+            for i in range(1, columns * rows + 1):
+                button background None ysize 198 xsize 320: # Each file slot is a button.
+                    action FileAction(i)
+                    focus_mask "Assets/gui/file_back.png"
+                    #xfill True
+                    #has hbox
+                    #vbox:
+#                    window background "#FFF":
+                    #frame:
+                    fixed:
+                        add "Assets/gui/file_back.png"
+                        add FileScreenshot(i) xpos 16 ypos 14 # Add the screenshot.
+                        
+                        imagebutton auto "Assets/gui/file_front_%s.png" action FileAction(i)
+                        $ file_name = FileSlotName(i, columns * rows)
+                        $ file_time = FileTime(i, empty=_("Empty Slot."))
+                        $ save_name = FileSaveName(i)
+                        #text "[file_name]. [file_time!t]\n[save_name!t]"
+                        
+                        text "[file_name]. [file_time!t]" xpos 21 ypos 17 size 12 outlines [(1, "#00000080", 0, 0)]
+                        $ mycolor = "FFF"
+                        if save_name:
+                            if save_name[2] == "d":
+                                $ mycolor = "5ac20e"
+                            if save_name[0] == "W":
+                                $ mycolor = "85add3"
+                            if save_name[0] == "A":
+                                $ mycolor = "f462f5"
+                            if save_name[2] == "m":
+                                $ mycolor = "fdb556"
+
+                        text "[save_name!t]" xpos 20 ypos 145 color mycolor outlines [(1, "#000", 0, 0)]
+                        
+                        key "save_delete" action FileDelete(i)
+
+        hbox ypos 100 xalign 0.5: # The buttons to allow the user to pick a page of files.
             style_group "file_picker_nav"
             
             textbutton _("Previous"):
@@ -623,36 +678,6 @@ screen file_picker:
             textbutton _("Next"):
                 action FilePageNext()
 
-        $ columns = 2
-        $ rows = 5
-                
-        # Display a grid of file slots.
-        grid columns rows:
-            transpose True
-            xfill True
-            style_group "file_picker"
-            
-            # Display ten file slots, numbered 1 - 10.
-            for i in range(1, columns * rows + 1):
-
-                # Each file slot is a button.
-                button:
-                    action FileAction(i)
-                    xfill True
-
-                    has hbox
-
-                    # Add the screenshot.
-                    add FileScreenshot(i)
-                    
-                    $ file_name = FileSlotName(i, columns * rows)
-                    $ file_time = FileTime(i, empty=_("Empty Slot."))
-                    $ save_name = FileSaveName(i)
-
-                    text "[file_name]. [file_time!t]\n[save_name!t]"
-
-                    key "save_delete" action FileDelete(i)
-                    
                     
 screen save:
     tag menu
@@ -669,7 +694,7 @@ screen load:
         use file_picker
 
 init -2 python:
-    style.file_picker_frame = Style(style.menu_frame)
+    #style.file_picker_frame = Style(style.menu_frame)
     style.file_picker_nav_button = Style(style.small_button)
     style.file_picker_nav_button_text = Style(style.small_button_text)
     style.file_picker_button = Style(style.large_button)

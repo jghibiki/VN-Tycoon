@@ -59,6 +59,7 @@ label sim:
         $ time.dec(0)
         $ day += 1
         $ time = Time(24)
+        $ save_name = job.title() + ", day " + str(day)# + " " + str (int(minutes/60) + ":" + str(minutes - int(minutes/60))
         $ event = eventcheck()
         if event[0]=="story":
             $ renpy.jump(event[1])

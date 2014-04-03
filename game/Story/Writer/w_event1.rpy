@@ -5,6 +5,7 @@ label writer_event1:
 # Joan Gold is introduced to the player. She tries writing but it just doesn't work out.
 # Scene:
 
+    
 #    In a world filled with endless water... where humanity has made an effort to eke out a living on flying islands...
     
     $ config.rollback_enabled = True
