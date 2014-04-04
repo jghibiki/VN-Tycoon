@@ -29,3 +29,4 @@ label writer_event3:
     hide screen autoPost
     with dissolve
     $ writer_event3 = True
+    jump sim
