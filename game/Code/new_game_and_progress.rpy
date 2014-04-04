@@ -61,7 +61,7 @@ init python:
                 super_power_bonus = 0
                 if skills.writing>9:
                     super_power_bonus = int((skills.writing-9)*10)
-                self.art_done += super_power_bonus * hours / 8
+                self.writing_done += super_power_bonus * hours / 8
                 self.writing_quality += skills.writing * (hours / 2)
                 return True
             else:
@@ -76,7 +76,7 @@ init python:
                 super_power_bonus = 0
                 if skills.coding>9:
                     super_power_bonus = int((skills.coding-9)*10)
-                self.art_done += super_power_bonus * hours / 8
+                self.coding_done += super_power_bonus * hours / 8
                 
                 self.coding_quality += skills.coding * (hours / 2)
                 return True
@@ -91,7 +91,7 @@ init python:
                 super_power_bonus = 0
                 if skills.music>9:
                     super_power_bonus = int((skills.music-9)*10)
-                self.art_done += super_power_bonus * hours / 8
+                self.music_done += super_power_bonus * hours / 8
                 self.music_quality += skills.music * (hours / 2)
                 return True
             else:
