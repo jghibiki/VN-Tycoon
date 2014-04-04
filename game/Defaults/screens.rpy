@@ -211,7 +211,7 @@ init python:
 
 init:
     $ updateUrl = "http://melt.ndacm.org/jgoetze/projects/vntycoon/updates.json"
-    $ menu_actions = {"return": Return(), "config": ShowMenu("preferences"), "save": ShowMenu("save"), "load": ShowMenu("load"), "main": MainMenu(), "help": ShowMenu("help_screen"), "quit": Quit(), "start": Start(), "extras": ShowMenu("extras_blank"), "cg_gallery": ShowMenu("cg_gallery"), "ch_gallery": ShowMenu("ch_gallery"), "bg_gallery": ShowMenu("bg_gallery"), "music_room": ShowMenu("music_room"), "dev_gallery": ShowMenu("dev_gallery"), "update": updater.Update(url=updateUrl), "credits": ui.callsinnewcontext("credits"), "soon" : ShowMenu("coming_soon")}
+    $ menu_actions = {"return": Return(), "config": ShowMenu("preferences"), "save": ShowMenu("save"), "load": ShowMenu("load"), "main": MainMenu(), "help": ShowMenu("help_screen"), "quit": Quit(), "start": Start(), "extras": ShowMenu("extras_blank"), "cg_gallery": ShowMenu("cg_gallery"), "ch_gallery": ShowMenu("ch_gallery"), "bg_gallery": ShowMenu("bg_gallery"), "music_room": ShowMenu("music_room"), "dev_gallery": ShowMenu("dev_gallery"), "update": updater.Update(url=updateUrl), "credits": ui.callsinnewcontext("credits"), "soon" : ShowMenu("coming_soon"), "hi" : ShowMenu("hiscore")}
     
     $ button_text = "Start"
     image m_button_start = At(LiveComposite ((312, 80), (0,0), "Assets/gui/main_button.png", (8, 6), Text(button_text, style="main_butt")), main_eff)
@@ -322,6 +322,11 @@ init:
     image button_quit_selected_idle = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button_selected.png", (x, 18), Text(button_text, style="side_butt")), side_eff_selected_idle)
     image button_quit_selected_hover = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button_selected.png", (x, 18), Text(button_text, style="side_butt")), side_eff_selected_hover)
     
+    $ button_text = "Hi Scores"
+    image button_hi = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button.png", (x, 18), Text(button_text, style="side_butt")), side_eff)
+    image button_hi_selected_idle = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button_selected.png", (x, 18), Text(button_text, style="side_butt")), side_eff_selected_idle)
+    image button_hi_selected_hover = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button_selected.png", (x, 18), Text(button_text, style="side_butt")), side_eff_selected_hover)
+        
 init -1:
     transform side_eff:
         on idle:
@@ -351,7 +356,7 @@ screen navigation:
     add "Assets/gui/main_menu_ground.png"
     add "Assets/gui/game_menu_ground.png"
 
-    $ game_menu_items = ["return", "config", "save", "load", "main", "quit"]
+    $ game_menu_items = ["return", "config", "save", "load", "main", "hi"]
     
     $ y = 129
     vbox xpos 1060 ypos 129 spacing 9:
@@ -446,6 +451,8 @@ init:
     image title_load_game=Text("Load Game", style="title")
     image help_title=Text("Help", style="title")
     image coming_soon_title=Text("Coming Soon", style="title")
+    image hiscore_title=Text("Hi Scores", style="title")
+    
     
     image information = Text("INFORMATION", style="tips_top")
     #Tooltips - game menu:    
@@ -455,7 +462,8 @@ init:
     image tooltip_main=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("Return to main menu", style="tips_bottom"))
     image tooltip_quit=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("Quit the game :(", style="tips_bottom"))
     image tooltip_return=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("Return to the previous screen", style="tips_bottom"))
-
+    image tooltip_hi=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("Check out the hi scores", style="tips_bottom"))
+    
     #Tooltips - main menu
     image tooltip_start=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("Start a new game", style="tips_bottom"))
     image tooltip_extras=LiveComposite((665, 73), (3,0), ImageReference("information"), (3,30), Text("View the additional unlockable\ncontent", style="tips_bottom"))
