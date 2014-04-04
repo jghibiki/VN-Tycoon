@@ -277,7 +277,7 @@ screen game_progress(curr_game = mygame):
                 window background None xmaximum 215 xminimum 215 ymaximum 100 yminimum 100 anchor(0.0, 0.0) xpos 323 ypos 148:
                     vbox:
                         hbox:
-                            $ my_text = "{:8,d}".format(mygame.scope)
+                            $ my_text = "{:8,d}".format(curr_game.scope)
                             text "word count: [my_text]" style "henpie"
                         hbox:
                             text "gameplay: " style "henpie"

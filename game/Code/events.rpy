@@ -36,7 +36,7 @@ init python:
                                 g.sales += 1
                             else:
                                 g.downloads += random.randint(30,50)
-                                if g.downloads >= 50000 and g.scope >= 100000:
+                                if g.downloads >= 5000 and g.scope >= 100000:
                                     writer_win = True
 #                    else: #downloads
 #                        pass
