@@ -326,7 +326,7 @@ init:
     image button_hi = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button.png", (x, 18), Text(button_text, style="side_butt")), side_eff)
     image button_hi_selected_idle = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button_selected.png", (x, 18), Text(button_text, style="side_butt")), side_eff_selected_idle)
     image button_hi_selected_hover = At(LiveComposite ((335, 74), (0,0), "Assets/gui/side_button_selected.png", (x, 18), Text(button_text, style="side_butt")), side_eff_selected_hover)
-        
+
 init -1:
     transform side_eff:
         on idle:

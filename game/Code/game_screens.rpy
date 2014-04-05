@@ -29,7 +29,7 @@ init -2 python:
             inc_by=0
             if skill == "art":
                 if skills.art > 3:
-                    inc_by += (hours / (12.0-skills.writing) + random.randint(0,1)) / 2
+                    inc_by += (hours / (12.0-skills.art) + random.randint(0,1)) / 2
                     #for hour in xrange(hours):
                         #inc_by += (random.randint(1,round(skills.art)))/3
                         #inc_by += (random.randint(1,round(skills.art)))/10
