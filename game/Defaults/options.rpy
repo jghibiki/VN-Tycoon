@@ -13,8 +13,8 @@ init -1 python hide:
     ## set to False before the game is released, so the user can't
     ## cheat using developer tools.
 
-    config.developer = True
-
+    #onfig.developer = True
+    
     ## These control the width and height of the screen.
 
     config.screen_width = 1366

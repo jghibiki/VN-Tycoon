@@ -6,7 +6,10 @@
 
 {b}Version 1.08{/b}
 - High Scores Screen
-
+- Fixes a problem with art assets being errenously added
+- Changed artist win conditions
+    "Reduced requierd dls to 5,000. Making a game and getting 50,000 dls in two months would be impossible"
+- Fixes a bug in the writers path that would cause the game to end at event 3
 
 {b}Version 1.07{/b}
 - Added new save game screen
