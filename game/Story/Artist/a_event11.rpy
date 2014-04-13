@@ -4,8 +4,11 @@ label artist_event11:
     scene black
     
     #Event 11: Conditions: Day 19
+    
+    #Instead of describing the conversations over the IM, it would be better to have the actual conversations. The chat styled NVL is used only once...
+    
     Martha happy "It became a daily thing. I'd talk to my Lemming Soft buddy over FingerHurt and tell him my troubles."
-    Martha "It honestly began so necessary and routine that I don't know if I could live without him."
+    Martha "It honestly started to become so necessary and routined that I didn't know if I could live without him."
     Martha "He meant that much to me."
     Marthas "I'd like to see your art sometime."
     Martha happy_blush "I read aloud the words on the screen. The words that caused my body to shake."
@@ -20,7 +23,7 @@ label artist_event11:
     Marthas "Please... understand..."
     Martha sad "I'm too afraid...."
     Martha "I apologized to him, but said I couldn't. I told him that I couldn't show anyone my work."
-    Martha "His response was painful 'Then aren't you not really an artist?'"
+    Martha "His response was painful 'Then aren't you really an artist?'"
     Martha "'Art isn't complete until someone else sees it, don't you think? What is the worst that could happen, by showing it to someone'"
     Martha annoyed "He couldn't understand.... He couldn't get it....."
     Martha "I can't... I just can't....."

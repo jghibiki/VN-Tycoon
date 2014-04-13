@@ -4,12 +4,12 @@ label artist_event6:
     $ renpy.block_rollback()
     scene black
     
-    Martha annoyed "I felt like I was making good progress but then everything just stopped."
-    Martha "Something felt missing, but I didn't know what it was."
+    Martha annoyed "I felt like I was making good progress, but then everything just stopped."
+    Martha "It felt like something is missing, but I didn't know what it was."
     Marthas sad "Hmm... something is just off."
     Martha "I started over again trying a different approach to the piece, but still it felt off."
     Marthas "What could be the issue? Is it the concept? The composition? The colors?"
-    Martha "I continued listing possible problems and checked everything I could think of but still I seemed to make no progress."
+    Martha "I continued listing possible problems and checked everything I could think of, but still I seemed to make no progress."
     Martha "I let out a sigh and decided to take a break."
     $ pen_kind = "drawing"
     if inventory.has_item(tablet):

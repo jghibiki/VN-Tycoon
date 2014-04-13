@@ -4,7 +4,7 @@ label artist_event13:
     scene black
 
     #Event 13: Conditions: Day 22
-    Martha annoyed "Nothing my conversation partner seemed to say to me stuck. I was just lost in a sea of depresion."
+    Martha annoyed "It seemed like nothing, my conversation partner said to me, stuck. I was just lost in a sea of depresion."
     Martha "I felt like I was stuck in quicksand, no matter what I did I couldn't escape."
     Martha "I began looking at everyone else's work. It seemd so much better than mine. Mine just lacked something... something that I couldn't understand... Something I probably would never be able to..."
     Martha sad "How do they do it?"

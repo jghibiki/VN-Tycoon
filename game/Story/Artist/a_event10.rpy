@@ -11,7 +11,7 @@ label artist_event10:
     Mom "You don't know if anything they say is the truth. They are probably deceiving you. You have to watch out for predators."
     Martha "I couldn't believe it. My mom was accusing my new friend of being a lie. Like I couldn't make friends on my own. Like good things couldn't happen to me."
     Martha "He isn't a lie.... someone getting along with me isn't a lie...."
-    Martha "I can have people like me. I can get along with people."
+    Martha "People can like me. I can get along with people."
     Martha "They aren't always deceiving me."
     Martha "Someone can care about me......"
     Martha "They can.... really...."

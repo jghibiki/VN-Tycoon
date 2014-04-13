@@ -4,17 +4,17 @@ label artist_event4:
     $ renpy.block_rollback()
     scene  black
     Martha annoyed "I awoke to yet another frustrating stalkmepls notification from my mother. She just didn't seem to want to stop."    
-    Martha surprise "And if that wasn't enough I check my phone and an actual message from her."
+    Martha surprise "And if that wasn't enough I checked my phone and saw a message from her."
     Martha upset "I couldn't stand it anymore."
-    Martha "I needed to vent, bad!"
+    Martha "I needed to vent, badly!"
     $ showBrowser = "lsf"
     show screen lsf(showOptions=False)
     Martha "I needed to take my mind off my problems so I began scanning through Lemming Soft Forums, and then I noticed it. A forum called 'Rant about your problems.'"
-    Martha "It was perfect. Like some kind of miracle had called me to this place. It was just want I needed a place where people talked about their issues and other people helped them out by just talking with them. A place to rant and vent."
+    Martha "It was perfect. Like some kind of miracle had called me to this place. It was just want I needed: a place where people talk about their issues and other people help them out by just talking with them. A place to rant and vent."
     $ writing_fail = False
     if skills.writing<1:
         $ writing_fail = True
-    
+#Since we have a post animation thingy, having the actual content of the posts would be nice    
     if not writing_fail:
         Martha happy "I found out I had more issues than I thought. They just kept flowing out and the post began more paragraphs than I had originally wanted."
         Martha "They are probably going to think I'm some kind of whiny babby...."
@@ -29,7 +29,7 @@ label artist_event4:
         Martha "Garbage..."
         Martha sad "I smacked my head on the keyboard in front of me. Why was writing so difficult, it was just stupid words."
         Martha "I glanced at my phone and let out a sigh."
-        Martha "Maybe Mom was right. This is so littered with typos and horridness I could never show my writing to someone."
+        Martha "Maybe mom was right. This is so littered with typos and horridness I could never show my writing to someone."
         #$ post = "This.... is....Garbage..."
         #call screen autoPost(323, 214, 628, 684, "Assets/gui/lsf_post_test.png", post, moveCursor=True)
         Martha surprise "I glanced up at the screen. Writen on it was 'Post Sucessful.'"
