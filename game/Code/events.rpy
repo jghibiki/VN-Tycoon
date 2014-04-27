@@ -94,7 +94,7 @@ init python:
             if not writer_event10 and curr_action=="hire_coder_money":# Joan's managed to snag the programmer for her project, and considers him for a bit. Must have attempted to recruit and gotten a programmer, must be paying him.
                 event = "story", "writer_event10"
             if not writer_event11 and day<61 and writer_win:
-                event = "story", "writer_event11" # You finished a game that has 100,000 words and over 50,000 downloads within 60 days.                 
+                event = "story", "writer_event11" # You finished a game that has 100,000 words and over 5,000 downloads within 60 days.                 
     
         if job=="coder":
             if not coder_event2 and curr_action=="coding":#first coding attempt

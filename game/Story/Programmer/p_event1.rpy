@@ -14,6 +14,8 @@
     $ renpy.music.play ("Assets/sfx/phone ring.ogg", channel="sound", loop=True, fadeout=1.0, fadein=1.0)
     t confused_glasses"A ringing noise shakes me out of my morning routine. For a moment, I assume I hit the snooze on my alarm instead, but I quickly deduce that the strange ringing is my phone."
     stop sound
+    show screen phone_mark
+    with dissolve
     ts confused "Hello?"
     m "Toby!"
     t scared "The sound of my former boss's voice wasn't what I was expecting to hear on my first day."
@@ -34,6 +36,8 @@
     m "Look, take sometime off. I've got your job tucked away for now. Get this thing out of your system and come back home to us. I'll be waiting."
     ts happy "...thanks, Mark."
     m "See ya, my little code monkey."
+    hide screen phone_mark
+    with dissolve
     ts neutral "..."
     t happy "I can't give up. I'm going to make a life out of this!"
     t excited "No more boxes... never again."

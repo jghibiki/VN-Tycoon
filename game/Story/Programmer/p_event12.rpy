@@ -11,6 +11,9 @@ label coder_event12:
     t "I bite my lip as I review the changes. The miracles, they should be called. Almost everything has been condensed. What took me ten lines only takes him two. Everything is polished and sleek."
     t confused "He's never touched HenPie and he's a bloody pro at it. I refuse to believe it. There's no way that someone brand new could just sit down and do this sort of work in an evening."
     t "I am going to get to the bottom of this."
+    show screen phone_mark
+    with dissolve
+
     m "Toby!"
     ts neutral_2 "Hey, Mark. I was looking over some of the changes you made to my script."
     m "Something wrong with them? I made sure it all worked before I sent it over."
@@ -34,6 +37,9 @@ label coder_event12:
     t sad "If he couldn't make it... what hope do I have?"
     ts neutral_2 "I'll let you know. Thanks for the help."
     m "Stay strong, Toby!"
+    hide screen phone_mark
+    with dissolve
+
     t "Stay strong... easier said than done."
 
     $ coder_event12 = True

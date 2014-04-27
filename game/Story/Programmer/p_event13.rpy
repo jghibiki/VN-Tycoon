@@ -7,6 +7,8 @@ label coder_event13:
     t neutral_2 "My phone sits before me like an uncaring demon ready to tear out my soul. I would rather jump into a pit of boiling lava than make the phone call. I'd rather roll around on a pile of broken glass than make this call."
     t "But a painful realization has slowly formed in my mind as my experience as a visual novel developer has grown. As awesome as I am, there are things that I don't know, things I can't do."
     t happy "The road to a dream isn't a lonely one."
+    show screen phone_mark
+    with dissolve
     ts "Hey."
     m "Toby! It's been a while! I thought you locked yourself in your apartment again."
     ts sad "I only did that once!"
@@ -36,6 +38,8 @@ label coder_event13:
     ts excited "Yeah!"
     m "We're all pulling for you. See ya tonight."
     ts "See ya."
+    hide screen phone_mark
+    with dissolve
     t "We're going to do this. We are going to make the best visual novel possible. Even if it doesn't go anywhere, even if I have to go back to that boring job... I want to make today count."
     t "Because I don't want to spend the rest of my life asking myself what could have been."
 

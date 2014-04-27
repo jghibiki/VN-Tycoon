@@ -14,6 +14,9 @@ label coderEvent11:
     t scared "Wait... It would be the ultimate swallowing of my pride, but Mark is a very sharp programmer. I don't know if he'd be willing to help me fix my code, but I'm out of options."
     
     t "He should have just gotten off. I doubt the first thing he wants to see when he gets home is more code... I hope he's in a good mood."
+    show screen phone_mark
+    with dissolve
+
     m "Toby!"
     ts happy "Hey, Mark. How are you?"
     m "Pretty good. Got a date with the wife in an hour or so. What's up?"
@@ -34,6 +37,9 @@ label coderEvent11:
     ts confused_glasses "I-I-I-I'm sorry. I'm really busy tonight."
     m "Some other time then. I gotta go. Talk to you later, Toby."
     ts confused "See ya."
+    hide screen phone_mark
+    with dissolve
+
     t neutral "I put down my cell phone. Rachel was one of my fellow interns when I first started. She was kind of cute, and we had a lot of fun working together on our menial tasks."
     t tense "But that life is behind me now. I'm an independent developer. I'm probably losing all of my street credit having a company man help me with my script."
     t "My heart doesn't lie though. It doesn't believe the truths the brain tries to spin. It knows I'm scared. Scared of being nothing more than a cog in the system. Lost forever following the same path as others."

@@ -46,18 +46,23 @@ label coder_event6:
     $ post = "How do you make those little people images appear at the side of the textbox? I've been trying for days and they just won't appear."
     call screen autoPost(323, 214, 628, 684, "Assets/gui/lsf_post_test.png", post, moveCursor=True)
 
-    
     #play ringing noise
     $ renpy.music.play ("Assets/sfx/phone ring.ogg", channel="sound", loop=True, fadeout=1.0, fadein=1.0)
     t confused_glasses "My phone? Who could be calling at this hour? Then again, I'm not really sure what hour it is."
     stop sound
+    show screen phone_mark
+    with dissolve
     ts confused "Hello?"
     m "Toby!"
     ts tense_hardcore "How did you find out so quickly?!"
     ts "Look, just because I asked for some help on things doesn't mean that I am going to fail."
     m "I just called to ask if you wanted to go out and grab something for dinner."
     m "But you're having problems?"
+    hide screen phone_mark
+    with dissolve
     ts tense "Nope, everything is good. 'kay, thanks, bye! Click."
+    show screen phone_mark
+    with dissolve
     m "..."
     t neutral "..."
     m "When you go click, you actually have to hang up the phone, Toby."
@@ -66,6 +71,9 @@ label coder_event6:
     ts excited "Thanks, Mark."
     m "I always got to bet on the underdog. Don't be a stranger, dude."
     ts "Thanks. I'll talk to you later."
+    hide screen phone_mark
+    with dissolve
+
     t happy "I feel a bit better. I can overcome this!"        
 
     hide screen lsf
