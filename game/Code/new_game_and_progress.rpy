@@ -48,7 +48,7 @@ init python:
                 if skills.art>9:
                     super_power_bonus = int((skills.art-9)*10)
                 self.art_done += super_power_bonus * hours / 8
-                self.art_quality += skills.art * (hours / 2)
+                self.art_quality += skills.art * (hours / 1.5)
                 return True
             else:
                 return False
@@ -62,7 +62,7 @@ init python:
                 if skills.writing>9:
                     super_power_bonus = int((skills.writing-9)*10)
                 self.writing_done += super_power_bonus * hours / 8
-                self.writing_quality += skills.writing * (hours / 2)
+                self.writing_quality += skills.writing * (hours / 1.5)
                 return True
             else:
                 return False
@@ -78,7 +78,7 @@ init python:
                     super_power_bonus = int((skills.coding-9)*10)
                 self.coding_done += super_power_bonus * hours / 8
                 
-                self.coding_quality += skills.coding * (hours / 2)
+                self.coding_quality += skills.coding * (hours / 1.5)
                 return True
             else:
                 return False
@@ -92,7 +92,7 @@ init python:
                 if skills.music>9:
                     super_power_bonus = int((skills.music-9)*10)
                 self.music_done += super_power_bonus * hours / 8
-                self.music_quality += skills.music * (hours / 2)
+                self.music_quality += skills.music * (hours / 1.5)
                 return True
             else:
                 return False
@@ -112,6 +112,8 @@ init python:
                 all_resources_done = False
             if all_resources_done:
                 self.quality = (self.art_quality + self.writing_quality + self.coding_quality + self.music_quality) / (self.art_done + self.writing_done + self.coding_done + self.music_done)
+                if self.quality>10:
+                    self.quality = 10.0
                 return True
             else:
                 return False
