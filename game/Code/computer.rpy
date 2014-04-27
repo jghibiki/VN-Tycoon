@@ -211,8 +211,8 @@ label computer:
                 if turnedIn:
                     $messages[_return[1]].stage = "response"
                     $ skill_tmp = (repBonus * 10)
-                    if skill_tmp > 6:
-                        $ skill_tmp = 6
+                    if skill_tmp > 5:
+                        $ skill_tmp = 5
                     $ quantity_tmp = messages[_return[1]].outputQuantity
                     
                     if messages[_return[1]].output == "money":
