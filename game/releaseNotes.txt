@@ -4,6 +4,10 @@
 - Cost of living
 - Tons of bug fixes
 
+{b}Version 1.08{/b}
+- Added $ before prices in Tarzan web shop
+- Added a confirmation before sleeping/going to bed
+
 {b}Version 1.07{/b}
 - Added new save game screen
 - Fixes a bug that would allow commission work to be negative

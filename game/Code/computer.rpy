@@ -685,7 +685,7 @@ screen tarzan:
                                                         hbox:
                                                             text tarzanStore[item].name
                                                             null width 20 
-                                                            text str(tarzanStore[item].price)
+                                                            text "$" + str(tarzanStore[item].price)
                                                         hbox:
                                                             add tarzanStore[item].pic
                                                             
@@ -717,7 +717,7 @@ screen tarzan:
                                                         hbox:
                                                             text tarzanCart[item].name
                                                             null width 20 
-                                                            text str(tarzanCart[item].price)
+                                                            text "$" + str(tarzanCart[item].price)
                                                         hbox:
                                                             null width 80
                                                             textbutton "Remove from cart" action Return(("tarzanRemove", item))

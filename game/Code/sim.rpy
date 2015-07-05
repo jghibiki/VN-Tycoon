@@ -54,6 +54,14 @@ label sim:
                 else:
                     "You are too sleepy to draw."
                 
+    if action == "confirmSleep":
+        call screen confirm_sleep
+        if _return == "sleep":
+            $action = "sleep"
+            "Time for bed! Good night."
+        else:
+            "Maybe later."
+
     if action == "sleep":
         call sleepingAnimation
         $ time.dec(0)
@@ -304,14 +312,14 @@ screen sim:
     #imagebutton idle "Assets/bg/room/room_base_closed.png" hover "Assets/bg/room/room_base_left.png" focus_mask "Assets/bg/room/left-door-mask.png" action [Return("work")] 
     imagebutton idle "#00000000" hover "room_left" focus_mask "Assets/bg/room/left_door_mask.png" action [Hide("gui_tooltip"), Return("work")] hovered [Play("sound", "Assets/sfx/door open.ogg"), Show("gui_tooltip", my_picture="tooltip_work") ] unhovered [Hide("gui_tooltip")]
     
-    imagebutton idle "#00000000" hover "room_right" focus_mask "Assets/bg/room/right_door_mask.png" action [Hide("gui_tooltip"), Return("sleep")] hovered [Play("sound", "Assets/sfx/door open.ogg"), Show("gui_tooltip", my_picture="tooltip_sleep") ] unhovered [Hide("gui_tooltip")]
+    imagebutton idle "#00000000" hover "room_right" focus_mask "Assets/bg/room/right_door_mask.png" action [Hide("gui_tooltip"), Return("confirmSleep")] hovered [Play("sound", "Assets/sfx/door open.ogg"), Show("gui_tooltip", my_picture="tooltip_sleep") ] unhovered [Hide("gui_tooltip")]
     
     
     
     imagebutton idle "Assets/bg/room/computer_off.png" hover "Assets/bg/room/computer_on.png" focus_mask "Assets/bg/room/computer_mask.png" action [Hide("gui_tooltip"), Return("computer")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_computer") ] unhovered [Hide("gui_tooltip")]
     if inventory.has_item(tablet):
         imagebutton auto "Assets/bg/room/tablet_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("draw")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_draw") ] unhovered [Hide("gui_tooltip")]
-    else
+    else:
         imagebutton auto "Assets/bg/room/sketchpad_%s.png" focus_mask True action [Hide("gui_tooltip"), Return("draw")] hovered [Play("sound", "Assets/sfx/click.ogg"), Show("gui_tooltip", my_picture="tooltip_draw") ] unhovered [Hide("gui_tooltip")]
     
     if inventory.has_item(keyboard):
@@ -344,7 +352,7 @@ screen sim:
         add "#00000005"
     
     
-#    imagebutton auto "Assets/gui/bedroom_%s.png" focus_mask True action [Return("sleep")] 
+#    imagebutton auto "Assets/gui/bedroom_%s.png" focus_mask True action [Return("confirmSleep")] 
     #imagebutton auto "Assets/gui/computer_%s.png" focus_mask True action [Return("computer")] 
     #imagebutton auto "Assets/gui/exit_%s.png" focus_mask True action [Return("work")] 
     #imagebutton auto "Assets/gui/tablet_%s.png" focus_mask True action [Return("draw")] 
@@ -392,6 +400,21 @@ init:
     image tooltip_read3=LiveComposite((665, 73), (3,56), Text("Read Writing for Retards. Time needed: 1 hour.", style="tips_bottom"))
     image tooltip_read4=LiveComposite((665, 73), (3,56), Text("Read Composing for Morons. Time needed: 1 hour.", style="tips_bottom"))
     
+    
+
+screen confirm_sleep:
+    modal False
+    frame:
+        xpos 0.35
+        ypos 0.35
+        background "#000"
+        frame:
+            background "#fff"
+            vbox:
+                text "Are you sure you want to go to bed?" style "stdTxt"
+                hbox:
+                    textbutton "Yes" action Return ("sleep")
+                    textbutton "No" action Return("")
     
 
 screen select_time:
