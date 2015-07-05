@@ -8,8 +8,7 @@ label writer_event11:
 # You finished a game that has 100,000 words and over 50,000 downloads within 60 days. 
 # Scene:
     Joan laugh_big "Ahaha... hahaha... AHAHAHA! I DID IT! I DID IIIT!"
-    #Joan "Hah! Look at that, you pompous ass! I did it! Fifty kay! That's a lot. That's like, a success, man! Each download being equal to at least two words means I'm doing prrrretty great."
-    Joan "Hah! Look at that, you pompous ass! I did it! Five kay! That's a lot. That's like, a success, man! Each download being equal to at least twenty words means I'm doing prrrretty great."
+    Joan "Hah! Look at that, you pompous ass! I did it! Fifty kay! That's a lot. That's like, a success, man! Each download being equal to at least two words means I'm doing prrrretty great."
     Joan laugh_med "Pfft, now who was bragging about being a great VN writer? Who was saying it's difficult to release this shit and make it quality? Because I just did it."
     Joan "You can take your damn arrogance and shove it up yours! Ahahaha! I did it! I'm a VN novelist!"
     Joan laugh_big "... I'm a VN novelist."

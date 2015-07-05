@@ -51,9 +51,7 @@ init python:
     build.classify('**/.**', None)
     build.classify('**/#**', None)
     build.classify('**/thumbs.db', None)
-    build.classify('*.txt', None)
-    build.classify('*.md', None)
-    
+
     ## To archive files, classify them as 'archive'.
 
     # build.classify('game/**.png', 'archive')
